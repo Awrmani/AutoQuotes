@@ -1,4 +1,4 @@
-## AutoQuotes
+# AutoQuotes
 
 ## Background
 Mechanic shops deal with a lot of inefficiencies regarding the generation of quotes to customers. 
@@ -12,17 +12,17 @@ Quotations are divided into two different sections.
 1.	Quotations with all required parts available in stock will be given immediately using our database data,
 2.	When some parts are not available or included in our database, Auto Quotes must contact multiple reserved suppliers and ask for parts availability and details. This task is done by sending emails to contracted suppliers with auto-generated links that lead them to a form on a website. This form includes customers’ car specifications using user inputs and information on the asking part. Suppliers are responsible for entering the details, including sale price, retail price, warranty, manufacturer, and condition. Then customers get noticed through email to complete their quotation by choosing between the options.
 
-# Company Value Add
+### Company Value Add
 Auto Quotes allows our company to create a close relationship with many mechanic shops and builds valuable connections with part suppliers. With the first iteration of the software, either a monthly fee or a per-use fee is charged to customers. With the next iteration, Auto Quotes can transcend the current SaaS setup and offer an integrated payment system with POS terminals. Being directly tied into the payment process would allow for a cut from every sale the mechanics shop makes, making Auto Quotes a very lucrative business.
 
-# Customer Value Add
+### Customer Value Add
 Auto Quotes will bring value to businesses in multiple ways. 
 •	It helps the company's marketing since it helps to get customers' attention and build a list of clients for sending out promotions and seasonal deals.
 •	It pushes the customer into using the services after getting a quote. Customers can look up the shop schedule and book an appointment for service on quotes on the same webpage. This option will make services much easier for customers since they get informed of the time, price, and availability in advance.
 •	Another advantage of using this system would be reducing the workload of the service advisors.
 •	The system incorporates an internal UI, where staff members can update the inventory, register recalls, and keep track of parts inventory and catalog.
 
-# End-User Value Add
+### End-User Value Add
 Auto Quotes will allow customers with zero to little knowledge of auto services to understand the various available services at the designated shop and do different actions based on their needs.
 Getting immediate informative quotes for all the available services that include service details such as:
 •	Accurate labor cost estimation,
@@ -31,7 +31,7 @@ Getting immediate informative quotes for all the available services that include
 •	And Service time estimation.
 
 ## Scope
-# What is Included
+### What is Included
 The project includes the development of a Back-end system, run on a PaaS provider like Heroku. Its code is written in NodeJS, and it provides internal REST APIs for the front-end interfaces. It stores all relevant information in MongoDB (Atlas) and uses SendGrid as a complete email-sending solution. 
  
 Three separate Web GUIs are to be implemented, built on top of React: 
@@ -40,7 +40,7 @@ Three separate Web GUIs are to be implemented, built on top of React:
 •	One for the internal use of mechanic shops where they can do basic administration, add/remove users, manage stalls, view orders, customer contact information, etc. 
 
 These interfaces can be hosted on any of the large CDN providers such as Netlify or Amazon S3. 
-# What is Not Included
+### What is Not Included
 The project, in its MVP form, will not provide the following features, that the company can develop as an upgrade for subsequent releases later:
 •	 An accounting/billing module, that offers POS integration, and would allow the company to take a cut from all sales
 •	A direct marketing/email campaign module, that could leverage the information collected from end-users
