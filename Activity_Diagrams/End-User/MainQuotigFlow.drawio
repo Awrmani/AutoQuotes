@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-17T03:25:38.935Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36 Edg/106.0.1370.47" etag="0_je3Tcmlr8ACVqqrGav" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-17T03:26:06.529Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36 Edg/106.0.1370.47" etag="bzRpLp2Fv1LeD_LEriOX" version="20.4.0" type="github">
   <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
     <mxGraphModel dx="1208" dy="671" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
       <root>
@@ -106,13 +106,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-20" value="Does the user &lt;br&gt;have an account?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="kRIrVRTwHgcSPXHYipSR-5">
-          <mxGeometry x="109" y="390" width="160" height="97" as="geometry" />
+          <mxGeometry x="106.37" y="390" width="160" height="97" as="geometry" />
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-22" value="Registration" style="whiteSpace=wrap;html=1;" vertex="1" parent="kRIrVRTwHgcSPXHYipSR-5">
           <mxGeometry x="30" y="547" width="96" height="53" as="geometry" />
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-24" value="Log in" style="whiteSpace=wrap;html=1;" vertex="1" parent="kRIrVRTwHgcSPXHYipSR-5">
-          <mxGeometry x="141.88" y="547" width="91" height="53" as="geometry" />
+          <mxGeometry x="140.87" y="547" width="91" height="53" as="geometry" />
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-74" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="kRIrVRTwHgcSPXHYipSR-5" source="kRIrVRTwHgcSPXHYipSR-26" target="kRIrVRTwHgcSPXHYipSR-28">
           <mxGeometry relative="1" as="geometry" />
@@ -130,7 +130,7 @@
           <mxGeometry x="239" y="897" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-71" value="Custom quote process" style="whiteSpace=wrap;html=1;sketch=0;" vertex="1" parent="kRIrVRTwHgcSPXHYipSR-5">
-          <mxGeometry x="127.38" y="637" width="120" height="50" as="geometry" />
+          <mxGeometry x="126.36999999999999" y="637" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="kRIrVRTwHgcSPXHYipSR-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="kRIrVRTwHgcSPXHYipSR-5" source="kRIrVRTwHgcSPXHYipSR-71" target="kRIrVRTwHgcSPXHYipSR-26">
           <mxGeometry relative="1" as="geometry" />
