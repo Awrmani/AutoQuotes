@@ -1,0 +1,96 @@
+{
+  "name": "autoquotes",
+  "version": "0.0.1",
+  "description": "Monorepo for Capstone project - Seneca SIA CPA PRJ666 course, winter 2023",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "engines": {
+    "node": "^18",
+    "yarn": ">= 1.22.19"
+  },
+  "main": "init.js",
+  "dependencies": {
+    "@rescripts/cli": "^0.0.16",
+    "react-scripts": "5.0.1",
+    "rescripts-use-yarn-workspaces": "^1.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lerna": "^6.4.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.2",
+    "rimraf": "^3.0.2",
+    "start-server-and-test": "^1.15.2"
+  },
+  "scripts": {
+    "enduser:dev": "yarn --cwd packages/end-user-fe dev",
+    "enduser:build": "yarn --cwd packages/end-user-fe build",
+    "licensing:dev": "yarn --cwd packages/licensing-fe dev",
+    "licensing:build": "yarn --cwd packages/licensing-fe build",
+    "shop:dev": "yarn --cwd packages/mechanic-shop-fe dev",
+    "shop:build": "yarn --cwd packages/mechanic-shop-fe build",
+    "thirdp:dev": "yarn --cwd packages/third-party-fe dev",
+    "thirdp:build": "yarn --cwd packages/third-party-fe build",
+    "clean": "lerna run clean && lerna clean --yes && rimraf ./node_modules",
+    "format": "prettier --write .",
+    "lint": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --fix-type problem",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadolhay/AutoQuotes.git"
+  },
+  "contributors": [
+    {
+      "name": "Arman Valaee Asr",
+      "email": "avalaee-asr@myseneca.ca"
+    },
+    {
+      "name": "Denes Adam Dolhay",
+      "email": "dadolhay@myseneca.ca"
+    },
+    {
+      "name": "Van Hoan Tran",
+      "email": "tvan-hoan@myseneca.ca"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/dadolhay/AutoQuotes/issues"
+  },
+  "browserslist": {
+    "production": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.js": [
+      "eslint --fix --fix-type problem",
+      "prettier --write"
+    ]
+  }
+}

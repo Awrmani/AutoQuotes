@@ -1,0 +1,27 @@
+{
+  "name": "@autoquotes/licensing-fe",
+  "version": "0.0.1",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "description": "Auto Quotes licensing front-end",
+  "dependencies": {
+    "@autoquotes/common": "^0.0.1",
+    "@autoquotes/libraries": "^0.0.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "5.11.0",
+    "@mui/material": "^5.11.4",
+    "lodash-es": "^4.17.21",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.6.1",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.2.2"
+  },
+  "scripts": {
+    "build": "rescripts build",
+    "dev": "rescripts start"
+  }
+}

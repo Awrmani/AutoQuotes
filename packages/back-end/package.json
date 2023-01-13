@@ -1,0 +1,10 @@
+{
+  "name": "@autoquotes/back-end",
+  "version": "0.0.1",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "description": "Auto Quotes backe-end",
+  "dependencies": {
+    "@autoquotes/libraries": "^0.0.1"
+  }
+}

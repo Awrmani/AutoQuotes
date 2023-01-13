@@ -1,0 +1,10 @@
+{
+  "name": "@autoquotes/common-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "description": "Auto Quotes common e2e test helpers",
+  "dependencies": {
+    "@autoquotes/libraries": "^0.0.1"
+  }
+}
