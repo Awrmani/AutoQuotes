@@ -4,5 +4,11 @@
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
   "description": "Auto Quotes common tools between packages",
-  "dependencies": {}
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "redux": "^4.2.0",
+    "redux-actions": "^2.6.5",
+    "redux-saga": "^1.2.2",
+    "uuid": "^9.0.0"
+  }
 }
