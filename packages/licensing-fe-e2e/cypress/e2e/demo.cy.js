@@ -1,6 +1,6 @@
 describe('Abandoned Signup Reminder', () => {
-  it('should display hello world', () => {
+  it('should display Licensing front-end', () => {
     cy.visit('/');
-    cy.getByText('Hello World!').should('exist');
+    cy.getByText('Licensing front-end').should('exist');
   });
 });

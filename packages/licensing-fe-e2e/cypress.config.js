@@ -2,7 +2,7 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
-  apiBaseUrl: 'TODO',
+  apiBaseUrl: 'http://localhost:8080/api/v1',
   viewportHeight: 937,
   viewportWidth: 1920,
   defaultCommandTimeout: 40000,
@@ -10,6 +10,6 @@ module.exports = defineConfig({
   videoUploadOnPasses: false,
   videoCompression: false,
   e2e: {
-    baseUrl: 'TODO',
+    baseUrl: 'http://localhost:3000',
   },
 });

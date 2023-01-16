@@ -3,7 +3,7 @@ const cors = require('cors');
 const compression = require('compression');
 // const passport = require('passport');
 
-const expressServer = () => {
+const apiServer = () => {
   // Create an express app instance we can use to attach middleware and HTTP routes
   const app = express();
 
@@ -18,11 +18,11 @@ const expressServer = () => {
   // passport.use(authorization.strategy());
   // app.use(passport.initialize());
 
-  /**
-   * Static assets
-   *
-   * TODO
-   */
+  // Health check route, required for start-server-and-test
+  app.get('/', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache');
+    res.status(200).json({ status: 'running' });
+  });
 
   /**
    * API ROUTES
@@ -59,12 +59,12 @@ const expressServer = () => {
   });
 
   // Get the desired port from the process environment. Default to `8080`
-  const port = parseInt(process.env.API_PORT || 8080, 10);
+  const port = parseInt(process.env.REACT_APP_API_PORT || 8080, 10);
 
   app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log(`Server  is listening on ${port}`);
+    console.log(`API is listening on ${port}`);
   });
 };
 
-module.exports = expressServer;
+module.exports = apiServer;
