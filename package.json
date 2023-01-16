@@ -38,6 +38,9 @@
     "start-server-and-test": "^1.15.2"
   },
   "scripts": {
+    "all:start": "yarn run build:frontend:all && yarn run backend:start",
+    "backend:start": "yarn --cwd packages/back-end start",
+    "build:frontend:all": "yarn run enduser:build && yarn run licensing:build && yarn run shop:build && yarn run thirdp:build",
     "enduser:dev": "yarn --cwd packages/end-user-fe dev",
     "enduser:build": "yarn --cwd packages/end-user-fe build",
     "licensing:dev": "yarn --cwd packages/licensing-fe dev",

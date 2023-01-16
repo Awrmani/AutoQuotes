@@ -5,6 +5,8 @@
   "license": "SEE LICENSE IN LICENSE",
   "description": "Auto Quotes common e2e test helpers",
   "dependencies": {
-    "@autoquotes/libraries": "^0.0.1"
+    "@autoquotes/libraries": "^0.0.1",
+    "@testing-library/cypress": "^9.0.0",
+    "cypress-wait-until": "^1.7.2"
   }
 }
