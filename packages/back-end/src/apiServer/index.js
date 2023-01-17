@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
-// const passport = require('passport');
+const passport = require('passport');
+const routes = require('./routes');
+const { strategyFactory } = require('../utils/authentication');
 
 const apiServer = () => {
   // Create an express app instance we can use to attach middleware and HTTP routes
@@ -14,9 +16,10 @@ const apiServer = () => {
   app.use(compression());
 
   // Set up our passport authorization middleware
-  // TODO JWT code
-  // passport.use(authorization.strategy());
-  // app.use(passport.initialize());
+  passport.use('enduser', strategyFactory({ audience: 'enduser' }));
+  passport.use('shop', strategyFactory({ audience: 'shop' }));
+  passport.use('licensing', strategyFactory({ audience: 'licensing' }));
+  app.use(passport.initialize());
 
   // Health check route, required for start-server-and-test
   app.get('/', (req, res) => {
@@ -26,15 +29,12 @@ const apiServer = () => {
 
   /**
    * API ROUTES
-   *
-   * TODO
    */
-  // app.use('/api/v1', routes);
+  app.use('/api/v1', routes);
 
   /**
    * ERROR HANDLING
    */
-
   // Handle no route found
   app.use((req, res) => {
     res.status(404).json({ error: 'No such route was found' });
@@ -58,12 +58,9 @@ const apiServer = () => {
     res.status(status).json({ error: message });
   });
 
-  // Get the desired port from the process environment. Default to `8080`
-  const port = parseInt(process.env.REACT_APP_API_PORT || 8080, 10);
-
-  app.listen(port, () => {
+  app.listen(8080, () => {
     // eslint-disable-next-line no-console
-    console.log(`API is listening on ${port}`);
+    console.log(`API is listening on 8080`);
   });
 };
 

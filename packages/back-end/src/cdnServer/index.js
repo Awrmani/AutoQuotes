@@ -80,12 +80,9 @@ const cdnServer = () => {
     res.status(status).send(`error: ${message}`);
   });
 
-  // Get the desired port from the process environment. Default to `80`
-  const port = parseInt(process.env.CDN_PORT || 80, 10);
-
-  app.listen(port, () => {
+  app.listen(80, () => {
     // eslint-disable-next-line no-console
-    console.log(`CDN is listening on ${port}`);
+    console.log(`CDN is listening on 80`);
   });
 };
 
