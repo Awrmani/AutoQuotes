@@ -1,11 +1,11 @@
 # Continuous Integration (CI) Workflow
 name: ci
 
-# This workflow will run whenever we push (or merge) commits to the `staging` branch,
+# This workflow will run whenever we push (or merge) commits to the `develop` branch,
 on:
   push:
     branches:
-      - staging
+      - develop
 
 jobs:
   lint:
