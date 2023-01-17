@@ -1,0 +1,56 @@
+# Continuous Integration (CI) Workflow
+name: ci
+
+# This workflow will run whenever we push (or merge) commits to the `staging` branch,
+on:
+  push:
+    branches:
+      - foo
+
+jobs:
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/checkout
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: 'run lint' # will run `yarn run lint` command
+
+  e2e-tests:
+    name: End to End Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: 'run test' # will run `yarn run test` command
