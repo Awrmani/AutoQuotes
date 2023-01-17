@@ -50,7 +50,7 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Install dependencies
+      - name: Run tests
         uses: Borales/actions-yarn@v4.2.0
         with:
           cmd: 'run test' # will run `yarn run test` command
