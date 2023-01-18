@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import lsStorageEngine from 'redux-persist/lib/storage';
-
-const dummyReducer = () => true;
+import formsReducer from '@autoquotes/libraries/src/reducers/formsReducer';
 
 // Root reducer
 const rootReducer = combineReducers({
-  dummy: dummyReducer,
+  forms: formsReducer,
 });
 
 const rootPersistConfig = {

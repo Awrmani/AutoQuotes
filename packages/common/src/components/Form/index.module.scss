@@ -1,0 +1,9 @@
+// CSS specificity increase hack
+.impliciteSubmitButton:not(#\9) {
+  visibility: hidden;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  height: 0;
+  border: 0;
+}
