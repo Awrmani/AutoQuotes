@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
+import { Typography } from '@mui/material';
 import formContext from './formContext';
-import FieldError from './FieldError';
 
-const FormError = () => {
+const FormError = props => {
   const form = useContext(formContext);
   const error = form.errors?.['*'];
+  if (!error) return null;
 
-  return <FieldError error={error} />;
+  return (
+    <Typography variant="danger" component="div" {...props}>
+      {error}
+    </Typography>
+  );
 };
 
 export default FormError;

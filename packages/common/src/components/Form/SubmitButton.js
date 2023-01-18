@@ -8,7 +8,6 @@ const SubmitButton = ({ disabled, ...rest }) => {
 
   return (
     <Button
-      variant="contained"
       {...rest}
       disabled={disabled || isSubmitting}
       onClick={submitForm}
