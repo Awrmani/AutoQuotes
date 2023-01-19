@@ -3,6 +3,7 @@ import validatorFactory, {
   stringValidators,
 } from '@autoquotes/common/src/utils/validation';
 import LoginForm from '../components/LoginForm';
+import { login } from '../actions';
 
 const initialValues = { email: '', password: '' };
 
@@ -13,7 +14,7 @@ const validator = validatorFactory({
 
 const LoginScreen = () => {
   return (
-    <Form initialValues={initialValues} validation={validator}>
+    <Form initialValues={initialValues} validation={validator} action={login}>
       <LoginForm />
     </Form>
   );
