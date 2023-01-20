@@ -25,9 +25,6 @@ const cdnServer = () => {
     if (host.startsWith('thirdp.')) {
       // Third party UI
       bundle = 'third-party-fe';
-    } else if (host.startsWith('licensing.')) {
-      // licensing UI
-      bundle = 'licensing-fe';
     } else if (host.startsWith('shop.')) {
       // Shop UI
       bundle = 'mechanic-shop-fe';

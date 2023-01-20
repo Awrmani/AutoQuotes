@@ -18,7 +18,6 @@ const apiServer = () => {
   // Set up our passport authorization middleware
   passport.use('enduser', strategyFactory({ audience: 'enduser' }));
   passport.use('shop', strategyFactory({ audience: 'shop' }));
-  passport.use('licensing', strategyFactory({ audience: 'licensing' }));
   app.use(passport.initialize());
 
   // Health check route, required for start-server-and-test
