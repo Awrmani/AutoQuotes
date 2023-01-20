@@ -22,6 +22,19 @@ export const cancel = createAction(
   (_, m) => m
 );
 
+// token
+export const setToken = createAction(
+  actionTypes.TOKEN_SET,
+  p => p,
+  (_, m) => m
+);
+
+export const removeToken = createAction(
+  actionTypes.TOKEN_REMOVE,
+  p => p,
+  (_, m) => m
+);
+
 // Form remove
 export const destroyForm = createAction(
   actionTypes.FORM_DESTROY,

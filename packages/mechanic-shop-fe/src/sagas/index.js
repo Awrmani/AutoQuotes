@@ -1,20 +1,21 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
 import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
+import {
+  earlySetToken,
+  addTokenRequestInterceptor,
+} from '@autoquotes/libraries/src/saga/interceptors/token';
+import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
 import * as actionTypes from '../constants/actionTypes';
 import * as mechanicShopApi from '../resources/mechanicShopApi';
 
 const apiCall = apiCallSagaFactory({
-  requestInterceptors: [
-    // addTokenRequestInterceptor,
-  ],
+  // These are interceptors that are added globally -- All apiCall sagas execute it
+  requestInterceptors: [addTokenRequestInterceptor],
   responseInterceptors: [
-    // General interceptorsacce
     // normalizeResponseInterceptor,
   ],
-  errorInterceptors: [
-    // errorTranslationInterceptor
-  ],
+  errorInterceptors: [errorTranslationInterceptor],
 });
 
 const initApp = () => {
@@ -29,9 +30,7 @@ export default function* root() {
       apiFn: mechanicShopApi.login,
       noInjectToken: true,
       onSuccess: [
-        [
-          // earlySetToken
-        ],
+        [earlySetToken],
         [
           // refreshCurrentUser
         ],
