@@ -15,6 +15,9 @@ const apiServer = () => {
   // Use gzip/deflate compression middleware
   app.use(compression());
 
+  // JSON request body parsing
+  app.use(express.json());
+
   // Set up our passport authorization middleware
   passport.use('enduser', strategyFactory({ audience: 'enduser' }));
   passport.use('shop', strategyFactory({ audience: 'shop' }));

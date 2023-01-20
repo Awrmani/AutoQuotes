@@ -1,9 +1,10 @@
 const express = require('express');
-
+const login = require('./login');
 // const { authenticate } = require('../authorization');
-// const api = require('./api');
 
 const router = express.Router();
+
+router.post('/login', login);
 
 // router.use(`/v1`, authenticate(), api);
 
