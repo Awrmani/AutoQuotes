@@ -20,16 +20,10 @@ const apiServer = () => {
   passport.use('shop', strategyFactory({ audience: 'shop' }));
   app.use(passport.initialize());
 
-  // Health check route, required for start-server-and-test
-  app.get('/', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache');
-    res.status(200).json({ status: 'running' });
-  });
-
   /**
    * API ROUTES
    */
-  app.use('/api/v1', routes);
+  app.use('/', routes);
 
   /**
    * ERROR HANDLING
