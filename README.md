@@ -2,6 +2,8 @@
 
 Capstone project - Seneca SIA CPA PRJ666 course
 
+## Development Environment
+
 ## Usage
 
 All of the following will have to be prefixed with `yarn run`
