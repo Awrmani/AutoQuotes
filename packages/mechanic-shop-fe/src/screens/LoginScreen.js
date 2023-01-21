@@ -1,7 +1,6 @@
 import { Form } from '@autoquotes/common/src/components/Form';
-import validatorFactory, {
-  stringValidators,
-} from '@autoquotes/common/src/utils/validation';
+import validatorFactory from '@autoquotes/libraries/src/utils/validation';
+import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import LoginForm from '../components/LoginForm';
 import { login } from '../actions';
 

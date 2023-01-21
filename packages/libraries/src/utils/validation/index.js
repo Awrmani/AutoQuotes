@@ -1,7 +1,3 @@
-import * as stringValidators from './string';
-import * as booleanValidators from './boolean';
-import * as arrayValidators from './array';
-
 /**
  * This Fn handles all validators for a specific field
  * We return the first error in the set
@@ -37,5 +33,5 @@ const validatorFactory = config => data => {
   return errors;
 };
 
-export default validatorFactory;
-export { stringValidators, booleanValidators, arrayValidators };
+// Using CJS export as this is used in both CJS and MJS
+module.exports = validatorFactory;

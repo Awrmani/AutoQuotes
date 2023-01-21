@@ -1,16 +1,16 @@
-import { validate as validateEmail } from 'email-validator';
+const validateEmail = require('email-validator').validate;
 
-export const isString = value =>
+const isString = value =>
   typeof value === 'string' ? undefined : 'Not a string';
 
-export const required = value => {
+const required = value => {
   const result = isString(value);
   if (result) return result;
 
   return value.length ? undefined : 'Required';
 };
 
-export const minLength = min => value => {
+const minLength = min => value => {
   const result = isString(value);
   if (result) return result;
 
@@ -20,7 +20,7 @@ export const minLength = min => value => {
   return undefined;
 };
 
-export const verifyInput = to => (value, allValues) => {
+const verifyInput = to => (value, allValues) => {
   const result = isString(value);
   if (result) return result;
 
@@ -30,5 +30,8 @@ export const verifyInput = to => (value, allValues) => {
   return undefined;
 };
 
-export const email = value =>
+const email = value =>
   validateEmail(value) ? undefined : 'Invalid email address';
+
+// Using CJS export as this is used in both CJS and MJS
+module.exports = { isString, required, minLength, verifyInput, email };
