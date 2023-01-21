@@ -1,4 +1,4 @@
-const { createToken } = require('../../../utils/authentication');
+const { createToken } = require('../../utils/authentication');
 
 module.exports = async (req, res) => {
   const { email, password } = req.body ?? {};

@@ -1,9 +1,11 @@
-import { getEnv } from '@autoquotes/libraries/src/utils/getEnv';
 import fetcherFactory from '@autoquotes/libraries/src/utils/fetcherFactory';
 
 const apiCall = fetcherFactory({
   timeout: 30000,
-  baseUrl: getEnv('API_BASE_URL') || 'http://localhost:8080/api/shop/v1',
+  // On production, the same domain and port serves cdn and api, so no need to specify them
+  baseUrl: `${
+    process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : ''
+  }/api/shop/v1`,
 });
 
 export const login = apiCall(({ email, password }) => ({
