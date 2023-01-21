@@ -2,6 +2,7 @@ const express = require('express');
 const enduser = require('./enduser');
 const shop = require('./shop');
 const thirdparty = require('./thirdparty');
+const FieldValidationError = require('../resources/FieldValidationError');
 
 // const { authenticate } = require('../authorization');
 // const api = require('./api');
@@ -21,6 +22,23 @@ router.get('/', (req, res) => {
 // Handle no route found
 router.use((req, res) => {
   res.status(404).json({ error: 'No such route was found' });
+});
+
+/**
+ * General error handling
+ */
+// eslint-disable-next-line no-unused-vars
+router.use((err, req, res, next) => {
+  if (err instanceof FieldValidationError) {
+    res.status(417).json({ fieldErrors: err.fieldErrors });
+    return;
+  }
+
+  // If no specific error was given, default it
+  const status = err.status || 500;
+  const message = err.message || 'unable to process request';
+
+  res.status(status).json({ error: message });
 });
 
 module.exports = router;
