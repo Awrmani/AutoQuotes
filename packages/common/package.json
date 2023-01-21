@@ -5,6 +5,14 @@
   "license": "SEE LICENSE IN LICENSE",
   "description": "Auto Quotes common UI elements",
   "dependencies": {
-    "@autoquotes/libraries": "^0.0.1"
+    "@autoquotes/libraries": "^0.0.1",
+    "@mui/icons-material": "5.11.0",
+    "@mui/material": "^5.11.5",
+    "email-validator": "^2.0.4",
+    "formik": "^2.2.9",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "uuid": "^9.0.0"
   }
 }
