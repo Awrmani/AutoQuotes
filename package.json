@@ -38,11 +38,10 @@
     "start-server-and-test": "^1.15.2"
   },
   "scripts": {
-    "production": "yarn run build:frontend:all && yarn run backend:cdn:start",
+    "build": "yarn run enduser:build && yarn run shop:build && yarn run thirdp:build",
+    "start": "yarn --cwd packages/back-end start",
     "test": "yarn run enduser:e2e:start && yarn run shop:e2e:start && yarn run thirdp:e2e:start",
-    "build:frontend:all": "yarn run enduser:build && yarn run shop:build && yarn run thirdp:build",
     "backend:dev": "yarn --cwd packages/back-end dev",
-    "backend:cdn:start": "yarn --cwd packages/back-end start",
     "enduser:dev": "start-test backend:dev http://127.0.0.1:8080 enduser:dev:fe",
     "enduser:dev:fe": "yarn --cwd packages/end-user-fe dev",
     "enduser:build": "yarn --cwd packages/end-user-fe build",
@@ -110,5 +109,14 @@
       "eslint --fix --fix-type problem",
       "prettier --write"
     ]
-  }
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "packages/libraries/node_modules",
+    "packages/common/node_modules",
+    "packages/back-end/node_modules",
+    "packages/end-user-fe/node_modules",
+    "packages/mechanic-shop-fe/node_modules",
+    "packages/third-party-fe/node_modules"
+  ]
 }
