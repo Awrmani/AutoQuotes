@@ -68,6 +68,17 @@ class ResourceBase {
     return props;
   };
 
+  update = toSet => {
+    // merge old attributes with input, and sanitize / verify them
+    const sanitized = this.validate({
+      ...this.attributes,
+      ...toSet,
+    });
+
+    // Validate did remove some important attributes, like id, and createdAt, so put them back
+    this.attributes = { ...this.attributes, ...sanitized };
+  };
+
   save = async () => {
     if (!this.attributes.id) {
       const document = await new this.Model(this.attributes).save();
