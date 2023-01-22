@@ -1,51 +1,56 @@
-const { pick } = require('lodash');
-const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
+const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
-const FieldValidationError = require('./FieldValidationError');
+const ResourceBase = require('./ResourceBase');
 
+/**
+ * Example usage
+ * const su = new ShopUser({ firstName: 'j', lastName: 'd', email: 'a@a.com', password: 'foo' });
+ * su.save() // saves, returns document ID (string)
+ *  .then(id => new ShopUser(id)) // reloads, returns instance
+ *  .then(su.delete) // deletes, returns old document ID (string)
+ *  .then(console.log);
+ */
+
+const shopUserSchema = mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    // Auto handle createdAt, updatedAt in ISO8601 format
+    timestamps: true,
+  }
+);
+
+const Model = mongoose.model('shopUsers', shopUserSchema);
+
+// This is the validation that is run against creating new entity, and updating entity
 const validatorConfig = {
-  firstName: [stringValidators.required, stringValidators.email],
+  firstName: [stringValidators.required],
   lastName: [stringValidators.required],
+  email: [stringValidators.required, stringValidators.email],
+  password: [stringValidators.required],
   // ... TODO
 };
 
-class ShopUser {
-  constructor(rawProps) {
-    const props = pick(rawProps, Object.keys(validatorConfig)); // Make sure we validate all incoming props. What's not in the validator gets removed
-    const validationResult = validatorFactory(validatorConfig)(props); // Run the valitator on the fields
-    if (Object.keys(validationResult).length) {
-      // If one or more fields have a validation error, we throw a FieldValidationError type object.
-      // We can later detect the type, and return the error to the front-end.
-      throw new FieldValidationError(validationResult);
-    }
-
-    // Validation is successful, let's copy the incoming props to `this`
-    Object.assign(this, props);
-    this.createdAt = new Date().toISOString();
-    this.updatedAt = new Date().toISOString();
+class ShopUser extends ResourceBase {
+  constructor(attributes) {
+    super({ Model, validatorConfig, attributes });
   }
-
-  static async byId(id) {
-    // TODO reload entity based on ID
-    return {};
-  }
-
-  delete = async () => {
-    // TODO delete by this.id
-    return this;
-  };
-
-  save = async () => {
-    this.updatedAt = new Date().toISOString();
-
-    // TODO save
-  };
-
-  validatePassword = async () => {
-    // TODO validate the pass and return boolean
-
-    return this;
-  };
 }
 
 module.exports = ShopUser;

@@ -38,6 +38,9 @@ module.exports = {
     ],
     'default-param-last': ['off'],
     'react/prop-types': ['warn'],
+    'no-underscore-dangle': ['off'], // Mongoose loves underscore dangling
+    'no-constructor-return': ['off'], // We sometimes return a promise from the constructor
+    'constructor-super': ['off'], // This is buggy with extended classes
   },
   env: {
     'cypress/globals': true,
