@@ -1,11 +1,17 @@
 const express = require('express');
-const login = require('./login');
-// const { authenticate } = require('../authorization');
+const postLogin = require('./postLogin');
+const getCurrentUser = require('./getCurrentUser');
+const ShopUser = require('../../resources/ShopUser');
+const { authenticatorFactory } = require('../../utils/authentication');
+
+const authenticator = authenticatorFactory({
+  audience: 'shop',
+  UserClass: ShopUser,
+});
 
 const router = express.Router();
 
-router.post('/login', login);
-
-// router.use(`/v1`, authenticate(), api);
+router.post('/login', postLogin);
+router.get(`/users/current`, authenticator, getCurrentUser);
 
 module.exports = router;

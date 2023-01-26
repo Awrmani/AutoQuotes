@@ -3,13 +3,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
-const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const apiRoutes = require('./apiRoutes');
 const getStaticFilePath = require('./utils/getStaticFilePath');
-const { strategyFactory } = require('./utils/authentication');
 const dbSeed = require('./fixtures/dbSeed');
 
 const runServer = async () => {
@@ -31,11 +29,6 @@ const runServer = async () => {
 
   // JSON request body parsing
   app.use(express.json());
-
-  // Set up our passport authorization middleware
-  passport.use('enduser', strategyFactory({ audience: 'enduser' }));
-  passport.use('shop', strategyFactory({ audience: 'shop' }));
-  app.use(passport.initialize());
 
   /**
    * API ROUTES

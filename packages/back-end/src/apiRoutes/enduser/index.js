@@ -1,10 +1,15 @@
 const express = require('express');
-
-// const { authenticate } = require('../authorization');
-// const api = require('./api');
+// const EndUser = require('../../resources/EndUser');
+// const { authenticatorFactory } = require('../../utils/authentication');
+/*
+const authenticator = authenticatorFactory({
+  audience: 'enduser',
+  UserClass: EndUser,
+});
+*/
 
 const router = express.Router();
 
-// router.use(`/v1`, authenticate(), api);
+// router.use(`/v1`, authenticator, api);
 
 module.exports = router;
