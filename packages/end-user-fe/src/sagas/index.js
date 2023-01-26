@@ -6,6 +6,7 @@ import {
   addTokenRequestInterceptor,
 } from '@autoquotes/libraries/src/saga/interceptors/token';
 import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
+import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
 
@@ -15,7 +16,7 @@ const apiCall = apiCallSagaFactory({
   responseInterceptors: [
     // normalizeResponseInterceptor,
   ],
-  errorInterceptors: [errorTranslationInterceptor],
+  errorInterceptors: [logoutErrorInterceptor, errorTranslationInterceptor],
 });
 
 const initApp = () => {

@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 
 // Async data fetches
 
-// TODO
+export const fetchCurrentUser = createAction(actionTypes.CURRENT_USER_FETCH);
 
 // Form submits & other actions altering backend state
 export const login = createAction(actionTypes.LOGIN);

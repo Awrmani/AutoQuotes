@@ -16,3 +16,7 @@ export const login = apiCall(({ email, password }) => ({
     password,
   },
 }));
+
+export const fetchCurrentUser = apiCall(() => ({
+  url: '/users/current',
+}));
