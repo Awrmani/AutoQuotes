@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
-const ResourceBase = require('./ResourceBase');
+const UserResourceBase = require('./UserResourceBase');
 
 /**
  * Example usage
@@ -36,7 +36,7 @@ const shopUserSchema = mongoose.Schema(
   }
 );
 
-const Model = mongoose.model('shopUsers', shopUserSchema);
+const ShopUserModel = mongoose.model('shopUsers', shopUserSchema);
 
 // This is the validation that is run against creating new entity, and updating entity
 const validatorConfig = {
@@ -47,10 +47,13 @@ const validatorConfig = {
   // ... TODO
 };
 
-class ShopUser extends ResourceBase {
+class ShopUser extends UserResourceBase {
   constructor(attributes) {
-    super({ Model, validatorConfig, attributes });
+    super({ Model: ShopUserModel, validatorConfig, attributes });
   }
 }
 
 module.exports = ShopUser;
+
+// Exporting the model too so DB seed is able to truncate the collection
+module.exports.ShopUserModel = ShopUserModel;

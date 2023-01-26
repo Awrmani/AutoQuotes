@@ -10,11 +10,15 @@ const mongoose = require('mongoose');
 const apiRoutes = require('./apiRoutes');
 const getStaticFilePath = require('./utils/getStaticFilePath');
 const { strategyFactory } = require('./utils/authentication');
+const dbSeed = require('./fixtures/dbSeed');
 
-const runServer = () => {
+const runServer = async () => {
   // Connect to DB
   mongoose.set('strictQuery', true);
   mongoose.connect(process.env.MONGO_CONN_STR);
+
+  // TODO a better way of detecting if seeding is required
+  if (process.env.NODE_ENV === 'development') await dbSeed();
 
   // Create an express app instance we can use to attach middleware and HTTP routes
   const app = express();

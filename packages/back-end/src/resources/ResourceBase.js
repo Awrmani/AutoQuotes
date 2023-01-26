@@ -1,5 +1,4 @@
 const { pick, omit } = require('lodash');
-const sha1 = require('sha1');
 const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
 const FieldValidationError = require('./FieldValidationError');
 
@@ -10,52 +9,56 @@ const FieldValidationError = require('./FieldValidationError');
  * here to enhance code reuse between all resources
  */
 class ResourceBase {
-  #Model;
+  _Model;
 
-  #validatorConfig;
+  _validatorConfig;
 
-  #attributes;
+  _attributes;
 
   constructor({ Model, validatorConfig, attributes }) {
-    this.#Model = Model;
-    this.#validatorConfig = validatorConfig;
+    this._Model = Model;
+    this._validatorConfig = validatorConfig;
+
+    if (attributes === undefined) {
+      // Return an uninitialized instance. Used to allow the
+      // child class to load an arbitrary mongoose object by
+      // the use of _loadByMongooseObj
+      return this;
+    }
 
     if (typeof attributes === 'string') {
       // Create instance by reloading persisted data by id
-      return this.#loadById(attributes);
+      return this._loadById(attributes);
     }
 
     // Create an instance with new data, not ever persisted
-    this.#createNew(attributes);
+    this._attributes = this._validate(attributes);
   }
 
   /**
-   * This async instance function reloads the data from monoose
+   * This async instance function parses the data from monoose object
    * and stores it in `this`
+   * This is useful if we want to look up based on something other than
+   * id.
    */
-  #loadById = async idToGet => {
-    this.#attributes = await this.#Model
-      .findById(idToGet)
-      .exec()
-      // Transform the result that we return
-      .then(instance => {
-        // Rename `_id` to `id` to abstract implementation away
-        const { _id: id, __v: v, ...rest } = instance._doc;
-        return { id: id.toString(), ...rest };
-      });
-
-    return this;
+  _loadByMongooseObj = mongooseObj => {
+    // Rename `_id` to `id` to abstract implementation away
+    const { _id: id, __v: v, ...rest } = mongooseObj._doc;
+    this._attributes = { id: id.toString(), ...rest };
   };
 
   /**
-   * This instance function makes sure that the data for
-   * the new instance is correct, then stores it in `this`
+   * This async instance function parses reloads the data from
+   * mongoose and stores it in `this`
    */
-  #createNew = props => {
-    this.#attributes = this.#validate({
-      ...props,
-      ...(props.password && { password: sha1(props.password) }),
-    });
+  _loadById = async idToGet => {
+    await this._Model
+      .findById(idToGet)
+      .exec()
+      // Transform the result that we return
+      .then(this._loadByMongooseObj);
+
+    return this;
   };
 
   /**
@@ -63,9 +66,9 @@ class ResourceBase {
    * the new instance is correct and only data that have
    * been validated is present. Returns sanitized data
    */
-  #validate = rawProps => {
-    const props = pick(rawProps, Object.keys(this.#validatorConfig)); // Make sure we validate all incoming props. What's not in the validator gets removed
-    const validationResult = validatorFactory(this.#validatorConfig)(props); // Run the valitator on the fields
+  _validate = rawProps => {
+    const props = pick(rawProps, Object.keys(this._validatorConfig)); // Make sure we validate all incoming props. What's not in the validator gets removed
+    const validationResult = validatorFactory(this._validatorConfig)(props); // Run the valitator on the fields
     if (Object.keys(validationResult).length) {
       // If one or more fields have a validation error, we throw a FieldValidationError type object.
       // We can later detect the type, and return the error to the front-end.
@@ -77,45 +80,38 @@ class ResourceBase {
 
   update = toSet => {
     // merge old attributes with input, and sanitize / verify them
-    const sanitized = this.#validate({
-      ...this.#attributes,
+    const sanitized = this._validate({
+      ...this._attributes,
       ...toSet,
-      // When updating password make sure to hash it
-      ...(toSet.password && { password: sha1(toSet.password) }),
     });
 
     // Validate did remove some important attributes, like id, and createdAt, so put them back
-    this.#attributes = { ...this.#attributes, ...sanitized };
+    this._attributes = { ...this._attributes, ...sanitized };
   };
 
   save = async () => {
-    if (!this.#attributes.id) {
-      const document = await new this.#Model(this.#attributes).save();
-      this.#attributes.id = document._id.toString();
-      return this.#attributes.id;
+    if (!this._attributes.id) {
+      const document = await new this._Model(this._attributes).save();
+      this._attributes.id = document._id.toString();
+      return this._attributes.id;
     }
 
-    await this.#Model.findOneAndUpdate(
-      { _id: this.#attributes.id },
-      omit(this.#attributes, ['id'])
+    await this._Model.findOneAndUpdate(
+      { _id: this._attributes.id },
+      omit(this._attributes, ['id'])
     );
 
-    return this.#attributes.id;
+    return this._attributes.id;
   };
 
   delete = async () => {
-    await this.#Model.findByIdAndDelete(this.#attributes.id);
+    await this._Model.findByIdAndDelete(this._attributes.id);
 
-    return this.#attributes.id;
-  };
-
-  // This is only used if it's a user type instance
-  validatePassword = async password => {
-    return this.#attributes.password === sha1(password);
+    return this._attributes.id;
   };
 
   get attributes() {
-    return omit(this.#attributes, ['password']);
+    return this._attributes;
   }
 }
 

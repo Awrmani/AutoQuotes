@@ -1,14 +1,24 @@
 const { createToken } = require('../../utils/authentication');
+const ShopUser = require('../../resources/ShopUser');
 
 module.exports = async (req, res) => {
   const { email, password } = req.body ?? {};
 
-  // Todo recall and authenticate user
-  if (email !== 'a@a.com' || password !== 'a') {
-    return res.status(401).json({ error: 'Incorrect username or password' });
+  if (typeof email !== 'string') {
+    return res.status(417).json({ error: 'Email needs to be a string' });
   }
 
-  return res
-    .status(200)
-    .json({ token: createToken({ userId: '1', audience: 'shop' }) });
+  let shopUser;
+  try {
+    shopUser = await new ShopUser(email);
+  } catch (e) {
+    return res.status(404).json({ error: 'Invalid user email' });
+  }
+
+  if (!shopUser.validatePassword(password))
+    return res.status(401).json({ error: 'Incorrect password' });
+
+  return res.status(200).json({
+    token: createToken({ userId: shopUser.attributes.id, audience: 'shop' }),
+  });
 };
