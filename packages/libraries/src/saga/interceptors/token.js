@@ -6,8 +6,9 @@ import { getToken } from '../../reducers/tokenReducer';
  * This success handler is responsible for dispatching a token set
  * action into the store
  */
-export const earlySetToken = function* ({ result }) {
-  if (result?.token) yield put(setToken(result));
+export const earlySetToken = function* ({ result, token }) {
+  if (result?.token ?? token)
+    yield put(setToken({ token: result?.token ?? token }));
 };
 
 /**

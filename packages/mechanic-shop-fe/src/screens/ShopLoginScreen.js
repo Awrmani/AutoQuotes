@@ -11,7 +11,7 @@ const validator = validatorFactory({
   password: [stringValidators.required],
 });
 
-const LoginScreen = () => {
+const ShopLoginScreen = () => {
   return (
     <Form initialValues={initialValues} validation={validator} action={login}>
       <LoginForm />
@@ -19,4 +19,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default ShopLoginScreen;
