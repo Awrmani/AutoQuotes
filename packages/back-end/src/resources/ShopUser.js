@@ -13,21 +13,34 @@ const UserResourceBase = require('./UserResourceBase');
 
 const shopUserSchema = mongoose.Schema(
   {
-    firstName: {
+    username: {
       type: String,
       required: true,
+      trim: true,
     },
-    lastName: {
+    name: {
       type: String,
       required: true,
     },
     email: {
       type: String,
       required: true,
+      trim: true,
+      lowercase: true,
+      index: { unique: true },
     },
+    phone: String,
     password: {
       type: String,
       required: true,
+      minlength: 8,
+    },
+    role: {
+      type: Number,
+      enum: ['employee', 'admin'],
+      default: {
+        role: 'employee',
+      },
     },
   },
   {
@@ -44,7 +57,6 @@ const validatorConfig = {
   lastName: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
   password: [stringValidators.required],
-  // ... TODO
 };
 
 class ShopUser extends UserResourceBase {
