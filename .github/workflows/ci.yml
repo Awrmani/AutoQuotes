@@ -27,7 +27,7 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Install dependencies
+      - name: Run lint
         uses: Borales/actions-yarn@v4.2.0
         with:
           cmd: 'run lint' # will run `yarn run lint` command
