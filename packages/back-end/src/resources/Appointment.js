@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+//const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const ResourceBase = require('./ResourceBase');
 
 const appointmentSchema = new mongoose.Schema(
@@ -10,6 +10,10 @@ const appointmentSchema = new mongoose.Schema(
       default: Date.now,
     },
     duration: Number,
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'EndUser',
+    },
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format

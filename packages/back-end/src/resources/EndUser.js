@@ -30,8 +30,14 @@ const endUserSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    quotes: ObjectId,
-    appointment: ObjectId,
+    quotes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'Quote',
+    },
+    appointment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Appointment',
+    },
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
