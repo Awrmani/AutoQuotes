@@ -10,17 +10,7 @@ const ResourceBase = require('./ResourceBase');
 
 class UserResourceBase extends ResourceBase {
   constructor({ Model, validatorConfig, attributes }) {
-    if (typeof attributes === 'string' && !attributes.includes('@')) {
-      // Create instance by reloading persisted data by id
-      return super({ Model, validatorConfig, attributes });
-    }
-
-    if (typeof attributes === 'string') {
-      // Look up user by email
-      super({ Model, validatorConfig });
-
-      return this._loadByEmail(attributes);
-    }
+    if (!attributes) return super({ Model, validatorConfig });
 
     // Alter original attibutes, hash password
     return super({
@@ -32,15 +22,6 @@ class UserResourceBase extends ResourceBase {
       },
     });
   }
-
-  _loadByEmail = async email => {
-    const mongooseObj = await this._Model.findOne({ email }).exec();
-
-    if (!mongooseObj) throw new Error('User not found');
-
-    this._loadByMongooseObj(mongooseObj);
-    return this;
-  };
 
   // When updating password make sure to hash it
   update = toSet => {

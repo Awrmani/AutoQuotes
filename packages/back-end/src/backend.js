@@ -15,8 +15,8 @@ const runServer = async () => {
   mongoose.set('strictQuery', true);
   mongoose.connect(process.env.MONGO_CONN_STR);
 
-  // TODO a better way of detecting if seeding is required
-  if (process.env.NODE_ENV === 'development') await dbSeed();
+  // Seed db if required
+  await dbSeed();
 
   // Create an express app instance we can use to attach middleware and HTTP routes
   const app = express();
