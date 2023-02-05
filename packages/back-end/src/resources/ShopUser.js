@@ -6,9 +6,11 @@ const UserResourceBase = require('./UserResourceBase');
  * Example usage
  * const su = new ShopUser({ firstName: 'j', lastName: 'd', email: 'a@a.com', password: 'foo' });
  * su.save() // saves, returns document ID (string)
- *  .then(id => new ShopUser(id)) // reloads, returns instance
+ *  .then(id => new ShopUser().loadById(id)) // reloads, returns instance
  *  .then(su.delete) // deletes, returns old document ID (string)
  *  .then(console.log);
+ * ---
+ * const su = await new ShopUser().loadBy({ email: 'a@a.com' });
  */
 
 const shopUserSchema = mongoose.Schema(
@@ -25,9 +27,7 @@ const shopUserSchema = mongoose.Schema(
     email: {
       type: String,
       required: true,
-      trim: true,
-      lowercase: true,
-      index: { unique: true },
+      unique: true,
     },
     phone: String,
     password: {

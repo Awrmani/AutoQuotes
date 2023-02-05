@@ -19,46 +19,52 @@ class ResourceBase {
     this._Model = Model;
     this._validatorConfig = validatorConfig;
 
-    if (attributes === undefined) {
-      // Return an uninitialized instance. Used to allow the
-      // child class to load an arbitrary mongoose object by
-      // the use of _loadByMongooseObj
-      return this;
-    }
-
-    if (typeof attributes === 'string') {
-      // Create instance by reloading persisted data by id
-      return this._loadById(attributes);
-    }
+    if (!attributes) return this;
 
     // Create an instance with new data, not ever persisted
     this._attributes = this._validate(attributes);
+
+    return this;
   }
 
   /**
-   * This async instance function parses the data from monoose object
+   * This instance function parses the data from monoose object
    * and stores it in `this`
    * This is useful if we want to look up based on something other than
    * id.
    */
-  _loadByMongooseObj = mongooseObj => {
+  _populateWithMongooseObj = mongooseObj => {
     // Rename `_id` to `id` to abstract implementation away
     const { _id: id, __v: v, ...rest } = mongooseObj._doc;
     this._attributes = { id: id.toString(), ...rest };
+
+    return this;
   };
 
   /**
    * This async instance function parses reloads the data from
    * mongoose and stores it in `this`
    */
-  _loadById = async idToGet => {
+  loadById = async idToGet => {
     await this._Model
       .findById(idToGet)
       .exec()
       // Transform the result that we return
-      .then(this._loadByMongooseObj);
+      .then(this._populateWithMongooseObj);
 
     return this;
+  };
+
+  /**
+   * This async instance fn allows to reload an entity
+   * based on custom search criteria
+   */
+  loadBy = async (criteria = {}) => {
+    const mongooseObj = await this._Model.findOne(criteria).exec();
+
+    if (!mongooseObj) throw new Error('Entity not found');
+
+    return this._populateWithMongooseObj(mongooseObj);
   };
 
   /**

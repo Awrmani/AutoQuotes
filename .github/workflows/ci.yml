@@ -4,8 +4,8 @@ name: ci
 # This workflow will run whenever we push (or merge) commits to the `develop` branch,
 on:
   push:
-    branches:
-      - develop
+    branches-ignore:
+      - main
 
 jobs:
   lint:
@@ -27,7 +27,7 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Install dependencies
+      - name: Run lint
         uses: Borales/actions-yarn@v4.2.0
         with:
           cmd: 'run lint' # will run `yarn run lint` command
