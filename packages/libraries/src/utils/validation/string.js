@@ -33,5 +33,8 @@ const verifyInput = to => (value, allValues) => {
 const email = value =>
   validateEmail(value) ? undefined : 'Invalid email address';
 
+const oneOf = options => value =>
+  options.includes(value) ? undefined : `Must be one of ${options.join('/')}`;
+
 // Using CJS export as this is used in both CJS and MJS
-module.exports = { isString, required, minLength, verifyInput, email };
+module.exports = { isString, required, minLength, verifyInput, email, oneOf };

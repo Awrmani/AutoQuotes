@@ -6,8 +6,12 @@ const ShopUser = require('../resources/ShopUser');
 const shopUserSeed = require('./shopUserSeed.json');
 
 const SEED_MAP = {
-  config: { Model: Config.ConfigModel, seed: configSeed },
-  shopUser: { Model: ShopUser.ShopUserModel, seed: shopUserSeed },
+  config: { Model: Config.ConfigModel, Resource: Config, seed: configSeed },
+  shopUser: {
+    Model: ShopUser.ShopUserModel,
+    Resource: ShopUser,
+    seed: shopUserSeed,
+  },
 };
 
 /**
@@ -55,13 +59,13 @@ const dbSeed = async () => {
 
   // Using for of, because [].forEach is unable to `await`
   for (const collection of Object.keys(SEED_MAP)) {
-    const { Model, seed } = SEED_MAP[collection];
+    const { Model, Resource, seed } = SEED_MAP[collection];
     console.log(`# Seeding ${collection} with ${seed.length} documents #`);
 
     Model.deleteMany({});
     for (const document of seed) {
       // eslint-disable-next-line no-await-in-loop
-      await new Model(document).save();
+      await new Resource(document).save();
     }
   }
 };

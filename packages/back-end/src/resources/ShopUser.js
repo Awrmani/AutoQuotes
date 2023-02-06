@@ -15,11 +15,7 @@ const UserResourceBase = require('./UserResourceBase');
 
 const shopUserSchema = mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
+    name: {
       type: String,
       required: true,
     },
@@ -28,9 +24,14 @@ const shopUserSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    phone: String,
     password: {
       type: String,
       required: true,
+    },
+    role: {
+      type: String,
+      enum: ['employee', 'admin'],
     },
   },
   {
@@ -43,11 +44,14 @@ const ShopUserModel = mongoose.model('shopUsers', shopUserSchema);
 
 // This is the validation that is run against creating new entity, and updating entity
 const validatorConfig = {
-  firstName: [stringValidators.required],
-  lastName: [stringValidators.required],
+  name: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
+  phone: [stringValidators.isString],
   password: [stringValidators.required],
-  // ... TODO
+  role: [
+    stringValidators.required,
+    stringValidators.oneOf(['employee', 'admin']),
+  ],
 };
 
 class ShopUser extends UserResourceBase {
