@@ -1,8 +1,9 @@
 [
   {
-    "firstName": "John",
-    "lastName": "Doe",
+    "name": "John Doe",
     "email": "jd1@a.com",
-    "password": "secret"
+    "phone": "",
+    "password": "secret",
+    "role": "admin"
   }
 ]
