@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   let shopUser;
   try {
-    shopUser = await new ShopUser(email);
+    shopUser = await new ShopUser().loadBy({ email });
   } catch (e) {
     return res.status(404).json({ error: 'Invalid user email' });
   }
