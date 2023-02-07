@@ -42,7 +42,7 @@ const SideBar = () => {
     user: {
       label: 'Username',
       icon: <AccountCircle />,
-      admin: true,
+      role: '',
     },
     categories: [
       {
@@ -148,7 +148,7 @@ const SideBar = () => {
           <Typography variant="h5" sx={{ mb: 1, textAlign: 'center' }}>
             Need help?
           </Typography>
-          <IconButton color="inherit" edge="start">
+          <IconButton color="inherit" edge="start" disableRipple>
             <Mail sx={{ mr: 1 }} />
             <Typography
               component={'a'}
@@ -159,7 +159,7 @@ const SideBar = () => {
             </Typography>
           </IconButton>
 
-          <IconButton color="inherit" edge="start">
+          <IconButton color="inherit" edge="start" disableRipple>
             <Phone sx={{ mr: 1 }} />
             <Typography
               component={'a'}
@@ -170,11 +170,11 @@ const SideBar = () => {
             </Typography>
           </IconButton>
 
-          <IconButton color="inherit" edge="start">
+          <IconButton color="inherit" edge="start" disableRipple>
             <LocationOn sx={{ mr: 1 }} />
             <Typography
               component={'a'}
-              sx={{ m: 0 }}
+              sx={{ m: 0, letterSpacing: 0 }}
               href="https://goo.gl/maps/iAG3PDidLF4zrCzy8"
             >
               A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5
