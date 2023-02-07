@@ -5,6 +5,7 @@ import buildStore from '@autoquotes/libraries/src/utils/buildStore';
 import MuiThemeProvider from '@autoquotes/common/src/components/MuiThemeProvider';
 import rootReducer from './reducers';
 import sagas from './sagas';
+
 import Routes from './Routes';
 
 const storePromise = buildStore({ rootReducer, sagas });

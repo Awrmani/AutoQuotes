@@ -1,7 +1,9 @@
 import React from 'react';
 
+import ShopLayout from '../components/ShopLayout';
+
 const ShopDashboardScreen = () => {
-  return <div>Shop dashboard</div>;
+  return ShopLayout;
 };
 
 export default ShopDashboardScreen;

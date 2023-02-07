@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import SideBar from './SideBar';
 
 const ShopLayout = () => {
   return (
     <div>
-      This is a Layout component, it wraps all logged in screens
+      <SideBar></SideBar>
       <Outlet />
     </div>
   );
