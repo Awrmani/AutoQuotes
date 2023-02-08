@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 const ShopLayout = () => {
   return (
     <div>
-      <SideBar></SideBar>
+      <SideBar />
       <Outlet />
     </div>
   );
