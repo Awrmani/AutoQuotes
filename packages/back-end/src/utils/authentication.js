@@ -44,7 +44,7 @@ const authenticatorFactory =
       );
     })
       // Promises automatically await in a promise chain
-      .then(({ sub }) => new UserClass(sub))
+      .then(({ sub }) => new UserClass().loadById(sub))
       .then(user => {
         // Successfully authenticated.
         req.user = user.attributes;

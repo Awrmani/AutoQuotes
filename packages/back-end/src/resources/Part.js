@@ -12,6 +12,9 @@ const partSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    amountInStock: {
+      type: Number,
+    },
     compatibleVehicles: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: 'VehicleType',
