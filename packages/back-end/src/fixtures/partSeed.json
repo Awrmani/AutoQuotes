@@ -1,0 +1,63 @@
+[
+  {
+    "id": "012345678901",
+    "name": "Oil filter (Honda/Nissan) 7356",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 1334 (Hyundai/old Honda)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 7060 (GM/Dodge)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 1042 (old GM)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 7502 (Ford)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 7502 (Ford)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 1372 (old Ford)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 1085 (old Dodge/Jeep)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 7899 (Dodge HEMI)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Oil filter 1085 (7145 for Toyota)",
+    "price": 5,
+    "amountInStock": 22,
+    "compatibleVehicles": []
+  }
+]
