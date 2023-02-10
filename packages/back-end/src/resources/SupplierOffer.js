@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const ResourceBase = require('./ResourceBase');
 
 const supplierOfferSchema = new mongoose.Schema(
   {
-    Supplier: {
-      type: mongoose.Schema.Types.ObjectId,
+    supplier: {
+      type: String,
       ref: 'ThirdPartySupplier',
       required: true,
     },
@@ -35,7 +36,11 @@ const SupplierOfferModel = mongoose.model(
 );
 
 const validatorConfig = {
+  supplier: [stringValidators.required],
+  price: [numberValidators.required],
+  warrantyPeriod: [numberValidators.required],
   manufacturer: [stringValidators.required],
+  description: [stringValidators.isString],
 };
 
 class SupplierOffer extends ResourceBase {

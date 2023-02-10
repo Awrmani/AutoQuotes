@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
+const arrayValidators = require('@autoquotes/libraries/src/utils/validation/array');
 const ResourceBase = require('./ResourceBase');
 
 const partSchema = new mongoose.Schema(
@@ -16,7 +18,7 @@ const partSchema = new mongoose.Schema(
       type: Number,
     },
     compatibleVehicles: {
-      type: [mongoose.Schema.Types.ObjectId],
+      type: [String],
       ref: 'VehicleType',
     },
   },
@@ -30,7 +32,9 @@ const PartModel = mongoose.model('parts', partSchema);
 
 const validatorConfig = {
   name: [stringValidators.required],
-  price: [stringValidators.required],
+  price: [numberValidators.required],
+  amountInStock: [numberValidators.required],
+  compatibleVehicles: [arrayValidators.isArray],
 };
 
 class Part extends ResourceBase {

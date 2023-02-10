@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const ResourceBase = require('./ResourceBase');
 
 const serviceTypeSchema = new mongoose.Schema(
@@ -21,6 +22,7 @@ const ServiceTypeModel = mongoose.model('serviceTypes', serviceTypeSchema);
 
 const validatorConfig = {
   type: [stringValidators.required],
+  time: [numberValidators.required],
   description: [stringValidators.required],
 };
 

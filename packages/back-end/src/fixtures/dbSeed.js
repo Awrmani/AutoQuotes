@@ -4,6 +4,8 @@ const Config = require('../resources/Config');
 const configSeed = require('./configSeed.json');
 const ShopUser = require('../resources/ShopUser');
 const shopUserSeed = require('./shopUserSeed.json');
+const Part = require('../resources/Part');
+const partSeed = require('./partSeed.json');
 
 const SEED_MAP = {
   config: { Model: Config.ConfigModel, Resource: Config, seed: configSeed },
@@ -12,6 +14,7 @@ const SEED_MAP = {
     Resource: ShopUser,
     seed: shopUserSeed,
   },
+  part: { Model: Part.PartModel, Resource: Part, seed: partSeed },
 };
 
 /**
