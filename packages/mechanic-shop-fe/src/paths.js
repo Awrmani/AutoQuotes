@@ -4,6 +4,10 @@ const dashboard = () => ({
   pathname: '/dashboard',
 });
 
-const paths = { login, dashboard };
+const inventory = () => ({
+  pathname: '/inventory',
+});
+
+const paths = { login, dashboard, inventory };
 
 export default paths;
