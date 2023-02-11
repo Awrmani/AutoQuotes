@@ -11,8 +11,7 @@ import {
 
 import { Menu } from '@mui/icons-material';
 import SideBarInner from '../SideBarInner';
-
-const drawerWidth = 240;
+import { DRAWER_WIDTH } from '../../../constants/layout';
 
 const SideBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,8 +26,8 @@ const SideBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% -${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { sm: `calc(100% -${DRAWER_WIDTH}px)` },
+          ml: { sm: `${DRAWER_WIDTH}px` },
           display: { sm: 'none', md: 'none' },
         }}
       >
@@ -49,7 +48,7 @@ const SideBar = () => {
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
       >
         <Drawer
           variant="temporary"
@@ -59,12 +58,12 @@ const SideBar = () => {
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: drawerWidth,
+              width: DRAWER_WIDTH,
             },
           }}
         >
           <SideBarInner
-            drawerWidth={drawerWidth}
+            drawerWidth={DRAWER_WIDTH}
             handleDrawerToggle={handleDrawerToggle}
           />
         </Drawer>
@@ -74,13 +73,13 @@ const SideBar = () => {
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: drawerWidth,
+              width: DRAWER_WIDTH,
             },
           }}
           open
         >
           <SideBarInner
-            drawerWidth={drawerWidth}
+            drawerWidth={DRAWER_WIDTH}
             handleDrawerToggle={handleDrawerToggle}
           />
         </Drawer>

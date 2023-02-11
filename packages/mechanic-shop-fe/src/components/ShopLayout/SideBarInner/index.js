@@ -61,7 +61,7 @@ const sideBarProps = {
   ],
 };
 
-const SideBarInner = drawerWidth => {
+const SideBarInner = () => {
   return (
     <Box>
       <Toolbar
@@ -130,7 +130,6 @@ const SideBarInner = drawerWidth => {
         <Box
           sx={{
             paddingLeft: 2,
-            minWidth: `${drawerWidth - 1}px`,
           }}
         >
           <Typography variant="h5" sx={{ mb: 1, textAlign: 'center' }}>
