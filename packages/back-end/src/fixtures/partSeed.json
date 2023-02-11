@@ -1,6 +1,5 @@
 [
   {
-    "id": "012345678901",
     "name": "Oil filter (Honda/Nissan) 7356",
     "price": 5,
     "amountInStock": 22,
@@ -58,6 +57,96 @@
     "name": "Oil filter 1085 (7145 for Toyota)",
     "price": 5,
     "amountInStock": 22,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Engine Air Filter Ford",
+    "price": 20,
+    "amountInStock": 40,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Spark Plugs GM",
+    "price": 25,
+    "amountInStock": 30,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Brake Pads GM",
+    "price": 50,
+    "amountInStock": 20,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Windshield Wipers",
+    "price": 15,
+    "amountInStock": 60,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Engine Coolant",
+    "price": 20,
+    "amountInStock": 40,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Transmission Fluid (ATF)",
+    "price": 25,
+    "amountInStock": 30,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Battery 55KWh",
+    "price": 80,
+    "amountInStock": 10,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Brake Rotors",
+    "price": 60,
+    "amountInStock": 20,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Suspension Struts",
+    "price": 80,
+    "amountInStock": 10,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Shock Absorbers",
+    "price": 50,
+    "amountInStock": 20,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Fuel Pump",
+    "price": 120,
+    "amountInStock": 5,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Fuel Filter",
+    "price": 10,
+    "amountInStock": 50,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Exhaust Manifold",
+    "price": 70,
+    "amountInStock": 20,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Exhaust Pipe",
+    "price": 50,
+    "amountInStock": 20,
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Catalytic Converter",
+    "price": 200,
+    "amountInStock": 5,
     "compatibleVehicles": []
   }
 ]

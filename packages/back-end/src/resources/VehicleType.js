@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const ResourceBase = require('./ResourceBase');
 
 const vehicleTypeSchema = new mongoose.Schema(
@@ -13,7 +14,7 @@ const vehicleTypeSchema = new mongoose.Schema(
       required: true,
     },
     modelYear: {
-      type: String,
+      type: Number,
       required: true,
     },
     engineVariant: {
@@ -36,7 +37,7 @@ const VehicleTypeModel = mongoose.model('vehicleTypes', vehicleTypeSchema);
 const validatorConfig = {
   make: [stringValidators.required],
   model: [stringValidators.required],
-  modelYear: [stringValidators.required],
+  modelYear: [numberValidators.required],
   engineVariant: [stringValidators.required],
   bodyType: [stringValidators.required],
 };
