@@ -50,13 +50,11 @@ class ResourceBase {
    * mongoose and stores it in `this`
    */
   loadById = async idToGet => {
-    await this._Model
-      .findById(idToGet)
-      .exec()
-      // Transform the result that we return
-      .then(this._populateWithMongooseObj);
+    const mongooseObj = await this._Model.findById(idToGet).exec();
 
-    return this;
+    if (!mongooseObj) throw new Error('Entity not found');
+
+    return this._populateWithMongooseObj(mongooseObj);
   };
 
   /**

@@ -19,7 +19,9 @@ module.exports = async (req, res) => {
 
   // Resources handle their own format validation and throw special
   // errors, that are in turn handled by a specific Express middleware
-  const su = await new ShopUser(userData).save();
+  await new ShopUser(userData).save();
 
-  return res.json(su.attributes);
+  // It's considered to be a good practice to return
+  // "" or {} even if we have nothing to say
+  return res.json({});
 };
