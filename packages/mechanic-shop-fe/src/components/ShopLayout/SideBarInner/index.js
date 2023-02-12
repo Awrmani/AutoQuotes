@@ -35,28 +35,34 @@ const sideBarProps = {
     {
       label: 'Inventories',
       icon: <Inventory />,
+      link: '/inventory',
     },
     {
       label: 'Services',
       icon: <SupportAgent />,
+      link: '/service',
     },
     {
       label: 'Appointments',
       icon: <CalendarMonth />,
+      link: '/appointment',
     },
   ],
   adminCategories: [
     {
       label: 'Configuration',
       icon: <Settings />,
+      link: '/configuration',
     },
     {
       label: 'User Management',
       icon: <ManageAccounts />,
+      link: '/userManagement',
     },
     {
       label: 'Report',
       icon: <Assessment />,
+      link: '/report',
     },
   ],
 };
@@ -94,7 +100,7 @@ const SideBarInner = () => {
       <List>
         {sideBarProps.categories.map(item => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton>
+            <ListItemButton LinkComponent="a" href={item.link}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.label} />
             </ListItemButton>
@@ -108,7 +114,7 @@ const SideBarInner = () => {
           <List>
             {sideBarProps.adminCategories.map(item => (
               <ListItem key={item.label} disablePadding>
-                <ListItemButton>
+                <ListItemButton href={sideBarProps.user.link}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItemButton>
