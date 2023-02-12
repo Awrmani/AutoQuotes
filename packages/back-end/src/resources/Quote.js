@@ -42,6 +42,15 @@ const quoteSchema = new mongoose.Schema(
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
     timestamps: true,
+    toJSON: {
+      // Map _id over to id and stringify
+      transform(doc, ret) {
+        // eslint-disable-next-line no-param-reassign
+        ret.id = ret._id.toString();
+        // eslint-disable-next-line no-param-reassign
+        delete ret._id;
+      },
+    },
   }
 );
 

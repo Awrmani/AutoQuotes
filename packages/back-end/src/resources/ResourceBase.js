@@ -37,9 +37,9 @@ class ResourceBase {
    * id.
    */
   _populateWithMongooseObj = mongooseObj => {
-    // Rename `_id` to `id` to abstract implementation away
-    const { _id: id, __v: v, ...rest } = mongooseObj._doc;
-    this._attributes = { id: id.toString(), ...rest };
+    // remove __v
+    const { __v: v, ...rest } = mongooseObj.toJSON();
+    this._attributes = rest;
     this._isSaved = true;
 
     return this;
