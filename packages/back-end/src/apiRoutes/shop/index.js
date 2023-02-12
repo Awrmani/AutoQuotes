@@ -1,8 +1,11 @@
 const express = require('express');
 const postLogin = require('./postLogin');
-const getCurrentUser = require('./getCurrentUser');
 const shopGet = require('./shopGet');
 const shopUpdate = require('./shopUpdate');
+const shopUserGet = require('./shopUserGet');
+const shopUserCreate = require('./shopUserCreate');
+const shopUserUpdate = require('./shopUserUpdate');
+const shopUserDelete = require('./shopUserDelete');
 const ShopUser = require('../../resources/ShopUser');
 const { authenticatorFactory } = require('../../utils/authentication');
 
@@ -14,7 +17,12 @@ const authenticator = authenticatorFactory({
 const router = express.Router();
 
 router.post('/login', postLogin);
-router.get(`/users/current`, authenticator, getCurrentUser);
+
+// Shop user CRUD handlers
+router.get('/users/:id', authenticator, shopUserGet);
+router.put('/users', authenticator, shopUserCreate);
+router.patch('/users/:id', authenticator, shopUserUpdate);
+router.delete('/users/:id', authenticator, shopUserDelete);
 
 // Shop RU handlers
 router.get('/shop', shopGet);
