@@ -33,7 +33,7 @@ jobs:
           cmd: 'run lint' # will run `yarn run lint` command
 
   shop-e2e-tests:
-    name: End to End Tests
+    name: Shop End to End Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -56,7 +56,7 @@ jobs:
           cmd: 'run shop:e2e:start' # will run `yarn run shop:e2e:start` command
 
   enduser-e2e-tests:
-    name: End to End Tests
+    name: End-user End to End Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -79,7 +79,7 @@ jobs:
           cmd: 'run enduser:e2e:start' # will run `yarn run enduser:e2e:start` command
 
   thirdp-e2e-tests:
-    name: End to End Tests
+    name: Third party End to End Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
