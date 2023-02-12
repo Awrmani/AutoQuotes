@@ -1,4 +1,5 @@
 const ShopUser = require('../../resources/ShopUser');
+const FieldValidationError = require('../../resources/FieldValidationError');
 
 module.exports = async (req, res) => {
   if (req.user.role !== 'admin')
@@ -9,9 +10,16 @@ module.exports = async (req, res) => {
   // Excluding ID from object
   const { id, ...userData } = req.body ?? {};
 
+  try {
+    await new ShopUser().loadBy({ email: userData.email });
+    throw new FieldValidationError({ email: 'This email already exists' });
+  } catch (e) {
+    // This is expected
+  }
+
   // Resources handle their own format validation and throw special
   // errors, that are in turn handled by a specific Express middleware
-  const su = await new ShopUser(userData).save(id);
+  const su = await new ShopUser(userData).save();
 
   return res.json(su.attributes);
 };

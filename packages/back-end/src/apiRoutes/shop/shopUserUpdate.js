@@ -1,14 +1,15 @@
 const { omit } = require('lodash');
 const ShopUser = require('../../resources/ShopUser');
+const FieldValidationError = require('../../resources/FieldValidationError');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
 
   let patchWith = req.body;
-  let su;
+  let userToChange;
   if (id === 'current' || id === req.user.id) {
     // The user wants to update their own information
-    su = await ShopUser.loadById(req.user.id);
+    userToChange = await ShopUser.loadById(req.user.id);
 
     // Users cannot update their own role
     patchWith = omit(patchWith, ['role']);
@@ -22,14 +23,24 @@ module.exports = async (req, res) => {
 
     // An admin user is trying to update an other user
     try {
-      su = await new ShopUser().loadById(id);
+      userToChange = await new ShopUser().loadById(id);
     } catch (e) {
       return res.status(404).json({ error: 'Cannot reload user with that ID' });
     }
   }
 
-  // Update user's information and save
-  await su.update(patchWith).save();
+  if (req.user.email && req.user.email !== userToChange.attributes.email) {
+    // Changing email
+    try {
+      await new ShopUser().loadBy({ email: req.user.email });
+      throw new FieldValidationError({ email: 'This email already exists' });
+    } catch (e) {
+      // This is expected
+    }
+  }
 
-  return res.json(su.attributes);
+  // Update user's information and save
+  await userToChange.update(patchWith).save();
+
+  return res.json(userToChange.attributes);
 };
