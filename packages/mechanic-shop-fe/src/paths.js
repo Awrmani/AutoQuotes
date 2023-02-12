@@ -8,6 +8,10 @@ const inventory = () => ({
   pathname: '/inventory',
 });
 
-const paths = { login, dashboard, inventory };
+const itemForm = () => ({
+  pathname: '/itemForm',
+});
+
+const paths = { login, dashboard, inventory, itemForm };
 
 export default paths;
