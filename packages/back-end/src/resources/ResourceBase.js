@@ -15,6 +15,8 @@ class ResourceBase {
 
   _attributes;
 
+  _isSaved;
+
   constructor({ Model, validatorConfig, attributes }) {
     this._Model = Model;
     this._validatorConfig = validatorConfig;
@@ -23,6 +25,7 @@ class ResourceBase {
 
     // Create an instance with new data, not ever persisted
     this._attributes = this._validate(attributes);
+    this._isSaved = false;
 
     return this;
   }
@@ -34,9 +37,10 @@ class ResourceBase {
    * id.
    */
   _populateWithMongooseObj = mongooseObj => {
-    // Rename `_id` to `id` to abstract implementation away
-    const { _id: id, __v: v, ...rest } = mongooseObj._doc;
-    this._attributes = { id: id.toString(), ...rest };
+    // remove __v
+    const { __v: v, ...rest } = mongooseObj.toJSON();
+    this._attributes = rest;
+    this._isSaved = true;
 
     return this;
   };
@@ -46,13 +50,11 @@ class ResourceBase {
    * mongoose and stores it in `this`
    */
   loadById = async idToGet => {
-    await this._Model
-      .findById(idToGet)
-      .exec()
-      // Transform the result that we return
-      .then(this._populateWithMongooseObj);
+    const mongooseObj = await this._Model.findById(idToGet).exec();
 
-    return this;
+    if (!mongooseObj) throw new Error('Entity not found');
+
+    return this._populateWithMongooseObj(mongooseObj);
   };
 
   /**
@@ -81,7 +83,10 @@ class ResourceBase {
       throw new FieldValidationError(validationResult);
     }
 
-    return props;
+    return {
+      ...props,
+      ...(rawProps.id && { id: rawProps.id }),
+    };
   };
 
   update = toSet => {
@@ -92,12 +97,16 @@ class ResourceBase {
     });
 
     // Validate did remove some important attributes, like id, and createdAt, so put them back
-    this._attributes = { ...this._attributes, ...sanitized };
+    this._attributes = {
+      ...this._attributes,
+      ...sanitized,
+    };
   };
 
   save = async () => {
-    if (!this._attributes.id) {
-      const document = await new this._Model(this._attributes).save();
+    if (!this._isSaved) {
+      const { id, ...attributes } = this._attributes;
+      const document = await new this._Model({ _id: id, ...attributes }).save();
       this._attributes.id = document._id.toString();
       return this._attributes.id;
     }
@@ -112,6 +121,7 @@ class ResourceBase {
 
   delete = async () => {
     await this._Model.findByIdAndDelete(this._attributes.id);
+    this._isSaved = false;
 
     return this._attributes.id;
   };

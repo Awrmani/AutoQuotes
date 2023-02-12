@@ -11,9 +11,22 @@ const ResourceBase = require('./ResourceBase');
  * console.log(config.attributes)
  */
 
-const configSchema = new mongoose.Schema({
-  seedVersion: Number,
-});
+const configSchema = new mongoose.Schema(
+  {
+    seedVersion: Number,
+  },
+  {
+    toJSON: {
+      // Map _id over to id and stringify
+      transform(doc, ret) {
+        // eslint-disable-next-line no-param-reassign
+        ret.id = ret._id.toString();
+        // eslint-disable-next-line no-param-reassign
+        delete ret._id;
+      },
+    },
+  }
+);
 
 const ConfigModel = mongoose.model('config', configSchema);
 

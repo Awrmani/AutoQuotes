@@ -1,0 +1,404 @@
+[
+  {
+    "id": "TeslSModelX0",
+    "make": "Tesla",
+    "model": "Model X",
+    "modelYear": 2022,
+    "engineVariant": "Long Range",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslModel3P1",
+    "make": "Tesla",
+    "model": "Model 3",
+    "modelYear": 2021,
+    "engineVariant": "Performance",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "TeslModelS22",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2022,
+    "engineVariant": "Plaid",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "TeslCyberT33",
+    "make": "Tesla",
+    "model": "Cybertruck",
+    "modelYear": 2021,
+    "engineVariant": "Tri-Motor",
+    "bodyType": "Pickup Truck"
+  },
+  {
+    "id": "TeslRoads444",
+    "make": "Tesla",
+    "model": "Roadster",
+    "modelYear": 2022,
+    "engineVariant": "Performance",
+    "bodyType": "Sports Car"
+  },
+  {
+    "id": "TeslModelY55",
+    "make": "Tesla",
+    "model": "Model Y",
+    "modelYear": 2022,
+    "engineVariant": "Long Range",
+    "bodyType": "Crossover"
+  },
+  {
+    "id": "TeslSemiT664",
+    "make": "Tesla",
+    "model": "Semi Truck",
+    "modelYear": 2022,
+    "engineVariant": "Standard Range",
+    "bodyType": "Semi-Trailer Truck"
+  },
+  {
+    "id": "TeslTruck777",
+    "make": "Tesla",
+    "model": "Semi",
+    "modelYear": 2022,
+    "engineVariant": "Tri-Motor",
+    "bodyType": "Class 8 Semi"
+  },
+  {
+    "id": "TeslTruck888",
+    "make": "Tesla",
+    "model": "Semi",
+    "modelYear": 2022,
+    "engineVariant": "Tri-Motor",
+    "bodyType": "Class 8 Semi"
+  },
+  {
+    "id": "TeslSModel39",
+    "make": "Tesla",
+    "model": "Model 3",
+    "modelYear": 2022,
+    "engineVariant": "Standard Range",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "VolkJetta_11",
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "modelYear": 2022,
+    "engineVariant": "2.2 Diesel",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "VolkAtlas_22",
+    "make": "Volkswagen",
+    "model": "Atlas",
+    "modelYear": 2022,
+    "engineVariant": "3.0 Turbo",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolkGolf_333",
+    "make": "Volkswagen",
+    "model": "Golf",
+    "modelYear": 2022,
+    "engineVariant": "V8 3L",
+    "bodyType": "Hatchback"
+  },
+  {
+    "id": "VolkTiguan44",
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "modelYear": 2022,
+    "engineVariant": "Inline 6 2.5L",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolkArteon_5",
+    "make": "Volkswagen",
+    "model": "Arteon",
+    "modelYear": 2022,
+    "engineVariant": "Inline 6 2.5L",
+    "bodyType": "Fastback"
+  },
+  {
+    "id": "VolkPassat_6",
+    "make": "Volkswagen",
+    "model": "Passat",
+    "modelYear": 2022,
+    "engineVariant": "V6 2.3L",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "VolkID4__777",
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "modelYear": 2022,
+    "engineVariant": "Pro S",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolkBeetle_8",
+    "make": "Volkswagen",
+    "model": "Beetle",
+    "modelYear": 2022,
+    "engineVariant": "1.4 Naturally Aspirated",
+    "bodyType": "Coupe"
+  },
+  {
+    "id": "VolkTouareg9",
+    "make": "Volkswagen",
+    "model": "Touareg",
+    "modelYear": 2022,
+    "engineVariant": "2.0D",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolkCC__1010",
+    "make": "Volkswagen",
+    "model": "CC",
+    "modelYear": 2022,
+    "engineVariant": "2.2 Turbo",
+    "bodyType": "Sedan"
+  },
+
+  {
+    "id": "VolvoXC40_11",
+    "make": "Volvo",
+    "model": "XC40",
+    "modelYear": 2022,
+    "engineVariant": "T5",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolvoXC90_22",
+    "make": "Volvo",
+    "model": "XC90",
+    "modelYear": 2022,
+    "engineVariant": "T6",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolvoS90_333",
+    "make": "Volvo",
+    "model": "S90",
+    "modelYear": 2022,
+    "engineVariant": "T6",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "VolvoV60_444",
+    "make": "Volvo",
+    "model": "V60",
+    "modelYear": 2022,
+    "engineVariant": "T4",
+    "bodyType": "Wagon"
+  },
+  {
+    "id": "VolvoV90_555",
+    "make": "Volvo",
+    "model": "V90",
+    "modelYear": 2022,
+    "engineVariant": "T6",
+    "bodyType": "Wagon"
+  },
+  {
+    "id": "VolvoS60_654",
+    "make": "Volvo",
+    "model": "S60",
+    "modelYear": 2022,
+    "engineVariant": "D3",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "VolvoXC60_76",
+    "make": "Volvo",
+    "model": "XC60",
+    "modelYear": 2022,
+    "engineVariant": "D5",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolvoV40__88",
+    "make": "Volvo",
+    "model": "V40",
+    "modelYear": 2022,
+    "engineVariant": "T2",
+    "bodyType": "Hatchback"
+  },
+  {
+    "id": "VolvoC40__91",
+    "make": "Volvo",
+    "model": "C40",
+    "modelYear": 2022,
+    "engineVariant": "Recharge",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "VolvoS40__10",
+    "make": "Volvo",
+    "model": "S40",
+    "modelYear": 2022,
+    "engineVariant": "T4",
+    "bodyType": "Sedan"
+  },
+
+  {
+    "id": "FordMustan_1",
+    "make": "Ford",
+    "model": "Mustang",
+    "modelYear": 2022,
+    "engineVariant": "GT 4.2",
+    "bodyType": "Coupe"
+  },
+  {
+    "id": "FordF150_212",
+    "make": "Ford",
+    "model": "F-150",
+    "modelYear": 2022,
+    "engineVariant": "Cummins 4.3",
+    "bodyType": "Pickup Truck"
+  },
+  {
+    "id": "FordEscape_3",
+    "make": "Ford",
+    "model": "Escape",
+    "modelYear": 2022,
+    "engineVariant": "2.2T",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "FordExplor_4",
+    "make": "Ford",
+    "model": "Explorer",
+    "modelYear": 2022,
+    "engineVariant": "4.2 Supercharged",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "FordFocus_55",
+    "make": "Ford",
+    "model": "Focus",
+    "modelYear": 2022,
+    "engineVariant": "1.8T",
+    "bodyType": "Hatchback"
+  },
+  {
+    "id": "FordEdge_641",
+    "make": "Ford",
+    "model": "Edge",
+    "modelYear": 2022,
+    "engineVariant": "1.8T",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "FordFusio_76",
+    "make": "Ford",
+    "model": "Fusion",
+    "modelYear": 2022,
+    "engineVariant": "2.2 Bi-turbo",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "FordExpedi_8",
+    "make": "Ford",
+    "model": "Expedition",
+    "modelYear": 2022,
+    "engineVariant": "4.3D",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "FordRanger_9",
+    "make": "Ford",
+    "model": "Ranger",
+    "modelYear": 2022,
+    "engineVariant": "2.0T",
+    "bodyType": "Pickup Truck"
+  },
+  {
+    "id": "FordBronco_1",
+    "make": "Ford",
+    "model": "Bronco",
+    "modelYear": 2022,
+    "engineVariant": "2.0D",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "GMCYukon_114",
+    "make": "GMC",
+    "model": "Yukon",
+    "modelYear": 2022,
+    "engineVariant": "2.2T",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "ChevyTahoe_2",
+    "make": "Chevrolet",
+    "model": "Tahoe",
+    "modelYear": 2022,
+    "engineVariant": "4.3F",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "CadilCTS_333",
+    "make": "Cadillac",
+    "model": "CTS",
+    "modelYear": 2022,
+    "engineVariant": "W12 6L",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "BuickEncla_4",
+    "make": "Buick",
+    "model": "Enclave",
+    "modelYear": 2022,
+    "engineVariant": "2.2",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "GMCSierra_55",
+    "make": "GMC",
+    "model": "Sierra",
+    "modelYear": 2022,
+    "engineVariant": "5.2T",
+    "bodyType": "Pickup Truck"
+  },
+  {
+    "id": "ChevySilver6",
+    "make": "Chevrolet",
+    "model": "Silverado",
+    "modelYear": 2022,
+    "engineVariant": "4.3 Turbo",
+    "bodyType": "Pickup Truck"
+  },
+  {
+    "id": "CadilXT4_777",
+    "make": "Cadillac",
+    "model": "XT4",
+    "modelYear": 2022,
+    "engineVariant": "2.0",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "BuickRegal_8",
+    "make": "Buick",
+    "model": "Regal",
+    "modelYear": 2022,
+    "engineVariant": "3.3T",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "GMCAcadia_91",
+    "make": "GMC",
+    "model": "Acadia",
+    "modelYear": 2022,
+    "engineVariant": "1.8T",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "ChevyCamar_1",
+    "make": "Chevrolet",
+    "model": "Camaro",
+    "modelYear": 2022,
+    "engineVariant": "3.3T",
+    "bodyType": "Coupe"
+  }
+]

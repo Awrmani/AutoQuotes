@@ -1,27 +1,59 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const openingHoursValidator = require('@autoquotes/libraries/src/utils/validation/openingHours');
 const ResourceBase = require('./ResourceBase');
 
 const shopSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    publicAddress: {
-      type: String,
-      required: true,
-    },
-    logo: {
-      type: Blob,
-    },
+    name: String,
+    logo: String,
     slogan: String,
-    email: {
-      type: String,
-      required: true,
+    email: String,
+    phone: String,
+    openingHours: {
+      monday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      tuesday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      wednesday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      thursday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      friday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      saturday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
+      sunday: {
+        openHour: Number,
+        openMinute: Number,
+        closeHour: Number,
+        closeMinute: Number,
+      },
     },
-    phone: [String],
-    operatingHours: [String],
     returnPolicyUrl: String,
     termsAndConditionsUrl: String,
     privacyPolicyUrl: String,
@@ -35,6 +67,15 @@ const shopSchema = new mongoose.Schema(
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
     timestamps: true,
+    toJSON: {
+      // Map _id over to id and stringify
+      transform(doc, ret) {
+        // eslint-disable-next-line no-param-reassign
+        ret.id = ret._id.toString();
+        // eslint-disable-next-line no-param-reassign
+        delete ret._id;
+      },
+    },
   }
 );
 
@@ -42,16 +83,16 @@ const ShopModel = mongoose.model('shop', shopSchema);
 
 const validatorConfig = {
   name: [stringValidators.required],
-  publicAddress: [stringValidators.required],
+  logo: [stringValidators.isString],
   slogan: [stringValidators.required],
-  email: [stringValidators.required],
+  email: [stringValidators.required, stringValidators.email],
   phone: [stringValidators.required],
-  operatingHours: [stringValidators.required],
+  openingHours: [openingHoursValidator.openingHours],
   returnPolicyUrl: [stringValidators.required],
-  termsAndConditionsUrl: [stringValidators.required, stringValidators.email],
+  termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],
   address1: [stringValidators.required],
-  address2: [stringValidators.required],
+  address2: [stringValidators.isString],
   zip: [stringValidators.required],
   city: [stringValidators.required],
   state: [stringValidators.required],

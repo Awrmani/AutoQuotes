@@ -33,5 +33,40 @@ const validatorFactory = config => data => {
   return errors;
 };
 
+/**
+ * This Fn allows us to validate a single sub collection
+ */
+const subValidator = config => {
+  const validator = validatorFactory(config);
+
+  return values => {
+    const failed = Object.keys(validator(values));
+    if (!failed.length) return undefined;
+
+    return `The follwing attributes are incorrect: ${failed.join(', ')}`;
+  };
+};
+
+/**
+ * This fn allows to deep validate an array
+ */
+const arrayOf = validatorArr => {
+  return valuesArray => {
+    if (!Array.isArray(valuesArray)) return 'Not an array';
+
+    // Take the first error from the list
+    const [error] = valuesArray
+      // run validator(s) on each element
+      .map(value => validateField({ validatorArr, value }))
+      // only keep failures
+      .filter()[0];
+
+    return error; // Either a validation error or undefined if there were none
+  };
+};
+
+validatorFactory.subValidator = subValidator;
+validatorFactory.arrayOfValidator = arrayOf;
+
 // Using CJS export as this is used in both CJS and MJS
 module.exports = validatorFactory;
