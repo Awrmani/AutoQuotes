@@ -1,14 +1,7 @@
 import PropTypes from 'prop-types';
-import {
-  Box,
-  Checkbox,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-} from '@mui/material';
+import { Checkbox, TableCell, TableHead, TableRow } from '@mui/material';
 
-const headCells = [
+const titles = [
   {
     id: 'Item',
     numeric: false,
@@ -30,17 +23,7 @@ const headCells = [
 ];
 
 const CustomTableHeader = props => {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
-  const createSortHandler = property => event => {
-    onRequestSort(event, property);
-  };
+  const { onSelectAllClick, numSelected, rowCount } = props;
 
   return (
     <TableHead>
@@ -51,30 +34,15 @@ const CustomTableHeader = props => {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
           />
         </TableCell>
-        {headCells.map(headCell => (
+        {titles.map(title => (
           <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            key={title.id}
+            align={title.numeric ? 'right' : 'left'}
+            padding={title.disablePadding ? 'none' : 'normal'}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span">
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+            {title.label}
           </TableCell>
         ))}
       </TableRow>
@@ -84,10 +52,7 @@ const CustomTableHeader = props => {
 
 CustomTableHeader.propTypes = {
   numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 

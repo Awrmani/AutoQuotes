@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { Delete, FilterList } from '@mui/icons-material';
-import { IconButton, Toolbar, Tooltip, Typography, alpha } from '@mui/material';
+import { Delete } from '@mui/icons-material';
+import { IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
 
 const CustomTableToolbar = props => {
   const { numSelected } = props;
@@ -10,13 +10,6 @@ const CustomTableToolbar = props => {
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: theme =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
       }}
     >
       {numSelected > 0 ? (
@@ -26,16 +19,11 @@ const CustomTableToolbar = props => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected} item(s) selected
         </Typography>
       ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Nutrition
+        <Typography sx={{ flex: '1 1 100%' }} variant="h6" component="div">
+          Inventory
         </Typography>
       )}
 
@@ -45,13 +33,7 @@ const CustomTableToolbar = props => {
             <Delete />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterList />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : null}
     </Toolbar>
   );
 };
