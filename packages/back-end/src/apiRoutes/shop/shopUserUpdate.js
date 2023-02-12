@@ -42,5 +42,7 @@ module.exports = async (req, res) => {
   // Update user's information and save
   await userToChange.update(patchWith).save();
 
-  return res.json(userToChange.attributes);
+  // It's considered to be a good practice to return
+  // "" or {} even if we have nothing to say
+  return res.json({});
 };
