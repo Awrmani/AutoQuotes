@@ -11,10 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 
-import CustomTableHeader from './CustomTableHeader';
 import CustomTableToolbar from './CustomTableToolbar';
-
-// import { visuallyHidden } from '@mui/utils';
+import CustomTableHeader from './CustomTableHeader';
 
 const items = [
   {

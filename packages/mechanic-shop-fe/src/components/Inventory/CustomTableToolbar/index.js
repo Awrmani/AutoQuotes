@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Add, Delete } from '@mui/icons-material';
-import { IconButton, Toolbar, Tooltip, Typography, Box } from '@mui/material';
+import { IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
 
 const CustomTableToolbar = props => {
   const { numSelected } = props;
@@ -35,7 +35,7 @@ const CustomTableToolbar = props => {
         </Tooltip>
       ) : (
         <Tooltip title="Create">
-          <IconButton>
+          <IconButton LinkComponent="a" href="/itemForm">
             <Add />
           </IconButton>
         </Tooltip>
