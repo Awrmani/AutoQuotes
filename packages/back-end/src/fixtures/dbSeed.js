@@ -8,9 +8,12 @@ const Part = require('../resources/Part');
 const partSeed = require('./partSeed.json');
 const VehicleType = require('../resources/VehicleType');
 const vehicleTypeSeed = require('./vehicleTypeSeed.json');
+const Shop = require('../resources/Shop');
+const shopSeed = require('./shopSeed.json');
 
 const SEED_MAP = {
   config: { Model: Config.ConfigModel, Resource: Config, seed: configSeed },
+  shop: { Model: Shop.ShopModel, Resource: Shop, seed: shopSeed },
   shopUser: {
     Model: ShopUser.ShopUserModel,
     Resource: ShopUser,
