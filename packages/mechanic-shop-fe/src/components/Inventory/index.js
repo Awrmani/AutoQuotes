@@ -16,7 +16,7 @@ import CustomTableToolbar from './CustomTableToolbar';
 
 // import { visuallyHidden } from '@mui/utils';
 
-const devices = [
+const items = [
   {
     id: '012345678901',
     name: 'Oil filter (Honda/Nissan) 7356',
@@ -110,7 +110,7 @@ const Inventory = () => {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelected = devices.map(device => device.id);
+      const newSelected = items.map(item => item.id);
       setSelected(newSelected);
       return;
     }
@@ -149,7 +149,7 @@ const Inventory = () => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - devices.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - items.length) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -160,32 +160,32 @@ const Inventory = () => {
             <CustomTableHeader
               numSelected={selected.length}
               onSelectAllClick={handleSelectAllClick}
-              rowCount={devices.length}
+              rowCount={items.length}
             />
             <TableBody>
-              {devices
+              {items
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(device => {
-                  const isItemSelected = isSelected(device.id);
+                .map(item => {
+                  const isItemSelected = isSelected(item.id);
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, device.id)}
-                      key={device.id}
+                      onClick={event => handleClick(event, item.id)}
+                      key={item.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox color="primary" checked={isItemSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
-                        {device.name}
+                        {item.name}
                       </TableCell>
                       <TableCell align="right" style={{ width: 160 }}>
-                        {device.price}
+                        {item.price}
                       </TableCell>
                       <TableCell align="right" style={{ width: 160 }}>
-                        {device.amountInStock}
+                        {item.amountInStock}
                       </TableCell>
                     </TableRow>
                   );
@@ -205,7 +205,7 @@ const Inventory = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
-          count={devices.length}
+          count={items.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
