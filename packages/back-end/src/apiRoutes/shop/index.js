@@ -14,6 +14,11 @@ const partGet = require('./partGet');
 const partUpdate = require('./partUpdate');
 const partDelete = require('./partDelete');
 const partList = require('./partList');
+const serviceCreate = require('./serviceCreate');
+const serviceGet = require('./serviceGet');
+const serviceList = require('./serviceList');
+const serviceUpdate = require('./serviceUpdate');
+const serviceDelete = require('./serviceDelete');
 
 const authenticator = authenticatorFactory({
   audience: 'shop',
@@ -41,5 +46,12 @@ router.get('/parts/:id', authenticator, partGet);
 router.put('/parts', authenticator, partCreate);
 router.patch('/parts/:id', authenticator, partUpdate);
 router.delete('/parts/:id', authenticator, partDelete);
+
+// ServiceType
+router.get('/services', authenticator, serviceList);
+router.get('/services/:id', authenticator, serviceGet);
+router.put('/services', authenticator, serviceCreate);
+router.patch('/services/:id', authenticator, serviceUpdate);
+router.delete('/services/:id', authenticator, serviceDelete);
 
 module.exports = router;
