@@ -8,6 +8,7 @@ import ShopDashboardScreen from './screens/ShopDashboardScreen';
 import paths from './paths';
 import InventoryScreen from './screens/InventoryScreen';
 import ItemFormScreen from './screens/ItemFormScreen';
+import SingleItemViewScreen from './screens/SingleItemViewScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -38,6 +39,11 @@ const Routes = () => {
           <Route
             path={paths.itemForm().pathname}
             element={<ItemFormScreen />}
+          />
+
+          <Route
+            path={paths.SingleItemView().pathname}
+            element={<SingleItemViewScreen />}
           />
         </Route>
       </Route>

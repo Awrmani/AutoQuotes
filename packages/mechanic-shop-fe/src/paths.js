@@ -12,6 +12,10 @@ const itemForm = () => ({
   pathname: '/itemForm',
 });
 
-const paths = { login, dashboard, inventory, itemForm };
+const SingleItemView = () => ({
+  pathname: '/item',
+});
+
+const paths = { login, dashboard, inventory, itemForm, SingleItemView };
 
 export default paths;

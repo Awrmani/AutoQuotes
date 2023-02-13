@@ -1,17 +1,18 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TablePagination,
+  Paper,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
 
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-
-import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-
-import CustomTableToolbar from './CustomTableToolbar';
+import { Delete, Edit } from '@mui/icons-material';
 import CustomTableHeader from './CustomTableHeader';
 
 const items = [
@@ -102,37 +103,8 @@ const items = [
 ];
 
 const Inventory = () => {
-  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleSelectAllClick = event => {
-    if (event.target.checked) {
-      const newSelected = items.map(item => item.id);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -143,8 +115,6 @@ const Inventory = () => {
     setPage(0);
   };
 
-  const isSelected = id => selected.indexOf(id) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - items.length) : 0;
@@ -152,31 +122,16 @@ const Inventory = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <CustomTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table sx={{ minWidth: 750 }} size={'medium'}>
-            <CustomTableHeader
-              numSelected={selected.length}
-              onSelectAllClick={handleSelectAllClick}
-              rowCount={items.length}
-            />
+            <CustomTableHeader rowCount={items.length} />
             <TableBody>
               {items
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(item => {
-                  const isItemSelected = isSelected(item.id);
-
                   return (
-                    <TableRow
-                      hover
-                      onClick={event => handleClick(event, item.id)}
-                      key={item.id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox color="primary" checked={isItemSelected} />
-                      </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
+                    <TableRow hover key={item.id}>
+                      <TableCell component="th" scope="row" padding="small">
                         {item.name}
                       </TableCell>
                       <TableCell align="right" style={{ width: 160 }}>
@@ -184,6 +139,18 @@ const Inventory = () => {
                       </TableCell>
                       <TableCell align="right" style={{ width: 160 }}>
                         {item.amountInStock}
+                      </TableCell>
+                      <TableCell align="right" style={{ width: 160 }}>
+                        <Tooltip title="Delete">
+                          <IconButton>
+                            <Delete />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Edit">
+                          <IconButton>
+                            <Edit />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   );

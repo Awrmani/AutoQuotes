@@ -8,7 +8,7 @@ import { Container, CssBaseline, Grid, Typography } from '@mui/material';
 
 const ItemForm = props => {
   return (
-    <Container sx={{ mt: 2, width: '60%' }}>
+    <Container sx={{ mt: 2, width: '80%' }}>
       <CssBaseline />
       <Typography variant="h6" gutterBottom>
         Create a new item
