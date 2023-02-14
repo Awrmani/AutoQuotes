@@ -1,8 +1,8 @@
 import React from 'react';
-import Inventory from '../components/Inventory';
+import PartList from '../components/PartList';
 
 const InventoryScreen = () => {
-  return <Inventory />;
+  return <PartList />;
 };
 
 export default InventoryScreen;

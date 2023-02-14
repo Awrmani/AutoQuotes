@@ -3,9 +3,14 @@ import { Form } from '@autoquotes/common/src/components/Form';
 import validatorFactory from '@autoquotes/libraries/src/utils/validation';
 import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import numberValidators from '@autoquotes/libraries/src/utils/validation/number';
-import ItemForm from '../components/Inventory/ItemForm';
+import EditPartForm from '../components/PartList/EditPartForm';
 
-const initialValues = { email: '', password: '' };
+const initialValues = {
+  name: '',
+  price: 0,
+  amountInStock: 0,
+  compatibleVehicles: '',
+};
 
 const validator = validatorFactory({
   name: [stringValidators.required],
@@ -17,7 +22,7 @@ const validator = validatorFactory({
 const ItemFormScreen = () => {
   return (
     <Form initialValues={initialValues} validation={validator} action={null}>
-      <ItemForm />
+      <EditPartForm />
     </Form>
   );
 };
