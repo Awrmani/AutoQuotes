@@ -5,11 +5,8 @@ const ResourceBase = require('./ResourceBase');
 
 const serviceTypeSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    time: Number,
+    name: String,
+    timeInMinutes: Number,
     description: String,
   },
   {
@@ -30,8 +27,8 @@ const serviceTypeSchema = new mongoose.Schema(
 const ServiceTypeModel = mongoose.model('serviceTypes', serviceTypeSchema);
 
 const validatorConfig = {
-  type: [stringValidators.required],
-  time: [numberValidators.required],
+  name: [stringValidators.required],
+  timeInMinutes: [numberValidators.required],
   description: [stringValidators.required],
 };
 
