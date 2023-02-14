@@ -7,8 +7,8 @@ import EditPartForm from '../components/EditPartForm';
 
 const initialValues = {
   name: '',
-  price: 0,
-  amountInStock: 0,
+  price: '',
+  amountInStock: '',
   compatibleVehicles: '',
 };
 
@@ -19,7 +19,7 @@ const validator = validatorFactory({
   compatibleVehicles: [stringValidators.required],
 });
 
-const ItemFormScreen = () => {
+const AddPartScreen = () => {
   return (
     <Form initialValues={initialValues} validation={validator} action={null}>
       <EditPartForm />
@@ -27,4 +27,4 @@ const ItemFormScreen = () => {
   );
 };
 
-export default ItemFormScreen;
+export default AddPartScreen;

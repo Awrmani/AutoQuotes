@@ -42,7 +42,7 @@ const Routes = () => {
           />
 
           <Route
-            path={paths.EditPartScreen().pathname}
+            path={paths.editPartForm().pathname}
             element={<EditPartScreen />}
           />
         </Route>

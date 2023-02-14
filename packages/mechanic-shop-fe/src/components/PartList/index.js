@@ -102,7 +102,7 @@ const items = [
   },
 ];
 
-const Inventory = () => {
+const PartList = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -181,4 +181,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default PartList;

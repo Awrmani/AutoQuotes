@@ -6,7 +6,7 @@ import {
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { Container, CssBaseline, Grid, Typography } from '@mui/material';
 
-const ItemForm = props => {
+const EditPartForm = props => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
       <CssBaseline />
@@ -71,4 +71,4 @@ const ItemForm = props => {
   );
 };
 
-export default ItemForm;
+export default EditPartForm;

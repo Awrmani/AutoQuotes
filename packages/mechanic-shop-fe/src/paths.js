@@ -13,7 +13,7 @@ const addPartForm = () => ({
 });
 
 const editPartForm = () => ({
-  pathname: 'editPartForm',
+  pathname: '/editPartForm',
 });
 const paths = { login, dashboard, addPartForm, partList, editPartForm };
 
