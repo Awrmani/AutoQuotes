@@ -35,7 +35,7 @@ const sideBarProps = {
     {
       label: 'Inventories',
       icon: <Inventory />,
-      link: '/inventory',
+      link: '/partList',
     },
     {
       label: 'Services',

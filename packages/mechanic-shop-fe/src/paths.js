@@ -4,18 +4,17 @@ const dashboard = () => ({
   pathname: '/dashboard',
 });
 
-const inventory = () => ({
-  pathname: '/inventory',
+const partList = () => ({
+  pathname: '/partList',
 });
 
-const itemForm = () => ({
-  pathname: '/itemForm',
+const addPartForm = () => ({
+  pathname: '/addPartForm',
 });
 
-const SingleItemView = () => ({
-  pathname: '/item',
+const editPartForm = () => ({
+  pathname: 'editPartForm',
 });
-
-const paths = { login, dashboard, inventory, itemForm, SingleItemView };
+const paths = { login, dashboard, addPartForm, partList, editPartForm };
 
 export default paths;
