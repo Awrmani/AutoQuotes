@@ -2,6 +2,7 @@ const express = require('express');
 const enduser = require('./enduser');
 const shop = require('./shop');
 const thirdparty = require('./thirdparty');
+const technical = require('./technical');
 const FieldValidationError = require('../resources/FieldValidationError');
 
 // const { authenticate } = require('../authorization');
@@ -12,6 +13,9 @@ const router = express.Router();
 router.use('/enduser/v1', enduser);
 router.use('/shop/v1', shop);
 router.use('/thirdparty/v1', thirdparty);
+if (process.env.NODE_ENV === 'development') {
+  router.use('/technical/v1', technical);
+}
 
 // Health check route, required for start-server-and-test
 router.get('/', (req, res) => {

@@ -1,3 +1,5 @@
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Box,
   Toolbar,
@@ -10,9 +12,9 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-
 import {
   PrecisionManufacturing,
+  Logout,
   Mail,
   Phone,
   LocationOn,
@@ -24,6 +26,7 @@ import {
   ManageAccounts,
   Assessment,
 } from '@mui/icons-material';
+import { removeToken } from '@autoquotes/libraries/src/actions';
 
 const sideBarProps = {
   user: {
@@ -67,7 +70,13 @@ const sideBarProps = {
   ],
 };
 
-const SideBarInner = () => {
+const SideBarInner = drawerWidth => {
+  const dispatch = useDispatch();
+
+  const onLogout = useCallback(() => {
+    dispatch(removeToken());
+  }, [dispatch]);
+
   return (
     <Box>
       <Toolbar
@@ -131,14 +140,24 @@ const SideBarInner = () => {
           bottom: 0,
         }}
       >
-        <Divider />
+        <List>
+          <ListItem disablePadding onClick={onLogout}>
+            <ListItemButton>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText primary="Log out" />
+            </ListItemButton>
+          </ListItem>
+        </List>
 
+        <Divider />
         <Box
           sx={{
             paddingLeft: 2,
           }}
         >
-          <Typography variant="h5" sx={{ mb: 1, textAlign: 'center' }}>
+          <Typography variant="h5" sx={{ my: 1, textAlign: 'center' }}>
             Need help?
           </Typography>
           <IconButton color="inherit" edge="start" disableRipple>
@@ -147,6 +166,8 @@ const SideBarInner = () => {
               component={'a'}
               sx={{ m: 0 }}
               href="mailto:autoquotes@gmail.com"
+              fontSize="small"
+              color="primary"
             >
               autoquotes@gmail.com
             </Typography>
@@ -157,9 +178,11 @@ const SideBarInner = () => {
             <Typography
               component={'a'}
               sx={{ m: 0 }}
-              href="tel: +1 999.999.9999"
+              href="tel:+12345678910"
+              fontSize="small"
+              color="primary"
             >
-              +1 999.999.9999
+              +1 (234) 457 8910
             </Typography>
           </IconButton>
 
@@ -169,6 +192,9 @@ const SideBarInner = () => {
               component={'a'}
               sx={{ m: 0, letterSpacing: 0 }}
               href="https://goo.gl/maps/iAG3PDidLF4zrCzy8"
+              fontSize="small"
+              color="primary"
+              align="left"
             >
               A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5
             </Typography>
