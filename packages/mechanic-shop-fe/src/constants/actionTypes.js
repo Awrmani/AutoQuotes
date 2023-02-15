@@ -5,4 +5,4 @@ export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
 export const LOGIN = 'LOGIN';
 
 // Add a new item
-export const ADD_ITEM = 'ADD_ITEM';
+export const PART_ADD = 'PART_ADD';

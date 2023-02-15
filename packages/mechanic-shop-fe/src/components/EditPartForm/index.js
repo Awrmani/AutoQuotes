@@ -4,12 +4,11 @@ import {
   FormError,
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
-import { Container, CssBaseline, Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 
 const EditPartForm = props => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
-      <CssBaseline />
       <Typography variant="h6" gutterBottom>
         Create a new item
       </Typography>

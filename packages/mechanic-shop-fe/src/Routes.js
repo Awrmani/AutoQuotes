@@ -36,13 +36,10 @@ const Routes = () => {
             element={<PartListScreen />}
           />
 
-          <Route
-            path={paths.addPartForm().pathname}
-            element={<AddPartScreen />}
-          />
+          <Route path={paths.addPart().pathname} element={<AddPartScreen />} />
 
           <Route
-            path={paths.editPartForm().pathname}
+            path={paths.editPart().pathname}
             element={<EditPartScreen />}
           />
         </Route>

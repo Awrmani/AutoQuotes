@@ -8,13 +8,13 @@ const partList = () => ({
   pathname: '/partList',
 });
 
-const addPartForm = () => ({
-  pathname: '/addPartForm',
+const addPart = () => ({
+  pathname: '/addPart',
 });
 
-const editPartForm = () => ({
-  pathname: '/editPartForm',
+const editPart = () => ({
+  pathname: '/editPart',
 });
-const paths = { login, dashboard, addPartForm, partList, editPartForm };
+const paths = { login, dashboard, addPart, partList, editPart };
 
 export default paths;

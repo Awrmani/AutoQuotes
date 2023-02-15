@@ -32,7 +32,7 @@ const CustomTableHeader = () => {
         <TableCell align="right">
           <Button
             LinkComponent="a"
-            href="/addPartForm"
+            href="/addPart"
             variant="text"
             startIcon={<Add />}
           >
