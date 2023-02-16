@@ -6,6 +6,9 @@ import ShopLayout from './components/ShopLayout';
 import ShopLoginScreen from './screens/ShopLoginScreen';
 import ShopDashboardScreen from './screens/ShopDashboardScreen';
 import paths from './paths';
+import PartListScreen from './screens/PartListScreen';
+import AddPartScreen from './screens/AddPartScreen';
+import EditPartScreen from './screens/EditPartScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -27,6 +30,17 @@ const Routes = () => {
           <Route
             path={paths.dashboard().pathname}
             element={<ShopDashboardScreen />}
+          />
+          <Route
+            path={paths.partList().pathname}
+            element={<PartListScreen />}
+          />
+
+          <Route path={paths.addPart().pathname} element={<AddPartScreen />} />
+
+          <Route
+            path={paths.editPart().pathname}
+            element={<EditPartScreen />}
           />
         </Route>
       </Route>
