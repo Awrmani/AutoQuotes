@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -28,48 +28,55 @@ import {
   Assessment,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
+import { getCurrentUser } from '../../../reducers/queriesReducer';
 import paths from '../../../paths';
 
-const sideBarProps = {
-  user: {
-    label: 'Username',
-    icon: <AccountCircle />,
-    admin: false,
-  },
-  categories: [
-    {
-      label: 'Parts',
-      icon: <Inventory />,
-      path: paths.partList(),
-    },
-    {
-      label: 'Services',
-      icon: <SupportAgent />,
-    },
-    {
-      label: 'Appointments',
-      icon: <CalendarMonth />,
-    },
-  ],
-  adminCategories: [
-    {
-      label: 'Configuration',
-      icon: <Settings />,
-    },
-    {
-      label: 'User Management',
-      icon: <ManageAccounts />,
-    },
-    {
-      label: 'Report',
-      icon: <Assessment />,
-    },
-  ],
-};
-
-const SideBarInner = drawerWidth => {
+const SideBarInner = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const currentUser = useSelector(getCurrentUser);
+  const { name } = currentUser ?? {};
+
+  const sideBarProps = useMemo(
+    () => ({
+      user: {
+        label: name,
+        icon: <AccountCircle />,
+        admin: false,
+      },
+      categories: [
+        {
+          label: 'Parts',
+          icon: <Inventory />,
+          path: paths.partList(),
+        },
+        {
+          label: 'Services',
+          icon: <SupportAgent />,
+        },
+        {
+          label: 'Appointments',
+          icon: <CalendarMonth />,
+        },
+      ],
+      adminCategories: [
+        {
+          label: 'Configuration',
+          icon: <Settings />,
+        },
+        {
+          label: 'User Management',
+          icon: <ManageAccounts />,
+        },
+        {
+          label: 'Report',
+          icon: <Assessment />,
+        },
+      ],
+    }),
+    [name]
+  );
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
