@@ -123,11 +123,16 @@ const SideBarInner = drawerWidth => {
         <Box>
           <Divider />
           <List>
-            {sideBarProps.adminCategories.map(item => (
-              <ListItem key={item.label} disablePadding>
-                <ListItemButton href={sideBarProps.user.path}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
+            {sideBarProps.adminCategories.map(({ label, path, icon }) => (
+              <ListItem key={label} disablePadding>
+                <ListItemButton
+                  href={sideBarProps.user.path}
+                  onClick={() => {
+                    path && navigate(path);
+                  }}
+                >
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={label} />
                 </ListItemButton>
               </ListItem>
             ))}
