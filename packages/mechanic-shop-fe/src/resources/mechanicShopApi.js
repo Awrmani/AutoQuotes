@@ -8,6 +8,18 @@ const apiCall = fetcherFactory({
   }/api/shop/v1`,
 });
 
+// Data fetching
+export const fetchCurrentUser = apiCall(() => ({
+  url: '/users/current',
+}));
+export const fetchPartList = apiCall(() => ({
+  url: '/parts',
+}));
+export const fetchPartDetails = apiCall(({ id }) => ({
+  url: `/parts/${id}`,
+}));
+
+// Form submits & other actions altering backend state
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
   method: 'POST',
@@ -17,6 +29,22 @@ export const login = apiCall(({ email, password }) => ({
   },
 }));
 
-export const fetchCurrentUser = apiCall(() => ({
-  url: '/users/current',
+// Part
+export const addPart = apiCall(
+  ({ name, price, amountInStock, compatibleVehicles }) => ({
+    url: '/parts',
+    method: 'PUT',
+    data: { name, price, amountInStock, compatibleVehicles },
+  })
+);
+export const updatePart = apiCall(
+  ({ id, name, price, amountInStock, compatibleVehicles }) => ({
+    url: `/parts/${id}`,
+    method: 'PATCH',
+    data: { name, price, amountInStock, compatibleVehicles },
+  })
+);
+export const deletePart = apiCall(({ id }) => ({
+  url: `/parts/${id}`,
+  method: 'DELETE',
 }));

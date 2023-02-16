@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Toolbar,
@@ -27,6 +28,7 @@ import {
   Assessment,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
+import paths from '../../../paths';
 
 const sideBarProps = {
   user: {
@@ -36,42 +38,38 @@ const sideBarProps = {
   },
   categories: [
     {
-      label: 'Inventories',
+      label: 'Parts',
       icon: <Inventory />,
-      link: '/partList',
+      path: paths.partList(),
     },
     {
       label: 'Services',
       icon: <SupportAgent />,
-      link: '/service',
     },
     {
       label: 'Appointments',
       icon: <CalendarMonth />,
-      link: '/appointment',
     },
   ],
   adminCategories: [
     {
       label: 'Configuration',
       icon: <Settings />,
-      link: '/configuration',
     },
     {
       label: 'User Management',
       icon: <ManageAccounts />,
-      link: '/userManagement',
     },
     {
       label: 'Report',
       icon: <Assessment />,
-      link: '/report',
     },
   ],
 };
 
 const SideBarInner = drawerWidth => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
@@ -107,11 +105,15 @@ const SideBarInner = drawerWidth => {
 
       <Divider />
       <List>
-        {sideBarProps.categories.map(item => (
-          <ListItem key={item.label} disablePadding>
-            <ListItemButton LinkComponent="a" href={item.link}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
+        {sideBarProps.categories.map(({ path, label, icon }) => (
+          <ListItem key={label} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                path && navigate(path);
+              }}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={label} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -123,7 +125,7 @@ const SideBarInner = drawerWidth => {
           <List>
             {sideBarProps.adminCategories.map(item => (
               <ListItem key={item.label} disablePadding>
-                <ListItemButton href={sideBarProps.user.link}>
+                <ListItemButton href={sideBarProps.user.path}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItemButton>

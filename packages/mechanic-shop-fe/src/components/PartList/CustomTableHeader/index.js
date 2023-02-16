@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { Add } from '@mui/icons-material';
 import { Button, TableCell, TableHead, TableRow } from '@mui/material';
+import paths from '../../../paths';
 
 const titles = [
   {
@@ -21,6 +23,8 @@ const titles = [
 ];
 
 const CustomTableHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <TableHead>
       <TableRow>
@@ -31,8 +35,7 @@ const CustomTableHeader = () => {
         ))}
         <TableCell align="right">
           <Button
-            LinkComponent="a"
-            href="/addPart"
+            onClick={() => navigate(paths.addPart())}
             variant="text"
             startIcon={<Add />}
           >
