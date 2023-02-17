@@ -4,12 +4,13 @@ import validatorFactory from '@autoquotes/libraries/src/utils/validation';
 import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import numberValidators from '@autoquotes/libraries/src/utils/validation/number';
 import EditPartForm from '../components/EditPartForm';
+import { addPart } from '../actions';
 
 const initialValues = {
   name: '',
   price: '',
   amountInStock: '',
-  compatibleVehicles: '',
+  compatibleVehicles: '', // This will have to be an array of strings
 };
 
 const validator = validatorFactory({
@@ -21,7 +22,7 @@ const validator = validatorFactory({
 
 const AddPartScreen = () => {
   return (
-    <Form initialValues={initialValues} validation={validator} action={null}>
+    <Form initialValues={initialValues} validation={validator} action={addPart}>
       <EditPartForm />
     </Form>
   );

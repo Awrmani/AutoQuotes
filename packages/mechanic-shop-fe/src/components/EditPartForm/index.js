@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Field,
   SubmitButton,
@@ -62,12 +64,20 @@ const EditPartForm = props => {
         <Grid item xs={12} sm={9}></Grid>
         <Grid item xs={12} sm={3}>
           <SubmitButton fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Create
+            {props.edit ? 'Update' : 'Create'}
           </SubmitButton>
         </Grid>
       </Grid>
     </Container>
   );
+};
+
+EditPartForm.propTypes = {
+  edit: PropTypes.bool,
+};
+
+EditPartForm.defaultProps = {
+  edit: false,
 };
 
 export default EditPartForm;

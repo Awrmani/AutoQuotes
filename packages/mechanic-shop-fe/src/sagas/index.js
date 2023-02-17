@@ -10,6 +10,7 @@ import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/
 import * as actionTypes from '../constants/actionTypes';
 import * as mechanicShopApi from '../resources/mechanicShopApi';
 import refreshCurrentUser from './interceptors/refreshCurrentUser';
+import refreshPartList from './interceptors/refreshPartList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -40,6 +41,26 @@ export default function* root() {
     }),
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
       apiFn: mechanicShopApi.fetchCurrentUser,
+    }),
+
+    // Part
+    takeLatest(actionTypes.PART_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchPartList,
+    }),
+    takeLatest(actionTypes.PART_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchPartDetails,
+    }),
+    takeLatest(actionTypes.PART_ADD, apiCall, {
+      apiFn: mechanicShopApi.addPart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.PART_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updatePart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.PART_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deletePart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

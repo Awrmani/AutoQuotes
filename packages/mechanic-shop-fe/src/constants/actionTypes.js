@@ -1,8 +1,12 @@
+export * from '@autoquotes/libraries/src/constants/actionTypes';
+
 // Async data fetches
 export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
+export const PART_LIST_FETCH = 'PART_LIST_FETCH';
+export const PART_DETAILS_FETCH = 'PART_DETAILS_FETCH';
 
-// Form submits
+// Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
-
-// Add a new item
 export const PART_ADD = 'PART_ADD';
+export const PART_UPDATE = 'PART_UPDATE';
+export const PART_DELETE = 'PART_DELETE';

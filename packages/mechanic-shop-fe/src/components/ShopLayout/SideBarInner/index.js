@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Toolbar,
@@ -27,51 +28,55 @@ import {
   Assessment,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
+import { getCurrentUser } from '../../../reducers/queriesReducer';
+import paths from '../../../paths';
 
-const sideBarProps = {
-  user: {
-    label: 'Username',
-    icon: <AccountCircle />,
-    admin: false,
-  },
-  categories: [
-    {
-      label: 'Inventories',
-      icon: <Inventory />,
-      link: '/partList',
-    },
-    {
-      label: 'Services',
-      icon: <SupportAgent />,
-      link: '/service',
-    },
-    {
-      label: 'Appointments',
-      icon: <CalendarMonth />,
-      link: '/appointment',
-    },
-  ],
-  adminCategories: [
-    {
-      label: 'Configuration',
-      icon: <Settings />,
-      link: '/configuration',
-    },
-    {
-      label: 'User Management',
-      icon: <ManageAccounts />,
-      link: '/userManagement',
-    },
-    {
-      label: 'Report',
-      icon: <Assessment />,
-      link: '/report',
-    },
-  ],
-};
-
-const SideBarInner = drawerWidth => {
+const SideBarInner = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentUser = useSelector(getCurrentUser);
+  const { name } = currentUser ?? {};
+
+  const sideBarProps = useMemo(
+    () => ({
+      user: {
+        label: name,
+        icon: <AccountCircle />,
+        admin: false,
+      },
+      categories: [
+        {
+          label: 'Parts',
+          icon: <Inventory />,
+          path: paths.partList(),
+        },
+        {
+          label: 'Services',
+          icon: <SupportAgent />,
+        },
+        {
+          label: 'Appointments',
+          icon: <CalendarMonth />,
+        },
+      ],
+      adminCategories: [
+        {
+          label: 'Configuration',
+          icon: <Settings />,
+        },
+        {
+          label: 'User Management',
+          icon: <ManageAccounts />,
+        },
+        {
+          label: 'Report',
+          icon: <Assessment />,
+        },
+      ],
+    }),
+    [name]
+  );
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
@@ -107,11 +112,15 @@ const SideBarInner = drawerWidth => {
 
       <Divider />
       <List>
-        {sideBarProps.categories.map(item => (
-          <ListItem key={item.label} disablePadding>
-            <ListItemButton LinkComponent="a" href={item.link}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
+        {sideBarProps.categories.map(({ path, label, icon }) => (
+          <ListItem key={label} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                path && navigate(path);
+              }}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={label} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -121,11 +130,16 @@ const SideBarInner = drawerWidth => {
         <Box>
           <Divider />
           <List>
-            {sideBarProps.adminCategories.map(item => (
-              <ListItem key={item.label} disablePadding>
-                <ListItemButton href={sideBarProps.user.link}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
+            {sideBarProps.adminCategories.map(({ label, path, icon }) => (
+              <ListItem key={label} disablePadding>
+                <ListItemButton
+                  href={sideBarProps.user.path}
+                  onClick={() => {
+                    path && navigate(path);
+                  }}
+                >
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={label} />
                 </ListItemButton>
               </ListItem>
             ))}
