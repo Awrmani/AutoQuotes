@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     ({ id }) => new Part().loadById(id.toString())
   );
 
-  const objects = await Promise.all(promises).map(obj => obj.attributes);
+  const objects = (await Promise.all(promises)).map(obj => obj.attributes);
 
   return res.json(objects);
 };
