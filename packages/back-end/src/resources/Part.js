@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
-const arrayValidators = require('@autoquotes/libraries/src/utils/validation/array');
 const ResourceBase = require('./ResourceBase');
 
 const partSchema = new mongoose.Schema(
@@ -17,10 +16,15 @@ const partSchema = new mongoose.Schema(
     amountInStock: {
       type: Number,
     },
-    compatibleVehicles: {
-      type: [String],
-      ref: 'VehicleType',
-    },
+    compatibleVehicles: [
+      {
+        _id: false,
+        make: String,
+        model: String,
+        fromYear: Number,
+        toYear: Number,
+      },
+    ],
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -43,7 +47,7 @@ const validatorConfig = {
   name: [stringValidators.required],
   price: [numberValidators.required],
   amountInStock: [numberValidators.required],
-  compatibleVehicles: [arrayValidators.isArray],
+  compatibleVehicles: [],
 };
 
 class Part extends ResourceBase {

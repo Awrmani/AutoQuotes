@@ -14,12 +14,10 @@ const Field = ({ component: Component, ...props }) => {
   } = useContext(formContext);
 
   const handleChange = useCallback(
-    (newValue, setTouched) => {
-      setFieldValue(name, newValue).then(() => {
-        if (setTouched) setFieldTouched(name);
-      });
+    newValue => {
+      setFieldValue(name, newValue);
     },
-    [setFieldValue, setFieldTouched, name]
+    [setFieldValue, name]
   );
 
   const handleBlur = useCallback(() => {

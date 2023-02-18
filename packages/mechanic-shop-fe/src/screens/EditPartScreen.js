@@ -14,7 +14,7 @@ const validator = validatorFactory({
   name: [stringValidators.required],
   price: [numberValidators.required],
   amountInStock: [numberValidators.required],
-  compatibleVehicles: [stringValidators.required],
+  // compatibleVehicles: [stringValidators.required],
 });
 
 const EditPartScreen = () => {
@@ -34,8 +34,6 @@ const EditPartScreen = () => {
   const initialValues = useMemo(
     () => ({
       ...result,
-      // Overriding for now
-      compatibleVehicles: '',
     }),
     [result]
   );

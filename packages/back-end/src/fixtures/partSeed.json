@@ -15,7 +15,14 @@
     "name": "Oil filter 7060 (GM/Dodge)",
     "price": 5,
     "amountInStock": 22,
-    "compatibleVehicles": []
+    "compatibleVehicles": [
+      {
+        "make": "GMC",
+        "model": "Sierra",
+        "fromYear": 2020,
+        "toYear": 2022
+      }
+    ]
   },
   {
     "name": "Oil filter 1042 (old GM)",
