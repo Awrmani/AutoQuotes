@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const {
+  arrayOfValidator,
+  subValidator,
+} = require('@autoquotes/libraries/src/utils/validation');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const ResourceBase = require('./ResourceBase');
@@ -47,7 +51,16 @@ const validatorConfig = {
   name: [stringValidators.required],
   price: [numberValidators.required],
   amountInStock: [numberValidators.required],
-  compatibleVehicles: [],
+  compatibleVehicles: [
+    arrayOfValidator([
+      subValidator({
+        make: [stringValidators.required],
+        model: [stringValidators.required],
+        fromYear: [numberValidators.required],
+        toYear: [numberValidators.required],
+      }),
+    ]),
+  ],
 };
 
 class Part extends ResourceBase {
