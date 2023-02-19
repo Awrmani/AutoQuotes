@@ -10,6 +10,8 @@ const VehicleType = require('../resources/VehicleType');
 const vehicleTypeSeed = require('./vehicleTypeSeed.json');
 const Shop = require('../resources/Shop');
 const shopSeed = require('./shopSeed.json');
+const ServiceType = require('../resources/ServiceType');
+const serviceTypeSeed = require('./serviceTypeSeed.json');
 
 const SEED_MAP = {
   config: { Model: Config.ConfigModel, Resource: Config, seed: configSeed },
@@ -25,6 +27,11 @@ const SEED_MAP = {
     seed: vehicleTypeSeed,
   },
   part: { Model: Part.PartModel, Resource: Part, seed: partSeed },
+  serviceType: {
+    Model: ServiceType.ServiceTypeModel,
+    Resource: ServiceType,
+    seed: serviceTypeSeed,
+  },
 };
 
 /**
