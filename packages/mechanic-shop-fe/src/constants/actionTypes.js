@@ -10,3 +10,7 @@ export const LOGIN = 'LOGIN';
 export const PART_ADD = 'PART_ADD';
 export const PART_UPDATE = 'PART_UPDATE';
 export const PART_DELETE = 'PART_DELETE';
+
+export const USER_ADD = 'USER_ADD';
+export const USER_UPDATE = 'USER_UPDATE';
+export const USER_DELETE = 'USER_DELETE';

@@ -12,3 +12,7 @@ export const login = createAction(actionTypes.LOGIN);
 export const addPart = createAction(actionTypes.PART_ADD);
 export const updatePart = createAction(actionTypes.PART_UPDATE);
 export const deletePart = createAction(actionTypes.PART_DELETE);
+
+export const addUser = createAction(actionTypes.USER_ADD);
+export const updateUser = createAction(actionTypes.USER_UPDATE);
+export const deleteUser = createAction(actionTypes.USER_DELETE);
