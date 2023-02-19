@@ -101,6 +101,8 @@ class ResourceBase {
       ...this._attributes,
       ...sanitized,
     };
+
+    return this;
   };
 
   save = async () => {
