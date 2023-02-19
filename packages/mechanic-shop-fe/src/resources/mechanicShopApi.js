@@ -8,18 +8,27 @@ const apiCall = fetcherFactory({
   }/api/shop/v1`,
 });
 
-// Data fetching
+// ===================Data fetching============================
 export const fetchCurrentUser = apiCall(() => ({
   url: '/users/current',
 }));
+
+// Parts
 export const fetchPartList = apiCall(() => ({
   url: '/parts',
 }));
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
+// Services
+export const fetchServiceList = apiCall(() => ({
+  url: '/services',
+}));
+export const fetchServiceDetails = apiCall(({ id }) => ({
+  url: `/services/${id}`,
+}));
 
-// Form submits & other actions altering backend state
+// =====Form submits & other actions altering backend state======
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
   method: 'POST',
@@ -29,7 +38,7 @@ export const login = apiCall(({ email, password }) => ({
   },
 }));
 
-// Part
+// Parts
 export const addPart = apiCall(
   ({ name, price, amountInStock, compatibleVehicles }) => ({
     url: '/parts',
@@ -46,5 +55,21 @@ export const updatePart = apiCall(
 );
 export const deletePart = apiCall(({ id }) => ({
   url: `/parts/${id}`,
+  method: 'DELETE',
+}));
+
+// Services
+export const addService = apiCall(({ name, time, description }) => ({
+  url: '/services',
+  method: 'PUT',
+  data: { name, time, description },
+}));
+export const updateService = apiCall(({ id, name, time, description }) => ({
+  url: `/services/${id}`,
+  method: 'PATCH',
+  data: { name, time, description },
+}));
+export const deleteService = apiCall(({ id }) => ({
+  url: `/services/${id}`,
   method: 'DELETE',
 }));
