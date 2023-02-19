@@ -51,7 +51,7 @@ const EditServiceScreen = () => {
       validation={validator}
       action={updateService}
     >
-      <EditServiceForm />
+      <EditServiceForm edit />
     </Form>
   );
 };
