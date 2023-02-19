@@ -34,14 +34,36 @@ export const addPart = apiCall(
   ({ name, price, amountInStock, compatibleVehicles }) => ({
     url: '/parts',
     method: 'PUT',
-    data: { name, price, amountInStock, compatibleVehicles },
+    data: {
+      name,
+      price: Number(price),
+      amountInStock: Number(amountInStock),
+      compatibleVehicles: compatibleVehicles.map(
+        ({ fromYear, toYear, ...rest }) => ({
+          ...rest,
+          fromYear: Number(fromYear),
+          toYear: Number(toYear),
+        })
+      ),
+    },
   })
 );
 export const updatePart = apiCall(
   ({ id, name, price, amountInStock, compatibleVehicles }) => ({
     url: `/parts/${id}`,
     method: 'PATCH',
-    data: { name, price, amountInStock, compatibleVehicles },
+    data: {
+      name,
+      price: Number(price),
+      amountInStock: Number(amountInStock),
+      compatibleVehicles: compatibleVehicles.map(
+        ({ fromYear, toYear, ...rest }) => ({
+          ...rest,
+          fromYear: Number(fromYear),
+          toYear: Number(toYear),
+        })
+      ),
+    },
   })
 );
 export const deletePart = apiCall(({ id }) => ({

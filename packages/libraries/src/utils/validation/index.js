@@ -57,9 +57,19 @@ const arrayOf = validatorArr => {
     // Take the first error from the list
     const [error] = valuesArray
       // run validator(s) on each element
-      .map(value => validateField({ validatorArr, value }))
+      .map((value, index) => {
+        const fieldValidationResult = validateField({
+          validatorArr,
+          value,
+        });
+
+        if (fieldValidationResult)
+          return `${fieldValidationResult} in array index [${index}]`;
+
+        return undefined;
+      })
       // only keep failures
-      .filter()[0];
+      .filter(v => !!v);
 
     return error; // Either a validation error or undefined if there were none
   };
