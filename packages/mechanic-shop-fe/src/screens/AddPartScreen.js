@@ -10,7 +10,7 @@ const initialValues = {
   name: '',
   price: '',
   amountInStock: '',
-  compatibleVehicles: '', // This will have to be an array of strings
+  compatibleVehicles: [],
 };
 
 const validator = validatorFactory({

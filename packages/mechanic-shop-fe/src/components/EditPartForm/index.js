@@ -7,12 +7,13 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { Container, Grid, Typography } from '@mui/material';
+import PartCompatibleVehicleFieldArray from './PartCompatibleVehicleFieldArray';
 
 const EditPartForm = props => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
       <Typography variant="h6" gutterBottom>
-        Create a new item
+        {props.edit ? 'Update Part' : 'Create Part'}
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -20,7 +21,6 @@ const EditPartForm = props => {
             required
             autoFocus
             component={TextInput}
-            id="name"
             name="name"
             label="Item name"
             fullWidth
@@ -31,7 +31,6 @@ const EditPartForm = props => {
           <Field
             required
             component={TextInput}
-            id="price"
             name="price"
             label="Price"
             fullWidth
@@ -42,7 +41,6 @@ const EditPartForm = props => {
           <Field
             required
             component={TextInput}
-            id="amountInStock"
             name="amountInStock"
             label="Quantity"
             fullWidth
@@ -50,18 +48,16 @@ const EditPartForm = props => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Field
-            required
-            component={TextInput}
-            id="compatibleVehicles"
-            name="compatibleVehicles"
-            label="Compatible Vehicles"
-            fullWidth
-            variant="standard"
-          />
+          <Typography variant="h6" gutterBottom>
+            Compatible Vehicles
+          </Typography>
         </Grid>
+        <Grid item xs={12}>
+          <PartCompatibleVehicleFieldArray />
+        </Grid>
+
         <FormError />
-        <Grid item xs={12} sm={9}></Grid>
+        <Grid item xs={12}></Grid>
         <Grid item xs={12} sm={3}>
           <SubmitButton fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             {props.edit ? 'Update' : 'Create'}
