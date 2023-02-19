@@ -16,6 +16,7 @@ const editPart = ({ id = ':id' } = {}) => ({
   pathname: `/editPart/${id}`,
 });
 
+// Shop User Paths
 const userList = () => ({
   pathname: '/userList',
 });

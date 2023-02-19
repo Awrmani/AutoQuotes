@@ -9,6 +9,7 @@ import paths from './paths';
 import PartListScreen from './screens/PartListScreen';
 import AddPartScreen from './screens/AddPartScreen';
 import EditPartScreen from './screens/EditPartScreen';
+import UserListScreen from './screens/UserListScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -41,6 +42,11 @@ const Routes = () => {
           <Route
             path={paths.editPart().pathname}
             element={<EditPartScreen />}
+          />
+
+          <Route
+            path={paths.userList().pathname}
+            element={<UserListScreen />}
           />
         </Route>
       </Route>
