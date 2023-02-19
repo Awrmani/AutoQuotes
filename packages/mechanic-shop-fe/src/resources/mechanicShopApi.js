@@ -19,6 +19,13 @@ export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
 
+export const fetchUserList = apiCall(() => ({
+  url: '/users',
+}));
+export const fetchUserDetails = apiCall(({ id }) => ({
+  url: `/users/${id}`,
+}));
+
 // Form submits & other actions altering backend state
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
@@ -46,5 +53,21 @@ export const updatePart = apiCall(
 );
 export const deletePart = apiCall(({ id }) => ({
   url: `/parts/${id}`,
+  method: 'DELETE',
+}));
+
+// User CRUD
+export const addUser = apiCall(({ name, email, phone, role }) => ({
+  url: '/users',
+  method: 'PUT',
+  data: { name, email, phone, role },
+}));
+export const updateUser = apiCall(({ id, name, email, phone, role }) => ({
+  url: `/users/${id}`,
+  method: 'PATCH',
+  data: { name, email, phone, role },
+}));
+export const deleteUser = apiCall(({ id }) => ({
+  url: `/users/${id}`,
   method: 'DELETE',
 }));

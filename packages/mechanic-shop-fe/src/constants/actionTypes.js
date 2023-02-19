@@ -5,6 +5,9 @@ export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
 export const PART_LIST_FETCH = 'PART_LIST_FETCH';
 export const PART_DETAILS_FETCH = 'PART_DETAILS_FETCH';
 
+export const USER_LIST_FETCH = 'USER_LIST_FETCH';
+export const USER_DETAILS_FETCH = 'USER_DETAILS_FETCH';
+
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
 export const PART_ADD = 'PART_ADD';

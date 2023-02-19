@@ -29,3 +29,6 @@ export const getPartList = state => state.queries.partList?.result;
 
 export const getPartDetailsQuery = state => state.queries.partDetails;
 export const getPartDetails = state => state.queries.partDetails?.result;
+
+export const getUserListQuery = state => state.queries.userList;
+export const getUserList = state => state.queries.userList?.result;
