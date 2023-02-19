@@ -8,11 +8,11 @@ import stringValidators from '@autoquotes/libraries/src/utils/validation/string'
 import numberValidators from '@autoquotes/libraries/src/utils/validation/number';
 import EditServiceForm from '../components/EditServiceForm';
 import { updateService, fetchServiceDetails } from '../actions';
-import { getPartDetailsQuery } from '../reducers/queriesReducer';
+import { getServiceDetailsQuery } from '../reducers/queriesReducer';
 
 const validator = validatorFactory({
   name: [stringValidators.required],
-  time: [numberValidators.required],
+  timeInMinutes: [numberValidators.required],
   description: [stringValidators.required],
 });
 
@@ -26,7 +26,7 @@ const EditServiceScreen = () => {
   }, [id, dispatch]);
 
   // Extract the details from the redux store
-  const serviceDetailsQuery = useSelector(getPartDetailsQuery);
+  const serviceDetailsQuery = useSelector(getServiceDetailsQuery);
   const { isFetching, result } = serviceDetailsQuery ?? {};
 
   // Create the form initial values, prefill the current details of the entity
