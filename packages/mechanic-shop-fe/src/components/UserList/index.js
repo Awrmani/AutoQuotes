@@ -72,10 +72,10 @@ const UserList = () => {
                     <TableCell component="th" scope="row">
                       {user.name}
                     </TableCell>
-                    <TableCell align="right" style={{ width: 200 }}>
+                    <TableCell align="left" style={{ width: 200 }}>
                       {user.email}
                     </TableCell>
-                    <TableCell align="right" style={{ width: 200 }}>
+                    <TableCell align="left" style={{ width: 160 }}>
                       {user.phone}
                     </TableCell>
                     <TableCell role="right" style={{ width: 160 }}>

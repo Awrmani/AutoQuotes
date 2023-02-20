@@ -15,6 +15,14 @@ export default combineReducers({
     triggerActionType: actionTypes.PART_DETAILS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+  userList: queryReducer({
+    triggerActionType: actionTypes.USER_LIST_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
+  userDetails: queryReducer({
+    triggerActionType: actionTypes.USER_DETAILS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -32,3 +40,6 @@ export const getPartDetails = state => state.queries.partDetails?.result;
 
 export const getUserListQuery = state => state.queries.userList;
 export const getUserList = state => state.queries.userList?.result;
+
+export const getUserDetailsQuery = state => state.queries.userDetails;
+export const getUserDetails = state => state.queries.userDetails?.result;

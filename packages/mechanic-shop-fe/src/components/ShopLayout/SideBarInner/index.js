@@ -36,7 +36,7 @@ const SideBarInner = () => {
   const navigate = useNavigate();
 
   const currentUser = useSelector(getCurrentUser);
-  const { name } = currentUser ?? {};
+  const { name, role } = currentUser ?? {};
 
   const sideBarProps = useMemo(
     () => ({
@@ -68,6 +68,7 @@ const SideBarInner = () => {
         {
           label: 'User Management',
           icon: <ManageAccounts />,
+          path: paths.userList(),
         },
         {
           label: 'Report',
@@ -126,7 +127,7 @@ const SideBarInner = () => {
         ))}
       </List>
 
-      {sideBarProps.user.admin ? (
+      {role === 'admin' ? (
         <Box>
           <Divider />
           <List>
