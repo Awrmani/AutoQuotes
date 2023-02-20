@@ -57,6 +57,16 @@ const iso8601 = value => {
 const oneOf = options => value =>
   options.includes(value) ? undefined : `Must be one of ${options.join('/')}`;
 
+const asNumber = validator => value => {
+  if (isNaN(Number(value))) return 'Not a number';
+
+  // We get here only if value is numbers, undefined or empty string
+
+  // If numbers are given, call the validator with parsed value
+  // otherwise (empty string or undefined) call it with undefined
+  return validator(value ? parseInt(value, 10) : undefined);
+};
+
 // Using CJS export as this is used in both CJS and MJS
 module.exports = {
   isStringOrUndefined,
@@ -67,4 +77,5 @@ module.exports = {
   email,
   iso8601,
   oneOf,
+  asNumber,
 };

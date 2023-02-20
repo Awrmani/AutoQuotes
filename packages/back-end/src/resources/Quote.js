@@ -23,6 +23,7 @@ const quoteSchema = new mongoose.Schema(
     },
     lineItems: [
       {
+        _id: false,
         supplierOfferId: {
           type: String,
           ref: 'SupplierOffer',
