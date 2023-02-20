@@ -54,6 +54,7 @@ const SideBarInner = () => {
         {
           label: 'Services',
           icon: <SupportAgent />,
+          path: paths.serviceList(),
         },
         {
           label: 'Appointments',

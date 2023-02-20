@@ -8,17 +8,19 @@ const apiCall = fetcherFactory({
   }/api/shop/v1`,
 });
 
-// Data fetching
+// ===================Data fetching============================
 export const fetchCurrentUser = apiCall(() => ({
   url: '/users/current',
 }));
+
+// Parts
 export const fetchPartList = apiCall(() => ({
   url: '/parts',
 }));
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
-
+// Users
 export const fetchUserList = apiCall(() => ({
   url: '/users',
 }));
@@ -26,7 +28,15 @@ export const fetchUserDetails = apiCall(({ id }) => ({
   url: `/users/${id}`,
 }));
 
-// Form submits & other actions altering backend state
+// Services
+export const fetchServiceList = apiCall(() => ({
+  url: '/services',
+}));
+export const fetchServiceDetails = apiCall(({ id }) => ({
+  url: `/services/${id}`,
+}));
+
+// =====Form submits & other actions altering backend state======
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
   method: 'POST',
@@ -36,19 +46,41 @@ export const login = apiCall(({ email, password }) => ({
   },
 }));
 
-// Part
+// Parts
 export const addPart = apiCall(
   ({ name, price, amountInStock, compatibleVehicles }) => ({
     url: '/parts',
     method: 'PUT',
-    data: { name, price, amountInStock, compatibleVehicles },
+    data: {
+      name,
+      price: Number(price),
+      amountInStock: Number(amountInStock),
+      compatibleVehicles: compatibleVehicles.map(
+        ({ fromYear, toYear, ...rest }) => ({
+          ...rest,
+          fromYear: Number(fromYear),
+          toYear: Number(toYear),
+        })
+      ),
+    },
   })
 );
 export const updatePart = apiCall(
   ({ id, name, price, amountInStock, compatibleVehicles }) => ({
     url: `/parts/${id}`,
     method: 'PATCH',
-    data: { name, price, amountInStock, compatibleVehicles },
+    data: {
+      name,
+      price: Number(price),
+      amountInStock: Number(amountInStock),
+      compatibleVehicles: compatibleVehicles.map(
+        ({ fromYear, toYear, ...rest }) => ({
+          ...rest,
+          fromYear: Number(fromYear),
+          toYear: Number(toYear),
+        })
+      ),
+    },
   })
 );
 export const deletePart = apiCall(({ id }) => ({
@@ -56,7 +88,7 @@ export const deletePart = apiCall(({ id }) => ({
   method: 'DELETE',
 }));
 
-// User CRUD
+// Users
 export const addUser = apiCall(({ name, email, phone, role }) => ({
   url: '/users',
   method: 'PUT',
@@ -69,5 +101,23 @@ export const updateUser = apiCall(({ id, name, email, phone, role }) => ({
 }));
 export const deleteUser = apiCall(({ id }) => ({
   url: `/users/${id}`,
+  method: 'DELETE',
+}));
+
+// Services
+export const addService = apiCall(({ name, timeInMinutes, description }) => ({
+  url: '/services',
+  method: 'PUT',
+  data: { name, timeInMinutes: Number(timeInMinutes), description },
+}));
+export const updateService = apiCall(
+  ({ id, name, timeInMinutes, description }) => ({
+    url: `/services/${id}`,
+    method: 'PATCH',
+    data: { name, timeInMinutes: Number(timeInMinutes), description },
+  })
+);
+export const deleteService = apiCall(({ id }) => ({
+  url: `/services/${id}`,
   method: 'DELETE',
 }));

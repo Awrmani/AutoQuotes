@@ -16,6 +16,18 @@ const editPart = ({ id = ':id' } = {}) => ({
   pathname: `/editPart/${id}`,
 });
 
+const serviceList = () => ({
+  pathname: '/serviceList',
+});
+
+const addService = () => ({
+  pathname: '/addService',
+});
+
+const editService = ({ id = ':id' } = {}) => ({
+  pathname: `/editService/${id}`,
+});
+
 // Shop User Paths
 const userList = () => ({
   pathname: '/userList',
@@ -38,6 +50,9 @@ const paths = {
   userList,
   addUser,
   editUser,
+  serviceList,
+  addService,
+  editService,
 };
 
 export default paths;

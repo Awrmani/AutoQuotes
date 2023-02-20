@@ -12,6 +12,7 @@ import * as mechanicShopApi from '../resources/mechanicShopApi';
 import refreshCurrentUser from './interceptors/refreshCurrentUser';
 import refreshPartList from './interceptors/refreshPartList';
 import refreshUserList from './interceptors/refreshUserList';
+import refreshServiceList from './interceptors/refreshServiceList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -82,6 +83,26 @@ export default function* root() {
     takeLatest(actionTypes.USER_DELETE, apiCall, {
       apiFn: mechanicShopApi.deleteUser,
       onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Service
+    takeLatest(actionTypes.SERVICE_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchServiceList,
+    }),
+    takeLatest(actionTypes.SERVICE_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchServiceDetails,
+    }),
+    takeLatest(actionTypes.SERVICE_ADD, apiCall, {
+      apiFn: mechanicShopApi.addService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

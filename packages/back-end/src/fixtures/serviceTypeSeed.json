@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Oil Change",
+    "timeInMinutes": 60,
+    "description": "Replace engine oil and oil filter"
+  },
+  {
+    "name": "Brake Service",
+    "timeInMinutes": 120,
+    "description": "Inspect and replace brake pads and rotors if necessary"
+  },
+  {
+    "name": "Tire Rotation",
+    "timeInMinutes": 150,
+    "description": "Rotate tires to ensure even wear and extend tire life"
+  },
+  {
+    "name": "Wheel Alignment",
+    "timeInMinutes": 60,
+    "description": "Align wheels to improve handling and prevent uneven tire wear"
+  },
+  {
+    "name": "Transmission Service",
+    "timeInMinutes": 120,
+    "description": "Replace transmission fluid and filter"
+  },
+  {
+    "name": "Coolant Flush",
+    "timeInMinutes": 30,
+    "description": "Flush and refill cooling system to prevent overheating"
+  },
+  {
+    "name": "Fuel System Cleaning",
+    "timeInMinutes": 120,
+    "description": "Clean fuel injectors and throttle body for improved performance"
+  },
+  {
+    "name": "Air Filter Replacement",
+    "timeInMinutes": 90,
+    "description": "Replace engine air filter for improved air flow and performance"
+  },
+  {
+    "name": "Spark Plug Replacement",
+    "timeInMinutes": 120,
+    "description": "Replace spark plugs for improved fuel efficiency and performance"
+  },
+  {
+    "name": "Battery Replacement",
+    "timeInMinutes": 150,
+    "description": "Replace battery if it is no longer holding a charge"
+  },
+  {
+    "name": "Alternator Replacement",
+    "timeInMinutes": 150,
+    "description": "Replace alternator if it is no longer charging the battery"
+  },
+  {
+    "name": "Starter Replacement",
+    "timeInMinutes": 150,
+    "description": "Replace starter if the engine is not cranking"
+  },
+  {
+    "name": "Radiator Replacement",
+    "timeInMinutes": 180,
+    "description": "Replace radiator if it is leaking or no longer cooling the engine"
+  },
+  {
+    "name": "Thermostat Replacement",
+    "timeInMinutes": 60,
+    "description": "Replace thermostat if the engine is running too hot or too cold"
+  },
+  {
+    "name": "Timing Belt Replacement",
+    "timeInMinutes": 30,
+    "description": "Replace timing belt to prevent engine damage"
+  },
+  {
+    "name": "Water Pump Replacement",
+    "timeInMinutes": 60,
+    "description": "Replace water pump if it is leaking or no longer circulating coolant"
+  },
+  {
+    "name": "Suspension Inspection",
+    "timeInMinutes": 90,
+    "description": "Inspect suspension components for wear and damage"
+  }
+]
