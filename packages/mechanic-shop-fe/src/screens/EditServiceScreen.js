@@ -39,7 +39,7 @@ const EditServiceScreen = () => {
   );
   const navigate = useNavigate();
   const handleSuccess = useCallback(() => {
-    navigate(paths.partList());
+    navigate(paths.serviceList());
   }, [navigate]);
 
   // DO not render while data is fetching from the BE
