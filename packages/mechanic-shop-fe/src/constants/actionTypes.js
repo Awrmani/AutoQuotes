@@ -5,8 +5,15 @@ export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
 export const PART_LIST_FETCH = 'PART_LIST_FETCH';
 export const PART_DETAILS_FETCH = 'PART_DETAILS_FETCH';
 
+export const SERVICE_LIST_FETCH = 'SERVICE_LIST_FETCH';
+export const SERVICE_DETAILS_FETCH = 'SERVICE_DETAILS_FETCH';
+
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
 export const PART_ADD = 'PART_ADD';
 export const PART_UPDATE = 'PART_UPDATE';
 export const PART_DELETE = 'PART_DELETE';
+
+export const SERVICE_ADD = 'SERVICE_ADD';
+export const SERVICE_UPDATE = 'SERVICE_UPDATE';
+export const SERVICE_DELETE = 'SERVICE_DELETE';

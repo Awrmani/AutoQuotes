@@ -9,6 +9,9 @@ import paths from './paths';
 import PartListScreen from './screens/PartListScreen';
 import AddPartScreen from './screens/AddPartScreen';
 import EditPartScreen from './screens/EditPartScreen';
+import ServiceListScreen from './screens/ServiceListScreen';
+import EditServiceScreen from './screens/EditServiceScreen';
+import AddServiceScreen from './screens/AddServiceScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -41,6 +44,21 @@ const Routes = () => {
           <Route
             path={paths.editPart().pathname}
             element={<EditPartScreen />}
+          />
+
+          <Route
+            path={paths.serviceList().pathname}
+            element={<ServiceListScreen />}
+          />
+
+          <Route
+            path={paths.addService().pathname}
+            element={<AddServiceScreen />}
+          />
+
+          <Route
+            path={paths.editService().pathname}
+            element={<EditServiceScreen />}
           />
         </Route>
       </Route>
