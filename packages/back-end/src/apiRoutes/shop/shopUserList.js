@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     ({ id }) => new ShopUser().loadById(id.toString())
   );
 
-  const objects = await Promise.all(promises).map(obj => obj.attributes);
+  const objects = (await Promise.all(promises)).map(obj => obj.attributes);
 
   return res.json(objects);
 };
