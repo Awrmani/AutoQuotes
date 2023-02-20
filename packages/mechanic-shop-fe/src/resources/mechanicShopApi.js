@@ -81,16 +81,18 @@ export const deletePart = apiCall(({ id }) => ({
 }));
 
 // Services
-export const addService = apiCall(({ name, time, description }) => ({
+export const addService = apiCall(({ name, timeInMinutes, description }) => ({
   url: '/services',
   method: 'PUT',
-  data: { name, time, description },
+  data: { name, timeInMinutes: Number(timeInMinutes), description },
 }));
-export const updateService = apiCall(({ id, name, time, description }) => ({
-  url: `/services/${id}`,
-  method: 'PATCH',
-  data: { name, time, description },
-}));
+export const updateService = apiCall(
+  ({ id, name, timeInMinutes, description }) => ({
+    url: `/services/${id}`,
+    method: 'PATCH',
+    data: { name, timeInMinutes: Number(timeInMinutes), description },
+  })
+);
 export const deleteService = apiCall(({ id }) => ({
   url: `/services/${id}`,
   method: 'DELETE',

@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CircularProgress, Stack } from '@mui/material';
 import { Form } from '@autoquotes/common/src/components/Form';
 import validatorFactory from '@autoquotes/libraries/src/utils/validation';
@@ -9,6 +9,7 @@ import numberValidators from '@autoquotes/libraries/src/utils/validation/number'
 import EditServiceForm from '../components/EditServiceForm';
 import { updateService, fetchServiceDetails } from '../actions';
 import { getServiceDetailsQuery } from '../reducers/queriesReducer';
+import paths from '../paths';
 
 const validator = validatorFactory({
   name: [stringValidators.required],
@@ -36,6 +37,10 @@ const EditServiceScreen = () => {
     }),
     [result]
   );
+  const navigate = useNavigate();
+  const handleSuccess = useCallback(() => {
+    navigate(paths.partList());
+  }, [navigate]);
 
   // DO not render while data is fetching from the BE
   if (isFetching || result?.id !== id)
@@ -50,6 +55,7 @@ const EditServiceScreen = () => {
       initialValues={initialValues}
       validation={validator}
       action={updateService}
+      onSuccess={handleSuccess}
     >
       <EditServiceForm edit />
     </Form>

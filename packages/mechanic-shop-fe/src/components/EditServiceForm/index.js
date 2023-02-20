@@ -31,7 +31,7 @@ const EditServiceForm = props => {
             required
             component={TextInput}
             name="timeInMinutes"
-            label="Minutes"
+            label="Duration(minutes)"
             fullWidth
             variant="standard"
           />

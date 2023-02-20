@@ -5,21 +5,21 @@ import paths from '../../../paths';
 
 const titles = [
   {
-    id: 'Item',
+    id: 'service',
     numeric: false,
-    label: 'Item',
+    label: 'Service',
   },
 
   {
-    id: 'Description',
+    id: 'description',
     numeric: false,
     disablePadding: false,
     label: 'Description',
   },
   {
-    id: 'Minutes',
+    id: 'timeInMinutes',
     numeric: true,
-    label: 'Hour',
+    label: 'Duration(minutes)',
   },
 ];
 
