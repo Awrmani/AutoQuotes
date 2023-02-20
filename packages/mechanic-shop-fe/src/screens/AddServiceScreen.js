@@ -8,14 +8,13 @@ import { addService } from '../actions';
 
 const initialValues = {
   name: '',
-  price: '',
-  amountInStock: '',
-  compatibleVehicles: '', // This will have to be an array of strings
+  timeInMinutes: '',
+  description: '',
 };
 
 const validator = validatorFactory({
   name: [stringValidators.required],
-  time: [numberValidators.required],
+  timeInMinutes: [stringValidators.asNumber(numberValidators.required)],
   description: [stringValidators.required],
 });
 const AddServiceScreen = () => {

@@ -12,7 +12,7 @@ import { getServiceDetailsQuery } from '../reducers/queriesReducer';
 
 const validator = validatorFactory({
   name: [stringValidators.required],
-  timeInMinutes: [numberValidators.required],
+  timeInMinutes: [stringValidators.asNumber(numberValidators.required)],
   description: [stringValidators.required],
 });
 
