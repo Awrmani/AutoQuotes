@@ -1,87 +1,121 @@
 [
   {
-    "name": "Oil Change",
-    "timeInMinutes": 60,
-    "description": "Replace engine oil and oil filter"
-  },
-  {
-    "name": "Brake Service",
-    "timeInMinutes": 120,
-    "description": "Inspect and replace brake pads and rotors if necessary"
-  },
-  {
-    "name": "Tire Rotation",
-    "timeInMinutes": 150,
-    "description": "Rotate tires to ensure even wear and extend tire life"
-  },
-  {
-    "name": "Wheel Alignment",
-    "timeInMinutes": 60,
-    "description": "Align wheels to improve handling and prevent uneven tire wear"
-  },
-  {
-    "name": "Transmission Service",
-    "timeInMinutes": 120,
-    "description": "Replace transmission fluid and filter"
-  },
-  {
-    "name": "Coolant Flush",
+    "name": "Tire rotation",
     "timeInMinutes": 30,
-    "description": "Flush and refill cooling system to prevent overheating"
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Fuel System Cleaning",
-    "timeInMinutes": 120,
-    "description": "Clean fuel injectors and throttle body for improved performance"
+    "name": "Break pads replacement - Front axle",
+    "timeInMinutes": 45,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Air Filter Replacement",
-    "timeInMinutes": 90,
-    "description": "Replace engine air filter for improved air flow and performance"
+    "name": "Break pads replacement - Rear axle",
+    "timeInMinutes": 45,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Spark Plug Replacement",
-    "timeInMinutes": 120,
-    "description": "Replace spark plugs for improved fuel efficiency and performance"
-  },
-  {
-    "name": "Battery Replacement",
-    "timeInMinutes": 150,
-    "description": "Replace battery if it is no longer holding a charge"
-  },
-  {
-    "name": "Alternator Replacement",
-    "timeInMinutes": 150,
-    "description": "Replace alternator if it is no longer charging the battery"
-  },
-  {
-    "name": "Starter Replacement",
-    "timeInMinutes": 150,
-    "description": "Replace starter if the engine is not cranking"
-  },
-  {
-    "name": "Radiator Replacement",
-    "timeInMinutes": 180,
-    "description": "Replace radiator if it is leaking or no longer cooling the engine"
-  },
-  {
-    "name": "Thermostat Replacement",
+    "name": "Suspension Alignment",
     "timeInMinutes": 60,
-    "description": "Replace thermostat if the engine is running too hot or too cold"
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Timing Belt Replacement",
+    "name": "Software redeploy",
+    "timeInMinutes": 90,
+    "description": "Remove and reinstall OS on vehicle",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Wiper blade replacement",
+    "timeInMinutes": 5,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Handle mechanics rebuild",
+    "timeInMinutes": 90,
+    "description": "Model S self-presenting handle mechanics fix",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Cabin air Filter Replacement",
+    "timeInMinutes": 10,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Pre-rurchase inspection",
+    "timeInMinutes": 60,
+    "description": "80 point inspection",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "12V battery Replacement",
+    "timeInMinutes": 20,
+    "description": "Low voltage lead-acid battery replacement",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Charge port replacement",
     "timeInMinutes": 30,
-    "description": "Replace timing belt to prevent engine damage"
+    "description": "Replace broken charge port",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Water Pump Replacement",
+    "name": "Upgrade to MCU3",
+    "timeInMinutes": 150,
+    "description": "Media control unit (Amd Ryzen)",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Upgrade to AP computer v3",
+    "timeInMinutes": 150,
+    "description": "Upgrade to FSD computer",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Heat pump replacement",
     "timeInMinutes": 60,
-    "description": "Replace water pump if it is leaking or no longer circulating coolant"
+    "description": "Replace heat pump scroll compressor",
+    "requiredParts": [],
+    "compatibleVehicles": []
   },
   {
-    "name": "Suspension Inspection",
-    "timeInMinutes": 90,
-    "description": "Inspect suspension components for wear and damage"
+    "name": "HV battery inspection",
+    "timeInMinutes": 30,
+    "description": "Re-certify vehicle for DC fast charging after Battery pack damage",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Front shock replacement",
+    "timeInMinutes": 120,
+    "description": "Replace shocks on the front axle",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Rear shock replacement",
+    "timeInMinutes": 120,
+    "description": "Replace shocks on the rear axle",
+    "requiredParts": [],
+    "compatibleVehicles": []
   }
 ]

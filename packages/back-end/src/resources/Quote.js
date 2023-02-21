@@ -1,34 +1,29 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
+const arrayValidators = require('@autoquotes/libraries/src/utils/validation/array');
 
 const ResourceBase = require('./ResourceBase');
+
+/**
+ * TODO
+ * Represent the selection the end-user makes from available parts
+ */
 
 const quoteSchema = new mongoose.Schema(
   {
     customerId: {
       type: String,
       ref: 'EndUser',
-      required: true,
     },
     vehicleTypeId: {
       type: String,
       ref: 'VehicleType',
-      required: true,
-    },
-    appointmentId: {
-      type: String,
-      ref: 'Appointment',
-      required: true,
     },
     lineItems: [
       {
         _id: false,
-        supplierOfferId: {
-          type: String,
-          ref: 'SupplierOffer',
-        },
-        serviceType: {
+        serviceTypeId: {
           type: String,
           ref: 'ServiceType',
         },
@@ -36,7 +31,6 @@ const quoteSchema = new mongoose.Schema(
           type: [String],
           ref: 'Part',
         },
-        duration: Number,
       },
     ],
   },
@@ -60,13 +54,11 @@ const QuoteModel = mongoose.model('quotes', quoteSchema);
 const validatorConfig = {
   customerId: [stringValidators.required],
   vehicleTypeId: [stringValidators.required],
-  appointmentId: [stringValidators.required],
   lineItems: [
     validatorFactory.arrayOf(
       validatorFactory.subValidator({
-        supplierOfferId: [stringValidators.isStringOrUndefined],
-        serviceType: [stringValidators.isStringOrUndefined],
-        parts: [],
+        serviceTypeId: [stringValidators.isStringOrUndefined],
+        partIds: [arrayValidators.arrayOfStrings],
       })
     ),
   ],

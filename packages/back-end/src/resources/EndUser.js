@@ -1,26 +1,27 @@
 const mongoose = require('mongoose');
+const { subValidator } = require('@autoquotes/libraries/src/utils/validation');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const UserResourceBase = require('./UserResourceBase');
 
 const endUserSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
+    name: String,
     email: {
       type: String,
-      required: true,
       index: { unique: true },
     },
     phone: String,
-    passwordHash: {
-      type: String,
-      required: true,
-    },
-    isVerified: {
-      type: Boolean,
-      required: true,
+    password: String,
+    isVerified: Boolean,
+    billingInformation: {
+      _id: false,
+      name: String,
+      address1: String,
+      address2: String,
+      zip: String,
+      city: String,
+      state: String,
+      country: String,
     },
   },
   {
@@ -41,10 +42,20 @@ const endUserSchema = new mongoose.Schema(
 const EndUserModel = mongoose.model('endUsers', endUserSchema);
 
 const validatorConfig = {
-  username: [stringValidators.required],
   name: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
-  passwordHash: [stringValidators.required],
+  password: [stringValidators.required],
+  billingInformation: [
+    subValidator({
+      name: [stringValidators.required],
+      address1: [stringValidators.required],
+      address2: [stringValidators.isString],
+      zip: [stringValidators.required],
+      city: [stringValidators.required],
+      state: [stringValidators.required],
+      country: [stringValidators.required],
+    }),
+  ],
 };
 
 class EndUser extends UserResourceBase {

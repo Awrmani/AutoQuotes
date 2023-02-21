@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const openingHoursValidator = require('@autoquotes/libraries/src/utils/validation/openingHours');
 const ResourceBase = require('./ResourceBase');
 
@@ -62,6 +63,7 @@ const shopSchema = new mongoose.Schema(
         closeMinute: Number,
       },
     },
+    numberOfStalls: Number,
     returnPolicyUrl: String,
     termsAndConditionsUrl: String,
     privacyPolicyUrl: String,
@@ -96,6 +98,7 @@ const validatorConfig = {
   email: [stringValidators.required, stringValidators.email],
   phone: [stringValidators.required],
   openingHours: [openingHoursValidator.openingHours],
+  numberOfStalls: [numberValidators.required],
   returnPolicyUrl: [stringValidators.required],
   termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],

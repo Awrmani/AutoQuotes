@@ -9,17 +9,16 @@ const ResourceBase = require('./ResourceBase');
 
 const partSchema = new mongoose.Schema(
   {
-    name: {
+    name: String,
+    description: String,
+    manufacturer: String,
+    type: {
       type: String,
-      required: true,
+      enum: ['OEM', 'OE', 'Aftermarket'],
     },
-    price: {
-      type: Number,
-      required: true,
-    },
-    amountInStock: {
-      type: Number,
-    },
+    warrantyMonths: Number,
+    price: Number, // If it cames from a supplier offer, it already contains markup
+    amountInStock: Number,
     compatibleVehicles: [
       {
         _id: false,
@@ -29,6 +28,8 @@ const partSchema = new mongoose.Schema(
         toYear: Number,
       },
     ],
+    supplierId: String,
+    offerExpiration: Date,
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -49,6 +50,13 @@ const PartModel = mongoose.model('parts', partSchema);
 
 const validatorConfig = {
   name: [stringValidators.required],
+  description: [stringValidators.isStringOrUndefined],
+  manufacturer: [stringValidators.isStringOrUndefined],
+  type: [
+    stringValidators.required,
+    stringValidators.oneOf(['OEM', 'OE', 'Aftermarket']),
+  ],
+  warrantyMonths: [numberValidators.required],
   price: [numberValidators.required],
   amountInStock: [numberValidators.required],
   compatibleVehicles: [
@@ -61,6 +69,8 @@ const validatorConfig = {
       }),
     ]),
   ],
+  supplierId: [stringValidators.isStringOrUndefined],
+  offerExpiration: [stringValidators.iso8601],
 };
 
 class Part extends ResourceBase {
