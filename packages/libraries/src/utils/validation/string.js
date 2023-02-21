@@ -37,6 +37,8 @@ const email = value =>
   validateEmail(value) ? undefined : 'Invalid email address';
 
 const iso8601 = value => {
+  if (!value) return undefined; // we will chain it with "required" if we want to make this mandatory
+
   if (
     !/^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$/.test(
       value

@@ -1,159 +1,269 @@
 [
   {
-    "name": "Oil filter (Honda/Nissan) 7356",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Oil filter 1334 (Hyundai/old Honda)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Oil filter 7060 (GM/Dodge)",
-    "price": 5,
-    "amountInStock": 22,
+    "name": "Rim - Aracnid 21\"",
+    "price": 2000,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
     "compatibleVehicles": [
       {
-        "make": "GMC",
-        "model": "Sierra",
-        "fromYear": 2020,
-        "toYear": 2022
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2021
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2021
       }
     ]
   },
   {
-    "name": "Oil filter 1042 (old GM)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Rim - Aracnid 21\"",
+    "price": 2000,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2022,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2022,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Oil filter 7502 (Ford)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Rim - Tempest 21\"",
+    "price": 750,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2021
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2021
+      }
+    ]
   },
   {
-    "name": "Oil filter 7502 (Ford)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Rim - Tempest 21\"",
+    "price": 750,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2022,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2022,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Oil filter 1372 (old Ford)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Tire pressure monitor",
+    "price": 95,
+    "amountInStock": 32,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Oil filter 1085 (old Dodge/Jeep)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Oil filter 7899 (Dodge HEMI)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Oil filter 1085 (7145 for Toyota)",
-    "price": 5,
-    "amountInStock": 22,
-    "compatibleVehicles": []
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Engine Air Filter Ford",
-    "price": 20,
-    "amountInStock": 40,
-    "compatibleVehicles": []
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model Y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Spark Plugs GM",
-    "price": 25,
-    "amountInStock": 30,
-    "compatibleVehicles": []
+    "name": "Cabin air filter",
+    "price": 34,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Brake Pads GM",
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model Y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Front break pads",
     "price": 50,
-    "amountInStock": 20,
-    "compatibleVehicles": []
+    "amountInStock": 8,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
   },
   {
-    "name": "Windshield Wipers",
-    "price": 15,
-    "amountInStock": 60,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Engine Coolant",
-    "price": 20,
-    "amountInStock": 40,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Transmission Fluid (ATF)",
-    "price": 25,
-    "amountInStock": 30,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Battery 55KWh",
-    "price": 80,
-    "amountInStock": 10,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Brake Rotors",
-    "price": 60,
-    "amountInStock": 20,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Suspension Struts",
-    "price": 80,
-    "amountInStock": 10,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Shock Absorbers",
+    "name": "Rear break pads",
     "price": 50,
-    "amountInStock": 20,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Fuel Pump",
-    "price": 120,
-    "amountInStock": 5,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Fuel Filter",
-    "price": 10,
-    "amountInStock": 50,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Exhaust Manifold",
-    "price": 70,
-    "amountInStock": 20,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Exhaust Pipe",
-    "price": 50,
-    "amountInStock": 20,
-    "compatibleVehicles": []
-  },
-  {
-    "name": "Catalytic Converter",
-    "price": 200,
-    "amountInStock": 5,
-    "compatibleVehicles": []
+    "amountInStock": 8,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
   }
 ]

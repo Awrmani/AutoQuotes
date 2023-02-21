@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
+const {
+  arrayOfValidator,
+  subValidator,
+} = require('@autoquotes/libraries/src/utils/validation');
+
 const ResourceBase = require('./ResourceBase');
 
 const serviceTypeSchema = new mongoose.Schema(
@@ -8,6 +13,21 @@ const serviceTypeSchema = new mongoose.Schema(
     name: String,
     timeInMinutes: Number,
     description: String,
+    requiredParts: [
+      {
+        _id: false,
+        name: String,
+      },
+    ],
+    compatibleVehicles: [
+      {
+        _id: false,
+        make: String,
+        model: String,
+        fromYear: Number,
+        toYear: Number,
+      },
+    ],
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -29,7 +49,22 @@ const ServiceTypeModel = mongoose.model('serviceTypes', serviceTypeSchema);
 const validatorConfig = {
   name: [stringValidators.required],
   timeInMinutes: [numberValidators.required],
-  description: [stringValidators.required],
+  description: [stringValidators.isString],
+  requiredParts: arrayOfValidator([
+    subValidator({
+      name: [stringValidators.required],
+    }),
+  ]),
+  compatibleVehicles: [
+    arrayOfValidator([
+      subValidator({
+        make: [stringValidators.isString],
+        model: [stringValidators.isString],
+        fromYear: [numberValidators.isNumber],
+        toYear: [numberValidators.isNumber],
+      }),
+    ]),
+  ],
 };
 
 class ServiceType extends ResourceBase {

@@ -15,6 +15,10 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       ref: 'EndUser',
     },
+    quoteId: {
+      type: String,
+      ref: 'Quote',
+    },
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -38,6 +42,7 @@ const validatorConfig = {
   startsAt: [stringValidators.required, stringValidators.iso8601],
   duration: [numberValidators.required],
   customerId: [stringValidators.required],
+  quoteId: [stringValidators.required],
 };
 
 class Appointment extends ResourceBase {
