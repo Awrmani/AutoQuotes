@@ -1,4 +1,5 @@
 import { applyMiddleware, compose } from 'redux';
+import devtoolsActionSanitizer from './devtoolsActionSanitizer';
 
 const createEnhancer = ({ sagaMiddleware }) => {
   if (process.env.NODE_ENV !== 'development')
@@ -14,6 +15,7 @@ const createEnhancer = ({ sagaMiddleware }) => {
     ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         name: 'AutoQuotes',
         shouldCatchErrors: false,
+        actionSanitizer: devtoolsActionSanitizer,
       })
     : compose;
   /* eslint-enable */
