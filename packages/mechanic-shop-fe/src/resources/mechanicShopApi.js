@@ -20,6 +20,14 @@ export const fetchPartList = apiCall(() => ({
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
+// Users
+export const fetchUserList = apiCall(() => ({
+  url: '/users',
+}));
+export const fetchUserDetails = apiCall(({ id }) => ({
+  url: `/users/${id}`,
+}));
+
 // Services
 export const fetchServiceList = apiCall(() => ({
   url: '/services',
@@ -77,6 +85,22 @@ export const updatePart = apiCall(
 );
 export const deletePart = apiCall(({ id }) => ({
   url: `/parts/${id}`,
+  method: 'DELETE',
+}));
+
+// Users
+export const addUser = apiCall(({ name, email, phone, role }) => ({
+  url: '/users',
+  method: 'PUT',
+  data: { name, email, phone, role },
+}));
+export const updateUser = apiCall(({ id, name, email, phone, role }) => ({
+  url: `/users/${id}`,
+  method: 'PATCH',
+  data: { name, email, phone, role },
+}));
+export const deleteUser = apiCall(({ id }) => ({
+  url: `/users/${id}`,
   method: 'DELETE',
 }));
 

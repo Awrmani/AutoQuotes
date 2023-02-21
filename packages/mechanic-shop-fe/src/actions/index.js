@@ -12,6 +12,9 @@ export const fetchServiceDetails = createAction(
   actionTypes.SERVICE_DETAILS_FETCH
 );
 
+export const fetchUserList = createAction(actionTypes.USER_LIST_FETCH);
+export const fetchUserDetails = createAction(actionTypes.USER_DETAILS_FETCH);
+
 // Form submits & other actions altering backend state
 export const login = createAction(actionTypes.LOGIN);
 export const addPart = createAction(actionTypes.PART_ADD);
@@ -21,3 +24,7 @@ export const deletePart = createAction(actionTypes.PART_DELETE);
 export const addService = createAction(actionTypes.SERVICE_ADD);
 export const updateService = createAction(actionTypes.SERVICE_UPDATE);
 export const deleteService = createAction(actionTypes.SERVICE_DELETE);
+
+export const addUser = createAction(actionTypes.USER_ADD);
+export const updateUser = createAction(actionTypes.USER_UPDATE);
+export const deleteUser = createAction(actionTypes.USER_DELETE);

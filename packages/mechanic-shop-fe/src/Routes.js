@@ -13,6 +13,8 @@ import ServiceListScreen from './screens/ServiceListScreen';
 import EditServiceScreen from './screens/EditServiceScreen';
 import AddServiceScreen from './screens/AddServiceScreen';
 
+import UserListScreen from './screens/UserListScreen';
+
 const Routes = () => {
   // If the user is logged in, they will have a token
   const token = useSelector(getToken);
@@ -59,6 +61,11 @@ const Routes = () => {
           <Route
             path={paths.editService().pathname}
             element={<EditServiceScreen />}
+          />
+
+          <Route
+            path={paths.userList().pathname}
+            element={<UserListScreen />}
           />
         </Route>
       </Route>

@@ -28,12 +28,28 @@ const editService = ({ id = ':id' } = {}) => ({
   pathname: `/editService/${id}`,
 });
 
+// Shop User Paths
+const userList = () => ({
+  pathname: '/userList',
+});
+
+const addUser = () => ({
+  pathname: '/addUser',
+});
+
+const editUser = ({ id = ':id' } = {}) => ({
+  pathname: `/editUser/'${id}`,
+});
+
 const paths = {
   login,
   dashboard,
-  partList,
   addPart,
+  partList,
   editPart,
+  userList,
+  addUser,
+  editUser,
   serviceList,
   addService,
   editService,

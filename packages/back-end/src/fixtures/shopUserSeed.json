@@ -3,7 +3,7 @@
     "id": "TestSUser001",
     "name": "John Doe",
     "email": "jd1@a.com",
-    "phone": "",
+    "phone": "+1 (437) 952-3322",
     "password": "secret",
     "role": "admin"
   }
