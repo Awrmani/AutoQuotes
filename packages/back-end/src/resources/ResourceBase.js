@@ -61,7 +61,12 @@ class ResourceBase {
    * This async instance fn allows to reload an entity
    * based on custom search criteria
    */
-  loadBy = async (criteria = {}) => {
+  loadBy = async ({ id, ...rest } = {}) => {
+    const criteria = {
+      ...(id && { _id: id }),
+      ...rest,
+    };
+
     const mongooseObj = await this._Model.findOne(criteria).exec();
 
     if (!mongooseObj) throw new Error('Entity not found');

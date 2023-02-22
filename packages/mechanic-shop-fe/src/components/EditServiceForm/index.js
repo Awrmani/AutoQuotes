@@ -23,7 +23,6 @@ const EditServiceForm = props => {
             name="name"
             label="Service name"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
@@ -33,7 +32,6 @@ const EditServiceForm = props => {
             name="timeInMinutes"
             label="Duration(minutes)"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
@@ -43,7 +41,6 @@ const EditServiceForm = props => {
             name="description"
             label="Description"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <FormError />

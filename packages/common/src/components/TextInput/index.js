@@ -24,6 +24,7 @@ const TextInput = ({
       error={!!error}
       disabled={isSubmitting}
       onChange={handleChange}
+      variant="standard"
       {...rest}
     />
   );

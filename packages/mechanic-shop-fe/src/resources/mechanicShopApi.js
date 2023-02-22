@@ -48,11 +48,24 @@ export const login = apiCall(({ email, password }) => ({
 
 // Parts
 export const addPart = apiCall(
-  ({ name, price, amountInStock, compatibleVehicles }) => ({
+  ({
+    name,
+    description,
+    manufacturer,
+    type,
+    warrantyMonths,
+    price,
+    amountInStock,
+    compatibleVehicles,
+  }) => ({
     url: '/parts',
     method: 'PUT',
     data: {
       name,
+      description,
+      manufacturer,
+      type,
+      warrantyMonths: Number(warrantyMonths),
       price: Number(price),
       amountInStock: Number(amountInStock),
       compatibleVehicles: compatibleVehicles.map(
@@ -66,11 +79,25 @@ export const addPart = apiCall(
   })
 );
 export const updatePart = apiCall(
-  ({ id, name, price, amountInStock, compatibleVehicles }) => ({
+  ({
+    id,
+    name,
+    description,
+    manufacturer,
+    type,
+    warrantyMonths,
+    price,
+    amountInStock,
+    compatibleVehicles,
+  }) => ({
     url: `/parts/${id}`,
     method: 'PATCH',
     data: {
       name,
+      description,
+      manufacturer,
+      type,
+      warrantyMonths: Number(warrantyMonths),
       price: Number(price),
       amountInStock: Number(amountInStock),
       compatibleVehicles: compatibleVehicles.map(

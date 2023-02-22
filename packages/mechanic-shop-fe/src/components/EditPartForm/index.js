@@ -6,8 +6,24 @@ import {
   FormError,
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
+import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { Container, Grid, Typography } from '@mui/material';
 import PartCompatibleVehicleFieldArray from './PartCompatibleVehicleFieldArray';
+
+const typeOptions = [
+  {
+    label: 'OEM',
+    value: 'OEM',
+  },
+  {
+    label: 'OE',
+    value: 'OE',
+  },
+  {
+    label: 'Aftermarket',
+    value: 'Aftermarket',
+  },
+];
 
 const EditPartForm = props => {
   return (
@@ -19,12 +35,43 @@ const EditPartForm = props => {
         <Grid item xs={12}>
           <Field
             required
-            autoFocus
             component={TextInput}
             name="name"
             label="Item name"
             fullWidth
-            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={TextInput}
+            name="description"
+            label="Description"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={TextInput}
+            name="manufacturer"
+            label="Manufacturer"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={Dropdown}
+            name="type"
+            label="Type"
+            fullWidth
+            options={typeOptions}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={TextInput}
+            name="warrantyMonths"
+            label="Warranty in months"
+            fullWidth
           />
         </Grid>
         <Grid item xs={12}>
@@ -34,7 +81,6 @@ const EditPartForm = props => {
             name="price"
             label="Price"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
@@ -44,7 +90,6 @@ const EditPartForm = props => {
             name="amountInStock"
             label="Quantity"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
@@ -55,7 +100,6 @@ const EditPartForm = props => {
         <Grid item xs={12}>
           <PartCompatibleVehicleFieldArray />
         </Grid>
-
         <FormError />
         <Grid item xs={12}></Grid>
         <Grid item xs={12} sm={3}>

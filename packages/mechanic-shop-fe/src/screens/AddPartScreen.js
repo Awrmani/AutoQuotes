@@ -13,6 +13,10 @@ import paths from '../paths';
 
 const initialValues = {
   name: '',
+  description: '',
+  manufacturer: '',
+  type: 'OEM',
+  warrantyMonths: '12',
   price: '',
   amountInStock: '',
   compatibleVehicles: [],
@@ -20,6 +24,13 @@ const initialValues = {
 
 const validator = validatorFactory({
   name: [stringValidators.required],
+  description: [stringValidators.isStringOrUndefined],
+  manufacturer: [stringValidators.isStringOrUndefined],
+  type: [
+    stringValidators.required,
+    stringValidators.oneOf(['OEM', 'OE', 'Aftermarket']),
+  ],
+  warrantyMonths: [stringValidators.asNumber(numberValidators.required)],
   price: [stringValidators.asNumber(numberValidators.required)],
   amountInStock: [stringValidators.asNumber(numberValidators.required)],
   compatibleVehicles: [

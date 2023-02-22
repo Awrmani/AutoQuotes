@@ -30,7 +30,6 @@ const PartCompatibleVehicleFieldArray = () => {
             name="make"
             label="Make"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={6}>
@@ -40,7 +39,6 @@ const PartCompatibleVehicleFieldArray = () => {
             name="model"
             label="Model"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={6}>
@@ -50,7 +48,6 @@ const PartCompatibleVehicleFieldArray = () => {
             name="fromYear"
             label="From year"
             fullWidth
-            variant="standard"
           />
         </Grid>
         <Grid item xs={6}>
@@ -60,7 +57,6 @@ const PartCompatibleVehicleFieldArray = () => {
             name="toYear"
             label="To year"
             fullWidth
-            variant="standard"
           />
         </Grid>
       </Grid>

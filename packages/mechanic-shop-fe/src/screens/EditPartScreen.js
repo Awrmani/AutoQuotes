@@ -18,6 +18,13 @@ const validator = validatorFactory({
   name: [stringValidators.required],
   price: [stringValidators.asNumber(numberValidators.required)],
   amountInStock: [stringValidators.asNumber(numberValidators.required)],
+  description: [stringValidators.isStringOrUndefined],
+  manufacturer: [stringValidators.isStringOrUndefined],
+  type: [
+    stringValidators.required,
+    stringValidators.oneOf(['OEM', 'OE', 'Aftermarket']),
+  ],
+  warrantyMonths: [stringValidators.asNumber(numberValidators.required)],
   compatibleVehicles: [
     arrayOfValidator([
       subValidator({

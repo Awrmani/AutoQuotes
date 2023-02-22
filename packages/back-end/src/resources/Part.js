@@ -28,8 +28,9 @@ const partSchema = new mongoose.Schema(
         toYear: Number,
       },
     ],
-    supplierId: String,
-    offerExpiration: Date,
+    supplierId: String, // only if this is an offer
+    offerExpiration: Date, // only if this is an offer
+    exclusiveQuoteId: String, // A supplier offer is for a specific quote
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -71,6 +72,7 @@ const validatorConfig = {
   ],
   supplierId: [stringValidators.isStringOrUndefined],
   offerExpiration: [stringValidators.iso8601],
+  exclusiveQuoteId: [stringValidators.isStringOrUndefined],
 };
 
 class Part extends ResourceBase {
