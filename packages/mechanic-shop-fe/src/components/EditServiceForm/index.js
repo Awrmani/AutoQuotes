@@ -7,6 +7,8 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { Container, Grid, Typography } from '@mui/material';
+import CompatibleVehicleFieldArray from '../CompatibleVehicleFieldArray';
+import RequiredPartFieldArray from '../RequiredPartFieldArray';
 
 const EditServiceForm = props => {
   return (
@@ -42,6 +44,22 @@ const EditServiceForm = props => {
             label="Description"
             fullWidth
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            Compatible Vehicles
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <CompatibleVehicleFieldArray />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            Required parts
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <RequiredPartFieldArray />
         </Grid>
         <FormError />
         <Grid item xs={12}></Grid>

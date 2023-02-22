@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CircularProgress, Stack } from '@mui/material';
 import { Form } from '@autoquotes/common/src/components/Form';
-import validatorFactory from '@autoquotes/libraries/src/utils/validation';
+import validatorFactory, {
+  arrayOfValidator,
+  subValidator,
+} from '@autoquotes/libraries/src/utils/validation';
 import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import numberValidators from '@autoquotes/libraries/src/utils/validation/number';
 import EditServiceForm from '../components/EditServiceForm';
@@ -15,6 +18,23 @@ const validator = validatorFactory({
   name: [stringValidators.required],
   timeInMinutes: [stringValidators.asNumber(numberValidators.required)],
   description: [stringValidators.required],
+  compatibleVehicles: [
+    arrayOfValidator([
+      subValidator({
+        make: [stringValidators.required],
+        model: [stringValidators.required],
+        fromYear: [stringValidators.asNumber(numberValidators.required)],
+        toYear: [stringValidators.asNumber(numberValidators.required)],
+      }),
+    ]),
+  ],
+  requiredParts: [
+    arrayOfValidator([
+      subValidator({
+        name: [stringValidators.required],
+      }),
+    ]),
+  ],
 });
 
 const EditServiceScreen = () => {

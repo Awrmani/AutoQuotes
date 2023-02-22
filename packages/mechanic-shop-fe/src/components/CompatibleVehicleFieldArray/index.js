@@ -3,7 +3,7 @@ import { Field, FieldArray } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { Grid } from '@mui/material';
 
-const emptyCompatibleVehicle = {
+const empty = {
   make: '',
   model: '',
   fromYear: '',
@@ -19,9 +19,9 @@ const emptyCompatibleVehicle = {
  * then repeated for each item in the array
  */
 
-const PartCompatibleVehicleFieldArray = () => {
+const CompatibleVehicleFieldArray = () => {
   return (
-    <FieldArray name="compatibleVehicles" emptyValue={emptyCompatibleVehicle}>
+    <FieldArray name="compatibleVehicles" emptyValue={empty}>
       <Grid container>
         <Grid item xs={6}>
           <Field
@@ -64,4 +64,4 @@ const PartCompatibleVehicleFieldArray = () => {
   );
 };
 
-export default PartCompatibleVehicleFieldArray;
+export default CompatibleVehicleFieldArray;

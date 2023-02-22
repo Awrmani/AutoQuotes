@@ -8,7 +8,15 @@ const apiCall = fetcherFactory({
   }/api/shop/v1`,
 });
 
-// ===================Data fetching============================
+// ====================== Helpers ===============================
+const processCompatibleVehicles = compatibleVehicles =>
+  compatibleVehicles.map(({ fromYear, toYear, ...rest }) => ({
+    ...rest,
+    fromYear: Number(fromYear),
+    toYear: Number(toYear),
+  }));
+
+// =================== Data fetching ============================
 export const fetchCurrentUser = apiCall(() => ({
   url: '/users/current',
 }));
@@ -68,13 +76,7 @@ export const addPart = apiCall(
       warrantyMonths: Number(warrantyMonths),
       price: Number(price),
       amountInStock: Number(amountInStock),
-      compatibleVehicles: compatibleVehicles.map(
-        ({ fromYear, toYear, ...rest }) => ({
-          ...rest,
-          fromYear: Number(fromYear),
-          toYear: Number(toYear),
-        })
-      ),
+      compatibleVehicles: processCompatibleVehicles(compatibleVehicles),
     },
   })
 );
@@ -100,13 +102,7 @@ export const updatePart = apiCall(
       warrantyMonths: Number(warrantyMonths),
       price: Number(price),
       amountInStock: Number(amountInStock),
-      compatibleVehicles: compatibleVehicles.map(
-        ({ fromYear, toYear, ...rest }) => ({
-          ...rest,
-          fromYear: Number(fromYear),
-          toYear: Number(toYear),
-        })
-      ),
+      compatibleVehicles: processCompatibleVehicles(compatibleVehicles),
     },
   })
 );
@@ -132,16 +128,43 @@ export const deleteUser = apiCall(({ id }) => ({
 }));
 
 // Services
-export const addService = apiCall(({ name, timeInMinutes, description }) => ({
-  url: '/services',
-  method: 'PUT',
-  data: { name, timeInMinutes: Number(timeInMinutes), description },
-}));
+export const addService = apiCall(
+  ({
+    name,
+    timeInMinutes,
+    description,
+    compatibleVehicles,
+    requiredParts,
+  }) => ({
+    url: '/services',
+    method: 'PUT',
+    data: {
+      name,
+      timeInMinutes: Number(timeInMinutes),
+      description,
+      compatibleVehicles: processCompatibleVehicles(compatibleVehicles),
+      requiredParts,
+    },
+  })
+);
 export const updateService = apiCall(
-  ({ id, name, timeInMinutes, description }) => ({
+  ({
+    id,
+    name,
+    timeInMinutes,
+    description,
+    compatibleVehicles,
+    requiredParts,
+  }) => ({
     url: `/services/${id}`,
     method: 'PATCH',
-    data: { name, timeInMinutes: Number(timeInMinutes), description },
+    data: {
+      name,
+      timeInMinutes: Number(timeInMinutes),
+      description,
+      compatibleVehicles: processCompatibleVehicles(compatibleVehicles),
+      requiredParts,
+    },
   })
 );
 export const deleteService = apiCall(({ id }) => ({

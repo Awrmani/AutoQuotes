@@ -8,7 +8,7 @@ import {
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { Container, Grid, Typography } from '@mui/material';
-import PartCompatibleVehicleFieldArray from './PartCompatibleVehicleFieldArray';
+import CompatibleVehicleFieldArray from '../CompatibleVehicleFieldArray';
 
 const typeOptions = [
   {
@@ -98,7 +98,7 @@ const EditPartForm = props => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <PartCompatibleVehicleFieldArray />
+          <CompatibleVehicleFieldArray />
         </Grid>
         <FormError />
         <Grid item xs={12}></Grid>
