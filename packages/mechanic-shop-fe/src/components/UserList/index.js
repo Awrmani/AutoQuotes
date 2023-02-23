@@ -106,7 +106,7 @@ const UserList = () => {
                     height: 73 * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={4} />
+                  <TableCell colSpan={5} />
                 </TableRow>
               )}
             </TableBody>

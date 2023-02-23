@@ -93,11 +93,11 @@ const SideBarInner = () => {
           display: 'flex',
           justifyContent: 'center',
           color: 'white',
+          cursor: 'pointer',
         }}
+        onClick={() => navigate(paths.dashboard())}
       >
-        <IconButton color="inherit" edge="start">
-          <PrecisionManufacturing />
-        </IconButton>
+        <PrecisionManufacturing sx={{ mr: 1 }} />
 
         <Typography variant="h6">Six Stars</Typography>
       </Toolbar>
