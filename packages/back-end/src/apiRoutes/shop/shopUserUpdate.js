@@ -1,6 +1,6 @@
 const { omit } = require('lodash');
 const ShopUser = require('../../resources/ShopUser');
-const FieldValidationError = require('../../resources/FieldValidationError');
+const FieldValidationError = require('../../resources/errors/FieldValidationError');
 
 module.exports = async (req, res) => {
   const { id } = req.params;

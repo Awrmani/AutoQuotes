@@ -1,5 +1,5 @@
 const ShopUser = require('../../resources/ShopUser');
-const FieldValidationError = require('../../resources/FieldValidationError');
+const FieldValidationError = require('../../resources/errors/FieldValidationError');
 
 module.exports = async (req, res) => {
   if (req.user.role !== 'admin')

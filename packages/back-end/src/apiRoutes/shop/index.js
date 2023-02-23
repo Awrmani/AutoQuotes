@@ -19,6 +19,9 @@ const serviceGet = require('./serviceGet');
 const serviceList = require('./serviceList');
 const serviceUpdate = require('./serviceUpdate');
 const serviceDelete = require('./serviceDelete');
+const appointmentGet = require('./appointmentGet');
+const appointmentList = require('./appointmentList');
+const appointmentDelete = require('./appointmentDelete');
 
 const authenticator = authenticatorFactory({
   audience: 'shop',
@@ -53,5 +56,10 @@ router.get('/services/:id', authenticator, serviceGet);
 router.put('/services', authenticator, serviceCreate);
 router.patch('/services/:id', authenticator, serviceUpdate);
 router.delete('/services/:id', authenticator, serviceDelete);
+
+// Appointment
+router.get('/appointments', authenticator, appointmentList);
+router.get('/appointments/:id', authenticator, appointmentGet);
+router.delete('/appointments/:id', authenticator, appointmentDelete);
 
 module.exports = router;

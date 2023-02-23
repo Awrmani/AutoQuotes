@@ -8,7 +8,7 @@ const required = value => {
 };
 
 const arrayOfStrings = value => {
-  if (Array.isArray(value)) return 'Not an array';
+  if (!Array.isArray(value)) return 'Not an array';
 
   for (let i = 0; i < value.length; i++) {
     if (typeof value[i] !== 'string') return `index ${i} is not a string`;
