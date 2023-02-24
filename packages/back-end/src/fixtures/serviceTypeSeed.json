@@ -1,0 +1,122 @@
+[
+  {
+    "id": "TireRotation",
+    "name": "Tire rotation",
+    "timeInMinutes": 30,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Break pads replacement - Front axle",
+    "timeInMinutes": 45,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Break pads replacement - Rear axle",
+    "timeInMinutes": 45,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Suspension Alignment",
+    "timeInMinutes": 60,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Software redeploy",
+    "timeInMinutes": 90,
+    "description": "Remove and reinstall OS on vehicle",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Wiper blade replacement",
+    "timeInMinutes": 5,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Handle mechanics rebuild",
+    "timeInMinutes": 90,
+    "description": "Model S self-presenting handle mechanics fix",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Cabin air Filter Replacement",
+    "timeInMinutes": 10,
+    "description": "",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Pre-rurchase inspection",
+    "timeInMinutes": 60,
+    "description": "80 point inspection",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "12V battery Replacement",
+    "timeInMinutes": 20,
+    "description": "Low voltage lead-acid battery replacement",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Charge port replacement",
+    "timeInMinutes": 30,
+    "description": "Replace broken charge port",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Upgrade to MCU3",
+    "timeInMinutes": 150,
+    "description": "Media control unit (Amd Ryzen)",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Upgrade to AP computer v3",
+    "timeInMinutes": 150,
+    "description": "Upgrade to FSD computer",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Heat pump replacement",
+    "timeInMinutes": 60,
+    "description": "Replace heat pump scroll compressor",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "HV battery inspection",
+    "timeInMinutes": 30,
+    "description": "Re-certify vehicle for DC fast charging after Battery pack damage",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Front shock replacement",
+    "timeInMinutes": 120,
+    "description": "Replace shocks on the front axle",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  },
+  {
+    "name": "Rear shock replacement",
+    "timeInMinutes": 120,
+    "description": "Replace shocks on the rear axle",
+    "requiredParts": [],
+    "compatibleVehicles": []
+  }
+]

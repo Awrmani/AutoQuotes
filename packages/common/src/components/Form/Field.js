@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import formContext from './formContext';
 
 const Field = ({ component: Component, ...props }) => {
@@ -14,12 +15,10 @@ const Field = ({ component: Component, ...props }) => {
   } = useContext(formContext);
 
   const handleChange = useCallback(
-    (newValue, setTouched) => {
-      setFieldValue(name, newValue).then(() => {
-        if (setTouched) setFieldTouched(name);
-      });
+    newValue => {
+      setFieldValue(name, newValue);
     },
-    [setFieldValue, setFieldTouched, name]
+    [setFieldValue, name]
   );
 
   const handleBlur = useCallback(() => {
@@ -28,7 +27,7 @@ const Field = ({ component: Component, ...props }) => {
 
   return (
     <Component
-      value={values[name]}
+      value={get(values, name)}
       // Only display errors on touched inputs
       error={touched[name] ? errors[name] : undefined}
       onChange={handleChange}

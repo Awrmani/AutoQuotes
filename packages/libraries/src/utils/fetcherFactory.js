@@ -1,5 +1,5 @@
-import merge from 'lodash-es/merge';
-import camelCase from 'lodash-es/camelCase';
+import merge from 'lodash/merge';
+import camelCase from 'lodash/camelCase';
 import { craftSearch } from './url';
 
 const METAS_TO_HEADER = {

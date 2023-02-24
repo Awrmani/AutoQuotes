@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import omit from 'lodash-es/omit';
+import omit from 'lodash/omit';
 import * as actionTypes from '../constants/actionTypes';
 
 /**

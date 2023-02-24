@@ -43,4 +43,3 @@ export const destroyForm = createAction(
 );
 
 // User mgt
-export const logout = createAction(actionTypes.LOGOUT);

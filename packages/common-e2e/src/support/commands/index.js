@@ -2,6 +2,7 @@ import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
 import './domGetters';
 import './networkRequest';
+import './programmaticalLogin';
 
 // ***********************************************
 // This example commands.js shows you how to

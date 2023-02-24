@@ -4,8 +4,8 @@ name: ci
 # This workflow will run whenever we push (or merge) commits to the `develop` branch,
 on:
   push:
-    branches:
-      - develop
+    branches-ignore:
+      - main
 
 jobs:
   lint:
@@ -27,13 +27,13 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Install dependencies
+      - name: Run lint
         uses: Borales/actions-yarn@v4.2.0
         with:
           cmd: 'run lint' # will run `yarn run lint` command
 
-  e2e-tests:
-    name: End to End Tests
+  shop-e2e-tests:
+    name: Shop End to End Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -53,4 +53,50 @@ jobs:
       - name: Run tests
         uses: Borales/actions-yarn@v4.2.0
         with:
-          cmd: 'run test' # will run `yarn run test` command
+          cmd: 'run shop:e2e:start' # will run `yarn run shop:e2e:start` command
+
+  enduser-e2e-tests:
+    name: End-user End to End Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Run tests
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: 'run enduser:e2e:start' # will run `yarn run enduser:e2e:start` command
+
+  thirdp-e2e-tests:
+    name: Third party End to End Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Run tests
+        uses: Borales/actions-yarn@v4.2.0
+        with:
+          cmd: 'run thirdp:e2e:start' # will run `yarn run thirdp:e2e:start` command

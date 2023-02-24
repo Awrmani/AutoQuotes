@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest, call } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
 import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
 import {
@@ -6,8 +6,14 @@ import {
   addTokenRequestInterceptor,
 } from '@autoquotes/libraries/src/saga/interceptors/token';
 import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
+import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 import * as actionTypes from '../constants/actionTypes';
 import * as mechanicShopApi from '../resources/mechanicShopApi';
+import refreshCurrentUser from './refreshers/refreshCurrentUser';
+import refreshPartList from './refreshers/refreshPartList';
+import refreshUserList from './refreshers/refreshUserList';
+import refreshServiceList from './refreshers/refreshServiceList';
+import refreshShopSettings from './refreshers/refreshShopSettings';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -15,11 +21,12 @@ const apiCall = apiCallSagaFactory({
   responseInterceptors: [
     // normalizeResponseInterceptor,
   ],
-  errorInterceptors: [errorTranslationInterceptor],
+  errorInterceptors: [logoutErrorInterceptor, errorTranslationInterceptor],
 });
 
-const initApp = () => {
-  // Just a placeholder for now
+// This runs every time the application is starting up
+const initApp = function* () {
+  yield call(refreshCurrentUser);
 };
 
 export default function* root() {
@@ -31,11 +38,81 @@ export default function* root() {
       noInjectToken: true,
       onSuccess: [
         [earlySetToken],
-        [
-          // refreshCurrentUser
-        ],
+        [refreshCurrentUser],
         apiCall.DISPATCH_SUCCESS,
       ],
+    }),
+    takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchCurrentUser,
+    }),
+
+    // Part
+    takeLatest(actionTypes.PART_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchPartList,
+    }),
+    takeLatest(actionTypes.PART_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchPartDetails,
+    }),
+    takeLatest(actionTypes.PART_ADD, apiCall, {
+      apiFn: mechanicShopApi.addPart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.PART_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updatePart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.PART_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deletePart,
+      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // User
+    takeLatest(actionTypes.USER_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchUserList,
+    }),
+    takeLatest(actionTypes.USER_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchUserDetails,
+    }),
+    takeLatest(actionTypes.USER_ADD, apiCall, {
+      apiFn: mechanicShopApi.addUser,
+      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.USER_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateUser,
+      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.USER_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteUser,
+      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Service
+    takeLatest(actionTypes.SERVICE_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchServiceList,
+    }),
+    takeLatest(actionTypes.SERVICE_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchServiceDetails,
+    }),
+    takeLatest(actionTypes.SERVICE_ADD, apiCall, {
+      apiFn: mechanicShopApi.addService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteService,
+      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Shop settings
+    takeLatest(actionTypes.SHOP_SETTINGS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchShopSettings,
+    }),
+    takeLatest(actionTypes.SHOP_SETTINGS_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateShopSettings,
+      onSuccess: [[refreshShopSettings], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

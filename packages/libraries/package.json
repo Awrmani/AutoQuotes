@@ -5,7 +5,8 @@
   "license": "SEE LICENSE IN LICENSE",
   "description": "Auto Quotes common tools between packages",
   "dependencies": {
-    "lodash-es": "^4.17.21",
+    "email-validator": "^2.0.4",
+    "lodash": "^4.17.21",
     "redux": "^4.2.0",
     "redux-actions": "^2.6.5",
     "redux-persist": "^6.0.0",

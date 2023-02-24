@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Provider as StoreProvider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { set } from 'lodash';
 import buildStore from '@autoquotes/libraries/src/utils/buildStore';
 import MuiThemeProvider from '@autoquotes/common/src/components/MuiThemeProvider';
-import LoginScreen from './screens/LoginScreen';
 import rootReducer from './reducers';
 import sagas from './sagas';
+
+import Routes from './Routes';
 
 const storePromise = buildStore({ rootReducer, sagas });
 
@@ -13,7 +16,17 @@ const App = () => {
 
   // Wait for redux store to rehydrate, then set it to `store`
   useEffect(() => {
-    storePromise.then(setStore);
+    storePromise.then(s => {
+      setStore(s);
+      /**
+       * If we are in dev mode, make store available on the browser's
+       * window object. This helps the e2e test suite prepare for tests,
+       * I.e., programmatically logging users in
+       */
+      if (process.env.NODE_ENV === 'development') {
+        set(window, ['AutoQuotes', 'store'], s);
+      }
+    });
   }, []);
 
   if (!store) return null;
@@ -21,8 +34,9 @@ const App = () => {
   return (
     <StoreProvider store={store}>
       <MuiThemeProvider>
-        <div>Mechanic shop front-end</div>
-        <LoginScreen />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </MuiThemeProvider>
     </StoreProvider>
   );

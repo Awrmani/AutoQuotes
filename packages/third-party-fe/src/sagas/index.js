@@ -2,6 +2,7 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
 // import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
 // import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
+// import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 
 /*
 const apiCall = apiCallSagaFactory({
@@ -10,7 +11,7 @@ const apiCall = apiCallSagaFactory({
   responseInterceptors: [
     // normalizeResponseInterceptor,
   ],
-  errorInterceptors: [errorTranslationInterceptor],
+  errorInterceptors: [logoutErrorInterceptor, errorTranslationInterceptor],
 });
 */
 const initApp = () => {

@@ -1,0 +1,269 @@
+[
+  {
+    "name": "Rim - Aracnid 21\"",
+    "price": 2000,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2021
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2021
+      }
+    ]
+  },
+  {
+    "name": "Rim - Aracnid 21\"",
+    "price": 2000,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2022,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2022,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Rim - Tempest 21\"",
+    "price": 750,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2021
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2021
+      }
+    ]
+  },
+  {
+    "name": "Rim - Tempest 21\"",
+    "price": 750,
+    "amountInStock": 2,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2022,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2022,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Tire pressure monitor",
+    "price": 95,
+    "amountInStock": 32,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      },
+      {
+        "make": "Tesla",
+        "model": "Model y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Wiper blade",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model Y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 34,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2012,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model X",
+        "fromYear": 2016,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model 3",
+        "fromYear": 2017,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Cabin air filter",
+    "price": 28,
+    "amountInStock": 41,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model Y",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Front break pads",
+    "price": 50,
+    "amountInStock": 8,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  },
+  {
+    "name": "Rear break pads",
+    "price": 50,
+    "amountInStock": 8,
+    "type": "OEM",
+    "warrantyMonths": 12,
+    "compatibleVehicles": [
+      {
+        "make": "Tesla",
+        "model": "Model S",
+        "fromYear": 2020,
+        "toYear": 2023
+      }
+    ]
+  }
+]

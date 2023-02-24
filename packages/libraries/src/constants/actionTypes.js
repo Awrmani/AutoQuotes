@@ -13,6 +13,3 @@ export const TOKEN_SET = 'TOKEN_SET';
 
 // Form remove
 export const FORM_DESTROY = 'FORM_DESTROY';
-
-// User mgt
-export const LOGOUT = 'LOGOUT';

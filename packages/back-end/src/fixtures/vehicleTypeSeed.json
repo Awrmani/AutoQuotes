@@ -1,0 +1,163 @@
+[
+  {
+    "id": "TeslaRoads01",
+    "make": "Tesla",
+    "model": "Roadster",
+    "modelYear": 2008,
+    "engineVariant": "standard",
+    "bodyType": "roadster"
+  },
+  {
+    "id": "TeslaModelS1",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2012,
+    "engineVariant": "RWD",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS2",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2012,
+    "engineVariant": "AWD",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS3",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2012,
+    "engineVariant": "Performance",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS4",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2016,
+    "engineVariant": "RWD",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS5",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2016,
+    "engineVariant": "AWD",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS6",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2016,
+    "engineVariant": "Performance",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS7",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2022,
+    "engineVariant": "Standard range",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS8",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2022,
+    "engineVariant": "Long range",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelS9",
+    "make": "Tesla",
+    "model": "Model S",
+    "modelYear": 2022,
+    "engineVariant": "Plaid",
+    "bodyType": "liftback"
+  },
+  {
+    "id": "TeslaModelX1",
+    "make": "Tesla",
+    "model": "Model X",
+    "modelYear": 2016,
+    "engineVariant": "AWD",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModelX2",
+    "make": "Tesla",
+    "model": "Model X",
+    "modelYear": 2016,
+    "engineVariant": "Performance",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModelX3",
+    "make": "Tesla",
+    "model": "Model X",
+    "modelYear": 2022,
+    "engineVariant": "Long range",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModelX4",
+    "make": "Tesla",
+    "model": "Model X",
+    "modelYear": 2022,
+    "engineVariant": "Plaid",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModel31",
+    "make": "Tesla",
+    "model": "Model 3",
+    "modelYear": 2017,
+    "engineVariant": "Standard range",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "TeslaModel32",
+    "make": "Tesla",
+    "model": "Model 3",
+    "modelYear": 2017,
+    "engineVariant": "Long range",
+    "bodyType": "Sedan"
+  },
+  {
+    "id": "TeslaModel33",
+    "make": "Tesla",
+    "model": "Model 3",
+    "modelYear": 2017,
+    "engineVariant": "Performance",
+    "bodyType": "Sedan"
+  },
+
+  {
+    "id": "TeslaModelY1",
+    "make": "Tesla",
+    "model": "Model Y",
+    "modelYear": 2020,
+    "engineVariant": "Standard range",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModelY2",
+    "make": "Tesla",
+    "model": "Model Y",
+    "modelYear": 2020,
+    "engineVariant": "Long range",
+    "bodyType": "SUV"
+  },
+  {
+    "id": "TeslaModelY3",
+    "make": "Tesla",
+    "model": "Model Y",
+    "modelYear": 2020,
+    "engineVariant": "Performance",
+    "bodyType": "SUV"
+  }
+]

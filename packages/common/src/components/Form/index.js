@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormProvider } from './formContext';
 import useForm from './hooks/useForm';
 import Field from './Field';
+import FieldArray from './FieldArray';
 import SubmitButton from './SubmitButton';
 import FormError from './FormError';
 import styles from './index.module.scss';
@@ -59,4 +60,4 @@ Form.defaultProps = {
   onError: undefined,
 };
 
-export { Form, Field, SubmitButton, FormError };
+export { Form, Field, FieldArray, SubmitButton, FormError };

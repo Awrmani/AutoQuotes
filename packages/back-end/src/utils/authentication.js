@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { Strategy: CustomStrategy } = require('passport-custom');
 
 const createToken = ({ userId, audience, customClaimPayload }) => {
   const token = jwt.sign(
@@ -15,38 +14,46 @@ const createToken = ({ userId, audience, customClaimPayload }) => {
     }
   );
 
-  return `Bearer ${token}`;
+  return token;
 };
 
-const strategyFactory = ({ audience }) =>
-  new CustomStrategy((req, callback) => {
+const authenticatorFactory =
+  ({ audience, UserClass }) =>
+  async (req, res, next) => {
     const { authorization } = req.headers ?? {};
     const token = authorization?.replace?.(/^Bearer /, '');
 
-    if (!token) {
-      callback('No token found', false);
-      return;
-    }
+    if (!token) return res.status(401).json({ error: 'No token found' });
 
-    jwt.verify(
-      token,
-      process.env.JWT_SECRET ?? 'secret',
-      {
-        audience,
-        issuer: process.env.DEPLOYMENT_NAME || 'AutoQuotes',
-      },
-      (error, decoded) => {
-        if (error) {
-          callback(error.message, false);
-          return;
+    new Promise((resolve, reject) => {
+      // Converting jwt.verify to a promise interface
+      jwt.verify(
+        token,
+        process.env.JWT_SECRET ?? 'secret',
+        {
+          audience,
+          issuer: process.env.DEPLOYMENT_NAME || 'AutoQuotes',
+        },
+        (error, decoded) => {
+          if (error) {
+            reject(error.message);
+            return;
+          }
+          resolve(decoded);
         }
+      );
+    })
+      // Promises automatically await in a promise chain
+      .then(({ sub }) => new UserClass().loadById(sub))
+      .then(user => {
         // Successfully authenticated.
-        // TODO we may want to look the user up later
-        callback(null, decoded);
-      }
-    );
-  });
+        req.user = user.attributes;
+        next();
+      })
+      .catch(e => {
+        return res.status(401).json({ error: 'User not found' });
+      });
+    return undefined;
+  };
 
-// passport.use('strategy-name');
-
-module.exports = { createToken, strategyFactory };
+module.exports = { authenticatorFactory, createToken };
