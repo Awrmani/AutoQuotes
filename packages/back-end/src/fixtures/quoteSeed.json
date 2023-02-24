@@ -1,0 +1,13 @@
+[
+  {
+    "id": "quoteforqndu",
+    "customerId": "endUser00001",
+    "vehicleTypeId": "TeslaModelS9",
+    "lineItems": [
+      {
+        "serviceTypeId": "TireRotation",
+        "parts": []
+      }
+    ]
+  }
+]

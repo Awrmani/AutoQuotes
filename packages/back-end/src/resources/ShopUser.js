@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
-const UserResourceBase = require('./UserResourceBase');
+const UserResourceBase = require('./abstracts/UserResourceBase');
 
 /**
  * Example usage

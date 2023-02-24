@@ -1,6 +1,8 @@
 const { pick, omit } = require('lodash');
 const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
-const FieldValidationError = require('./FieldValidationError');
+const FieldValidationError = require('../errors/FieldValidationError');
+const NotFoundError = require('../errors/NotFoundError');
+const InvalidSearchCriteriaError = require('../errors/InvalidSearchCriteriaError');
 
 /**
  * This is an abstract class that has to be extended by
@@ -52,7 +54,7 @@ class ResourceBase {
   loadById = async idToGet => {
     const mongooseObj = await this._Model.findById(idToGet).exec();
 
-    if (!mongooseObj) throw new Error('Entity not found');
+    if (!mongooseObj) throw new NotFoundError();
 
     return this._populateWithMongooseObj(mongooseObj);
   };
@@ -67,9 +69,15 @@ class ResourceBase {
       ...rest,
     };
 
-    const mongooseObj = await this._Model.findOne(criteria).exec();
+    let mongooseObj;
 
-    if (!mongooseObj) throw new Error('Entity not found');
+    try {
+      mongooseObj = await this._Model.findOne(criteria).exec();
+    } catch (e) {
+      throw new InvalidSearchCriteriaError();
+    }
+
+    if (!mongooseObj) throw new NotFoundError();
 
     return this._populateWithMongooseObj(mongooseObj);
   };

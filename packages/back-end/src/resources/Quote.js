@@ -3,7 +3,7 @@ const stringValidators = require('@autoquotes/libraries/src/utils/validation/str
 const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
 const arrayValidators = require('@autoquotes/libraries/src/utils/validation/array');
 
-const ResourceBase = require('./ResourceBase');
+const ResourceBase = require('./abstracts/ResourceBase');
 
 /**
  * TODO
@@ -55,10 +55,10 @@ const validatorConfig = {
   customerId: [stringValidators.required],
   vehicleTypeId: [stringValidators.required],
   lineItems: [
-    validatorFactory.arrayOf(
+    validatorFactory.arrayOfValidator(
       validatorFactory.subValidator({
         serviceTypeId: [stringValidators.isStringOrUndefined],
-        partIds: [arrayValidators.arrayOfStrings],
+        parts: [arrayValidators.arrayOfStrings],
       })
     ),
   ],

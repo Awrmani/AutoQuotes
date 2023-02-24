@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { subValidator } = require('@autoquotes/libraries/src/utils/validation');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
-const UserResourceBase = require('./UserResourceBase');
+const UserResourceBase = require('./abstracts/UserResourceBase');
 
 const endUserSchema = new mongoose.Schema(
   {

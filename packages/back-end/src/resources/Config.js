@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ResourceBase = require('./ResourceBase');
+const ResourceBase = require('./abstracts/ResourceBase');
 
 /**
  * This resource is to store basic application config, like

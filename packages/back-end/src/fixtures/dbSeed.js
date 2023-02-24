@@ -14,10 +14,22 @@ const EndUser = require('../resources/EndUser');
 const endUserSeed = require('./endUserSeed.json');
 const ServiceType = require('../resources/ServiceType');
 const serviceTypeSeed = require('./serviceTypeSeed.json');
+const Quote = require('../resources/Quote');
+const quoteSeed = require('./quoteSeed.json');
+const Appointment = require('../resources/Appointment');
+const appointmentSeed = require('./appointmentSeed.json');
 
 const SEED_MAP = {
-  config: { Model: Config.ConfigModel, Resource: Config, seed: configSeed },
-  shop: { Model: Shop.ShopModel, Resource: Shop, seed: shopSeed },
+  config: {
+    Model: Config.ConfigModel,
+    Resource: Config,
+    seed: configSeed,
+  },
+  shop: {
+    Model: Shop.ShopModel,
+    Resource: Shop,
+    seed: shopSeed,
+  },
   shopUser: {
     Model: ShopUser.ShopUserModel,
     Resource: ShopUser,
@@ -28,7 +40,11 @@ const SEED_MAP = {
     Resource: VehicleType,
     seed: vehicleTypeSeed,
   },
-  part: { Model: Part.PartModel, Resource: Part, seed: partSeed },
+  part: {
+    Model: Part.PartModel,
+    Resource: Part,
+    seed: partSeed,
+  },
   endUser: {
     Model: EndUser.EndUserModel,
     Resource: EndUser,
@@ -38,6 +54,16 @@ const SEED_MAP = {
     Model: ServiceType.ServiceTypeModel,
     Resource: ServiceType,
     seed: serviceTypeSeed,
+  },
+  quote: {
+    Model: Quote.QuoteModel,
+    Resource: Quote,
+    seed: quoteSeed,
+  },
+  appointment: {
+    Model: Appointment.AppointmentModel,
+    Resource: Appointment,
+    seed: appointmentSeed,
   },
 };
 

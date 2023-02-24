@@ -6,7 +6,7 @@ const {
   subValidator,
 } = require('@autoquotes/libraries/src/utils/validation');
 
-const ResourceBase = require('./ResourceBase');
+const ResourceBase = require('./abstracts/ResourceBase');
 
 const serviceTypeSchema = new mongoose.Schema(
   {

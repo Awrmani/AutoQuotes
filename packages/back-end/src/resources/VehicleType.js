@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
-const ResourceBase = require('./ResourceBase');
+const ResourceBase = require('./abstracts/ResourceBase');
 
 const vehicleTypeSchema = new mongoose.Schema(
   {

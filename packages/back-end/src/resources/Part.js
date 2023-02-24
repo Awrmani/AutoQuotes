@@ -5,7 +5,7 @@ const {
 } = require('@autoquotes/libraries/src/utils/validation');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
-const ResourceBase = require('./ResourceBase');
+const ResourceBase = require('./abstracts/ResourceBase');
 
 const partSchema = new mongoose.Schema(
   {
