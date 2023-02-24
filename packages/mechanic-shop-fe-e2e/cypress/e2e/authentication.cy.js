@@ -10,7 +10,7 @@ describe('Authentication', () => {
     cy.getByText('Sign In').click(); // submit form
 
     // After a successful login we are landed on the dashboard
-    cy.getByText('Shop dashboard').should('exist');
+    cy.getByTestId('dashboardScreen').should('exist');
   });
 
   it('should allow the user to log out', () => {
