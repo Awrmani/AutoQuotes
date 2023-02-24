@@ -34,6 +34,10 @@ export default combineReducers({
     triggerActionType: actionTypes.SERVICE_DETAILS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+  shopSettings: queryReducer({
+    triggerActionType: actionTypes.SHOP_SETTINGS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -61,3 +65,7 @@ export const getServiceList = state => state.queries.serviceList?.result;
 
 export const getServiceDetailsQuery = state => state.queries.serviceDetails;
 export const getServiceDetails = state => state.queries.serviceDetails?.result;
+
+// Shop settings
+export const getShopSettingsQuery = state => state.queries.shopSettings;
+export const getShopSettings = state => state.queries.shopSettings?.result;

@@ -18,7 +18,7 @@ const validatorFactory = config => data => {
   const errors = Object.keys(config).reduce((acc, fieldName) => {
     const error = validateField({
       validatorArr: config[fieldName],
-      value: data[fieldName],
+      value: data?.[fieldName],
       allValues: data,
     });
 

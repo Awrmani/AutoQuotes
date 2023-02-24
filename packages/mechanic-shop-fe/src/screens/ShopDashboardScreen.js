@@ -5,6 +5,7 @@ import Car from '../components/icons/Car';
 const ShopDashboardScreen = () => {
   return (
     <Box
+      data-testid="dashboardScreen"
       sx={{
         display: 'flex',
         justifyContent: 'center',

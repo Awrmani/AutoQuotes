@@ -11,6 +11,8 @@ export const USER_DETAILS_FETCH = 'USER_DETAILS_FETCH';
 export const SERVICE_LIST_FETCH = 'SERVICE_LIST_FETCH';
 export const SERVICE_DETAILS_FETCH = 'SERVICE_DETAILS_FETCH';
 
+export const SHOP_SETTINGS_FETCH = 'SHOP_SETTINGS_FETCH';
+
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
 export const PART_ADD = 'PART_ADD';
@@ -24,3 +26,5 @@ export const USER_DELETE = 'USER_DELETE';
 export const SERVICE_ADD = 'SERVICE_ADD';
 export const SERVICE_UPDATE = 'SERVICE_UPDATE';
 export const SERVICE_DELETE = 'SERVICE_DELETE';
+
+export const SHOP_SETTINGS_UPDATE = 'SHOP_SETTINGS_UPDATE';
