@@ -25,7 +25,6 @@ import {
   CalendarMonth,
   Settings,
   ManageAccounts,
-  Assessment,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
 import { getCurrentUser } from '../../../reducers/queriesReducer';
@@ -63,17 +62,14 @@ const SideBarInner = () => {
       ],
       adminCategories: [
         {
-          label: 'Configuration',
+          label: 'Settings',
           icon: <Settings />,
+          path: paths.shopSettings(),
         },
         {
           label: 'User Management',
           icon: <ManageAccounts />,
           path: paths.userList(),
-        },
-        {
-          label: 'Report',
-          icon: <Assessment />,
         },
       ],
     }),

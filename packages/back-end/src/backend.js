@@ -28,7 +28,7 @@ const runServer = async () => {
   app.use(compression());
 
   // JSON request body parsing
-  app.use(express.json());
+  app.use(express.json({ limit: '50MB' }));
 
   /**
    * API ROUTES

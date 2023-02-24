@@ -14,10 +14,11 @@ const openingHours = oh => {
   if (typeof oh !== 'object') return 'must be an object';
 
   // Verify if the correct keys are only present
-  if (pull(Object.values(DAYS), ...Object.keys(oh)).length)
-    return `Only the following keys are allowed: ${Object.values(DAYS).join(
+  const extraKeys = pull(Object.keys(oh), ...Object.values(DAYS));
+  if (extraKeys.length)
+    return `Only the following keys are allowed: [${Object.values(DAYS).join(
       ', '
-    )}`;
+    )}] but got [${extraKeys.join(', ')}]`;
 
   // Check each day
   for (const day of Object.keys(oh)) {

@@ -9,10 +9,11 @@ import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/inte
 import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 import * as actionTypes from '../constants/actionTypes';
 import * as mechanicShopApi from '../resources/mechanicShopApi';
-import refreshCurrentUser from './interceptors/refreshCurrentUser';
-import refreshPartList from './interceptors/refreshPartList';
-import refreshUserList from './interceptors/refreshUserList';
-import refreshServiceList from './interceptors/refreshServiceList';
+import refreshCurrentUser from './refreshers/refreshCurrentUser';
+import refreshPartList from './refreshers/refreshPartList';
+import refreshUserList from './refreshers/refreshUserList';
+import refreshServiceList from './refreshers/refreshServiceList';
+import refreshShopSettings from './refreshers/refreshShopSettings';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -103,6 +104,15 @@ export default function* root() {
     takeLatest(actionTypes.SERVICE_DELETE, apiCall, {
       apiFn: mechanicShopApi.deleteService,
       onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Shop settings
+    takeLatest(actionTypes.SHOP_SETTINGS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchShopSettings,
+    }),
+    takeLatest(actionTypes.SHOP_SETTINGS_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateShopSettings,
+      onSuccess: [[refreshShopSettings], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

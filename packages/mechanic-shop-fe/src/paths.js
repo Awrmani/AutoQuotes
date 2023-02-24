@@ -4,6 +4,8 @@ const dashboard = () => ({
   pathname: '/dashboard',
 });
 
+// Part paths
+
 const partList = () => ({
   pathname: '/partList',
 });
@@ -15,6 +17,8 @@ const addPart = () => ({
 const editPart = ({ id = ':id' } = {}) => ({
   pathname: `/editPart/${id}`,
 });
+
+// Service paths
 
 const serviceList = () => ({
   pathname: '/serviceList',
@@ -41,6 +45,11 @@ const editUser = ({ id = ':id' } = {}) => ({
   pathname: `/editUser/'${id}`,
 });
 
+// Shop settings
+const shopSettings = () => ({
+  pathname: '/shopSettings',
+});
+
 const paths = {
   login,
   dashboard,
@@ -53,6 +62,7 @@ const paths = {
   serviceList,
   addService,
   editService,
+  shopSettings,
 };
 
 export default paths;

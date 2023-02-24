@@ -12,6 +12,7 @@ import EditPartScreen from './screens/EditPartScreen';
 import ServiceListScreen from './screens/ServiceListScreen';
 import EditServiceScreen from './screens/EditServiceScreen';
 import AddServiceScreen from './screens/AddServiceScreen';
+import ShopSettingsScreen from './screens/ShopSettingsScreen';
 
 import UserListScreen from './screens/UserListScreen';
 
@@ -40,32 +41,30 @@ const Routes = () => {
             path={paths.partList().pathname}
             element={<PartListScreen />}
           />
-
           <Route path={paths.addPart().pathname} element={<AddPartScreen />} />
-
           <Route
             path={paths.editPart().pathname}
             element={<EditPartScreen />}
           />
-
           <Route
             path={paths.serviceList().pathname}
             element={<ServiceListScreen />}
           />
-
           <Route
             path={paths.addService().pathname}
             element={<AddServiceScreen />}
           />
-
           <Route
             path={paths.editService().pathname}
             element={<EditServiceScreen />}
           />
-
           <Route
             path={paths.userList().pathname}
             element={<UserListScreen />}
+          />
+          <Route
+            path={paths.shopSettings().pathname}
+            element={<ShopSettingsScreen />}
           />
         </Route>
       </Route>

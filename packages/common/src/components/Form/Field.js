@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import formContext from './formContext';
 
 const Field = ({ component: Component, ...props }) => {
@@ -26,7 +27,7 @@ const Field = ({ component: Component, ...props }) => {
 
   return (
     <Component
-      value={values[name]}
+      value={get(values, name)}
       // Only display errors on touched inputs
       error={touched[name] ? errors[name] : undefined}
       onChange={handleChange}

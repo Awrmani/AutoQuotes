@@ -43,6 +43,9 @@ export const fetchServiceList = apiCall(() => ({
 export const fetchServiceDetails = apiCall(({ id }) => ({
   url: `/services/${id}`,
 }));
+export const fetchShopSettings = apiCall(() => ({
+  url: '/shop',
+}));
 
 // =====Form submits & other actions altering backend state======
 export const login = apiCall(({ email, password }) => ({
@@ -171,3 +174,64 @@ export const deleteService = apiCall(({ id }) => ({
   url: `/services/${id}`,
   method: 'DELETE',
 }));
+
+export const updateShopSettings = apiCall(
+  ({
+    name,
+    logo,
+    slogan,
+    email,
+    phone,
+    openingHours,
+    numberOfStalls,
+    returnPolicyUrl,
+    termsAndConditionsUrl,
+    privacyPolicyUrl,
+    address1,
+    address2,
+    zip,
+    city,
+    state,
+    country,
+    ...rest
+  }) => ({
+    url: '/shop',
+    method: 'PATCH',
+    data: {
+      name,
+      ...(logo.isNew && { logo: logo.uri }),
+      slogan,
+      email,
+      phone,
+      openingHours: Object.keys(openingHours).reduce((acc, dayName) => {
+        if (
+          !String(openingHours[dayName].openHour) ||
+          !String(openingHours[dayName].openMinute) ||
+          !String(openingHours[dayName].closeHour) ||
+          !String(openingHours[dayName].closeMinute)
+        )
+          return acc;
+
+        return {
+          ...acc,
+          [dayName]: {
+            openHour: Number(openingHours[dayName].openHour),
+            openMinute: Number(openingHours[dayName].openMinute),
+            closeHour: Number(openingHours[dayName].closeHour),
+            closeMinute: Number(openingHours[dayName].closeMinute),
+          },
+        };
+      }, {}),
+      numberOfStalls,
+      returnPolicyUrl,
+      termsAndConditionsUrl,
+      privacyPolicyUrl,
+      address1,
+      address2,
+      zip,
+      city,
+      state,
+      country,
+    },
+  })
+);
