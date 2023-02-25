@@ -23,13 +23,24 @@ const getStaticFilePath = ({ req, rootPath }) => {
     bundle = 'end-user-fe';
   }
 
+  /**
+   * If there is no . in the pathname, then it's a
+   * react router path, have to serve the main bundle
+   * it will know what screen to show
+   */
+  if (!basename.includes('.'))
+    return path.join(rootPath, 'packages', bundle, 'build', 'index.html');
+
+  /**
+   * pathnamen contains '.' => let's try to serve a static
+   * file (sg. other than index.html)
+   */
   const fileToServe = path.join(
     rootPath,
     'packages',
     bundle,
     'build',
-    pathname,
-    ...(basename.includes('.') ? [] : ['index.html']) // Add index.html at the end if no file was specified
+    pathname
   );
 
   return fileToServe;
