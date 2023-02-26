@@ -26,7 +26,7 @@ const EditUserScreen = () => {
   const { id } = useParams(); // Take the ID out of the browser url
   const dispatch = useDispatch();
 
-  // Hook responsible for loading part details from the BE
+  // Hook responsible for loading user details from the BE
   useEffect(() => {
     dispatch(fetchUserDetails({ id }));
   }, [id, dispatch]);
@@ -44,7 +44,7 @@ const EditUserScreen = () => {
   );
 
   const handleSuccess = useCallback(() => {
-    navigate(paths.partList());
+    navigate(paths.userList());
   }, [navigate]);
 
   // DO not render while data is fetching from the BE

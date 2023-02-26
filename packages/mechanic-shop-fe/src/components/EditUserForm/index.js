@@ -8,7 +8,6 @@ import {
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { Container, Grid, Typography } from '@mui/material';
-import { Password } from '@mui/icons-material';
 
 const roleOptions = [
   {
@@ -46,7 +45,7 @@ const EditUserForm = props => {
             fullWidth
           />
         </Grid>
-        <Grid items xs={12}>
+        <Grid item xs={12}>
           <Field
             required
             component={TextInput}
@@ -58,7 +57,7 @@ const EditUserForm = props => {
         <Grid item xs={12}>
           <Field
             required
-            component={Password}
+            component={TextInput}
             name="password"
             label="Password"
             fullWidth
