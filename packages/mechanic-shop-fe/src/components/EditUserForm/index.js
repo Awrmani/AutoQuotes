@@ -12,11 +12,11 @@ import { Password } from '@mui/icons-material';
 
 const roleOptions = [
   {
-    label: 'admin',
-    value: 'amdin',
+    label: 'Admin',
+    value: 'admin',
   },
   {
-    label: 'employee',
+    label: 'Employee',
     value: 'employee',
   },
 ];
