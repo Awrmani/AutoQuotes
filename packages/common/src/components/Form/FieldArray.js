@@ -115,9 +115,14 @@ const FieldArray = ({ children, name, emptyValue }) => {
   }, [setFieldValue, emptyValue, name]);
 
   return (
-    <div>
+    <div data-testid={`fieldArray-${name}`}>
       {values[name].map((value, index) => (
-        <Card elevation={4} sx={{ marginBottom: 2 }} key={index}>
+        <Card
+          elevation={4}
+          sx={{ marginBottom: 2 }}
+          key={index}
+          data-testid={`fieldArray-${name}[${index}]`}
+        >
           <CardContent>
             <Grid container spacing={2}>
               <Grid item xs={11}>
@@ -132,7 +137,11 @@ const FieldArray = ({ children, name, emptyValue }) => {
                 </FieldArrayLine>
               </Grid>
               <Grid item xs={1}>
-                <IconButton color="warning" onClick={() => removeLine(index)}>
+                <IconButton
+                  color="warning"
+                  onClick={() => removeLine(index)}
+                  data-testid="fieldArray-deleteItem"
+                >
                   <Delete />
                 </IconButton>
               </Grid>
@@ -143,7 +152,11 @@ const FieldArray = ({ children, name, emptyValue }) => {
       <Grid container spacing={2}>
         <Grid item xs={11} />
         <Grid item xs={1}>
-          <IconButton color="success" onClick={addLine}>
+          <IconButton
+            color="success"
+            onClick={addLine}
+            data-testid="fieldArray-addItem"
+          >
             <AddCircleOutline fontSize="large" />
           </IconButton>
         </Grid>

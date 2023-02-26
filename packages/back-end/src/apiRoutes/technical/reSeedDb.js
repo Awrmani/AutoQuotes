@@ -5,7 +5,7 @@ const dbSeed = require('../../fixtures/dbSeed');
  * This endpoint re-seeds the DB (only available in dev/testing)
  */
 module.exports = async (req, res) => {
-  await dbSeed();
+  await dbSeed({ force: true });
 
   return res.json({});
 };
