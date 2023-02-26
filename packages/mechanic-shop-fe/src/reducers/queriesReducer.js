@@ -38,6 +38,16 @@ export default combineReducers({
     triggerActionType: actionTypes.SHOP_SETTINGS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+
+  // Appointment
+  appointmentList: queryReducer({
+    triggerActionType: actionTypes.APPOINTMENT_LIST_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
+  appointmentDetails: queryReducer({
+    triggerActionType: actionTypes.APPOINTMENT_DETAILS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -69,3 +79,13 @@ export const getServiceDetails = state => state.queries.serviceDetails?.result;
 // Shop settings
 export const getShopSettingsQuery = state => state.queries.shopSettings;
 export const getShopSettings = state => state.queries.shopSettings?.result;
+
+// Appointment
+export const getAppointmentListQuery = state => state.queries.appointmentList;
+export const getAppointmentList = state =>
+  state.queries.appointmentList?.result;
+
+export const getAppointmentDetailsQuery = state =>
+  state.queries.appointmentDetails;
+export const getAppointmentDetails = state =>
+  state.queries.appointmentDetails?.result;

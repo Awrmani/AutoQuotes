@@ -50,6 +50,9 @@ const shopSettings = () => ({
   pathname: '/shopSettings',
 });
 
+const appointmentList = () => ({
+  pathname: '/appointmentList',
+});
 const paths = {
   login,
   dashboard,
@@ -63,6 +66,7 @@ const paths = {
   addService,
   editService,
   shopSettings,
+  appointmentList,
 };
 
 export default paths;

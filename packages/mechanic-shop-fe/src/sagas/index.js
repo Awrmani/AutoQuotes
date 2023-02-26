@@ -14,6 +14,7 @@ import refreshPartList from './refreshers/refreshPartList';
 import refreshUserList from './refreshers/refreshUserList';
 import refreshServiceList from './refreshers/refreshServiceList';
 import refreshShopSettings from './refreshers/refreshShopSettings';
+import refreshAppointmentList from './refreshers/refreshAppointment';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -113,6 +114,18 @@ export default function* root() {
     takeLatest(actionTypes.SHOP_SETTINGS_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updateShopSettings,
       onSuccess: [[refreshShopSettings], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Appointment
+    takeLatest(actionTypes.APPOINTMENT_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchAppointmentList,
+    }),
+    takeLatest(actionTypes.APPOINTMENT_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchAppointmentDetails,
+    }),
+    takeLatest(actionTypes.APPOINTMENT_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteAppointment,
+      onSuccess: [[refreshAppointmentList], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

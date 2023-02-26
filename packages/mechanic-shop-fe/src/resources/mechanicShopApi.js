@@ -43,8 +43,18 @@ export const fetchServiceList = apiCall(() => ({
 export const fetchServiceDetails = apiCall(({ id }) => ({
   url: `/services/${id}`,
 }));
+
+// Shop Settings
 export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
+}));
+
+// Services
+export const fetchAppointmentList = apiCall(() => ({
+  url: '/appointments',
+}));
+export const fetchAppointmentDetails = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
 }));
 
 // =====Form submits & other actions altering backend state======
@@ -235,3 +245,8 @@ export const updateShopSettings = apiCall(
     },
   })
 );
+
+export const deleteAppointment = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
+  method: 'DELETE',
+}));
