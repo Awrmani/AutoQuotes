@@ -151,7 +151,7 @@ const ShopSettingsForm = () => {
         </Grid>
         {DAYS.map(({ label, key }) => (
           <Fragment key={key}>
-            <Grid item xs={3}>
+            <Grid item xs={3} data-testid={`openingHours-${key}-openHour`}>
               <Field
                 required
                 component={TextInput}
@@ -160,7 +160,7 @@ const ShopSettingsForm = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} data-testid={`openingHours-${key}-openMinute`}>
               <Field
                 required
                 component={TextInput}
@@ -169,7 +169,7 @@ const ShopSettingsForm = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} data-testid={`openingHours-${key}-closeHour`}>
               <Field
                 required
                 component={TextInput}
@@ -178,7 +178,7 @@ const ShopSettingsForm = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} data-testid={`openingHours-${key}-closeMinute`}>
               <Field
                 required
                 component={TextInput}
