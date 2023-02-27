@@ -38,6 +38,7 @@ const CustomTableHeader = () => {
             onClick={() => navigate(paths.addPart())}
             variant="text"
             startIcon={<Add />}
+            data-testid="addPartButton"
           >
             Create
           </Button>

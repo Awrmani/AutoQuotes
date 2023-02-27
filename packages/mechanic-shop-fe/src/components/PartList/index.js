@@ -66,7 +66,7 @@ const PartList = () => {
             <TableBody>
               {items.map(item => {
                 return (
-                  <TableRow hover key={item.id}>
+                  <TableRow hover key={item.id} data-testid={`part-${item.id}`}>
                     <TableCell component="th" scope="row">
                       {item.name}
                     </TableCell>
@@ -78,7 +78,10 @@ const PartList = () => {
                     </TableCell>
                     <TableCell align="right" style={{ width: 160 }}>
                       <Tooltip title="Delete">
-                        <IconButton onClick={() => handleDeleteClick(item.id)}>
+                        <IconButton
+                          onClick={() => handleDeleteClick(item.id)}
+                          data-testid="deleteButton"
+                        >
                           <Delete />
                         </IconButton>
                       </Tooltip>
@@ -87,6 +90,7 @@ const PartList = () => {
                           onClick={() =>
                             navigate(paths.editPart({ id: item.id }))
                           }
+                          data-testid="editButton"
                         >
                           <Edit />
                         </IconButton>

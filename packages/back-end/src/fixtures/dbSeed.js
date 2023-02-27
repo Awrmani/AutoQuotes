@@ -102,8 +102,8 @@ const getShouldSeed = async () => {
  *
  * @returns {Promise}
  */
-const dbSeed = async () => {
-  if (!(await getShouldSeed())) return;
+const dbSeed = async ({ force } = {}) => {
+  if (!force && !(await getShouldSeed())) return;
 
   /**
    * Seed config
@@ -115,7 +115,8 @@ const dbSeed = async () => {
     const { Model, Resource, seed } = SEED_MAP[collection];
     console.log(`# Seeding ${collection} with ${seed.length} documents #`);
 
-    Model.deleteMany({});
+    // eslint-disable-next-line no-await-in-loop
+    await Model.deleteMany({});
     for (const document of seed) {
       // eslint-disable-next-line no-await-in-loop
       await new Resource(document).save();

@@ -12,6 +12,7 @@ const SideBar = () => {
 
   return (
     <Drawer
+      data-testid="drawer"
       variant="permanent"
       sx={{
         '& .MuiDrawer-paper': {
