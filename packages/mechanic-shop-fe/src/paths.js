@@ -51,8 +51,13 @@ const shopSettings = () => ({
 });
 
 const appointmentList = () => ({
-  pathname: '/appointmentList',
+  pathname: `/appointmentList`,
 });
+
+const appointmentDetails = ({ id = ':id' } = {}) => ({
+  pathname: `/appointmentList/${id}`,
+});
+
 const paths = {
   login,
   dashboard,
@@ -67,6 +72,7 @@ const paths = {
   editService,
   shopSettings,
   appointmentList,
+  appointmentDetails,
 };
 
 export default paths;

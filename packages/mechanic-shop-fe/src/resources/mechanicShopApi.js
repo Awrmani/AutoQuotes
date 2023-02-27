@@ -49,10 +49,12 @@ export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));
 
-// Services
-export const fetchAppointmentList = apiCall(() => ({
+// appointment
+export const fetchAppointmentList = apiCall(({ from, to }) => ({
   url: '/appointments',
+  params: { from, to },
 }));
+
 export const fetchAppointmentDetails = apiCall(({ id }) => ({
   url: `/appointments/${id}`,
 }));
