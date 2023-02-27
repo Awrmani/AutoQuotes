@@ -97,7 +97,7 @@ export default function* root() {
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updateUser,
       onSuccess: [
-        [refreshUserList],
+        [refreshUserList, refreshCurrentUser],
         [successToast('User updated!')],
         apiCall.DISPATCH_SUCCESS,
       ],

@@ -28,6 +28,7 @@ export const fetchPartList = apiCall(() => ({
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
+
 // Users
 export const fetchUserList = apiCall(() => ({
   url: '/users',
@@ -43,6 +44,8 @@ export const fetchServiceList = apiCall(() => ({
 export const fetchServiceDetails = apiCall(({ id }) => ({
   url: `/services/${id}`,
 }));
+
+// Shop settings
 export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));

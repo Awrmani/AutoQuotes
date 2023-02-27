@@ -44,6 +44,7 @@ const CustomTableHeader = () => {
             onClick={() => navigate(paths.addUser())}
             variant="text"
             startIcon={<Add />}
+            data-testid="addUserButton"
           >
             Create
           </Button>

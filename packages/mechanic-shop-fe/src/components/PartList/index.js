@@ -64,41 +64,39 @@ const PartList = () => {
           <Table sx={{ minWidth: 750 }} size={'medium'}>
             <CustomTableHeader rowCount={items.length} />
             <TableBody>
-              {items.map(item => {
-                return (
-                  <TableRow hover key={item.id} data-testid={`part-${item.id}`}>
-                    <TableCell component="th" scope="row">
-                      {item.name}
-                    </TableCell>
-                    <TableCell align="right" style={{ width: 160 }}>
-                      {item.price}
-                    </TableCell>
-                    <TableCell align="right" style={{ width: 160 }}>
-                      {item.amountInStock}
-                    </TableCell>
-                    <TableCell align="right" style={{ width: 160 }}>
-                      <Tooltip title="Delete">
-                        <IconButton
-                          onClick={() => handleDeleteClick(item.id)}
-                          data-testid="deleteButton"
-                        >
-                          <Delete />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Edit">
-                        <IconButton
-                          onClick={() =>
-                            navigate(paths.editPart({ id: item.id }))
-                          }
-                          data-testid="editButton"
-                        >
-                          <Edit />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {items.map(item => (
+                <TableRow hover key={item.id} data-testid={`part-${item.id}`}>
+                  <TableCell component="th" scope="row">
+                    {item.name}
+                  </TableCell>
+                  <TableCell align="right" style={{ width: 160 }}>
+                    {item.price}
+                  </TableCell>
+                  <TableCell align="right" style={{ width: 160 }}>
+                    {item.amountInStock}
+                  </TableCell>
+                  <TableCell align="right" style={{ width: 160 }}>
+                    <Tooltip title="Delete">
+                      <IconButton
+                        onClick={() => handleDeleteClick(item.id)}
+                        data-testid="deleteButton"
+                      >
+                        <Delete />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                      <IconButton
+                        onClick={() =>
+                          navigate(paths.editPart({ id: item.id }))
+                        }
+                        data-testid="editButton"
+                      >
+                        <Edit />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
