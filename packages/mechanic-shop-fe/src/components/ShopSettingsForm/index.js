@@ -192,7 +192,12 @@ const ShopSettingsForm = () => {
         <FormError />
         <Grid item xs={12}></Grid>
         <Grid item xs={12} sm={3}>
-          <SubmitButton fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <SubmitButton
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            data-testid="submitButton"
+          >
             Update
           </SubmitButton>
         </Grid>

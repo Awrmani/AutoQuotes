@@ -46,7 +46,6 @@ describe('User Management', () => {
 
     // Hex version of ID
     cy.getByTestId('user-546573745355736572303032').within(() => {
-      // Pre-accept confirmation dialog
       cy.getByTestId('deleteButton').click();
     });
 
