@@ -1,96 +1,85 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
-
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getAppointmentList } from '../../reducers/queriesReducer';
+import { useSelector } from 'react-redux';
+import {
+  getAppointmentList,
+  getShopSettings,
+} from '../../reducers/queriesReducer';
 import paths from '../../paths';
-import { fetchAppointmentList } from '../../actions';
 
 const localizer = momentLocalizer(moment);
 
-const resourceMap = [
-  { resourceId: 1, resourceTitle: 'Stall 1' },
-  { resourceId: 2, resourceTitle: 'Stall 2' },
-  { resourceId: 3, resourceTitle: 'Stall 3' },
-  { resourceId: 4, resourceTitle: 'Stall 4' },
-];
+class Stall {
+  constructor(stallId) {
+    this.stallId = stallId;
+    this.stallTitle = `Stall ${stallId}`;
+  }
+}
 
-const AppointmentList = () => {
+const AppointmentList = ({ setSelectedDay, selectedDay }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [currentDate, setCurrentDate] = useState(() => {
-    const myDate = new Date();
-    return new Date(myDate.getFullYear(), myDate.getMonth(), myDate.getDate());
-  });
 
-  const [nextDay, setNextDate] = useState(() => {
-    const myDate = new Date();
-    return new Date(
-      myDate.getFullYear(),
-      myDate.getMonth(),
-      myDate.getDate() + 1
-    );
-  });
+  const appointments = useSelector(getAppointmentList);
+  const shopSettings = useSelector(getShopSettings);
 
-  const appointmentList = useSelector(getAppointmentList);
+  const stalls = useMemo(() => {
+    const { numberOfStalls } = shopSettings;
+    const results = [];
+    for (let i = 1; i <= numberOfStalls; i++) {
+      results.push(new Stall(i));
+    }
+    return results;
+  }, [shopSettings]);
 
-  const events = appointmentList.map(a => {
-    const startDate = moment(a.startsAt);
-    return {
-      id: a.customerId,
-      title: a.customerId,
-      start: startDate.toDate(),
-      end: startDate.add(a.duration, 'minutes').toDate(),
-      resourceId: a.stall,
-    };
-  });
+  const schedules = useMemo(
+    () =>
+      appointments.map(a => {
+        const startDate = moment(a.startsAt);
+        return {
+          id: a.customerId,
+          title: a.customerId,
+          start: startDate.toDate(),
+          end: startDate.add(a.duration, 'minutes').toDate(),
+          resourceId: a.stall,
+        };
+      }),
+    [appointments]
+  );
 
-  const onNavigate = curDate => {
-    setCurrentDate(
-      new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate())
-    );
-    setNextDate(
-      new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate() + 1)
-    );
-  };
-
-  const { defaultDate, views } = useMemo(
-    () => ({
-      defaultDate: new Date(),
-      views: ['day', 'work_week'],
-    }),
-    []
+  const onNavigate = useCallback(
+    curDate => {
+      const date = moment(curDate);
+      setSelectedDay(new Date(date.year(), date.month(), date.date()));
+    },
+    [setSelectedDay]
   );
 
   return (
-    <Fragment>
-      <div className="height600">
-        <Calendar
-          defaultDate={defaultDate}
-          defaultView={Views.DAY}
-          events={events}
-          localizer={localizer}
-          resourceIdAccessor="resourceId"
-          resources={resourceMap}
-          resourceTitleAccessor="resourceTitle"
-          step={60}
-          views={views}
-          onSelectEvent={e => navigate(paths.AppointmentDetails({ id: e.id }))}
-          onNavigate={curDate => {
-            onNavigate(curDate);
-          }}
-        />
-      </div>
-    </Fragment>
+    <div className="height600">
+      <Calendar
+        date={selectedDay}
+        defaultView={Views.DAY}
+        events={schedules}
+        localizer={localizer}
+        resourceIdAccessor="stallId"
+        resources={stalls}
+        resourceTitleAccessor="stallTitle"
+        step={30}
+        views={['day']}
+        onSelectEvent={e => navigate(paths.AppointmentDetails({ id: e.id }))}
+        onNavigate={onNavigate}
+      />
+    </div>
   );
 };
 
-// Resource.propTypes = {
-//  localizer: PropTypes.instanceOf(DateLocalizer),
-// };
+AppointmentList.propTypes = {
+  selectedDay: PropTypes.instanceOf(Date),
+  setSelectedDay: PropTypes.func,
+};
 
 export default AppointmentList;
