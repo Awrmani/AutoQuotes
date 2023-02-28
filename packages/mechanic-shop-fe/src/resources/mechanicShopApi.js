@@ -50,6 +50,16 @@ export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));
 
+// appointment
+export const fetchAppointmentList = apiCall(({ from, to }) => ({
+  url: '/appointments',
+  params: { from, to },
+}));
+
+export const fetchAppointmentDetails = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
+}));
+
 // =====Form submits & other actions altering backend state======
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
@@ -238,3 +248,8 @@ export const updateShopSettings = apiCall(
     },
   })
 );
+
+export const deleteAppointment = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
+  method: 'DELETE',
+}));
