@@ -44,6 +44,7 @@ export const fetchServiceDetails = apiCall(({ id }) => ({
   url: `/services/${id}`,
 }));
 
+// Shop settings
 export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));
