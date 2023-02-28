@@ -13,27 +13,20 @@ import paths from '../../paths';
 
 const localizer = momentLocalizer(moment);
 
-class Stall {
-  constructor(stallId) {
-    this.stallId = stallId;
-    this.stallTitle = `Stall ${stallId}`;
-  }
-}
-
 const AppointmentList = ({ setSelectedDay, selectedDay }) => {
   const navigate = useNavigate();
 
   const appointments = useSelector(getAppointmentList);
   const shopSettings = useSelector(getShopSettings);
 
-  const stalls = useMemo(() => {
-    const { numberOfStalls } = shopSettings;
-    const results = [];
-    for (let i = 1; i <= numberOfStalls; i++) {
-      results.push(new Stall(i));
-    }
-    return results;
-  }, [shopSettings]);
+  const stalls = useMemo(
+    () =>
+      new Array(shopSettings.numberOfStalls).fill().map((_, index) => ({
+        stallId: index + 1,
+        stallTitle: `Stall ${index + 1}`,
+      })),
+    [shopSettings]
+  );
 
   const schedules = useMemo(
     () =>

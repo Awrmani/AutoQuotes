@@ -11,8 +11,6 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "5.11.0",
     "@mui/material": "^5.11.5",
-    "date-fns": "^2.29.3",
-    "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
