@@ -40,7 +40,7 @@ const AppointmentList = ({ setSelectedDay, selectedDay }) => {
       appointments.map(a => {
         const startDate = moment(a.startsAt);
         return {
-          id: a.customerId,
+          id: a.id,
           title: a.customerId,
           start: startDate.toDate(),
           end: startDate.add(a.duration, 'minutes').toDate(),
@@ -70,7 +70,7 @@ const AppointmentList = ({ setSelectedDay, selectedDay }) => {
         resourceTitleAccessor="stallTitle"
         step={30}
         views={['day']}
-        onSelectEvent={e => navigate(paths.AppointmentDetails({ id: e.id }))}
+        onSelectEvent={e => navigate(paths.appointmentDetails({ id: e.id }))}
         onNavigate={onNavigate}
       />
     </div>
