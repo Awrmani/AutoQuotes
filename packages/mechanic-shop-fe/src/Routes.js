@@ -17,6 +17,7 @@ import ShopSettingsScreen from './screens/ShopSettingsScreen';
 import UserListScreen from './screens/UserListScreen';
 
 import AppointmentListScreen from './screens/AppointmentListScreen';
+import AppointmentDetailsScreen from './screens/AppointmentDetailsScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -72,6 +73,11 @@ const Routes = () => {
           <Route
             path={paths.appointmentList().pathname}
             element={<AppointmentListScreen />}
+          />
+
+          <Route
+            path={paths.appointmentDetails().pathname}
+            element={<AppointmentDetailsScreen />}
           />
         </Route>
       </Route>
