@@ -6,7 +6,11 @@
     "lineItems": [
       {
         "serviceTypeId": "TireRotation",
-        "parts": []
+        "parts": ["a", "b", "c"]
+      },
+      {
+        "serviceTypeId": "TireRotation",
+        "parts": ["a", "b", "c"]
       }
     ]
   }
