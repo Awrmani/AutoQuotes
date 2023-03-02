@@ -17,12 +17,22 @@ const Routes = () => {
         // Render the layout component around all routes
         element={<EndUserLayout />}
       >
-        {/* Add all Unauthenticated routes here */}
-        <Route path={paths.login().pathname} element={<UserLoginScreen />} />
         <Route
-          path={paths.registration().pathname}
-          element={<UserRegistrationScreen />}
-        />
+          // We only want to show these when the user is *NOT* logged in
+          element={
+            <ProtectedRoute
+              doRedirect={!!token}
+              redirectPath={paths.quotingPage()}
+            />
+          }
+        >
+          {/* Add all Unauthenticated routes here */}
+          <Route path={paths.login().pathname} element={<UserLoginScreen />} />
+          <Route
+            path={paths.registration().pathname}
+            element={<UserRegistrationScreen />}
+          />
+        </Route>
         <Route
           path={paths.quotingPage().pathname}
           element={<EndUserQuotingPageScreen />}
