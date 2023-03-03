@@ -42,7 +42,11 @@ const addUser = () => ({
 });
 
 const editUser = ({ id = ':id' } = {}) => ({
-  pathname: `/editUser/'${id}`,
+  pathname: `/editUser/${id}`,
+});
+
+const userProfile = ({ id = ':id' } = {}) => ({
+  pathname: `/userProfile/${id}`,
 });
 
 // Shop settings
@@ -59,6 +63,7 @@ const paths = {
   userList,
   addUser,
   editUser,
+  userProfile,
   serviceList,
   addService,
   editService,
