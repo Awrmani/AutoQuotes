@@ -10,14 +10,13 @@ const ContactDetails = () => {
       <Stack
         spacing={1}
         sx={{
-          paddingLeft: 2,
+          padding: 1,
           justifyItems: 'left',
         }}
       >
-        <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
           <Typography
             color="primary.main"
-            variant="h6"
             component={'span'}
             sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
           >
@@ -32,6 +31,7 @@ const ContactDetails = () => {
         >
           <Mail sx={{ mr: 1 }} />
           <Typography
+            noWrap
             color="inherit"
             component="a"
             href={'#'}
@@ -75,31 +75,11 @@ const ContactDetails = () => {
             href={'#'}
             underline="none"
             sx={buttonSx}
-            fontSize="medium"
+            fontSize="small"
           >
             A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5
           </Typography>
         </IconButton>
-        <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
-          <Typography
-            variant="body2"
-            component={'span'}
-            color="primary.main"
-            sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
-          >
-            Opening hours
-          </Typography>
-        </Box>
-        <Typography sx={{ ml: 2, my: 0, textAlign: 'left' }}>
-          Weekdays:
-          <Typography variant="subtitle1" component={'span'}>
-            {' hours go here'}
-          </Typography>
-        </Typography>
-        <Typography sx={{ ml: 2, my: 0, textAlign: 'left' }}>
-          Weekends:
-          <Typography component={'span'}>{' hours go here'}</Typography>
-        </Typography>
       </Stack>
     </Box>
   );

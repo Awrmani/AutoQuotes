@@ -7,10 +7,19 @@ const PoweredBy = () => {
       <Stack
         spacing={0}
         sx={{
-          paddingLeft: 2,
+          padding: 1,
           justifyItems: 'left',
         }}
       >
+        <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
+          <Typography
+            component={'span'}
+            color="primary.main"
+            sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
+          >
+            Powered by
+          </Typography>
+        </Box>
         <Typography
           sx={{
             m: 0,

@@ -13,14 +13,13 @@ const TermsServices = () => {
       <Stack
         spacing={1}
         sx={{
-          paddingLeft: 2,
+          padding: 1,
           justifyItems: 'left',
         }}
       >
-        <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
           <Typography
             color="primary.main"
-            variant="h6"
             component={'span'}
             sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
           >
@@ -36,7 +35,7 @@ const TermsServices = () => {
           sx={{ justifyContent: 'left', m: 0, p: 0 }}
         >
           <Shield sx={{ mr: 1 }} />
-          <Typography color="inherit" sx={buttonSx} fontSize="medium">
+          <Typography color="inherit" sx={buttonSx} fontSize="small">
             Privacy Policy
           </Typography>
         </IconButton>
@@ -49,7 +48,7 @@ const TermsServices = () => {
           sx={{ justifyContent: 'left', m: 0, p: 0 }}
         >
           <AssignmentReturn sx={{ mr: 1 }} />
-          <Typography color="inherit" sx={buttonSx} fontSize="medium">
+          <Typography noWrap color="inherit" sx={buttonSx} fontSize="small">
             Return Policy
           </Typography>
         </IconButton>
@@ -62,7 +61,7 @@ const TermsServices = () => {
           sx={{ justifyContent: 'left', m: 0, p: 0 }}
         >
           <Gavel sx={{ mr: 1 }} />
-          <Typography color="inherit" sx={buttonSx} fontSize="medium">
+          <Typography noWrap color="inherit" sx={buttonSx} fontSize="small">
             Terms and Conditions
           </Typography>
         </IconButton>

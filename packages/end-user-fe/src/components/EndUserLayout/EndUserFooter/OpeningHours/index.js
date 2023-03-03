@@ -1,17 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { ContactSupport, RequestQuote } from '@mui/icons-material';
+import { DateRange, Weekend } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
-import { buttonSx } from '../../../../constants/layout';
-import paths from '../../../../paths';
+import React from 'react';
 
-const Navigation = () => {
-  const navigate = useNavigate();
+const OpeningHours = () => {
   return (
     <Box sx={{ mb: 2 }}>
       <Stack
-        spacing={1}
+        spacing={0}
         sx={{
           padding: 1,
           justifyItems: 'left',
@@ -23,32 +18,29 @@ const Navigation = () => {
             color="primary.main"
             sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
           >
-            Navigation
+            Opening Hours
           </Typography>
         </Box>
-
         <IconButton
-          onClick={() => navigate(paths.quotingPage())}
           color="inherit"
           edge="start"
           disableRipple
           sx={{ justifyContent: 'left', m: 0, p: 0 }}
         >
-          <RequestQuote sx={{ mr: 1 }} />
-          <Typography noWrap color="inherit" sx={buttonSx} fontSize="small">
-            Get a quote
+          <DateRange sx={{ mr: 1 }} />
+          <Typography noWrap color="inherit" fontSize="small">
+            Weekdays:
           </Typography>
         </IconButton>
         <IconButton
-          onClick={() => navigate(paths.quotingPage())}
           color="inherit"
           edge="start"
           disableRipple
           sx={{ justifyContent: 'left', m: 0, p: 0 }}
         >
-          <ContactSupport sx={{ mr: 1 }} />
-          <Typography noWrap color="inherit" sx={buttonSx} fontSize="small">
-            About us
+          <Weekend sx={{ mr: 1 }} />
+          <Typography noWrap color="inherit" fontSize="small">
+            Weekends:
           </Typography>
         </IconButton>
       </Stack>
@@ -56,4 +48,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default OpeningHours;
