@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest, call } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
 import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
 import {
@@ -9,6 +9,7 @@ import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/inte
 import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
+import refreshCurrentUser from './refreshers/refreshCurrentUser';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -19,8 +20,9 @@ const apiCall = apiCallSagaFactory({
   errorInterceptors: [logoutErrorInterceptor, errorTranslationInterceptor],
 });
 
-const initApp = () => {
-  // Just a placeholder for now
+// This runs every time the application is starting up
+const initApp = function* () {
+  yield call(refreshCurrentUser);
 };
 
 export default function* root() {
@@ -34,9 +36,19 @@ export default function* root() {
         [earlySetToken],
         [
           // refreshCurrentUser
+          [earlySetToken],
+          [refreshCurrentUser],
+          apiCall.DISPATCH_SUCCESS,
         ],
         apiCall.DISPATCH_SUCCESS,
       ],
+    }),
+    takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
+      apiFn: endUserApi.fetchCurrentUser,
+    }),
+    // Shop settings
+    takeLatest(actionTypes.SHOP_SETTINGS_FETCH, apiCall, {
+      apiFn: endUserApi.fetchShopSettings,
     }),
   ]);
 }
