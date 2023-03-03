@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Stack } from '@mui/material';
 import React from 'react';
 import paths from '../../../../paths';
-import FooterIconButton from '../FooterIconButton';
+import FooterIconButton from '../ItemButton';
 import FooterTitleBox from '../FooterTitleBox';
 
 const TermsServices = () => {

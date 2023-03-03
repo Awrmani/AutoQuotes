@@ -13,7 +13,7 @@ const OpeningHours = () => {
           justifyItems: 'left',
         }}
       >
-        <FooterTitleBox title={'Opening Hours'}></FooterTitleBox>
+        <FooterTitleBox title={'Opening Hours'} />
         <IconButton
           color="inherit"
           edge="start"

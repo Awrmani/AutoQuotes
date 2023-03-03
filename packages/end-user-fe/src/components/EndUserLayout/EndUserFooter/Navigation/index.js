@@ -5,7 +5,7 @@ import { ContactSupport, RequestQuote } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
 
 import paths from '../../../../paths';
-import FooterIconButton from '../FooterIconButton';
+import ItemButton from '../ItemButton';
 import FooterTitleBox from '../FooterTitleBox';
 
 const Navigation = () => {
@@ -32,15 +32,16 @@ const Navigation = () => {
           justifyItems: 'left',
         }}
       >
-        <FooterTitleBox title={'Navigation'}></FooterTitleBox>
+        <FooterTitleBox title={'Navigation'} />
+
         {NavigationElements.map(e => {
           return (
-            <FooterIconButton
+            <ItemButton
               key={e.title}
               title={e.title}
               icon={e.icon}
               onclick={e.onclick}
-            ></FooterIconButton>
+            />
           );
         })}
       </Stack>

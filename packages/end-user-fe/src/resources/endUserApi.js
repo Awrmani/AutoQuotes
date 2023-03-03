@@ -16,3 +16,8 @@ export const login = apiCall(({ email, password }) => ({
     password,
   },
 }));
+
+// Shop settings
+export const fetchShopSettings = apiCall(() => ({
+  url: '/shop',
+}));

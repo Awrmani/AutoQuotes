@@ -1,1 +1,5 @@
 export const LOGIN = 'LOGIN';
+
+export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
+
+export const SHOP_SETTINGS_FETCH = 'SHOP_SETTINGS_FETCH';

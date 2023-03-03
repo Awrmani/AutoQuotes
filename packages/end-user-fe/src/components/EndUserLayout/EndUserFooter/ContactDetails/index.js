@@ -1,9 +1,8 @@
 import { LocationOn, Mail, Phone } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
 import React from 'react';
-
 import FooterTitleBox from '../FooterTitleBox';
-import ContactItem from './ContactItem';
+import ItemLink from '../ItemLink';
 
 const ContactDetails = () => {
   const contactDetailsElements = [
@@ -35,15 +34,15 @@ const ContactDetails = () => {
           justifyItems: 'left',
         }}
       >
-        <FooterTitleBox title={'Contact details'}></FooterTitleBox>
+        <FooterTitleBox title={'Contact details'} />
         {contactDetailsElements.map(e => {
           return (
-            <ContactItem
+            <ItemLink
               key={e.title}
               title={e.title}
               href={e.href}
               icon={e.icon}
-            ></ContactItem>
+            ></ItemLink>
           );
         })}
       </Stack>

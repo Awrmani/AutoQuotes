@@ -12,7 +12,7 @@ const PoweredBy = () => {
           justifyItems: 'left',
         }}
       >
-        <FooterTitleBox title={'Powered by'}></FooterTitleBox>
+        <FooterTitleBox title={'Powered by'} />
         <Typography
           sx={{
             m: 0,

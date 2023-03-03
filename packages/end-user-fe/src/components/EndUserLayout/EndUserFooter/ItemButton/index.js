@@ -1,43 +1,35 @@
 import { IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export const buttonSx = {
+const buttonSx = {
   m: 0,
+  textDecoration: `none`,
   '&:hover': {
     textDecoration: 'underline',
     color: 'primary.main',
   },
 };
-
-const ContactItem = ({ title, icon, href }) => {
+const ItemButton = ({ title, icon, onclick }) => {
   return (
     <IconButton
+      onClick={onclick}
       color="inherit"
       edge="start"
       disableRipple
       sx={{ justifyContent: 'left', m: 0, p: 0 }}
     >
       {icon}
-      <Typography
-        noWrap
-        color="inherit"
-        component="a"
-        href={href}
-        target="_blank"
-        underline="none"
-        sx={buttonSx}
-        fontSize="small"
-      >
+      <Typography noWrap color="inherit" sx={buttonSx} fontSize="small">
         {title}
       </Typography>
     </IconButton>
   );
 };
 
-ContactItem.propTypes = {
+ItemButton.propTypes = {
   title: PropTypes.string,
-  href: PropTypes.string,
   icon: PropTypes.element,
+  onclick: PropTypes.func,
 };
 
-export default ContactItem;
+export default ItemButton;

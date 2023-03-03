@@ -5,6 +5,7 @@ const FooterTitleBox = ({ title }) => {
   return (
     <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
       <Typography
+        noWrap
         component={'span'}
         color="primary.main"
         sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
