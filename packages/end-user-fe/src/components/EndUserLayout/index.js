@@ -7,7 +7,7 @@ import EndUserAppBar from './EndUserAppBar';
 
 const EndUserLayout = () => {
   return (
-    <Stack>
+    <Stack sx={{ mt: 0 }}>
       <EndUserAppBar />
       <Container sx={{ display: 'flex', justifyContent: 'center' }}>
         <Outlet />
@@ -18,7 +18,6 @@ const EndUserLayout = () => {
           width: '100%',
           position: 'fixed',
           bottom: 0,
-          justifySelf: 'center',
         }}
       >
         <Divider sx={{ borderWidth: 1 }} />

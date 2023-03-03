@@ -1,6 +1,7 @@
 import { DateRange, Weekend } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
+import FooterTitleBox from '../FooterTitleBox';
 
 const OpeningHours = () => {
   return (
@@ -12,15 +13,7 @@ const OpeningHours = () => {
           justifyItems: 'left',
         }}
       >
-        <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
-          <Typography
-            component={'span'}
-            color="primary.main"
-            sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
-          >
-            Opening Hours
-          </Typography>
-        </Box>
+        <FooterTitleBox title={'Opening Hours'}></FooterTitleBox>
         <IconButton
           color="inherit"
           edge="start"

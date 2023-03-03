@@ -1,10 +1,31 @@
 import { LocationOn, Mail, Phone } from '@mui/icons-material';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import React from 'react';
 
-import { buttonSx } from '../../../../constants/layout';
+import FooterTitleBox from '../FooterTitleBox';
+import ContactItem from './ContactItem';
 
 const ContactDetails = () => {
+  const contactDetailsElements = [
+    {
+      title: 'autoquotes@gmail.com',
+      href: `mailto:autoquotes@gmail.com`,
+      icon: <Mail sx={{ mr: 1 }} />,
+    },
+    {
+      title: '+1 (234) 457 8910',
+      href: `tel:+1 (234) 457 8910`,
+      icon: <Phone sx={{ mr: 1 }} />,
+    },
+    {
+      title: 'A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5',
+      href: `https://www.google.com/search?q=${encodeURIComponent(
+        'A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5'
+      )}`,
+      icon: <LocationOn sx={{ mr: 1 }} />,
+    },
+  ];
+
   return (
     <Box sx={{ mb: 2 }}>
       <Stack
@@ -14,72 +35,17 @@ const ContactDetails = () => {
           justifyItems: 'left',
         }}
       >
-        <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
-          <Typography
-            color="primary.main"
-            component={'span'}
-            sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
-          >
-            Contact Details
-          </Typography>
-        </Box>
-        <IconButton
-          color="inherit"
-          edge="start"
-          disableRipple
-          sx={{ justifyContent: 'left', m: 0, p: 0 }}
-        >
-          <Mail sx={{ mr: 1 }} />
-          <Typography
-            noWrap
-            color="inherit"
-            component="a"
-            href={'#'}
-            underline="none"
-            sx={buttonSx}
-            fontSize="small"
-          >
-            autoquotes@gmail.com
-          </Typography>
-        </IconButton>
-
-        <IconButton
-          color="inherit"
-          edge="start"
-          disableRipple
-          sx={{ justifyContent: 'left', m: 0, p: 0 }}
-        >
-          <Phone sx={{ mr: 1 }} />
-          <Typography
-            color="inherit"
-            component="a"
-            href={'#'}
-            underline="none"
-            sx={buttonSx}
-            fontSize="small"
-          >
-            {'+1 (234) 457 8910'}
-          </Typography>
-        </IconButton>
-
-        <IconButton
-          color="inherit"
-          edge="start"
-          disableRipple
-          sx={{ justifyContent: 'left', m: 0, p: 0 }}
-        >
-          <LocationOn sx={{ mr: 1 }} />
-          <Typography
-            color="inherit"
-            component="a"
-            href={'#'}
-            underline="none"
-            sx={buttonSx}
-            fontSize="small"
-          >
-            A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5
-          </Typography>
-        </IconButton>
+        <FooterTitleBox title={'Contact details'}></FooterTitleBox>
+        {contactDetailsElements.map(e => {
+          return (
+            <ContactItem
+              key={e.title}
+              title={e.title}
+              href={e.href}
+              icon={e.icon}
+            ></ContactItem>
+          );
+        })}
       </Stack>
     </Box>
   );
