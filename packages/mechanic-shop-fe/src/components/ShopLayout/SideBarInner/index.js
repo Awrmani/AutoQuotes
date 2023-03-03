@@ -35,7 +35,7 @@ const SideBarInner = () => {
   const navigate = useNavigate();
 
   const currentUser = useSelector(getCurrentUser);
-  const { name, role } = currentUser ?? {};
+  const { name, role, id } = currentUser ?? {};
 
   const sideBarProps = useMemo(
     () => ({
@@ -43,6 +43,7 @@ const SideBarInner = () => {
         label: name,
         icon: <AccountCircle />,
         admin: false,
+        path: paths.editUser({ id }),
       },
       categories: [
         {
@@ -59,21 +60,21 @@ const SideBarInner = () => {
           label: 'Appointments',
           icon: <CalendarMonth />,
         },
-      ],
-      adminCategories: [
         {
           label: 'Settings',
           icon: <Settings />,
           path: paths.shopSettings(),
+          adminOnly: true,
         },
         {
           label: 'User Management',
           icon: <ManageAccounts />,
           path: paths.userList(),
+          adminOnly: true,
         },
       ],
     }),
-    [name]
+    [name, id]
   );
 
   const onLogout = useCallback(() => {
@@ -101,7 +102,11 @@ const SideBarInner = () => {
       <Divider />
       <List>
         <ListItem key={sideBarProps.user.label} disablePadding>
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              navigate(sideBarProps.user.path);
+            }}
+          >
             <ListItemIcon>{sideBarProps.user.icon}</ListItemIcon>
             <ListItemText primary={sideBarProps.user.label} />
           </ListItemButton>
@@ -110,40 +115,21 @@ const SideBarInner = () => {
 
       <Divider />
       <List>
-        {sideBarProps.categories.map(({ path, label, icon }) => (
-          <ListItem key={label} disablePadding>
-            <ListItemButton
-              onClick={() => {
-                path && navigate(path);
-              }}
-            >
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={label} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {sideBarProps.categories
+          .filter(({ adminOnly }) => !adminOnly || role === 'admin')
+          .map(({ path, label, icon, adminOnly }) => (
+            <ListItem key={label} disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  path && navigate(path);
+                }}
+              >
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
       </List>
-
-      {role === 'admin' ? (
-        <Box>
-          <Divider />
-          <List>
-            {sideBarProps.adminCategories.map(({ label, path, icon }) => (
-              <ListItem key={label} disablePadding>
-                <ListItemButton
-                  href={sideBarProps.user.path}
-                  onClick={() => {
-                    path && navigate(path);
-                  }}
-                >
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText primary={label} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      ) : null}
 
       <Box
         position={'absolute'}

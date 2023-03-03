@@ -24,16 +24,16 @@ class UserResourceBase extends ResourceBase {
   }
 
   // When updating password make sure to hash it
-  update = toSet => {
+  update(toSet) {
     return super.update({
       ...toSet,
       ...(toSet.password && { password: sha1(toSet.password) }),
     });
-  };
+  }
 
-  validatePassword = password => {
+  validatePassword(password) {
     return this._attributes.password === sha1(password);
-  };
+  }
 
   // Make sure we don't return the user's hashed password
   get attributes() {

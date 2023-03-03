@@ -6,7 +6,10 @@ import { Form } from '@autoquotes/common/src/components/Form';
 import validatorFactory from '@autoquotes/libraries/src/utils/validation';
 import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import EditUserForm from '../components/EditUserForm';
-import { getUserDetailsQuery } from '../reducers/queriesReducer';
+import {
+  getUserDetailsQuery,
+  getCurrentUser,
+} from '../reducers/queriesReducer';
 import { updateUser, fetchUserDetails } from '../actions';
 import paths from '../paths';
 
@@ -14,7 +17,7 @@ const validator = validatorFactory({
   name: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
   phone: [stringValidators.required],
-  password: [stringValidators.required],
+  password: [stringValidators.isString],
   role: [
     stringValidators.required,
     stringValidators.oneOf(['admin', 'employee']),
@@ -25,6 +28,8 @@ const EditUserScreen = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // Take the ID out of the browser url
   const dispatch = useDispatch();
+
+  const currentUser = useSelector(getCurrentUser);
 
   // Hook responsible for loading user details from the BE
   useEffect(() => {
@@ -38,6 +43,7 @@ const EditUserScreen = () => {
   // Create the form initial values, prefill the current details of the entity
   const initialValues = useMemo(
     () => ({
+      password: '', // Have to add this, BE will never send back the PWD in any form
       ...result,
     }),
     [result]
@@ -62,7 +68,7 @@ const EditUserScreen = () => {
       action={updateUser}
       onSuccess={handleSuccess}
     >
-      <EditUserForm edit />
+      <EditUserForm edit selfEdit={currentUser.id === id} />
     </Form>
   );
 };

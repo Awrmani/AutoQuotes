@@ -56,22 +56,24 @@ const EditUserForm = props => {
         </Grid>
         <Grid item xs={12}>
           <Field
-            required
+            required={!props.edit}
             component={TextInput}
             name="password"
             label="Password"
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
-          <Field
-            component={Dropdown}
-            name="role"
-            label="User Role"
-            fullWidth
-            options={roleOptions}
-          />
-        </Grid>
+        {!props.selfEdit && (
+          <Grid item xs={12}>
+            <Field
+              component={Dropdown}
+              name="role"
+              label="User Role"
+              fullWidth
+              options={roleOptions}
+            />
+          </Grid>
+        )}
         <FormError />
         <Grid item xs={12} sm={3}>
           <SubmitButton fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -85,6 +87,7 @@ const EditUserForm = props => {
 
 EditUserForm.propTypes = {
   edit: PropTypes.bool,
+  selfEdit: PropTypes.bool.isRequired,
 };
 
 EditUserForm.defaultProps = {
