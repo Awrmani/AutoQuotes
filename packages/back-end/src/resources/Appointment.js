@@ -49,6 +49,16 @@ class Appointment extends ResourceBase {
   constructor(attributes) {
     super({ Model: AppointmentModel, validatorConfig, attributes });
   }
+
+  // create fake endsAt, make sure startsAt is a Date object
+  get attributes() {
+    const attributes = super.attributes;
+
+    const startsAt = new Date(super.attributes.startsAt);
+    const endsAt = new Date(startsAt.getTime() + attributes.duration * 60_000);
+
+    return { ...attributes, startsAt, endsAt };
+  }
 }
 
 module.exports = Appointment;
