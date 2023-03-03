@@ -18,6 +18,9 @@ import UserListScreen from './screens/UserListScreen';
 import AddUserScreen from './screens/AddUserScreen';
 import EditUserScreen from './screens/EditUserScreen';
 
+import AppointmentListScreen from './screens/AppointmentListScreen';
+import AppointmentDetailsScreen from './screens/AppointmentDetailsScreen';
+
 const Routes = () => {
   // If the user is logged in, they will have a token
   const token = useSelector(getToken);
@@ -72,6 +75,16 @@ const Routes = () => {
           <Route
             path={paths.shopSettings().pathname}
             element={<ShopSettingsScreen />}
+          />
+
+          <Route
+            path={paths.appointmentList().pathname}
+            element={<AppointmentListScreen />}
+          />
+
+          <Route
+            path={paths.appointmentDetails().pathname}
+            element={<AppointmentDetailsScreen />}
           />
         </Route>
       </Route>

@@ -7,6 +7,7 @@ import {
 } from '@autoquotes/libraries/src/saga/interceptors/token';
 import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
 import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
+import successToast from '@autoquotes/libraries/src/saga/successToast';
 import * as actionTypes from '../constants/actionTypes';
 import * as mechanicShopApi from '../resources/mechanicShopApi';
 import refreshCurrentUser from './refreshers/refreshCurrentUser';
@@ -14,6 +15,7 @@ import refreshPartList from './refreshers/refreshPartList';
 import refreshUserList from './refreshers/refreshUserList';
 import refreshServiceList from './refreshers/refreshServiceList';
 import refreshShopSettings from './refreshers/refreshShopSettings';
+import refreshAppointmentList from './refreshers/refreshAppointment';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -55,15 +57,27 @@ export default function* root() {
     }),
     takeLatest(actionTypes.PART_ADD, apiCall, {
       apiFn: mechanicShopApi.addPart,
-      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshPartList],
+        [successToast('Part added!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.PART_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updatePart,
-      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshPartList],
+        [successToast('Part updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.PART_DELETE, apiCall, {
       apiFn: mechanicShopApi.deletePart,
-      onSuccess: [[refreshPartList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshPartList],
+        [successToast('Part deleted!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
 
     // User
@@ -75,15 +89,27 @@ export default function* root() {
     }),
     takeLatest(actionTypes.USER_ADD, apiCall, {
       apiFn: mechanicShopApi.addUser,
-      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshUserList],
+        [successToast('User added!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updateUser,
-      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshUserList, refreshCurrentUser],
+        [successToast('User updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.USER_DELETE, apiCall, {
       apiFn: mechanicShopApi.deleteUser,
-      onSuccess: [[refreshUserList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshUserList],
+        [successToast('User deleted!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
 
     // Service
@@ -95,15 +121,27 @@ export default function* root() {
     }),
     takeLatest(actionTypes.SERVICE_ADD, apiCall, {
       apiFn: mechanicShopApi.addService,
-      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshServiceList],
+        [successToast('Service type added!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.SERVICE_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updateService,
-      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshServiceList],
+        [successToast('Service type updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.SERVICE_DELETE, apiCall, {
       apiFn: mechanicShopApi.deleteService,
-      onSuccess: [[refreshServiceList], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshServiceList],
+        [successToast('Service type deleted!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
 
     // Shop settings
@@ -112,7 +150,23 @@ export default function* root() {
     }),
     takeLatest(actionTypes.SHOP_SETTINGS_UPDATE, apiCall, {
       apiFn: mechanicShopApi.updateShopSettings,
-      onSuccess: [[refreshShopSettings], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [refreshShopSettings],
+        [successToast('Shop settings updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+
+    // Appointment
+    takeLatest(actionTypes.APPOINTMENT_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchAppointmentList,
+    }),
+    takeLatest(actionTypes.APPOINTMENT_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchAppointmentDetails,
+    }),
+    takeLatest(actionTypes.APPOINTMENT_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteAppointment,
+      onSuccess: [[refreshAppointmentList], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

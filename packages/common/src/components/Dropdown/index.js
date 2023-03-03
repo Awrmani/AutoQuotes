@@ -13,7 +13,7 @@ const Dropdown = ({
   label,
   ...rest
 }) => {
-  const [, labelId] = useState(() => uuid());
+  const [labelId] = useState(() => uuid());
 
   const handleChange = useCallback(
     e => {
@@ -36,7 +36,11 @@ const Dropdown = ({
         {...rest}
       >
         {options.map(option => (
-          <MenuItem value={option.value} key={option.value}>
+          <MenuItem
+            value={option.value}
+            key={option.value}
+            data-testid={`select-option-${option.value}`}
+          >
             {option.label}
           </MenuItem>
         ))}

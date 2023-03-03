@@ -59,6 +59,7 @@ const SideBarInner = () => {
         {
           label: 'Appointments',
           icon: <CalendarMonth />,
+          path: paths.appointmentList(),
         },
         {
           label: 'Settings',
