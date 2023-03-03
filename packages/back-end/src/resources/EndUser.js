@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { subValidator } = require('@autoquotes/libraries/src/utils/validation');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
+const booleanValidators = require('@autoquotes/libraries/src/utils/validation/boolean');
 const UserResourceBase = require('./abstracts/UserResourceBase');
 
 const endUserSchema = new mongoose.Schema(
@@ -13,6 +14,7 @@ const endUserSchema = new mongoose.Schema(
     phone: String,
     password: String,
     isVerified: Boolean,
+    verificationCode: String,
     billingInformation: {
       _id: false,
       name: String,
@@ -44,7 +46,10 @@ const EndUserModel = mongoose.model('endUsers', endUserSchema);
 const validatorConfig = {
   name: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
+  phone: [stringValidators.required],
   password: [stringValidators.required],
+  isVerified: [booleanValidators.isBoolean],
+  verificationCode: [stringValidators.required],
   billingInformation: [
     subValidator({
       name: [stringValidators.required],
