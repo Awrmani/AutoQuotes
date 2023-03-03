@@ -49,7 +49,7 @@ const validatorConfig = {
   phone: [stringValidators.required],
   password: [stringValidators.required],
   isVerified: [booleanValidators.isBoolean],
-  verificationCode: [stringValidators.required],
+  verificationCode: [stringValidators.isString],
   billingInformation: [
     subValidator({
       name: [stringValidators.required],

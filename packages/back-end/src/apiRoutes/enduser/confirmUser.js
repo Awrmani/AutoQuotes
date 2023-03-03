@@ -15,7 +15,10 @@ module.exports = async (req, res) => {
   if (enduser.attributes.isVerified)
     return res.status(409).json({ error: 'User already verified' });
 
-  if (enduser.attributes.verificationCode !== verificationCode)
+  if (
+    !verificationCode ||
+    enduser.attributes.verificationCode !== verificationCode
+  )
     return res.status(403).json({ error: 'Incorrect verification code' });
 
   enduser.update({ isVerified: true, verificationCode: '' });
