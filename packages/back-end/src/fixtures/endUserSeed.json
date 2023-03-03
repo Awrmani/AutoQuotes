@@ -6,6 +6,7 @@
     "phone": "+1 (234) 565-5543",
     "password": "secret",
     "isVerified": false,
+    "verificationCode": "88888888-4444-4444-121212121212",
     "billingInformation": {
       "name": "End User1",
       "address1": "567 Front Street",
