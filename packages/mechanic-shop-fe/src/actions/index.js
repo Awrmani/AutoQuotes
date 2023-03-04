@@ -23,6 +23,13 @@ export const fetchAppointmentDetails = createAction(
   actionTypes.APPOINTMENT_DETAILS_FETCH
 );
 
+export const fetchVehicleTypeList = createAction(
+  actionTypes.VEHICLE_TYPE_LIST_FETCH
+);
+export const fetchVehicleTypeDetails = createAction(
+  actionTypes.VEHICLE_TYPE_DETAILS_FETCH
+);
+
 // Form submits & other actions altering backend state
 export const login = createAction(actionTypes.LOGIN);
 export const updateShopSettings = createAction(
@@ -41,3 +48,7 @@ export const updateUser = createAction(actionTypes.USER_UPDATE);
 export const deleteUser = createAction(actionTypes.USER_DELETE);
 
 export const deleteAppointment = createAction(actionTypes.APPOINTMENT_DELETE);
+
+export const addVehicleType = createAction(actionTypes.VEHICLE_TYPE_ADD);
+export const updateVehicleType = createAction(actionTypes.VEHICLE_TYPE_UPDATE);
+export const deleteVehicleType = createAction(actionTypes.VEHICLE_TYPE_DELETE);

@@ -50,12 +50,26 @@ const shopSettings = () => ({
   pathname: '/shopSettings',
 });
 
+// Appointment
 const appointmentList = () => ({
   pathname: `/appointmentList`,
 });
 
 const appointmentDetails = ({ id = ':id' } = {}) => ({
   pathname: `/appointmentList/${id}`,
+});
+
+// Vehicle Types
+const vehicleTypeList = () => ({
+  pathname: `/vehicleTypeList`,
+});
+
+const addVehicleType = () => ({
+  pathname: `/addVehicleType`,
+});
+
+const editVehicleType = ({ id = ':id' } = {}) => ({
+  pathname: `/editVehicleType/${id}`,
 });
 
 const paths = {
@@ -73,6 +87,9 @@ const paths = {
   shopSettings,
   appointmentList,
   appointmentDetails,
+  vehicleTypeList,
+  addVehicleType,
+  editVehicleType,
 };
 
 export default paths;

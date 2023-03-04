@@ -6,33 +6,21 @@ import {
   FormError,
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
-import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { Container, Grid, Typography } from '@mui/material';
 
-const roleOptions = [
-  {
-    label: 'Admin',
-    value: 'admin',
-  },
-  {
-    label: 'Employee',
-    value: 'employee',
-  },
-];
-
-const EditUserForm = props => {
+const EditVehicleTypeForm = props => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
       <Typography variant="h6" gutterBottom>
-        {props.edit ? 'Update User' : 'Create User'}
+        {props.edit ? 'Update Type' : 'Create Type'}
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Field
             required
             component={TextInput}
-            name="name"
-            label="Full Name"
+            name="make"
+            label="Make"
             fullWidth
           />
         </Grid>
@@ -40,8 +28,8 @@ const EditUserForm = props => {
           <Field
             required
             component={TextInput}
-            name="email"
-            label="Email"
+            name="model"
+            label="Model"
             fullWidth
           />
         </Grid>
@@ -49,32 +37,31 @@ const EditUserForm = props => {
           <Field
             required
             component={TextInput}
-            name="phone"
-            label="Phone Number"
+            name="modelYear"
+            label="Model Year"
             fullWidth
           />
         </Grid>
         <Grid item xs={12}>
           <Field
-            required={!props.edit}
+            required
             component={TextInput}
-            name="password"
-            label="Password"
+            name="engineVariant"
+            label="Engine Variant"
             fullWidth
           />
         </Grid>
-        {!props.selfEdit && (
-          <Grid item xs={12}>
-            <Field
-              component={Dropdown}
-              name="role"
-              label="User Role"
-              fullWidth
-              options={roleOptions}
-            />
-          </Grid>
-        )}
+        <Grid item xs={12}>
+          <Field
+            required
+            component={TextInput}
+            name="bodyType"
+            label="Body Type"
+            fullWidth
+          />
+        </Grid>
         <FormError />
+        <Grid item xs={12}></Grid>
         <Grid item xs={12} sm={3}>
           <SubmitButton
             fullWidth
@@ -90,13 +77,12 @@ const EditUserForm = props => {
   );
 };
 
-EditUserForm.propTypes = {
+EditVehicleTypeForm.propTypes = {
   edit: PropTypes.bool,
-  selfEdit: PropTypes.bool.isRequired,
 };
 
-EditUserForm.defaultProps = {
+EditVehicleTypeForm.defaultProps = {
   edit: false,
 };
 
-export default EditUserForm;
+export default EditVehicleTypeForm;

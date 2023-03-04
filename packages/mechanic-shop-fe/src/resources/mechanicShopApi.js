@@ -28,6 +28,12 @@ export const fetchPartList = apiCall(() => ({
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
+export const fetchVehicleTypes = apiCall(() => ({
+  url: '/vehicleTypes',
+}));
+export const fetchvehicleTypeDetails = apiCall(({ id }) => ({
+  url: `/vehicleTypes/${id}`,
+}));
 
 // Users
 export const fetchUserList = apiCall(() => ({
@@ -124,6 +130,38 @@ export const updatePart = apiCall(
 );
 export const deletePart = apiCall(({ id }) => ({
   url: `/parts/${id}`,
+  method: 'DELETE',
+}));
+
+// Vehicle types
+export const addVehicleType = apiCall(
+  ({ make, model, modelYear, engineVariant, bodyType }) => ({
+    url: '/vehicleTypes',
+    method: 'PUT',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
+export const updateVehicleType = apiCall(
+  ({ id, make, model, modelYear, engineVariant, bodyType }) => ({
+    url: `/vehicleTypes/${id}`,
+    method: 'PATCH',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
+export const deleteVehicleType = apiCall(({ id }) => ({
+  url: `/vehicleTypes/${id}`,
   method: 'DELETE',
 }));
 

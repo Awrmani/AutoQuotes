@@ -11,8 +11,13 @@ describe('User Management', () => {
     cy.getByTestId('drawer').within(() => {
       cy.getByText('John Doe').click();
     });
+    cy.findByLabelText('Full Name *').clear().type('Jane Black');
+    cy.getByTestId('submitButton').click();
+    cy.getByText('User updated!').should('exist');
 
-    // Todo implement test of altering current user when feature is done
+    cy.getByTestId('drawer').within(() => {
+      cy.getByText('Jane Black').should('exist');
+    });
   });
 
   it('should add  user', () => {
@@ -20,10 +25,13 @@ describe('User Management', () => {
       cy.getByText('User Management').click();
     });
 
-    // Hex version of ID
     cy.getByTestId('addUserButton').click();
-
-    // Todo implement test of adding user when feature is done
+    cy.findByLabelText('Full Name *').clear().type('Jane Black');
+    cy.findByLabelText('Email *').clear().type('jane@black.com');
+    cy.findByLabelText('Phone Number *').clear().type('+1231231234');
+    cy.findByLabelText('Password *').clear().type('secret');
+    cy.getByTestId('submitButton').click();
+    cy.getByText('User added!').should('exist');
   });
 
   it('should update other user', () => {
@@ -36,7 +44,13 @@ describe('User Management', () => {
       cy.getByTestId('editButton').click();
     });
 
-    // Todo implement test of altering other user when feature is done
+    cy.findByLabelText('Full Name *').clear().type('Jane Black');
+    cy.getByTestId('submitButton').click();
+    cy.getByText('User updated!').should('exist');
+
+    cy.getByTestId('user-546573745355736572303032').within(() => {
+      cy.getByText('Jane Black').should('exist');
+    });
   });
 
   it('should delete other user', () => {

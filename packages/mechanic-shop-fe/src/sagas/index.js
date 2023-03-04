@@ -16,6 +16,7 @@ import refreshUserList from './refreshers/refreshUserList';
 import refreshServiceList from './refreshers/refreshServiceList';
 import refreshShopSettings from './refreshers/refreshShopSettings';
 import refreshAppointmentList from './refreshers/refreshAppointment';
+import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -76,6 +77,38 @@ export default function* root() {
       onSuccess: [
         [refreshPartList],
         [successToast('Part deleted!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+
+    // Vehicle Type
+    takeLatest(actionTypes.VEHICLE_TYPE_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchVehicleTypes,
+    }),
+    takeLatest(actionTypes.VEHICLE_TYPE_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchvehicleTypeDetails,
+    }),
+    takeLatest(actionTypes.VEHICLE_TYPE_ADD, apiCall, {
+      apiFn: mechanicShopApi.addVehicleType,
+      onSuccess: [
+        [refreshVehicleTypeList],
+        [successToast('Vehicle type added!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.VEHICLE_TYPE_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateVehicleType,
+      onSuccess: [
+        [refreshVehicleTypeList],
+        [successToast('Vehicle type updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.VEHICLE_TYPE_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteVehicleType,
+      onSuccess: [
+        [refreshVehicleTypeList],
+        [successToast('Vehicle type deleted!')],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),

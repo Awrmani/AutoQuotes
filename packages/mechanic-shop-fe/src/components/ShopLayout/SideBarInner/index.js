@@ -25,6 +25,7 @@ import {
   CalendarMonth,
   Settings,
   ManageAccounts,
+  DirectionsCar,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
 import { getCurrentUser } from '../../../reducers/queriesReducer';
@@ -46,6 +47,11 @@ const SideBarInner = () => {
         path: paths.editUser({ id }),
       },
       categories: [
+        {
+          label: 'Vehicle types',
+          icon: <DirectionsCar />,
+          path: paths.vehicleTypeList(),
+        },
         {
           label: 'Parts',
           icon: <Inventory />,
