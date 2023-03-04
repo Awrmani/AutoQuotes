@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import {
   AppBar,
   Box,
@@ -25,6 +25,11 @@ import {
 import paths from '../../../paths';
 
 const EndUserAppBar = () => {
+  const currentUser = useSelector(getCurrentUser);
+  const { name } = currentUser ?? {};
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
   const shopDetails = useSelector(getShopSettings);
   const { name: shopName, logo } = shopDetails;
   const dispatch = useDispatch();
@@ -35,13 +40,10 @@ const EndUserAppBar = () => {
     setAnchorElUser(null);
   }, [dispatch]);
 
-  const profileNavigate = useCallback(
-    event => {
-      navigate(paths.login());
-      setAnchorElNav(event.currentTarget);
-    },
-    [navigate]
-  );
+  const profileNavigate = useCallback(() => {
+    navigate(paths.login());
+    handleOpenNavMenu();
+  }, [navigate]);
 
   const pages = useMemo(() => {
     return [
@@ -79,12 +81,6 @@ const EndUserAppBar = () => {
     ],
     [onLogout, profileNavigate]
   );
-
-  const currentUser = useSelector(getCurrentUser);
-  const { name } = currentUser ?? {};
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -197,7 +193,7 @@ const EndUserAppBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             {name ? (
-              <React.Fragment>
+              <Fragment>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt={name} src="#" />
@@ -224,7 +220,7 @@ const EndUserAppBar = () => {
                     </MenuItem>
                   ))}
                 </Menu>
-              </React.Fragment>
+              </Fragment>
             ) : (
               <Tooltip title="Login">
                 <IconButton
