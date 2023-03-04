@@ -1,9 +1,43 @@
 import { DateRange, Weekend } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
-import React from 'react';
+import { useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
 import FooterTitleBox from '../FooterTitleBox';
 
+import { getShopSettings } from '../../../../reducers/queriesReducer';
+
 const OpeningHours = () => {
+  const shopDetails = useSelector(getShopSettings);
+
+  const { openingHours } = shopDetails;
+
+  const weekdays = useMemo(() => {
+    return ` from ${openingHours.monday.openHour}.${
+      openingHours.monday.openMinute === 0
+        ? '00'
+        : `${openingHours.monday.openMinute}`
+    } to ${openingHours.monday.closeHour}.${
+      openingHours.monday.openMinute === 0
+        ? '00'
+        : `${openingHours.monday.closeMinute}`
+    } `;
+  }, [openingHours]);
+
+  const weekends = useMemo(() => {
+    if ('saturday' in openingHours) {
+      return ` from ${openingHours.saturday.openHour}.${
+        openingHours.saturday.openMinute === 0
+          ? '00'
+          : `${openingHours.saturday.openMinute}`
+      } to ${openingHours.saturday.closeHour}.${
+        openingHours.saturday.openMinute === 0
+          ? '00'
+          : `${openingHours.saturday.closeMinute}`
+      } `;
+    }
+    return 'closed';
+  }, [openingHours]);
+
   return (
     <Box sx={{ mb: 2 }}>
       <Stack
@@ -22,7 +56,7 @@ const OpeningHours = () => {
         >
           <DateRange sx={{ mr: 1 }} />
           <Typography noWrap color="inherit" fontSize="small">
-            Weekdays:
+            Weekdays: {weekdays}
           </Typography>
         </IconButton>
         <IconButton
@@ -33,7 +67,7 @@ const OpeningHours = () => {
         >
           <Weekend sx={{ mr: 1 }} />
           <Typography noWrap color="inherit" fontSize="small">
-            Weekends:
+            Weekends: {weekends}
           </Typography>
         </IconButton>
       </Stack>

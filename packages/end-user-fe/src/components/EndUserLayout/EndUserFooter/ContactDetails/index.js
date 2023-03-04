@@ -1,29 +1,41 @@
 import { LocationOn, Mail, Phone } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import FooterTitleBox from '../FooterTitleBox';
 import ItemLink from '../ItemLink';
 
+import { getShopSettings } from '../../../../reducers/queriesReducer';
+
 const ContactDetails = () => {
-  const contactDetailsElements = [
-    {
-      title: 'autoquotes@gmail.com',
-      href: `mailto:autoquotes@gmail.com`,
-      icon: <Mail sx={{ mr: 1 }} />,
-    },
-    {
-      title: '+1 (234) 457 8910',
-      href: `tel:+1 (234) 457 8910`,
-      icon: <Phone sx={{ mr: 1 }} />,
-    },
-    {
-      title: 'A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5',
-      href: `https://www.google.com/search?q=${encodeURIComponent(
-        'A1750 Finch Avenue East Toronto, Ontario, Canada M2J 2X5'
-      )}`,
-      icon: <LocationOn sx={{ mr: 1 }} />,
-    },
-  ];
+  const shopDetails = useSelector(getShopSettings);
+  const { phone, email, address1, address2, zip, city, state, country } =
+    shopDetails;
+
+  const contactDetailsElements = useMemo(() => {
+    const address = `${
+      address2 !== '' ? `${address2},` : ''
+    } ${address1}, ${city}, ${state}, ${country}, ${zip}`;
+    return [
+      {
+        title: `${email}`,
+        href: `mailto:${email}`,
+        icon: <Mail sx={{ mr: 1 }} />,
+      },
+      {
+        title: `${phone}`,
+        href: `tel:${phone}`,
+        icon: <Phone sx={{ mr: 1 }} />,
+      },
+      {
+        title: `${address}`,
+        href: `https://www.google.com/search?q=${encodeURIComponent(
+          `${address}`
+        )}`,
+        icon: <LocationOn sx={{ mr: 1 }} />,
+      },
+    ];
+  }, [phone, email, address1, address2, zip, city, state, country]);
 
   return (
     <Box sx={{ mb: 2 }}>

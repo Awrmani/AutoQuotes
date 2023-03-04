@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   AppBar,
   Box,
@@ -13,14 +13,76 @@ import {
   Avatar,
 } from '@mui/material';
 
-import { CarRepair, Login } from '@mui/icons-material';
+import { Login } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
-
-const pages = ['Get Quote', 'Book Appointment', 'About us'];
-const settings = ['Profile', 'Logout'];
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { removeToken } from '@autoquotes/libraries/src/actions';
+import {
+  getCurrentUser,
+  getShopSettings,
+} from '../../../reducers/queriesReducer';
+import paths from '../../../paths';
 
 const EndUserAppBar = () => {
-  const login = false;
+  const shopDetails = useSelector(getShopSettings);
+  const { name: shopName, logo } = shopDetails;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onLogout = useCallback(() => {
+    dispatch(removeToken());
+    setAnchorElUser(null);
+  }, [dispatch]);
+
+  const profileNavigate = useCallback(
+    event => {
+      navigate(paths.login());
+      setAnchorElNav(event.currentTarget);
+    },
+    [navigate]
+  );
+
+  const pages = useMemo(() => {
+    return [
+      {
+        title: 'Get Quote',
+        onclick: () => {
+          navigate(paths.quotingPage());
+        },
+      },
+      {
+        title: 'Book Appointment',
+        onclick: () => {
+          navigate(paths.appointment());
+        },
+      },
+      {
+        title: 'About us',
+        onclick: () => {
+          navigate(paths.about());
+        },
+      },
+    ];
+  }, [navigate]);
+
+  const UserSettings = useMemo(
+    () => [
+      {
+        title: 'Profile',
+        onclick: profileNavigate,
+      },
+      {
+        title: 'Logout',
+        onclick: onLogout,
+      },
+    ],
+    [onLogout, profileNavigate]
+  );
+
+  const currentUser = useSelector(getCurrentUser);
+  const { name } = currentUser ?? {};
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,7 +105,12 @@ const EndUserAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <CarRepair sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Avatar
+            variant="square"
+            alt={shopName}
+            src={logo}
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -58,7 +125,7 @@ const EndUserAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            SixStars
+            {shopName}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -70,7 +137,6 @@ const EndUserAppBar = () => {
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -87,14 +153,19 @@ const EndUserAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(p => (
+                <MenuItem key={p.title} onClick={p.onclick}>
+                  <Typography textAlign="center">{p.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <CarRepair sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Avatar
+            variant="square"
+            alt={shopName}
+            src={logo}
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -110,31 +181,30 @@ const EndUserAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            SixStars
+            {shopName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(page => (
+            {pages.map(p => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={p.title}
+                onClick={p.onclick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {p.title}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {login ? (
+            {name ? (
               <React.Fragment>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="#" />
+                    <Avatar alt={name} src="#" />
                   </IconButton>
                 </Tooltip>
                 <Menu
                   sx={{ mt: '45px' }}
-                  id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
                     vertical: 'top',
@@ -148,16 +218,21 @@ const EndUserAppBar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map(setting => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                  {UserSettings.map(e => (
+                    <MenuItem key={e.title} onClick={e.onclick}>
+                      <Typography textAlign="center">{e.title}</Typography>
                     </MenuItem>
                   ))}
                 </Menu>
               </React.Fragment>
             ) : (
               <Tooltip title="Login">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton
+                  onClick={() => {
+                    navigate(paths.login());
+                  }}
+                  sx={{ p: 0 }}
+                >
                   <Login
                     fontSize="large"
                     sx={{

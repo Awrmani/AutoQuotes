@@ -19,7 +19,7 @@ const Navigation = () => {
     {
       title: 'About us',
       icon: <ContactSupport sx={{ mr: 1 }} />,
-      onclick: () => navigate(paths.quotingPage()),
+      onclick: () => navigate(paths.about()),
     },
   ];
 

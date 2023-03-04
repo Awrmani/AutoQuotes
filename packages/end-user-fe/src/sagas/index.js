@@ -38,6 +38,7 @@ export default function* root() {
           // refreshCurrentUser
           [earlySetToken],
           [refreshCurrentUser],
+
           apiCall.DISPATCH_SUCCESS,
         ],
         apiCall.DISPATCH_SUCCESS,

@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Stack, Typography } from '@mui/material';
 import React from 'react';
 import FooterTitleBox from '../FooterTitleBox';
 
@@ -9,10 +9,13 @@ const PoweredBy = () => {
         spacing={0}
         sx={{
           padding: 1,
-          justifyItems: 'left',
+          alignItems: 'center',
         }}
       >
         <FooterTitleBox title={'Powered by'} />
+        <Avatar sx={{ my: 2, width: 56, height: 56 }} variant="square">
+          AQ
+        </Avatar>
         <Typography
           sx={{
             m: 0,

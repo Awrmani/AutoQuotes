@@ -1,30 +1,38 @@
 import { AssignmentReturn, Gavel, Shield } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 import { Box, Stack } from '@mui/material';
-import React from 'react';
-import paths from '../../../../paths';
-import FooterIconButton from '../ItemButton';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+
 import FooterTitleBox from '../FooterTitleBox';
 
+import { getShopSettings } from '../../../../reducers/queriesReducer';
+import ItemLink from '../ItemLink';
+
 const TermsServices = () => {
-  const navigate = useNavigate();
-  const termsServicesElements = [
-    {
-      title: 'Privacy Policy',
-      icon: <Shield sx={{ mr: 1 }} />,
-      onclick: () => navigate(paths.quotingPage()),
-    },
-    {
-      title: 'Return Policy',
-      icon: <AssignmentReturn sx={{ mr: 1 }} />,
-      onclick: () => navigate(paths.quotingPage()),
-    },
-    {
-      title: 'Terms and Conditions',
-      icon: <Gavel sx={{ mr: 1 }} />,
-      onclick: () => navigate(paths.quotingPage()),
-    },
-  ];
+  const shopDetails = useSelector(getShopSettings);
+  const { returnPolicyUrl, termsAndConditionsUrl, privacyPolicyUrl } =
+    shopDetails;
+
+  const termsServicesElements = useMemo(() => {
+    return [
+      {
+        title: 'Privacy Policy',
+        icon: <Shield sx={{ mr: 1 }} />,
+        href: privacyPolicyUrl,
+      },
+      {
+        title: 'Return Policy',
+        icon: <AssignmentReturn sx={{ mr: 1 }} />,
+        href: returnPolicyUrl,
+      },
+      {
+        title: 'Terms and Conditions',
+        icon: <Gavel sx={{ mr: 1 }} />,
+        href: termsAndConditionsUrl,
+      },
+    ];
+  }, [returnPolicyUrl, termsAndConditionsUrl, privacyPolicyUrl]);
+
   return (
     <Box sx={{ mb: 2 }}>
       <Stack
@@ -37,12 +45,12 @@ const TermsServices = () => {
         <FooterTitleBox title={'Terms and Services'}></FooterTitleBox>
         {termsServicesElements.map(e => {
           return (
-            <FooterIconButton
+            <ItemLink
               key={e.title}
               title={e.title}
               icon={e.icon}
-              onclick={e.onclick}
-            ></FooterIconButton>
+              href={e.href}
+            ></ItemLink>
           );
         })}
       </Stack>
