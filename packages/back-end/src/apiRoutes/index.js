@@ -48,6 +48,11 @@ router.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || 'unable to process request';
 
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+
   return res.status(status).json({ error: message });
 });
 

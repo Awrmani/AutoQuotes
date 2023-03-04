@@ -42,7 +42,7 @@ const addUser = () => ({
 });
 
 const editUser = ({ id = ':id' } = {}) => ({
-  pathname: `/editUser/'${id}`,
+  pathname: `/editUser/${id}`,
 });
 
 // Shop settings

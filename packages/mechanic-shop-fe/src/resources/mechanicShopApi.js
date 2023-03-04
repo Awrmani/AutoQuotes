@@ -128,16 +128,26 @@ export const deletePart = apiCall(({ id }) => ({
 }));
 
 // Users
-export const addUser = apiCall(({ name, email, phone, role }) => ({
+export const addUser = apiCall(({ name, email, phone, password, role }) => ({
   url: '/users',
   method: 'PUT',
-  data: { name, email, phone, role },
+  data: { name, email, phone, password, role },
 }));
-export const updateUser = apiCall(({ id, name, email, phone, role }) => ({
-  url: `/users/${id}`,
-  method: 'PATCH',
-  data: { name, email, phone, role },
-}));
+
+export const updateUser = apiCall(
+  ({ id, name, email, phone, password, role }) => ({
+    url: `/users/${id}`,
+    method: 'PATCH',
+    data: {
+      name,
+      email,
+      phone,
+      // Only send pwd change request to BE if pwd field is not empty
+      ...(password?.length && { password }),
+      role,
+    },
+  })
+);
 export const deleteUser = apiCall(({ id }) => ({
   url: `/users/${id}`,
   method: 'DELETE',

@@ -35,7 +35,7 @@ const UserList = () => {
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Check
+    setPage(0);
   };
 
   const users = useMemo(() => {
@@ -45,7 +45,6 @@ const UserList = () => {
     return userList.slice(from, to);
   }, [userList, page, rowsPerPage]);
 
-  // TODO Check
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = Math.max(0, rowsPerPage - users.length);
 

@@ -15,6 +15,8 @@ import AddServiceScreen from './screens/AddServiceScreen';
 import ShopSettingsScreen from './screens/ShopSettingsScreen';
 
 import UserListScreen from './screens/UserListScreen';
+import AddUserScreen from './screens/AddUserScreen';
+import EditUserScreen from './screens/EditUserScreen';
 
 import AppointmentListScreen from './screens/AppointmentListScreen';
 import AppointmentDetailsScreen from './screens/AppointmentDetailsScreen';
@@ -64,6 +66,11 @@ const Routes = () => {
           <Route
             path={paths.userList().pathname}
             element={<UserListScreen />}
+          />
+          <Route path={paths.addUser().pathname} element={<AddUserScreen />} />
+          <Route
+            path={paths.editUser().pathname}
+            element={<EditUserScreen />}
           />
           <Route
             path={paths.shopSettings().pathname}

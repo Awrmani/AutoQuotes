@@ -38,32 +38,32 @@ class ResourceBase {
    * This is useful if we want to look up based on something other than
    * id.
    */
-  _populateWithMongooseObj = mongooseObj => {
+  async _populateWithMongooseObj(mongooseObj) {
     // remove __v
     const { __v: v, ...rest } = mongooseObj.toJSON();
     this._attributes = rest;
     this._isSaved = true;
 
     return this;
-  };
+  }
 
   /**
    * This async instance function parses reloads the data from
    * mongoose and stores it in `this`
    */
-  loadById = async idToGet => {
+  async loadById(idToGet) {
     const mongooseObj = await this._Model.findById(idToGet).exec();
 
     if (!mongooseObj) throw new NotFoundError();
 
     return this._populateWithMongooseObj(mongooseObj);
-  };
+  }
 
   /**
    * This async instance fn allows to reload an entity
    * based on custom search criteria
    */
-  loadBy = async ({ id, ...rest } = {}) => {
+  async loadBy({ id, ...rest } = {}) {
     const criteria = {
       ...(id && { _id: id }),
       ...rest,
@@ -80,14 +80,14 @@ class ResourceBase {
     if (!mongooseObj) throw new NotFoundError();
 
     return this._populateWithMongooseObj(mongooseObj);
-  };
+  }
 
   /**
    * This instance function makes sure that the data for
    * the new instance is correct and only data that have
    * been validated is present. Returns sanitized data
    */
-  _validate = rawProps => {
+  _validate(rawProps) {
     const props = pick(rawProps, Object.keys(this._validatorConfig)); // Make sure we validate all incoming props. What's not in the validator gets removed
     const validationResult = validatorFactory(this._validatorConfig)(props); // Run the valitator on the fields
     if (Object.keys(validationResult).length) {
@@ -100,9 +100,9 @@ class ResourceBase {
       ...props,
       ...(rawProps.id && { id: rawProps.id }),
     };
-  };
+  }
 
-  update = toSet => {
+  update(toSet) {
     // merge old attributes with input, and sanitize / verify them
     const sanitized = this._validate({
       ...this._attributes,
@@ -116,9 +116,9 @@ class ResourceBase {
     };
 
     return this;
-  };
+  }
 
-  save = async () => {
+  async save() {
     if (!this._isSaved) {
       const { id, ...attributes } = this._attributes;
       const document = await new this._Model({ _id: id, ...attributes }).save();
@@ -132,14 +132,14 @@ class ResourceBase {
     );
 
     return this._attributes.id;
-  };
+  }
 
-  delete = async () => {
+  async delete() {
     await this._Model.findByIdAndDelete(this._attributes.id);
     this._isSaved = false;
 
     return this._attributes.id;
-  };
+  }
 
   get attributes() {
     return this._attributes;
