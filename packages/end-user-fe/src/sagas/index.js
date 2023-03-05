@@ -41,7 +41,6 @@ export default function* root() {
 
           apiCall.DISPATCH_SUCCESS,
         ],
-        apiCall.DISPATCH_SUCCESS,
       ],
     }),
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
