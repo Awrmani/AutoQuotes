@@ -30,6 +30,10 @@ const apiCall = apiCallSagaFactory({
 // This runs every time the application is starting up
 const initApp = function* () {
   yield call(refreshCurrentUser);
+
+  // Pre loading this for autocomplete suggestions
+  yield call(refreshVehicleTypeList);
+  yield call(refreshPartList);
 };
 
 export default function* root() {
@@ -41,7 +45,7 @@ export default function* root() {
       noInjectToken: true,
       onSuccess: [
         [earlySetToken],
-        [refreshCurrentUser],
+        [refreshCurrentUser, refreshVehicleTypeList, refreshPartList],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),

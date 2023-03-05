@@ -1,42 +1,68 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@mui/material/TextField';
+import { TextField, Autocomplete } from '@mui/material';
 
 const TextInput = ({
   onChange,
+  value,
   error,
   description,
   isSubmitting,
   isRequired,
+  options,
   ...rest
 }) => {
   const handleChange = useCallback(
-    e => {
-      onChange(e.target.value);
+    (e, newValue) => {
+      onChange(newValue ?? e?.target?.value);
     },
     [onChange]
   );
 
+  if (!options)
+    return (
+      <TextField
+        required={isRequired}
+        helperText={error ?? description}
+        error={!!error}
+        disabled={isSubmitting}
+        value={value}
+        onChange={handleChange}
+        variant="standard"
+        {...rest}
+      />
+    );
+
   return (
-    <TextField
-      required={isRequired}
-      helperText={error ?? description}
-      error={!!error}
-      disabled={isSubmitting}
-      onChange={handleChange}
-      variant="standard"
-      {...rest}
+    <Autocomplete
+      inputValue={String(value)}
+      onInputChange={handleChange}
+      freeSolo
+      options={options}
+      renderInput={params => (
+        <TextField
+          {...rest}
+          {...params}
+          variant="standard"
+          required={isRequired}
+          helperText={error ?? description}
+          error={!!error}
+          disabled={isSubmitting}
+        />
+      )}
     />
   );
 };
 
 TextInput.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   error: PropTypes.string,
   description: PropTypes.string,
   isSubmitting: PropTypes.bool,
   isRequired: PropTypes.bool,
+  options: PropTypes.arrayOf(PropTypes.string),
 };
 
 TextInput.defaultProps = {
@@ -44,6 +70,7 @@ TextInput.defaultProps = {
   description: undefined,
   isSubmitting: false,
   isRequired: false,
+  options: undefined,
 };
 
 export default TextInput;
