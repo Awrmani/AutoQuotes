@@ -15,19 +15,18 @@ import {
 } from '@mui/material';
 
 import { Delete, Edit } from '@mui/icons-material';
+import { getVehicleTypeList } from '../../reducers/queriesReducer';
 import CustomTableHeader from './CustomTableHeader';
+import { deleteVehicleType } from '../../actions';
 import paths from '../../paths';
 
-import { deleteUser } from '../../actions';
-import { getUserList } from '../../reducers/queriesReducer';
-
-const UserList = () => {
+const VehicleTypeList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const userList = useSelector(getUserList);
+  const vehicletypeList = useSelector(getVehicleTypeList);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -38,21 +37,21 @@ const UserList = () => {
     setPage(0);
   };
 
-  const users = useMemo(() => {
+  const items = useMemo(() => {
     const from = page * rowsPerPage;
     const to = from + rowsPerPage;
 
-    return userList.slice(from, to);
-  }, [userList, page, rowsPerPage]);
+    return vehicletypeList.slice(from, to);
+  }, [vehicletypeList, page, rowsPerPage]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = Math.max(0, rowsPerPage - users.length);
+  const emptyRows = Math.max(0, rowsPerPage - items.length);
 
   const handleDeleteClick = useCallback(
     id => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Are you sure you want to delete?')) {
-        dispatch(deleteUser({ id }));
+        dispatch(deleteVehicleType({ id }));
       }
     },
     [dispatch]
@@ -63,26 +62,25 @@ const UserList = () => {
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 750 }} size={'medium'}>
-            <CustomTableHeader rowCount={users.length} />
+            <CustomTableHeader rowCount={items.length} />
             <TableBody>
-              {users.map(user => (
-                <TableRow hover key={user.id} data-testid={`user-${user.id}`}>
+              {items.map(item => (
+                <TableRow
+                  hover
+                  key={item.id}
+                  data-testid={`vehicletype-${item.id}`}
+                >
                   <TableCell component="th" scope="row">
-                    {user.name}
+                    {item.make}
                   </TableCell>
-                  <TableCell align="left" style={{ width: 200 }}>
-                    {user.email}
-                  </TableCell>
-                  <TableCell align="left" style={{ width: 160 }}>
-                    {user.phone}
-                  </TableCell>
-                  <TableCell role="right" style={{ width: 160 }}>
-                    {user.role}
-                  </TableCell>
-                  <TableCell align="right" style={{ width: 160 }}>
+                  <TableCell>{item.model}</TableCell>
+                  <TableCell align="center">{item.modelYear}</TableCell>
+                  <TableCell align="center">{item.bodyType}</TableCell>
+                  <TableCell align="center">{item.engineVariant}</TableCell>
+                  <TableCell align="right" style={{ width: 100 }}>
                     <Tooltip title="Delete">
                       <IconButton
-                        onClick={() => handleDeleteClick(user.id)}
+                        onClick={() => handleDeleteClick(item.id)}
                         data-testid="deleteButton"
                       >
                         <Delete />
@@ -91,7 +89,7 @@ const UserList = () => {
                     <Tooltip title="Edit">
                       <IconButton
                         onClick={() =>
-                          navigate(paths.editUser({ id: user.id }))
+                          navigate(paths.editVehicleType({ id: item.id }))
                         }
                         data-testid="editButton"
                       >
@@ -107,7 +105,7 @@ const UserList = () => {
                     height: 73 * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={5} />
+                  <TableCell colSpan={4} />
                 </TableRow>
               )}
             </TableBody>
@@ -116,7 +114,7 @@ const UserList = () => {
         <TablePagination
           rowsPerPageOptions={[10, 25, 50, 100]}
           component="div"
-          count={userList.length}
+          count={vehicletypeList.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -127,4 +125,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default VehicleTypeList;

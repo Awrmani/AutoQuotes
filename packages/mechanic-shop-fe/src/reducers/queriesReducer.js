@@ -48,6 +48,16 @@ export default combineReducers({
     triggerActionType: actionTypes.APPOINTMENT_DETAILS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+
+  // Vehicle type
+  vehicleTypeList: queryReducer({
+    triggerActionType: actionTypes.VEHICLE_TYPE_LIST_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
+  vehicleTypeDetails: queryReducer({
+    triggerActionType: actionTypes.VEHICLE_TYPE_DETAILS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -89,3 +99,13 @@ export const getAppointmentDetailsQuery = state =>
   state.queries.appointmentDetails;
 export const getAppointmentDetails = state =>
   state.queries.appointmentDetails?.result;
+
+// Vehicle Types
+export const getVehicleTypeListQuery = state => state.queries.vehicleTypeList;
+export const getVehicleTypeList = state =>
+  state.queries.vehicleTypeList?.result;
+
+export const getVehicleTypeDetailsQuery = state =>
+  state.queries.vehicleTypeDetails;
+export const getVehicleTypeDetails = state =>
+  state.queries.vehicleTypeDetails?.result;

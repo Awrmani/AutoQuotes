@@ -31,7 +31,7 @@ const Form = ({
   const { handleSubmit } = formikBag;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
       <FormProvider value={formikBag}>{children}</FormProvider>
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <button type="submit" className={styles.impliciteSubmitButton} />

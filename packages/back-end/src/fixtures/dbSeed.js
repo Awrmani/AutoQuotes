@@ -113,7 +113,7 @@ const dbSeed = async ({ force } = {}) => {
   // Using for of, because [].forEach is unable to `await`
   for (const collection of Object.keys(SEED_MAP)) {
     const { Model, Resource, seed } = SEED_MAP[collection];
-    console.log(`# Seeding ${collection} with ${seed.length} documents #`);
+    // console.log(`# Seeding ${collection} with ${seed.length} documents #`);
 
     // eslint-disable-next-line no-await-in-loop
     await Model.deleteMany({});

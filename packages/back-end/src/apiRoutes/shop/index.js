@@ -22,6 +22,11 @@ const serviceDelete = require('./serviceDelete');
 const appointmentGet = require('./appointmentGet');
 const appointmentList = require('./appointmentList');
 const appointmentDelete = require('./appointmentDelete');
+const vehicleTypeCreate = require('./vehicleTypeCreate');
+const vehicleTypeDelete = require('./vehicleTypeDelete');
+const vehicleTypeGet = require('./vehicleTypeGet');
+const vehicleTypeList = require('./vehicleTypeList');
+const vehicleTypeUpdate = require('./vehicleTypeUpdate');
 
 const authenticator = authenticatorFactory({
   audience: 'shop',
@@ -61,5 +66,12 @@ router.delete('/services/:id', authenticator, serviceDelete);
 router.get('/appointments', authenticator, appointmentList);
 router.get('/appointments/:id', authenticator, appointmentGet);
 router.delete('/appointments/:id', authenticator, appointmentDelete);
+
+// Vehicle type
+router.get('/vehicleTypes', authenticator, vehicleTypeList);
+router.get('/vehicleTypes/:id', authenticator, vehicleTypeGet);
+router.put('/vehicleTypes', authenticator, vehicleTypeCreate);
+router.patch('/vehicleTypes/:id', authenticator, vehicleTypeUpdate);
+router.delete('/vehicleTypes/:id', authenticator, vehicleTypeDelete);
 
 module.exports = router;

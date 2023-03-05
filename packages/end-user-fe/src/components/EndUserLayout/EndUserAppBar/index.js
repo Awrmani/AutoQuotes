@@ -26,7 +26,7 @@ import paths from '../../../paths';
 
 const EndUserAppBar = () => {
   const currentUser = useSelector(getCurrentUser);
-  const { name: userName } = currentUser ?? {};
+  const { name } = currentUser ?? {};
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -192,11 +192,11 @@ const EndUserAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {!userName ? (
+            {name ? (
               <Fragment>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={userName} src="#" />
+                    <Avatar alt={name} src="#" />
                   </IconButton>
                 </Tooltip>
                 <Menu

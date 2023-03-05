@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   let userToChange;
   if (id === 'current' || id === req.user.id) {
     // The user wants to update their own information
-    userToChange = await ShopUser.loadById(req.user.id);
+    userToChange = await new ShopUser().loadById(req.user.id);
 
     // Users cannot update their own role
     patchWith = omit(patchWith, ['role']);
