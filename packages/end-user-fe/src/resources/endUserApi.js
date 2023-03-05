@@ -26,3 +26,80 @@ export const fetchCurrentUser = apiCall(() => ({
 export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));
+// Users
+export const fetchUserDetails = apiCall(({ id }) => ({
+  url: `/users/${id}`,
+}));
+
+// =====Form submits & other actions altering backend state======
+
+// Users
+export const registerUser = apiCall(
+  ({
+    name,
+    password,
+    email,
+    phone,
+    address1,
+    address2,
+    zip,
+    city,
+    state,
+    country,
+    ...rest
+  }) => ({
+    url: '/users',
+    method: 'PUT',
+    data: {
+      password,
+      name,
+      email,
+      phone,
+      billingInformation: {
+        name,
+        address1,
+        address2,
+        zip,
+        city,
+        state,
+        country,
+      },
+    },
+  })
+);
+
+export const updateUser = apiCall(
+  ({
+    id,
+    name,
+    password,
+    email,
+    phone,
+    address1,
+    address2,
+    zip,
+    city,
+    state,
+    country,
+    ...rest
+  }) => ({
+    url: `/users/${id}`,
+    method: 'PATCH',
+    data: {
+      name,
+      email,
+      phone,
+      billingInformation: {
+        name,
+        address1,
+        address2,
+        zip,
+        city,
+        state,
+        country,
+      },
+      // Only send pwd change request to BE if pwd field is not empty
+      ...(password?.length && { password }),
+    },
+  })
+);
