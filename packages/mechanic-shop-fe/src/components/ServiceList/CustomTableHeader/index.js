@@ -39,6 +39,7 @@ const CustomTableHeader = () => {
             onClick={() => navigate(paths.addService())}
             variant="text"
             startIcon={<Add />}
+            data-testid="addServiceButton"
           >
             Create
           </Button>

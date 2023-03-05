@@ -1,4 +1,9 @@
 describe('Authentication', () => {
+  beforeEach(() => {
+    // Reset BE to initial state before each test
+    cy.reSeedDb();
+  });
+
   it('should allow the user to log in', () => {
     cy.visit('/');
     cy.getByText('Sign in to Mechanic shop').should('exist');

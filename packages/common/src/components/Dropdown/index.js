@@ -8,12 +8,11 @@ const Dropdown = ({
   error,
   description,
   isSubmitting,
-  isRequired,
   options,
   label,
   ...rest
 }) => {
-  const [, labelId] = useState(() => uuid());
+  const [labelId] = useState(() => uuid());
 
   const handleChange = useCallback(
     e => {
@@ -26,7 +25,6 @@ const Dropdown = ({
     <FormControl fullWidth variant="standard">
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
-        required={isRequired}
         labelId={labelId}
         helperText={error ?? description}
         error={!!error}
@@ -36,7 +34,11 @@ const Dropdown = ({
         {...rest}
       >
         {options.map(option => (
-          <MenuItem value={option.value} key={option.value}>
+          <MenuItem
+            value={option.value}
+            key={option.value}
+            data-testid={`select-option-${option.value}`}
+          >
             {option.label}
           </MenuItem>
         ))}
@@ -51,7 +53,6 @@ Dropdown.propTypes = {
   error: PropTypes.string,
   description: PropTypes.string,
   isSubmitting: PropTypes.bool,
-  isRequired: PropTypes.bool,
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -65,7 +66,6 @@ Dropdown.defaultProps = {
   error: undefined,
   description: undefined,
   isSubmitting: false,
-  isRequired: false,
 };
 
 export default Dropdown;

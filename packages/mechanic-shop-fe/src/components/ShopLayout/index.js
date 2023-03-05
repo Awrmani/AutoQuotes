@@ -7,7 +7,7 @@ import SideBar from './SideBar';
 const ShopLayout = () => {
   return (
     <>
-      <SideBar data-testid="drawer" />
+      <SideBar />
       <Box
         sx={{
           ml: `${DRAWER_WIDTH}px`,

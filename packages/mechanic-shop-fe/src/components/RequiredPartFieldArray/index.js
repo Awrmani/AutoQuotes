@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Field, FieldArray } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { Grid } from '@mui/material';
+import { getPartList } from '../../reducers/queriesReducer';
 
 const empty = {
   name: '',
@@ -17,6 +19,18 @@ const empty = {
  */
 
 const RequiredPartFieldArray = () => {
+  const partList = useSelector(getPartList);
+
+  const partOptions = useMemo(() => {
+    const s = new Set();
+    // Deduplicate
+    partList?.forEach(({ name }) => {
+      s.add(name);
+    });
+
+    return Array.from(s);
+  }, [partList]);
+
   return (
     <FieldArray name="requiredParts" emptyValue={empty}>
       <Grid container>
@@ -27,6 +41,7 @@ const RequiredPartFieldArray = () => {
             name="name"
             label="Part name"
             fullWidth
+            options={partOptions}
           />
         </Grid>
       </Grid>

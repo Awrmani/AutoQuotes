@@ -13,8 +13,14 @@ import ServiceListScreen from './screens/ServiceListScreen';
 import EditServiceScreen from './screens/EditServiceScreen';
 import AddServiceScreen from './screens/AddServiceScreen';
 import ShopSettingsScreen from './screens/ShopSettingsScreen';
-
 import UserListScreen from './screens/UserListScreen';
+import AddUserScreen from './screens/AddUserScreen';
+import EditUserScreen from './screens/EditUserScreen';
+import AppointmentListScreen from './screens/AppointmentListScreen';
+import AppointmentDetailsScreen from './screens/AppointmentDetailsScreen';
+import VehicleTypeListScreen from './screens/VehicleTypeListScreen';
+import AddVehicleTypeScreen from './screens/AddVehicleTypeScreen';
+import EditVehicleTypeScreen from './screens/EditVehicleTypeScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -62,9 +68,37 @@ const Routes = () => {
             path={paths.userList().pathname}
             element={<UserListScreen />}
           />
+          <Route path={paths.addUser().pathname} element={<AddUserScreen />} />
+          <Route
+            path={paths.editUser().pathname}
+            element={<EditUserScreen />}
+          />
           <Route
             path={paths.shopSettings().pathname}
             element={<ShopSettingsScreen />}
+          />
+
+          <Route
+            path={paths.appointmentList().pathname}
+            element={<AppointmentListScreen />}
+          />
+
+          <Route
+            path={paths.appointmentDetails().pathname}
+            element={<AppointmentDetailsScreen />}
+          />
+
+          <Route
+            path={paths.vehicleTypeList().pathname}
+            element={<VehicleTypeListScreen />}
+          />
+          <Route
+            path={paths.addVehicleType().pathname}
+            element={<AddVehicleTypeScreen />}
+          />
+          <Route
+            path={paths.editVehicleType().pathname}
+            element={<EditVehicleTypeScreen />}
           />
         </Route>
       </Route>

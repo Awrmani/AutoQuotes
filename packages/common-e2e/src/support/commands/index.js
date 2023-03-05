@@ -3,6 +3,7 @@ import 'cypress-wait-until';
 import './domGetters';
 import './networkRequest';
 import './programmaticalLogin';
+import './reSeed';
 
 // ***********************************************
 // This example commands.js shows you how to

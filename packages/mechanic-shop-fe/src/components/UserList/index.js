@@ -35,7 +35,7 @@ const UserList = () => {
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Check
+    setPage(0);
   };
 
   const users = useMemo(() => {
@@ -45,7 +45,6 @@ const UserList = () => {
     return userList.slice(from, to);
   }, [userList, page, rowsPerPage]);
 
-  // TODO Check
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = Math.max(0, rowsPerPage - users.length);
 
@@ -66,40 +65,42 @@ const UserList = () => {
           <Table sx={{ minWidth: 750 }} size={'medium'}>
             <CustomTableHeader rowCount={users.length} />
             <TableBody>
-              {users.map(user => {
-                return (
-                  <TableRow hover key={user.id}>
-                    <TableCell component="th" scope="row">
-                      {user.name}
-                    </TableCell>
-                    <TableCell align="left" style={{ width: 200 }}>
-                      {user.email}
-                    </TableCell>
-                    <TableCell align="left" style={{ width: 160 }}>
-                      {user.phone}
-                    </TableCell>
-                    <TableCell role="right" style={{ width: 160 }}>
-                      {user.role}
-                    </TableCell>
-                    <TableCell align="right" style={{ width: 160 }}>
-                      <Tooltip title="Delete">
-                        <IconButton onClick={() => handleDeleteClick(user.id)}>
-                          <Delete />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Edit">
-                        <IconButton
-                          onClick={() =>
-                            navigate(paths.editPart({ id: user.id }))
-                          }
-                        >
-                          <Edit />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {users.map(user => (
+                <TableRow hover key={user.id} data-testid={`user-${user.id}`}>
+                  <TableCell component="th" scope="row">
+                    {user.name}
+                  </TableCell>
+                  <TableCell align="left" style={{ width: 200 }}>
+                    {user.email}
+                  </TableCell>
+                  <TableCell align="left" style={{ width: 160 }}>
+                    {user.phone}
+                  </TableCell>
+                  <TableCell role="right" style={{ width: 160 }}>
+                    {user.role}
+                  </TableCell>
+                  <TableCell align="right" style={{ width: 160 }}>
+                    <Tooltip title="Delete">
+                      <IconButton
+                        onClick={() => handleDeleteClick(user.id)}
+                        data-testid="deleteButton"
+                      >
+                        <Delete />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                      <IconButton
+                        onClick={() =>
+                          navigate(paths.editUser({ id: user.id }))
+                        }
+                        data-testid="editButton"
+                      >
+                        <Edit />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
               {emptyRows > 0 && (
                 <TableRow
                   style={{

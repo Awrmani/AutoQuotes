@@ -28,6 +28,13 @@ export const fetchPartList = apiCall(() => ({
 export const fetchPartDetails = apiCall(({ id }) => ({
   url: `/parts/${id}`,
 }));
+export const fetchVehicleTypes = apiCall(() => ({
+  url: '/vehicleTypes',
+}));
+export const fetchvehicleTypeDetails = apiCall(({ id }) => ({
+  url: `/vehicleTypes/${id}`,
+}));
+
 // Users
 export const fetchUserList = apiCall(() => ({
   url: '/users',
@@ -43,8 +50,20 @@ export const fetchServiceList = apiCall(() => ({
 export const fetchServiceDetails = apiCall(({ id }) => ({
   url: `/services/${id}`,
 }));
+
+// Shop settings
 export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
+}));
+
+// appointment
+export const fetchAppointmentList = apiCall(({ from, to }) => ({
+  url: '/appointments',
+  params: { from, to },
+}));
+
+export const fetchAppointmentDetails = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
 }));
 
 // =====Form submits & other actions altering backend state======
@@ -114,17 +133,59 @@ export const deletePart = apiCall(({ id }) => ({
   method: 'DELETE',
 }));
 
+// Vehicle types
+export const addVehicleType = apiCall(
+  ({ make, model, modelYear, engineVariant, bodyType }) => ({
+    url: '/vehicleTypes',
+    method: 'PUT',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
+export const updateVehicleType = apiCall(
+  ({ id, make, model, modelYear, engineVariant, bodyType }) => ({
+    url: `/vehicleTypes/${id}`,
+    method: 'PATCH',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
+export const deleteVehicleType = apiCall(({ id }) => ({
+  url: `/vehicleTypes/${id}`,
+  method: 'DELETE',
+}));
+
 // Users
-export const addUser = apiCall(({ name, email, phone, role }) => ({
+export const addUser = apiCall(({ name, email, phone, password, role }) => ({
   url: '/users',
   method: 'PUT',
-  data: { name, email, phone, role },
+  data: { name, email, phone, password, role },
 }));
-export const updateUser = apiCall(({ id, name, email, phone, role }) => ({
-  url: `/users/${id}`,
-  method: 'PATCH',
-  data: { name, email, phone, role },
-}));
+
+export const updateUser = apiCall(
+  ({ id, name, email, phone, password, role }) => ({
+    url: `/users/${id}`,
+    method: 'PATCH',
+    data: {
+      name,
+      email,
+      phone,
+      // Only send pwd change request to BE if pwd field is not empty
+      ...(password?.length && { password }),
+      role,
+    },
+  })
+);
 export const deleteUser = apiCall(({ id }) => ({
   url: `/users/${id}`,
   method: 'DELETE',
@@ -235,3 +296,8 @@ export const updateShopSettings = apiCall(
     },
   })
 );
+
+export const deleteAppointment = apiCall(({ id }) => ({
+  url: `/appointments/${id}`,
+  method: 'DELETE',
+}));

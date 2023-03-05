@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Provider as StoreProvider } from 'react-redux';
 import { set } from 'lodash';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import buildStore from '@autoquotes/libraries/src/utils/buildStore';
 import MuiThemeProvider from '@autoquotes/common/src/components/MuiThemeProvider';
 import rootReducer from './reducers';
@@ -29,11 +31,14 @@ const App = () => {
   if (!store) return null;
 
   return (
-    <StoreProvider store={store}>
-      <MuiThemeProvider>
-        <div>Third party FE</div>
-      </MuiThemeProvider>
-    </StoreProvider>
+    <>
+      <ToastContainer />
+      <StoreProvider store={store}>
+        <MuiThemeProvider>
+          <div>Third party FE</div>
+        </MuiThemeProvider>
+      </StoreProvider>
+    </>
   );
 };
 
