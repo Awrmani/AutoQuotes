@@ -16,3 +16,13 @@ export const login = apiCall(({ email, password }) => ({
     password,
   },
 }));
+
+// =================== Data fetching ============================
+export const fetchCurrentUser = apiCall(() => ({
+  url: '/users/current',
+}));
+
+// Shop settings
+export const fetchShopSettings = apiCall(() => ({
+  url: '/shop',
+}));
