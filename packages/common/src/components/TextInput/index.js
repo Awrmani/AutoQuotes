@@ -8,7 +8,6 @@ const TextInput = ({
   error,
   description,
   isSubmitting,
-  isRequired,
   options,
   ...rest
 }) => {
@@ -22,7 +21,6 @@ const TextInput = ({
   if (!options)
     return (
       <TextField
-        required={isRequired}
         helperText={error ?? description}
         error={!!error}
         disabled={isSubmitting}
@@ -44,7 +42,6 @@ const TextInput = ({
           {...rest}
           {...params}
           variant="standard"
-          required={isRequired}
           helperText={error ?? description}
           error={!!error}
           disabled={isSubmitting}
@@ -61,7 +58,6 @@ TextInput.propTypes = {
   error: PropTypes.string,
   description: PropTypes.string,
   isSubmitting: PropTypes.bool,
-  isRequired: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -69,7 +65,6 @@ TextInput.defaultProps = {
   error: undefined,
   description: undefined,
   isSubmitting: false,
-  isRequired: false,
   options: undefined,
 };
 

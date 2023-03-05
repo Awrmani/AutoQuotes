@@ -8,7 +8,6 @@ const Dropdown = ({
   error,
   description,
   isSubmitting,
-  isRequired,
   options,
   label,
   ...rest
@@ -26,7 +25,6 @@ const Dropdown = ({
     <FormControl fullWidth variant="standard">
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
-        required={isRequired}
         labelId={labelId}
         helperText={error ?? description}
         error={!!error}
@@ -55,7 +53,6 @@ Dropdown.propTypes = {
   error: PropTypes.string,
   description: PropTypes.string,
   isSubmitting: PropTypes.bool,
-  isRequired: PropTypes.bool,
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -69,7 +66,6 @@ Dropdown.defaultProps = {
   error: undefined,
   description: undefined,
   isSubmitting: false,
-  isRequired: false,
 };
 
 export default Dropdown;
