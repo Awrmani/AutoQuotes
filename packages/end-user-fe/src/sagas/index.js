@@ -35,13 +35,8 @@ export default function* root() {
       noInjectToken: true,
       onSuccess: [
         [earlySetToken],
-        [
-          // refreshCurrentUser
-          [earlySetToken],
-          [refreshCurrentUser],
-
-          apiCall.DISPATCH_SUCCESS,
-        ],
+        [refreshCurrentUser],
+        apiCall.DISPATCH_SUCCESS,
       ],
     }),
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
@@ -57,11 +52,17 @@ export default function* root() {
     }),
     takeLatest(actionTypes.USER_REGISTER, apiCall, {
       apiFn: endUserApi.registerUser,
-      onSuccess: [[successToast('User added!')], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [successToast('Successfully created!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: endUserApi.updateUser,
-      onSuccess: [[successToast('User updated!')], apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [successToast('Successfully updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }
