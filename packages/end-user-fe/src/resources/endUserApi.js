@@ -27,8 +27,8 @@ export const fetchShopSettings = apiCall(() => ({
   url: '/shop',
 }));
 // Users
-export const fetchUserDetails = apiCall(({ id }) => ({
-  url: `/users/${id}`,
+export const fetchUserDetails = apiCall(() => ({
+  url: `/users/current`,
 }));
 
 // =====Form submits & other actions altering backend state======
