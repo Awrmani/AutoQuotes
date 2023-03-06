@@ -35,16 +35,28 @@ const EndUserLayout = () => {
     );
 
   return (
-    <Stack sx={{ mt: 0 }}>
-      <EndUserAppBar />
-      <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Stack sx={{ mt: 0, minHeight: '100vh' }}>
+      <Box sx={{ minHeight: '5vh' }}>
+        <EndUserAppBar />
+      </Box>
+
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mt: 1,
+          minHeight: '75vh',
+        }}
+      >
         <Outlet />
       </Container>
 
       <Box
         sx={{
+          mt: 3,
+          minHeight: '20vh',
           width: '100%',
-          position: 'fixed',
+          position: 'static',
           bottom: 0,
         }}
       >
