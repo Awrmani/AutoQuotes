@@ -12,6 +12,11 @@ export default combineReducers({
     triggerActionType: actionTypes.SHOP_SETTINGS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+  // Users
+  userDetails: queryReducer({
+    triggerActionType: actionTypes.USER_DETAILS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -24,3 +29,7 @@ export const getCurrentUser = state => state.queries.currentUser?.result;
 // Shop settings
 export const getShopSettingsQuery = state => state.queries.shopSettings;
 export const getShopSettings = state => state.queries.shopSettings?.result;
+
+// Users
+export const getUserDetailsQuery = state => state.queries.userDetails;
+export const getUserDetails = state => state.queries.userDetails?.result;
