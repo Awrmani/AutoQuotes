@@ -46,7 +46,6 @@ export const registerUser = apiCall(
     city,
     state,
     country,
-    ...rest
   }) => ({
     url: '/users',
     method: 'PUT',
