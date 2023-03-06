@@ -35,13 +35,8 @@ export default function* root() {
       noInjectToken: true,
       onSuccess: [
         [earlySetToken],
-        [
-          // refreshCurrentUser
-          [earlySetToken],
-          [refreshCurrentUser],
-
-          apiCall.DISPATCH_SUCCESS,
-        ],
+        [refreshCurrentUser],
+        apiCall.DISPATCH_SUCCESS,
       ],
     }),
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
