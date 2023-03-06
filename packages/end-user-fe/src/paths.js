@@ -2,8 +2,8 @@ const login = () => ({ pathname: '/login' });
 
 const registration = () => ({ pathname: '/registration' });
 
-const profile = ({ id = ':id' } = {}) => ({
-  pathname: `/profile/${id}`,
+const profile = () => ({
+  pathname: `/profile`,
 });
 
 const quotingPage = () => ({

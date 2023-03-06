@@ -75,7 +75,7 @@ const EndUserLogin = () => {
                 navigate(paths.registration());
               }}
               sx={{
-                '&:hover': { cursor: 'pointer' },
+                cursor: 'pointer',
               }}
               variant="body2"
             >
@@ -86,7 +86,7 @@ const EndUserLogin = () => {
                 navigate(paths.registration());
               }}
               sx={{
-                '&:hover': { cursor: 'pointer' },
+                cursor: 'pointer',
               }}
               variant="body2"
             >
