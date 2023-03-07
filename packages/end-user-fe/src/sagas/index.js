@@ -53,14 +53,14 @@ export default function* root() {
     takeLatest(actionTypes.USER_REGISTER, apiCall, {
       apiFn: endUserApi.registerUser,
       onSuccess: [
-        [successToast('Successfully created')],
+        [successToast('Successfully created!')],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: endUserApi.updateUser,
       onSuccess: [
-        [successToast('Successfully updated')],
+        [successToast('Successfully updated!')],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
