@@ -26,7 +26,10 @@ const validator = validatorFactory({
   email: [stringValidators.required, stringValidators.email],
   phone: [stringValidators.required],
   password: [stringValidators.required],
-  passwordConfirm: [stringValidators.required],
+  passwordConfirm: [
+    stringValidators.required,
+    stringValidators.verifyInput('password'),
+  ],
   address1: [stringValidators.required],
   address2: [stringValidators.isString],
   zip: [stringValidators.required],

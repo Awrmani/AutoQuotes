@@ -23,8 +23,11 @@ import {
   getShopSettings,
 } from '../../../reducers/queriesReducer';
 import paths from '../../../paths';
+import { fetchShopSettings } from '../../../actions';
 
 const EndUserAppBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentUser = useSelector(getCurrentUser);
   const { name: username } = currentUser ?? {};
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -32,17 +35,16 @@ const EndUserAppBar = () => {
 
   const shopDetails = useSelector(getShopSettings);
   const { name: shopName, logo } = shopDetails;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
-    setAnchorElUser(null);
+    dispatch(fetchShopSettings());
+    handleCloseUserMenu();
   }, [dispatch]);
 
   const profileNavigate = useCallback(() => {
-    navigate(paths.login());
-    handleOpenNavMenu();
+    navigate(paths.profile());
+    handleCloseUserMenu();
   }, [navigate]);
 
   const pages = useMemo(() => {
