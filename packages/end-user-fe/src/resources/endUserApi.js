@@ -80,7 +80,6 @@ export const updateUser = apiCall(
     city,
     state,
     country,
-    ...rest
   }) => ({
     url: `/users/${id}`,
     method: 'PATCH',
