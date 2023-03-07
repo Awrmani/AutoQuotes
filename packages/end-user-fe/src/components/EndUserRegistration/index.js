@@ -199,7 +199,7 @@ const EndUserRegistration = props => {
                 navigate(paths.login());
               }}
               sx={{
-                '&:hover': { cursor: 'pointer' },
+                cursor: 'pointer',
               }}
               variant="body2"
             >
