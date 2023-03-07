@@ -69,7 +69,6 @@ export const registerUser = apiCall(
 
 export const updateUser = apiCall(
   ({
-    id,
     name,
     password,
     email,
@@ -81,7 +80,7 @@ export const updateUser = apiCall(
     state,
     country,
   }) => ({
-    url: `/users/${id}`,
+    url: `/users`,
     method: 'PATCH',
     data: {
       name,
