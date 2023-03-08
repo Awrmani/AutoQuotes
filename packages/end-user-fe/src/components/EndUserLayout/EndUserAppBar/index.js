@@ -23,7 +23,6 @@ import {
   getShopSettings,
 } from '../../../reducers/queriesReducer';
 import paths from '../../../paths';
-import { fetchShopSettings } from '../../../actions';
 
 const EndUserAppBar = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,6 @@ const EndUserAppBar = () => {
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
-    dispatch(fetchShopSettings());
     handleCloseUserMenu();
   }, [dispatch]);
 
