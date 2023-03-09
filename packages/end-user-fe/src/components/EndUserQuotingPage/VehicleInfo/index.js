@@ -57,15 +57,6 @@ const specs = [
     ],
   },
 ];
-const obj = {
-  cpp: [
-    {
-      java: {
-        python: 2012,
-      },
-    },
-  ],
-};
 
 const VehicleInfo = sx => {
   return (
