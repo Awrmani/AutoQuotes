@@ -11,6 +11,7 @@ import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/
 import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
 import refreshCurrentUser from './refreshers/refreshCurrentUser';
+import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -24,6 +25,7 @@ const apiCall = apiCallSagaFactory({
 // This runs every time the application is starting up
 const initApp = function* () {
   yield call(refreshCurrentUser);
+  yield call(refreshVehicleTypeList);
 };
 
 export default function* root() {
@@ -42,13 +44,12 @@ export default function* root() {
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
       apiFn: endUserApi.fetchCurrentUser,
     }),
+    takeLatest(actionTypes.VEHICLE_TYPE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchVehicleTypeList,
+    }),
     // Shop settings
     takeLatest(actionTypes.SHOP_SETTINGS_FETCH, apiCall, {
       apiFn: endUserApi.fetchShopSettings,
-    }),
-    // User
-    takeLatest(actionTypes.USER_DETAILS_FETCH, apiCall, {
-      apiFn: endUserApi.fetchUserDetails,
     }),
     takeLatest(actionTypes.USER_REGISTER, apiCall, {
       apiFn: endUserApi.registerUser,

@@ -4,8 +4,9 @@ import * as actionTypes from '../constants/actionTypes';
 // Async data fetches
 export const fetchShopSettings = createAction(actionTypes.SHOP_SETTINGS_FETCH);
 export const fetchCurrentUser = createAction(actionTypes.CURRENT_USER_FETCH);
-
-export const fetchUserDetails = createAction(actionTypes.USER_DETAILS_FETCH);
+export const fetchVehicleTypeList = createAction(
+  actionTypes.VEHICLE_TYPE_LIST_FETCH
+);
 
 // Form submits & other actions altering backend state
 export const login = createAction(actionTypes.LOGIN);

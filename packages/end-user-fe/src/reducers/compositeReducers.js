@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { getShopSettings } from './queriesReducer';
+import { set } from 'lodash';
+import { getShopSettings, getVehicleTypeList } from './queriesReducer';
 
 const DAY_NAMES = {
   monday: 'Mon',
@@ -18,9 +19,10 @@ export const getHumanReadableOpeningHours = createSelector(
 
     /**
      * Group days like: [
-     *    { openHour: 8, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['monday', 'tuesday'] },
-     *    { openHour: 9, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['wednesday'] },
-     *    { openHour: 8, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['monday', 'tuesday'] },
+     *    { isOpen: true, openHour: 8, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['monday', 'tuesday'] },
+     *    { isOpen: true, openHour: 9, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['wednesday'] },
+     *    { isOpen: true, openHour: 8, openMinute: 0, closeHour: 17, closeMinute: 0, days: ['thursday', 'friday'] },
+     *    { isOpen: false, days: ['saturday', 'sunday']}
      * ]
      */
     const grouped = Object.keys(DAY_NAMES).reduce((acc, dayName) => {
@@ -29,22 +31,30 @@ export const getHumanReadableOpeningHours = createSelector(
         openingHours[dayName] ?? {};
 
       // Check if we are indeed open on that day
-      if (
-        typeof openHour !== 'number' ||
-        typeof openMinute !== 'number' ||
-        typeof closeHour !== 'number' ||
-        typeof closeMinute !== 'number'
-      )
-        return acc;
+      const isOpen =
+        typeof openHour === 'number' &&
+        typeof openMinute === 'number' &&
+        typeof closeHour === 'number' &&
+        typeof closeMinute === 'number';
 
       // Try to find a matching config already in acc
       const lastDescriptor = acc[acc.length - 1];
-      const matchingWithLast =
-        acc.length &&
-        openHour === lastDescriptor.openHour &&
-        openMinute === lastDescriptor.openMinute &&
-        closeHour === lastDescriptor.closeHour &&
-        closeMinute === lastDescriptor.closeMinute;
+
+      // This is an IIFE (Immediately invoked function expression)
+      const matchingWithLast = (() => {
+        if (!lastDescriptor) return false;
+        if (!lastDescriptor.isOpen && !isOpen) return true;
+        if (
+          lastDescriptor &&
+          openHour === lastDescriptor.openHour &&
+          openMinute === lastDescriptor.openMinute &&
+          closeHour === lastDescriptor.closeHour &&
+          closeMinute === lastDescriptor.closeMinute
+        )
+          return true;
+
+        return false;
+      })();
 
       // Found, add day to that object (foundInAcc is by reference)
       if (matchingWithLast) {
@@ -56,10 +66,13 @@ export const getHumanReadableOpeningHours = createSelector(
       return [
         ...acc,
         {
-          openHour,
-          openMinute,
-          closeHour,
-          closeMinute,
+          isOpen,
+          ...(isOpen && {
+            openHour,
+            openMinute,
+            closeHour,
+            closeMinute,
+          }),
           days: [dayName],
         },
       ];
@@ -80,15 +93,35 @@ export const getHumanReadableOpeningHours = createSelector(
               DAY_NAMES[group.days[group.days.length - 1]]
             }`;
 
-      const timeRangeHuman = `${String(group.openHour).padStart(2, 0)}:${String(
-        group.openMinute
-      ).padStart(2, 0)} - ${String(group.closeHour).padStart(2, 0)}:${String(
-        group.closeMinute
-      ).padStart(2, 0)}`;
+      let timeRangeHuman;
+      if (group.isOpen) {
+        timeRangeHuman = `${String(group.openHour).padStart(2, 0)}:${String(
+          group.openMinute
+        ).padStart(2, 0)} - ${String(group.closeHour).padStart(2, 0)}:${String(
+          group.closeMinute
+        ).padStart(2, 0)}`;
+      } else {
+        timeRangeHuman = 'Closed';
+      }
 
       return { ...group, daysHuman, timeRangeHuman };
     });
 
     return result;
+  }
+);
+
+export const getVehicleTypeOptions = createSelector(
+  getVehicleTypeList,
+  vehicleTypeList => {
+    const options = {};
+
+    (vehicleTypeList ?? []).forEach(
+      ({ make, model, modelYear, engineVariant, bodyType }) => {
+        set(options, [make, model, modelYear, engineVariant, bodyType], true);
+      }
+    );
+
+    return options;
   }
 );

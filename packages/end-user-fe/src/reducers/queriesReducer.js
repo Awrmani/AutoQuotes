@@ -11,10 +11,9 @@ export default combineReducers({
   shopSettings: queryReducer({
     triggerActionType: actionTypes.SHOP_SETTINGS_FETCH,
   }),
-  // Users
-  userDetails: queryReducer({
-    triggerActionType: actionTypes.USER_DETAILS_FETCH,
-    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+
+  vehicleTypeList: queryReducer({
+    triggerActionType: actionTypes.VEHICLE_TYPE_LIST_FETCH,
   }),
 });
 
@@ -29,6 +28,7 @@ export const getCurrentUser = state => state.queries.currentUser?.result;
 export const getShopSettingsQuery = state => state.queries.shopSettings;
 export const getShopSettings = state => state.queries.shopSettings?.result;
 
-// Users
-export const getUserDetailsQuery = state => state.queries.userDetails;
-export const getUserDetails = state => state.queries.userDetails?.result;
+// Vehicle type list
+export const getVehicleTypeListQuery = state => state.queries.vehicleTypeList;
+export const getVehicleTypeList = state =>
+  state.queries.vehicleTypeList?.result;
