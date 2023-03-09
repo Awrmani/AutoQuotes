@@ -7,7 +7,15 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import { useNavigate } from 'react-router-dom';
 import TextInput from '@autoquotes/common/src/components/TextInput';
-import { Box, Container, Grid, Link, Paper, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link,
+  Paper,
+  Typography,
+} from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import { getShopSettings } from '../../reducers/queriesReducer';
@@ -181,31 +189,43 @@ const EndUserRegistration = props => {
             />
           </Grid>
           <FormError />
-          <Grid item xs={0} sm={4}></Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
+            <Button
+              color="error"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, mr: 1 }}
+              onClick={() => navigate(paths.quotingPage())}
+            >
+              Cancel
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <SubmitButton
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, ml: 1 }}
               data-testid="submitButton"
             >
               {props.edit ? 'Update' : 'Register'}
             </SubmitButton>
           </Grid>
 
-          <Grid item xs={12}>
-            <Link
-              onClick={() => {
-                navigate(paths.login());
-              }}
-              sx={{
-                cursor: 'pointer',
-              }}
-              variant="body2"
-            >
-              {'I have an account? Sign in'}
-            </Link>
-          </Grid>
+          {props.edit ? null : (
+            <Grid item xs={12}>
+              <Link
+                onClick={() => {
+                  navigate(paths.login());
+                }}
+                sx={{
+                  cursor: 'pointer',
+                }}
+                variant="body2"
+              >
+                {'I have an account? Sign in'}
+              </Link>
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </Container>

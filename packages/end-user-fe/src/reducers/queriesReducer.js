@@ -10,7 +10,6 @@ export default combineReducers({
 
   shopSettings: queryReducer({
     triggerActionType: actionTypes.SHOP_SETTINGS_FETCH,
-    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
   // Users
   userDetails: queryReducer({
