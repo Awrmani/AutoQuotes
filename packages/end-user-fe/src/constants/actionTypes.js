@@ -5,7 +5,7 @@ export const CURRENT_USER_FETCH = 'CURRENT_USER_FETCH';
 
 export const SHOP_SETTINGS_FETCH = 'SHOP_SETTINGS_FETCH';
 
-export const USER_DETAILS_FETCH = 'USER_DETAILS_FETCH';
+export const VEHICLE_TYPE_LIST_FETCH = 'VEHICLE_TYPE_LIST_FETCH';
 
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
