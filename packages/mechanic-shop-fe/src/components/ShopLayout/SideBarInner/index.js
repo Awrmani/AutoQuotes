@@ -12,9 +12,9 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Avatar,
 } from '@mui/material';
 import {
-  PrecisionManufacturing,
   Logout,
   Mail,
   Phone,
@@ -28,16 +28,19 @@ import {
   DirectionsCar,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
-import { getCurrentUser } from '../../../reducers/queriesReducer';
+import {
+  getCurrentUser,
+  getShopSettings,
+} from '../../../reducers/queriesReducer';
 import paths from '../../../paths';
 
 const SideBarInner = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const shopSettings = useSelector(getShopSettings);
   const currentUser = useSelector(getCurrentUser);
   const { name, role, id } = currentUser ?? {};
-
+  const { name: shopName, logo } = shopSettings;
   const sideBarProps = useMemo(
     () => ({
       user: {
@@ -89,62 +92,72 @@ const SideBarInner = () => {
   }, [dispatch]);
 
   return (
-    <Box>
-      <Toolbar
-        sx={{
-          minHeight: '64px',
-          bgcolor: 'primary.main',
-          display: 'flex',
-          justifyContent: 'center',
-          color: 'white',
-          cursor: 'pointer',
-        }}
-        onClick={() => navigate(paths.dashboard())}
-      >
-        <PrecisionManufacturing sx={{ mr: 1 }} />
-
-        <Typography variant="h6">Six Stars</Typography>
-      </Toolbar>
-
-      <Divider />
-      <List>
-        <ListItem key={sideBarProps.user.label} disablePadding>
-          <ListItemButton
-            onClick={() => {
-              navigate(sideBarProps.user.path);
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Box>
+        <Toolbar
+          sx={{
+            minHeight: '64px',
+            bgcolor: 'primary.main',
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'white',
+            cursor: 'pointer',
+          }}
+          onClick={() => navigate(paths.dashboard())}
+        >
+          <Avatar
+            variant="square"
+            alt={shopName}
+            src={logo}
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              mr: 1,
+              width: 32,
+              height: 32,
             }}
-          >
-            <ListItemIcon>{sideBarProps.user.icon}</ListItemIcon>
-            <ListItemText primary={sideBarProps.user.label} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+          />
 
-      <Divider />
-      <List>
-        {sideBarProps.categories
-          .filter(({ adminOnly }) => !adminOnly || role === 'admin')
-          .map(({ path, label, icon, adminOnly }) => (
-            <ListItem key={label} disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  path && navigate(path);
-                }}
-              >
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText primary={label} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-      </List>
+          <Typography variant="h6">{shopName}</Typography>
+        </Toolbar>
 
-      <Box
-        position={'absolute'}
-        sx={{
-          paddingBottom: 2,
-          bottom: 0,
-        }}
-      >
+        <Divider />
+        <List>
+          <ListItem key={sideBarProps.user.label} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                navigate(sideBarProps.user.path);
+              }}
+            >
+              <ListItemIcon>{sideBarProps.user.icon}</ListItemIcon>
+              <ListItemText primary={sideBarProps.user.label} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+
+        <Divider />
+        <List>
+          {sideBarProps.categories
+            .filter(({ adminOnly }) => !adminOnly || role === 'admin')
+            .map(({ path, label, icon, adminOnly }) => (
+              <ListItem key={label} disablePadding>
+                <ListItemButton
+                  onClick={() => {
+                    path && navigate(path);
+                  }}
+                >
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+        </List>
         <List>
           <ListItem disablePadding onClick={onLogout}>
             <ListItemButton>
@@ -155,16 +168,26 @@ const SideBarInner = () => {
             </ListItemButton>
           </ListItem>
         </List>
+      </Box>
 
+      <Box>
         <Divider />
         <Box
           sx={{
             paddingLeft: 2,
           }}
         >
-          <Typography variant="h5" sx={{ my: 1, textAlign: 'center' }}>
-            Need help?
-          </Typography>
+          <Box sx={{ my: 1, display: 'flex', justifyContent: 'center' }}>
+            <Typography
+              noWrap
+              component={'span'}
+              color="primary.main"
+              variant="h6"
+              sx={{ my: 0, textAlign: 'center', border: 1, px: 1 }}
+            >
+              {'Need help?'}
+            </Typography>
+          </Box>
           <IconButton color="inherit" edge="start" disableRipple>
             <Mail sx={{ mr: 1 }} />
             <Typography
