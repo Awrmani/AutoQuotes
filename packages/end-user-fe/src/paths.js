@@ -2,6 +2,10 @@ const login = () => ({ pathname: '/login' });
 
 const registration = () => ({ pathname: '/registration' });
 
+const profile = () => ({
+  pathname: `/profile`,
+});
+
 const quotingPage = () => ({
   pathname: '/quotingPage',
 });
@@ -20,6 +24,7 @@ const paths = {
   registration,
   quotingPage,
   appointment,
+  profile,
 };
 
 export default paths;

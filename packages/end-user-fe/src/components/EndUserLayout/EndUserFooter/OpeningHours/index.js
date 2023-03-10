@@ -1,42 +1,12 @@
-import { DateRange, Weekend } from '@mui/icons-material';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import React, { useMemo } from 'react';
+import { DateRange } from '@mui/icons-material';
+import { Box, Stack, Typography } from '@mui/material';
+import { getHumanReadableOpeningHours } from '../../../../reducers/compositeReducers';
 import FooterTitleBox from '../FooterTitleBox';
 
-import { getShopSettings } from '../../../../reducers/queriesReducer';
-
 const OpeningHours = () => {
-  const shopDetails = useSelector(getShopSettings);
-
-  const { openingHours } = shopDetails;
-
-  const weekdays = useMemo(() => {
-    return ` from ${openingHours.monday.openHour}.${
-      openingHours.monday.openMinute === 0
-        ? '00'
-        : `${openingHours.monday.openMinute}`
-    } to ${openingHours.monday.closeHour}.${
-      openingHours.monday.openMinute === 0
-        ? '00'
-        : `${openingHours.monday.closeMinute}`
-    } `;
-  }, [openingHours]);
-
-  const weekends = useMemo(() => {
-    if ('saturday' in openingHours) {
-      return ` from ${openingHours.saturday.openHour}.${
-        openingHours.saturday.openMinute === 0
-          ? '00'
-          : `${openingHours.saturday.openMinute}`
-      } to ${openingHours.saturday.closeHour}.${
-        openingHours.saturday.openMinute === 0
-          ? '00'
-          : `${openingHours.saturday.closeMinute}`
-      } `;
-    }
-    return 'closed';
-  }, [openingHours]);
+  const openingHours = useSelector(getHumanReadableOpeningHours);
 
   return (
     <Box sx={{ mb: 2 }}>
@@ -48,28 +18,49 @@ const OpeningHours = () => {
         }}
       >
         <FooterTitleBox title={'Opening Hours'} />
-        <IconButton
+        <Box
           color="inherit"
           edge="start"
           disableRipple
-          sx={{ justifyContent: 'left', m: 0, p: 0 }}
+          sx={{
+            justifyContent: 'left',
+            mt: 1,
+            display: 'flex',
+            alignItems: 'flex-start',
+          }}
         >
           <DateRange sx={{ mr: 1 }} />
-          <Typography noWrap color="inherit" fontSize="small">
-            Weekdays: {weekdays}
-          </Typography>
-        </IconButton>
-        <IconButton
-          color="inherit"
-          edge="start"
-          disableRipple
-          sx={{ justifyContent: 'left', m: 0, p: 0 }}
-        >
-          <Weekend sx={{ mr: 1 }} />
-          <Typography noWrap color="inherit" fontSize="small">
-            Weekends: {weekends}
-          </Typography>
-        </IconButton>
+
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            {openingHours.map(group => (
+              <Box key={group.daysHuman} sx={{ flex: '1' }} align="left">
+                <Typography
+                  noWrap
+                  color="inherit"
+                  fontSize="small"
+                  component="span"
+                  sx={{
+                    display: 'inline-block',
+                    verticalAlign: 'middle',
+                    minWidth: 70,
+                  }}
+                >
+                  {group.daysHuman}:
+                </Typography>
+
+                <Typography
+                  noWrap
+                  color="inherit"
+                  fontSize="small"
+                  component="span"
+                  sx={{ display: 'inline-block', verticalAlign: 'middle' }}
+                >
+                  {group.timeRangeHuman}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
       </Stack>
     </Box>
   );

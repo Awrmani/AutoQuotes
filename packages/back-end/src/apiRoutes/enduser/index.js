@@ -6,6 +6,7 @@ const shopGet = require('./shopGet');
 const currentUserGet = require('./currentUserGet');
 const endUserCreate = require('./endUserCreate');
 const confirmUser = require('./confirmUser');
+const vehicleTypeList = require('./vehicleTypeList');
 
 const authenticator = authenticatorFactory({
   audience: 'enduser',
@@ -22,5 +23,8 @@ router.post('/users/:id/confirm', confirmUser);
 
 // Shop
 router.get('/shop', shopGet);
+
+// Vehicle type
+router.get('/vehicleTypes', vehicleTypeList);
 
 module.exports = router;

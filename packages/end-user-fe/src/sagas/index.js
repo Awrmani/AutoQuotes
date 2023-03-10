@@ -5,11 +5,13 @@ import {
   earlySetToken,
   addTokenRequestInterceptor,
 } from '@autoquotes/libraries/src/saga/interceptors/token';
+import successToast from '@autoquotes/libraries/src/saga/successToast';
 import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
 import logoutErrorInterceptor from '@autoquotes/libraries/src/saga/interceptors/logoutErrorInterceptor';
 import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
 import refreshCurrentUser from './refreshers/refreshCurrentUser';
+import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -23,6 +25,7 @@ const apiCall = apiCallSagaFactory({
 // This runs every time the application is starting up
 const initApp = function* () {
   yield call(refreshCurrentUser);
+  yield call(refreshVehicleTypeList);
 };
 
 export default function* root() {
@@ -34,22 +37,33 @@ export default function* root() {
       noInjectToken: true,
       onSuccess: [
         [earlySetToken],
-        [
-          // refreshCurrentUser
-          [earlySetToken],
-          [refreshCurrentUser],
-
-          apiCall.DISPATCH_SUCCESS,
-        ],
+        [refreshCurrentUser],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
     takeLatest(actionTypes.CURRENT_USER_FETCH, apiCall, {
       apiFn: endUserApi.fetchCurrentUser,
     }),
+    takeLatest(actionTypes.VEHICLE_TYPE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchVehicleTypeList,
+    }),
     // Shop settings
     takeLatest(actionTypes.SHOP_SETTINGS_FETCH, apiCall, {
       apiFn: endUserApi.fetchShopSettings,
+    }),
+    takeLatest(actionTypes.USER_REGISTER, apiCall, {
+      apiFn: endUserApi.registerUser,
+      onSuccess: [
+        [successToast('Successfully created!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.USER_UPDATE, apiCall, {
+      apiFn: endUserApi.updateUser,
+      onSuccess: [
+        [successToast('Successfully updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }

@@ -25,24 +25,24 @@ import {
 import paths from '../../../paths';
 
 const EndUserAppBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentUser = useSelector(getCurrentUser);
-  const { name } = currentUser ?? {};
+  const { name: username } = currentUser ?? {};
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const shopDetails = useSelector(getShopSettings);
   const { name: shopName, logo } = shopDetails;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onLogout = useCallback(() => {
     dispatch(removeToken());
-    setAnchorElUser(null);
+    handleCloseUserMenu();
   }, [dispatch]);
 
   const profileNavigate = useCallback(() => {
-    navigate(paths.login());
-    handleOpenNavMenu();
+    navigate(paths.profile());
+    handleCloseUserMenu();
   }, [navigate]);
 
   const pages = useMemo(() => {
@@ -192,11 +192,11 @@ const EndUserAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {name ? (
+            {username ? (
               <Fragment>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={name} src="#" />
+                    <Avatar alt={username} src="#" />
                   </IconButton>
                 </Tooltip>
                 <Menu
