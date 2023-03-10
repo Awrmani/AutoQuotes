@@ -283,7 +283,7 @@ export const updateShopSettings = apiCall(
           },
         };
       }, {}),
-      numberOfStalls,
+      numberOfStalls: Number(numberOfStalls),
       returnPolicyUrl,
       termsAndConditionsUrl,
       privacyPolicyUrl,
