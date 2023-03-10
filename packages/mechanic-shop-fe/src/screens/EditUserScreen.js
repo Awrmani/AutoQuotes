@@ -50,8 +50,8 @@ const EditUserScreen = () => {
   );
 
   const handleSuccess = useCallback(() => {
-    navigate(paths.userList());
-  }, [navigate]);
+    navigate(result?.role === 'admin' ? paths.userList() : paths.dashboard());
+  }, [navigate, result?.role]);
 
   // DO not render while data is fetching from the BE
   if (isFetching || result?.id !== id)
