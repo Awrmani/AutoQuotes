@@ -5,5 +5,12 @@
     "duration": 90,
     "customerId": "endUser00001",
     "quoteId": "quoteforqndu"
+  },
+  {
+    "stall": 2,
+    "startsAt": "2023-03-10T16:00:00Z",
+    "duration": 180,
+    "customerId": "endUser00001",
+    "quoteId": "quoteforqndu"
   }
 ]
