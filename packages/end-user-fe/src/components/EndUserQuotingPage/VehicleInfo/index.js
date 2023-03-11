@@ -1,81 +1,114 @@
-import React from 'react';
-
+import React, { useContext, useMemo } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
+import { useSelector } from 'react-redux';
+import formContext from '@autoquotes/common/src/components/Form/formContext';
 
-const specs = [
-  {
-    name: 'make',
-    label: 'Make',
-    data: [{ value: 'Tesla', label: 'Tesla' }],
-  },
-  {
-    name: 'model',
-    label: 'Model',
-    data: [
-      { value: 'Roadster', label: 'Roadster' },
-      { value: 'Model S', label: 'Model S' },
-      { value: 'Model X', label: 'Model X' },
-      { value: 'Model 3', label: 'Model 3' },
-      { value: 'Model Y', label: 'Model Y' },
-    ],
-  },
-  {
-    name: 'year',
-    label: 'Year',
-    data: [
-      { value: '2008', label: '2008' },
-      { value: '2012', label: '2012' },
-      { value: '2016', label: '2016' },
-      { value: '2017', label: '2017' },
-      { value: '2020', label: '2020' },
-      { value: '2022', label: '2022' },
-    ],
-  },
-  {
-    name: 'engine',
-    label: 'Engine',
-    data: [
-      { value: 'standard', label: 'Standard' },
-      { value: 'RWD', label: 'RWD' },
-      { value: 'AWD', label: 'AWD' },
-      { value: 'Performance', label: 'Performance' },
-      { value: 'Standard range', label: 'Standard range' },
-      { value: 'Long range', label: 'Long range' },
-      { value: 'Plaid', label: 'Plaid' },
-    ],
-  },
-  {
-    name: 'body',
-    label: 'Body',
-    data: [
-      { value: 'roadster', label: 'Roadster' },
-      { value: 'liftback', label: 'Liftback' },
-      { value: 'SUV', label: 'SUV' },
-      { value: 'Sedan', label: 'Sedan' },
-    ],
-  },
-];
+import { getVehicleTypeOptions } from '../../../reducers/compositeReducers';
 
-const VehicleInfo = sx => {
+const VehicleInfo = () => {
+  const { values } = useContext(formContext);
+  const { make, model, year, engine } = values;
+  const vehicleOptions = useSelector(getVehicleTypeOptions);
+
+  // Makes
+  const makeOptions = useMemo(
+    () => Object.keys(vehicleOptions).map(m => ({ value: m, label: m })),
+    [vehicleOptions]
+  );
+
+  // Models
+  const modelOptions = useMemo(() => {
+    if (!vehicleOptions?.[make]) return [{ value: '', label: '' }];
+    return Object.keys(vehicleOptions[make]).map(m => ({
+      value: m,
+      label: m,
+    }));
+  }, [vehicleOptions, make]);
+
+  // Years
+  const yearOptions = useMemo(() => {
+    if (!vehicleOptions?.[make]?.[model]) return [{ value: '', label: '' }];
+    return Object.keys(vehicleOptions[make][model]).map(m => ({
+      value: m.substring(1),
+      label: m.substring(1),
+    }));
+  }, [vehicleOptions, make, model]);
+
+  // Engines
+  const engineOptions = useMemo(() => {
+    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`])
+      return [{ value: '', label: '' }];
+
+    return Object.keys(vehicleOptions[make][model][`_${year}`]).map(m => ({
+      value: m,
+      label: m,
+    }));
+  }, [vehicleOptions, make, model, year]);
+
+  const bodyOptions = useMemo(() => {
+    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`]?.[engine])
+      return [{ value: '', label: '' }];
+    return Object.keys(vehicleOptions[make][model][`_${year}`][engine]).map(
+      m => ({
+        value: m,
+        label: m,
+      })
+    );
+  }, [vehicleOptions, make, model, year, engine]);
+
   return (
     <Container>
       <Typography component="h1" variant="h5">
         Vehicle Specifications
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {specs.map(e => (
-          <Box key={e.name} sx={{ minWidth: 120 }}>
-            <Field
-              component={Dropdown}
-              name={e.name}
-              label={e.label}
-              fullWidth
-              options={e.data}
-            />
-          </Box>
-        ))}
+        <Box sx={{ minWidth: 120 }}>
+          <Field
+            component={Dropdown}
+            name="make"
+            label="Make"
+            fullWidth
+            options={makeOptions}
+          />
+        </Box>
+        <Box sx={{ minWidth: 120 }}>
+          <Field
+            component={Dropdown}
+            name="model"
+            label="Model"
+            fullWidth
+            options={modelOptions}
+          />
+        </Box>
+        <Box sx={{ minWidth: 120 }}>
+          <Field
+            component={Dropdown}
+            name="year"
+            label="Year"
+            fullWidth
+            options={yearOptions}
+          />
+        </Box>
+        <Box sx={{ minWidth: 120 }}>
+          <Field
+            component={Dropdown}
+            name="engine"
+            label="Engine"
+            fullWidth
+            options={engineOptions}
+          />
+        </Box>
+        <Box sx={{ minWidth: 120 }}>
+          <Field
+            component={Dropdown}
+            name="body"
+            label="Body"
+            fullWidth
+            options={bodyOptions}
+          />
+        </Box>
       </Box>
     </Container>
   );
