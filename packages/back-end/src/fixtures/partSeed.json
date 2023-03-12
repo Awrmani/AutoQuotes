@@ -1,6 +1,6 @@
 [
   {
-    "id": "RimAracMSMX1",
+    "id": "AracRimMSX16",
     "name": "Rim - Aracnid 21\"",
     "price": 2000,
     "amountInStock": 2,
@@ -22,6 +22,7 @@
     ]
   },
   {
+    "id": "AracRimMSX22",
     "name": "Rim - Aracnid 21\"",
     "price": 2000,
     "amountInStock": 2,
@@ -43,6 +44,7 @@
     ]
   },
   {
+    "id": "TempRimMSX12",
     "name": "Rim - Tempest 21\"",
     "price": 750,
     "amountInStock": 2,
@@ -64,6 +66,7 @@
     ]
   },
   {
+    "id": "TempRimMSX22",
     "name": "Rim - Tempest 21\"",
     "price": 750,
     "amountInStock": 2,
@@ -85,6 +88,7 @@
     ]
   },
   {
+    "id": "TirePressure",
     "name": "Tire pressure monitor",
     "price": 95,
     "amountInStock": 32,
@@ -118,6 +122,7 @@
     ]
   },
   {
+    "id": "WiperBladeMS",
     "name": "Wiper blade",
     "price": 28,
     "amountInStock": 41,
@@ -133,6 +138,7 @@
     ]
   },
   {
+    "id": "WiperBladeMX",
     "name": "Wiper blade",
     "price": 28,
     "amountInStock": 41,
@@ -148,6 +154,7 @@
     ]
   },
   {
+    "id": "WiperBladeM3",
     "name": "Wiper blade",
     "price": 28,
     "amountInStock": 41,
@@ -163,6 +170,7 @@
     ]
   },
   {
+    "id": "WiperBladeMY",
     "name": "Wiper blade",
     "price": 28,
     "amountInStock": 41,
@@ -178,6 +186,7 @@
     ]
   },
   {
+    "id": "CabinAirModS",
     "name": "Cabin air filter",
     "price": 34,
     "amountInStock": 41,
@@ -193,6 +202,7 @@
     ]
   },
   {
+    "id": "CabinAirModX",
     "name": "Cabin air filter",
     "price": 28,
     "amountInStock": 41,
@@ -208,6 +218,7 @@
     ]
   },
   {
+    "id": "CabinAirMod3",
     "name": "Cabin air filter",
     "price": 28,
     "amountInStock": 41,
@@ -223,6 +234,7 @@
     ]
   },
   {
+    "id": "CabinAirModY",
     "name": "Cabin air filter",
     "price": 28,
     "amountInStock": 41,
@@ -238,6 +250,7 @@
     ]
   },
   {
+    "id": "FrontBreakPa",
     "name": "Front break pads",
     "price": 50,
     "amountInStock": 8,
@@ -253,6 +266,7 @@
     ]
   },
   {
+    "id": "RearBreakPad",
     "name": "Rear break pads",
     "price": 50,
     "amountInStock": 8,
