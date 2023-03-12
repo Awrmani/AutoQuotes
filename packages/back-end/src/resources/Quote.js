@@ -74,7 +74,7 @@ const quoteSchema = new mongoose.Schema(
 const QuoteModel = mongoose.model('quotes', quoteSchema);
 
 const validatorConfig = {
-  customerId: [stringValidators.required],
+  customerId: [stringValidators.isStringOrUndefined],
   vehicleTypeId: [stringValidators.required],
   lineItems: [
     validatorFactory.arrayOfValidator(
