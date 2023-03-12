@@ -43,7 +43,7 @@ describe('Part tests', () => {
 
   it('should allow to edit a part', () => {
     // Hexa coded object id (we gave it in ascii in the seed, it's been converted over)
-    cy.getByTestId('part-52696d417261634d534d5831').within(() => {
+    cy.getByTestId('part-4172616352696d4d53583136').within(() => {
       cy.getByTestId('editButton').click();
     });
 
@@ -56,7 +56,7 @@ describe('Part tests', () => {
 
   it('should allow to delete a part', () => {
     // Hexa coded object id (we gave it in ascii in the seed, it's been converted over)
-    cy.getByTestId('part-52696d417261634d534d5831').within(() => {
+    cy.getByTestId('part-4172616352696d4d53583136').within(() => {
       cy.getByTestId('deleteButton').click();
     });
 
