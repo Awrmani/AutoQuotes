@@ -47,7 +47,7 @@
     "timeInMinutes": 90,
     "description": "Model S self-presenting handle mechanics fix",
     "requiredParts": [{ "name": "Door handle rebuild kit" }],
-    "compatibleVehicles": []
+    "compatibleVehicles": [{ "make": "Tesla", "model": "Model S" }]
   },
   {
     "name": "Cabin air Filter Replacement",

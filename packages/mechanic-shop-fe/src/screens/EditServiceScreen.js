@@ -23,8 +23,12 @@ const validator = validatorFactory({
       subValidator({
         make: [stringValidators.required],
         model: [stringValidators.required],
-        fromYear: [stringValidators.asNumber(numberValidators.required)],
-        toYear: [stringValidators.asNumber(numberValidators.required)],
+        fromYear: [
+          stringValidators.asNumber(numberValidators.isNumberOrUndefined),
+        ],
+        toYear: [
+          stringValidators.asNumber(numberValidators.isNumberOrUndefined),
+        ],
       }),
     ]),
   ],
