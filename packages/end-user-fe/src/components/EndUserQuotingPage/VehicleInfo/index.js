@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 
 import { getVehicleTypeOptions } from '../../../reducers/compositeReducers';
+import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
@@ -70,7 +71,7 @@ const VehicleInfo = () => {
         Vehicle Specifications
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
             name="make"
@@ -79,7 +80,7 @@ const VehicleInfo = () => {
             options={makeOptions}
           />
         </Box>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
             name="model"
@@ -88,7 +89,7 @@ const VehicleInfo = () => {
             options={modelOptions}
           />
         </Box>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
             name="year"
@@ -97,7 +98,7 @@ const VehicleInfo = () => {
             options={yearOptions}
           />
         </Box>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
             name="engine"
@@ -106,7 +107,7 @@ const VehicleInfo = () => {
             options={engineOptions}
           />
         </Box>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
             name="body"
