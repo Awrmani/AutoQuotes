@@ -60,8 +60,8 @@ const validatorConfig = {
       subValidator({
         make: [stringValidators.isString],
         model: [stringValidators.isString],
-        fromYear: [numberValidators.isNumber],
-        toYear: [numberValidators.isNumber],
+        fromYear: [numberValidators.isNumberOrUndefined],
+        toYear: [numberValidators.isNumberOrUndefined],
       }),
     ]),
   ],
