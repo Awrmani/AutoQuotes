@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
@@ -9,10 +9,23 @@ const Dropdown = ({
   description,
   isSubmitting,
   options,
+  value,
   label,
   ...rest
 }) => {
   const [labelId] = useState(() => uuid());
+  const optionValues = useMemo(
+    () => options.map(({ value: v }) => v),
+    [options]
+  );
+
+  // set value to empty string to prevent changing from
+  // controlled component to uncontrolled component
+  useEffect(() => {
+    if (!optionValues.includes(value)) {
+      onChange('');
+    }
+  }, [optionValues, onChange, value]);
 
   const handleChange = useCallback(
     e => {
@@ -31,6 +44,7 @@ const Dropdown = ({
         disabled={isSubmitting}
         onChange={handleChange}
         label={label}
+        value={optionValues.includes(value) ? value : ''}
         {...rest}
       >
         {options.map(option => (
@@ -50,6 +64,7 @@ const Dropdown = ({
 Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string,
   error: PropTypes.string,
   description: PropTypes.string,
   isSubmitting: PropTypes.bool,
@@ -65,6 +80,7 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   error: undefined,
   description: undefined,
+  value: '',
   isSubmitting: false,
 };
 

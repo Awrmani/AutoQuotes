@@ -7,20 +7,24 @@ import formContext from '@autoquotes/common/src/components/Form/formContext';
 
 import { getVehicleTypeOptions } from '../../../reducers/compositeReducers';
 
+const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
   const { values } = useContext(formContext);
   const { make, model, year, engine } = values;
   const vehicleOptions = useSelector(getVehicleTypeOptions);
 
   // Makes
-  const makeOptions = useMemo(
-    () => Object.keys(vehicleOptions).map(m => ({ value: m, label: m })),
-    [vehicleOptions]
-  );
+  const makeOptions = useMemo(() => {
+    return Object.keys(vehicleOptions).map(m => ({
+      value: m,
+      label: m,
+    }));
+  }, [vehicleOptions]);
 
   // Models
   const modelOptions = useMemo(() => {
-    if (!vehicleOptions?.[make]) return [{ value: '', label: '' }];
+    if (!vehicleOptions?.[make]) return [optionDefault];
+
     return Object.keys(vehicleOptions[make]).map(m => ({
       value: m,
       label: m,
@@ -29,7 +33,8 @@ const VehicleInfo = () => {
 
   // Years
   const yearOptions = useMemo(() => {
-    if (!vehicleOptions?.[make]?.[model]) return [{ value: '', label: '' }];
+    if (!vehicleOptions?.[make]?.[model]) return [optionDefault];
+
     return Object.keys(vehicleOptions[make][model]).map(m => ({
       value: m.substring(1),
       label: m.substring(1),
@@ -38,8 +43,7 @@ const VehicleInfo = () => {
 
   // Engines
   const engineOptions = useMemo(() => {
-    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`])
-      return [{ value: '', label: '' }];
+    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`]) return [optionDefault];
 
     return Object.keys(vehicleOptions[make][model][`_${year}`]).map(m => ({
       value: m,
@@ -47,9 +51,11 @@ const VehicleInfo = () => {
     }));
   }, [vehicleOptions, make, model, year]);
 
+  // Bodies
   const bodyOptions = useMemo(() => {
     if (!vehicleOptions?.[make]?.[model]?.[`_${year}`]?.[engine])
-      return [{ value: '', label: '' }];
+      return [optionDefault];
+
     return Object.keys(vehicleOptions[make][model][`_${year}`][engine]).map(
       m => ({
         value: m,
