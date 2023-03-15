@@ -2,7 +2,13 @@
 
 Capstone project - Seneca SIA CPA PRJ666 course
 
-## Development Environment
+## Demo Deployment URLs
+
+| Interface      | Url                          |
+| -------------- | ---------------------------- |
+| End-user       | http://sixix.denke.hu        |
+| Mechanic shop  | http://shop.sixix.denke.hu   |
+| Third-party UI | http://thirdp.sixix.denke.hu |
 
 ## Usage
 

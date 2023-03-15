@@ -7,10 +7,20 @@ const currentUserGet = require('./currentUserGet');
 const endUserCreate = require('./endUserCreate');
 const confirmUser = require('./confirmUser');
 const vehicleTypeList = require('./vehicleTypeList');
+const quoteList = require('./quoteList');
+const quoteCreate = require('./quoteCreate');
+const quoteGet = require('./quoteGet');
+const serviceList = require('./serviceList');
 
 const authenticator = authenticatorFactory({
   audience: 'enduser',
   UserClass: EndUser,
+});
+
+const optionalAuthenticator = authenticatorFactory({
+  audience: 'enduser',
+  UserClass: EndUser,
+  optional: true,
 });
 
 const router = express.Router();
@@ -26,5 +36,13 @@ router.get('/shop', shopGet);
 
 // Vehicle type
 router.get('/vehicleTypes', vehicleTypeList);
+
+// Quotes
+router.put('/quotes', optionalAuthenticator, quoteCreate);
+router.get('/quotes', authenticator, quoteList);
+router.get('/quotes/:quoteId', optionalAuthenticator, quoteGet);
+
+// services
+router.get('/quotes/:quoteId/services', optionalAuthenticator, serviceList);
 
 module.exports = router;

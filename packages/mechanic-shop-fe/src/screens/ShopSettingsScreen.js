@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Stack, CircularProgress } from '@mui/material';
 import { Form } from '@autoquotes/common/src/components/Form';
@@ -9,7 +9,7 @@ import validatorFactory, {
 import stringValidators from '@autoquotes/libraries/src/utils/validation/string';
 import numberValidators from '@autoquotes/libraries/src/utils/validation/number';
 import ShopSettingsForm from '../components/ShopSettingsForm';
-import { fetchShopSettings, updateShopSettings } from '../actions';
+import { updateShopSettings } from '../actions';
 import { getShopSettingsQuery } from '../reducers/queriesReducer';
 import paths from '../paths';
 
@@ -47,12 +47,7 @@ const validator = validatorFactory({
 });
 
 const ShopSettingsScreen = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(fetchShopSettings());
-  }, [dispatch]);
 
   // Extract the details from the redux store
   const shopSettingsQuery = useSelector(getShopSettingsQuery);

@@ -23,7 +23,9 @@ import paths from '../../paths';
 const AppointmentDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { appointment, customer, quote } = useSelector(getAppointmentDetails);
+  const { appointment, customer, quote, vehicleType } = useSelector(
+    getAppointmentDetails
+  );
   const { address1, address2, city, country, state, zip } =
     customer.billingInformation;
   const address = `${
@@ -132,9 +134,12 @@ const AppointmentDetails = () => {
 
       <Typography variant="h6" sx={{ mt: 4, mb: 1 }}>
         Service Details for&nbsp;
-        <Typography variant="h6" component="span">
-          {quote.vehicleTypeId}
-        </Typography>
+        {!!vehicleType && (
+          <Typography variant="h6" component="span">
+            {vehicleType.modelYear} {vehicleType.make} {vehicleType.model}{' '}
+            {vehicleType.engineVariant} {vehicleType?.bodyType}
+          </Typography>
+        )}
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -148,33 +153,44 @@ const AppointmentDetails = () => {
                 Services
               </TableCell>
               <TableCell sx={{ color: 'white', fontSize: 'medium' }}>
-                {' '}
-                Parts
+                Part name
+              </TableCell>
+              <TableCell sx={{ color: 'white', fontSize: 'medium' }}>
+                Type
+              </TableCell>
+              <TableCell sx={{ color: 'white', fontSize: 'medium' }}>
+                Manufacturer
+              </TableCell>
+              <TableCell sx={{ color: 'white', fontSize: 'medium' }}>
+                Price
               </TableCell>
             </TableRow>
           </TableHead>
-          {quote.lineItems.map(item => {
-            return (
-              <TableBody>
+          {quote.lineItems.map(lineItem => (
+            <TableBody>
+              <TableRow>
+                <TableCell
+                  width={160}
+                  align="left"
+                  rowSpan={lineItem.selectedParts.length + 1}
+                  colSpan={lineItem.selectedParts.length ? 1 : 5}
+                >
+                  {lineItem.serviceTypeId}
+                </TableCell>
+              </TableRow>
+
+              {lineItem.selectedParts.map(selectedPart => (
                 <TableRow>
-                  <TableCell
-                    width={160}
-                    align="left"
-                    rowSpan={item.parts.length + 1}
-                  >
-                    {item.serviceTypeId}
+                  <TableCell align="left">{selectedPart.name}</TableCell>
+                  <TableCell align="left">{selectedPart.type}</TableCell>
+                  <TableCell align="left">
+                    {selectedPart.manufacturer}
                   </TableCell>
+                  <TableCell align="left">${selectedPart.price}</TableCell>
                 </TableRow>
-                {item.parts.map(part => {
-                  return (
-                    <TableRow>
-                      <TableCell align="left">{part}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            );
-          })}
+              ))}
+            </TableBody>
+          ))}
         </Table>
       </TableContainer>
       <Container sx={{ display: 'flex', justifyContent: 'center' }}>

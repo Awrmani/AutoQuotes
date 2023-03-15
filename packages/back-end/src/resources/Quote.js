@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const validatorFactory = require('@autoquotes/libraries/src/utils/validation');
-const arrayValidators = require('@autoquotes/libraries/src/utils/validation/array');
+const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
+const booleanValidators = require('@autoquotes/libraries/src/utils/validation/boolean');
 
 const ResourceBase = require('./abstracts/ResourceBase');
 
 /**
- * TODO
- * Represent the selection the end-user makes from available parts
+ * `selectedPartIds` represent the selection the end-user makes from available parts
+ * If a quote is confirmed (an appointment is added with it's ID) it can no longer be
+ * edited by any party, also all required parts should be listed in `selectedPartIds`
+ * for each individual package
  */
 
 const quoteSchema = new mongoose.Schema(
@@ -23,16 +26,35 @@ const quoteSchema = new mongoose.Schema(
     lineItems: [
       {
         _id: false,
+        // AKA. package
         serviceTypeId: {
           type: String,
           ref: 'ServiceType',
         },
-        parts: {
-          type: [String],
-          ref: 'Part',
-        },
+        // To leave a paper trail (persist these in case of part changes) we copy the original
+        // part details here once a selection has been made by the end-user
+        selectedParts: [
+          {
+            _id: false,
+            id: {
+              type: [String],
+              ref: 'Part',
+            },
+            name: String,
+            description: String,
+            manufacturer: String,
+            type: {
+              type: String,
+              enum: ['OEM', 'OE', 'Aftermarket'],
+            },
+            warrantyMonths: Number,
+            price: Number, // If it cames from a supplier offer, it already contains markup
+            supplierId: String, // only if this is an offer
+          },
+        ],
       },
     ],
+    isFinalized: Boolean,
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -52,16 +74,31 @@ const quoteSchema = new mongoose.Schema(
 const QuoteModel = mongoose.model('quotes', quoteSchema);
 
 const validatorConfig = {
-  customerId: [stringValidators.required],
+  customerId: [stringValidators.isStringOrUndefined],
   vehicleTypeId: [stringValidators.required],
   lineItems: [
     validatorFactory.arrayOfValidator(
       validatorFactory.subValidator({
         serviceTypeId: [stringValidators.isStringOrUndefined],
-        parts: [arrayValidators.arrayOfStrings],
+        selectedParts: validatorFactory.arrayOfValidator(
+          validatorFactory.subValidator({
+            id: [stringValidators.required],
+            name: [stringValidators.required],
+            description: [stringValidators.isStringOrUndefined],
+            manufacturer: [stringValidators.isStringOrUndefined],
+            type: [
+              stringValidators.required,
+              stringValidators.oneOf(['OEM', 'OE', 'Aftermarket']),
+            ],
+            warrantyMonths: [numberValidators.required],
+            price: [numberValidators.required],
+            supplierId: [stringValidators.isStringOrUndefined],
+          })
+        ),
       })
     ),
   ],
+  isFinalized: [booleanValidators.isBoolean],
 };
 
 class Quote extends ResourceBase {

@@ -18,9 +18,12 @@ const createToken = ({ userId, audience, customClaimPayload }) => {
 };
 
 const authenticatorFactory =
-  ({ audience, UserClass }) =>
+  ({ audience, UserClass, optional }) =>
   async (req, res, next) => {
     const { authorization } = req.headers ?? {};
+
+    if (optional && !authorization) next();
+
     const token = authorization?.replace?.(/^Bearer /, '');
 
     if (!token) return res.status(401).json({ error: 'No token found' });

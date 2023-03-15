@@ -11,14 +11,14 @@
     "name": "Break pads replacement - Front axle",
     "timeInMinutes": 45,
     "description": "",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Front break pads" }],
     "compatibleVehicles": []
   },
   {
     "name": "Break pads replacement - Rear axle",
     "timeInMinutes": 45,
     "description": "",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Rear break pads" }],
     "compatibleVehicles": []
   },
   {
@@ -39,21 +39,21 @@
     "name": "Wiper blade replacement",
     "timeInMinutes": 5,
     "description": "",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Wiper blade" }],
     "compatibleVehicles": []
   },
   {
-    "name": "Handle mechanics rebuild",
+    "name": "Door handle mechanics rebuild",
     "timeInMinutes": 90,
     "description": "Model S self-presenting handle mechanics fix",
-    "requiredParts": [],
-    "compatibleVehicles": []
+    "requiredParts": [{ "name": "Door handle rebuild kit" }],
+    "compatibleVehicles": [{ "make": "Tesla", "model": "Model S" }]
   },
   {
     "name": "Cabin air Filter Replacement",
     "timeInMinutes": 10,
     "description": "",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Cabin air filter" }],
     "compatibleVehicles": []
   },
   {
@@ -67,56 +67,56 @@
     "name": "12V battery Replacement",
     "timeInMinutes": 20,
     "description": "Low voltage lead-acid battery replacement",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "12V battery" }],
     "compatibleVehicles": []
   },
   {
     "name": "Charge port replacement",
     "timeInMinutes": 30,
     "description": "Replace broken charge port",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Charge port assembly" }],
     "compatibleVehicles": []
   },
   {
     "name": "Upgrade to MCU3",
     "timeInMinutes": 150,
     "description": "Media control unit (Amd Ryzen)",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "MCU 3 computer" }],
     "compatibleVehicles": []
   },
   {
     "name": "Upgrade to AP computer v3",
     "timeInMinutes": 150,
     "description": "Upgrade to FSD computer",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "AP computer v3" }],
     "compatibleVehicles": []
   },
   {
     "name": "Heat pump replacement",
     "timeInMinutes": 60,
     "description": "Replace heat pump scroll compressor",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Scroll compressor" }],
     "compatibleVehicles": []
   },
   {
     "name": "HV battery inspection",
     "timeInMinutes": 30,
     "description": "Re-certify vehicle for DC fast charging after Battery pack damage",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "HV battery pack" }],
     "compatibleVehicles": []
   },
   {
     "name": "Front shock replacement",
     "timeInMinutes": 120,
     "description": "Replace shocks on the front axle",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Front shocks" }],
     "compatibleVehicles": []
   },
   {
     "name": "Rear shock replacement",
     "timeInMinutes": 120,
     "description": "Replace shocks on the rear axle",
-    "requiredParts": [],
+    "requiredParts": [{ "name": "Rear shocks" }],
     "compatibleVehicles": []
   }
 ]
