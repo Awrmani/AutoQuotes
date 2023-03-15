@@ -118,7 +118,11 @@ export const getVehicleTypeOptions = createSelector(
 
     (vehicleTypeList ?? []).forEach(
       ({ make, model, modelYear, engineVariant, bodyType }) => {
-        set(options, [make, model, modelYear, engineVariant, bodyType], true);
+        set(
+          options,
+          [make, model, `_${modelYear}`, engineVariant, bodyType],
+          true
+        );
       }
     );
 
