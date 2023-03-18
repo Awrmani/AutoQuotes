@@ -11,6 +11,8 @@ const quoteList = require('./quoteList');
 const quoteCreate = require('./quoteCreate');
 const quoteGet = require('./quoteGet');
 const serviceList = require('./serviceList');
+const serviceAdd = require('./serviceAdd');
+const serviceDelete = require('./serviceDelete');
 
 const authenticator = authenticatorFactory({
   audience: 'enduser',
@@ -43,6 +45,14 @@ router.get('/quotes', authenticator, quoteList);
 router.get('/quotes/:quoteId', optionalAuthenticator, quoteGet);
 
 // services
+
+// This lists the services that are compatible with the vehicle
 router.get('/quotes/:quoteId/services', optionalAuthenticator, serviceList);
+router.put('/quotes/:quoteId/services', optionalAuthenticator, serviceAdd);
+router.delete(
+  '/quotes/:quoteId/services/:serviceTypeId',
+  optionalAuthenticator,
+  serviceDelete
+);
 
 module.exports = router;
