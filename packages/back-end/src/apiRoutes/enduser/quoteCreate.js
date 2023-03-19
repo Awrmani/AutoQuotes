@@ -9,17 +9,24 @@ const VehicleType = require('../../resources/VehicleType');
 
 module.exports = async (req, res) => {
   const customerId = req.user?.id; // user may be unauthenticated
-  const { vehicleTypeId } = req.body ?? {};
+  const { make, model, modelYear, engineVariant, bodyType } = req.body ?? {};
 
+  let vehicleType;
   try {
-    await new VehicleType().loadById(vehicleTypeId);
+    vehicleType = await new VehicleType().loadBy({
+      make,
+      model,
+      modelYear,
+      engineVariant,
+      bodyType,
+    });
   } catch (e) {
     throw new Error('Vehicle type not found');
   }
 
   const quote = new Quote({
     customerId,
-    vehicleTypeId,
+    vehicleTypeId: vehicleType.attributes.id,
     lineItems: [],
     isFinalized: false,
   });
