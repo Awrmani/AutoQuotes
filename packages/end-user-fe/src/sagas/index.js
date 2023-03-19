@@ -65,5 +65,9 @@ export default function* root() {
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
+    takeLatest(actionTypes.QUOTE_CREATE, apiCall, {
+      apiFn: endUserApi.createQuote,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
   ]);
 }

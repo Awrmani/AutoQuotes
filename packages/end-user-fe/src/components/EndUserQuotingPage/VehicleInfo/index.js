@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useCallback, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
@@ -10,7 +10,7 @@ import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
-  const { values } = useContext(formContext);
+  const { values, submitForm } = useContext(formContext);
   const { make, model, year, engine } = values;
   const vehicleOptions = useSelector(getVehicleTypeOptions);
 
@@ -64,6 +64,12 @@ const VehicleInfo = () => {
       })
     );
   }, [vehicleOptions, make, model, year, engine]);
+
+  useEffect(() => {
+    if (values.body) {
+      submitForm();
+    }
+  }, [values, submitForm]);
 
   return (
     <Container>

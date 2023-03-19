@@ -31,6 +31,12 @@ export const fetchVehicleTypeList = apiCall(() => ({
   url: '/vehicleTypes',
 }));
 
+export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}/services`,
+  method: 'GET',
+  data: { quoteId },
+}));
+
 // =====Form submits & other actions altering backend state======
 
 // Users
@@ -100,3 +106,9 @@ export const updateUser = apiCall(
     },
   })
 );
+
+export const createQuote = apiCall(({ make, model, year, engine, body }) => ({
+  url: `/quotes`,
+  method: 'PUT',
+  data: { make, model, year, engine, body },
+}));
