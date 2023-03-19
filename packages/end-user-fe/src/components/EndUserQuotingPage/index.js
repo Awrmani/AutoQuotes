@@ -10,19 +10,17 @@ import { createQuote } from '../../actions';
 const initialValues = {
   make: '',
   model: '',
-  year: '',
-  engine: '',
-  body: '',
+  modelYear: '',
+  engineVariant: '',
+  bodyType: '',
 };
 
 const EndUserQuotingPage = () => {
   const { setFieldValue } = useContext(formContext);
   const onSuccess = useCallback(
-    (...attributes) => {
-      console.log(attributes);
-      const quoteId = '';
+    ({ response }) => {
       // get the quoteId from attributes
-      setFieldValue('quoteId', quoteId);
+      setFieldValue('quoteId', response?.id);
     },
     [setFieldValue]
   );

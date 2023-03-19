@@ -111,10 +111,10 @@ const useForm = ({
 
   const submitForm = useCallback(() => {
     // If we are already submitting, stop here
-    if (isSubmitting) return;
+    if (formikBagRef.current?.isSubmitting) return;
 
     formikBagRef.current?.submitForm?.();
-  }, [isSubmitting]);
+  }, []);
 
   const formikBagToExport = useMemo(
     () => ({

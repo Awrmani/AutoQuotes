@@ -107,8 +107,16 @@ export const updateUser = apiCall(
   })
 );
 
-export const createQuote = apiCall(({ make, model, year, engine, body }) => ({
-  url: `/quotes`,
-  method: 'PUT',
-  data: { make, model, year, engine, body },
-}));
+export const createQuote = apiCall(
+  ({ make, model, modelYear, engineVariant, bodyType }) => ({
+    url: `/quotes`,
+    method: 'PUT',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
