@@ -34,7 +34,6 @@ export const fetchVehicleTypeList = apiCall(() => ({
 export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
   url: `/quotes/${quoteId}/services`,
   method: 'GET',
-  data: { quoteId },
 }));
 
 // =====Form submits & other actions altering backend state======

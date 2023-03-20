@@ -65,8 +65,17 @@ export default function* root() {
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
+
+    // Quotes
     takeLatest(actionTypes.QUOTE_CREATE, apiCall, {
       apiFn: endUserApi.createQuote,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Services
+
+    takeLatest(actionTypes.SERVICE_TYPE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchServiceTypeList,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
   ]);

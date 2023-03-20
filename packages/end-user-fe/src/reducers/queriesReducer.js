@@ -15,6 +15,9 @@ export default combineReducers({
   vehicleTypeList: queryReducer({
     triggerActionType: actionTypes.VEHICLE_TYPE_LIST_FETCH,
   }),
+  serviceTypeList: queryReducer({
+    triggerActionType: actionTypes.SERVICE_TYPE_LIST_FETCH,
+  }),
 });
 
 /**
@@ -32,3 +35,8 @@ export const getShopSettings = state => state.queries.shopSettings?.result;
 export const getVehicleTypeListQuery = state => state.queries.vehicleTypeList;
 export const getVehicleTypeList = state =>
   state.queries.vehicleTypeList?.result;
+
+// Service type list
+export const getServiceTypeListQuery = state => state.queries.serviceTypeList;
+export const getServiceTypeList = state =>
+  state.queries.serviceTypeList?.result;
