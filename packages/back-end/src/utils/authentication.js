@@ -22,7 +22,10 @@ const authenticatorFactory =
   async (req, res, next) => {
     const { authorization } = req.headers ?? {};
 
-    if (optional && !authorization) next();
+    if (optional && !authorization) {
+      next();
+      return undefined;
+    }
 
     const token = authorization?.replace?.(/^Bearer /, '');
 

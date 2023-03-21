@@ -7,12 +7,9 @@ import { fetchVehicleTypeList } from '../actions';
 import { getVehicleTypeListQuery } from '../reducers/queriesReducer';
 
 const initialValues = {
-  make: '',
-  model: '',
-  year: '',
-  engine: '',
-  body: '',
+  quoteId: '',
 };
+
 const EndUserQuotingPageScreen = () => {
   const dispatch = useDispatch();
 
@@ -35,6 +32,7 @@ const EndUserQuotingPageScreen = () => {
     );
   return (
     <Form
+      allowReinitialize
       initialValues={initialValues}
       validation={null}
       action={null}

@@ -31,6 +31,11 @@ export const fetchVehicleTypeList = apiCall(() => ({
   url: '/vehicleTypes',
 }));
 
+export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}/services`,
+  method: 'GET',
+}));
+
 // =====Form submits & other actions altering backend state======
 
 // Users
@@ -97,6 +102,20 @@ export const updateUser = apiCall(
       },
       // Only send pwd change request to BE if pwd field is not empty
       ...(password?.length && { password }),
+    },
+  })
+);
+
+export const createQuote = apiCall(
+  ({ make, model, modelYear, engineVariant, bodyType }) => ({
+    url: `/quotes`,
+    method: 'PUT',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
     },
   })
 );

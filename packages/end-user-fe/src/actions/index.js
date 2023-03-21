@@ -8,8 +8,14 @@ export const fetchVehicleTypeList = createAction(
   actionTypes.VEHICLE_TYPE_LIST_FETCH
 );
 
+export const fetchServiceTypeList = createAction(
+  actionTypes.SERVICE_TYPE_LIST_FETCH
+);
+
 // Form submits & other actions altering backend state
 export const login = createAction(actionTypes.LOGIN);
 
 export const registerUser = createAction(actionTypes.USER_REGISTER);
 export const updateUser = createAction(actionTypes.USER_UPDATE);
+
+export const createQuote = createAction(actionTypes.QUOTE_CREATE);

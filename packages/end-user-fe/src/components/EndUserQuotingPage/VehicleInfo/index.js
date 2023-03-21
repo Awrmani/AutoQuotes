@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
@@ -10,8 +10,8 @@ import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
-  const { values } = useContext(formContext);
-  const { make, model, year, engine } = values;
+  const { values, submitForm } = useContext(formContext);
+  const { make, model, modelYear, engineVariant, bodyType } = values;
   const vehicleOptions = useSelector(getVehicleTypeOptions);
 
   // Makes
@@ -44,26 +44,34 @@ const VehicleInfo = () => {
 
   // Engines
   const engineOptions = useMemo(() => {
-    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`]) return [optionDefault];
+    if (!vehicleOptions?.[make]?.[model]?.[`_${modelYear}`])
+      return [optionDefault];
 
-    return Object.keys(vehicleOptions[make][model][`_${year}`]).map(m => ({
+    return Object.keys(vehicleOptions[make][model][`_${modelYear}`]).map(m => ({
       value: m,
       label: m,
     }));
-  }, [vehicleOptions, make, model, year]);
+  }, [vehicleOptions, make, model, modelYear]);
 
   // Bodies
   const bodyOptions = useMemo(() => {
-    if (!vehicleOptions?.[make]?.[model]?.[`_${year}`]?.[engine])
+    if (!vehicleOptions?.[make]?.[model]?.[`_${modelYear}`]?.[engineVariant])
       return [optionDefault];
 
-    return Object.keys(vehicleOptions[make][model][`_${year}`][engine]).map(
-      m => ({
-        value: m,
-        label: m,
-      })
-    );
-  }, [vehicleOptions, make, model, year, engine]);
+    return Object.keys(
+      vehicleOptions[make][model][`_${modelYear}`][engineVariant]
+    ).map(m => ({
+      value: m,
+      label: m,
+    }));
+  }, [vehicleOptions, make, model, modelYear, engineVariant]);
+
+  useEffect(() => {
+    if (!make || !model || !modelYear || !engineVariant || !bodyType) return;
+
+    submitForm();
+    // All of the below has to be a dependency, if any changes and all are set, we will wnat to re-post
+  }, [make, model, modelYear, engineVariant, bodyType, submitForm]);
 
   return (
     <Container>
@@ -92,7 +100,7 @@ const VehicleInfo = () => {
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
-            name="year"
+            name="modelYear"
             label="Year"
             fullWidth
             options={yearOptions}
@@ -101,7 +109,7 @@ const VehicleInfo = () => {
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
-            name="engine"
+            name="engineVariant"
             label="Engine"
             fullWidth
             options={engineOptions}
@@ -110,7 +118,7 @@ const VehicleInfo = () => {
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
-            name="body"
+            name="bodyType"
             label="Body"
             fullWidth
             options={bodyOptions}
