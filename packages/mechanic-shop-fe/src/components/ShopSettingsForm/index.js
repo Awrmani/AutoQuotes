@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Container, Grid, Typography } from '@mui/material';
+import { DAY_OPTIONS } from '@autoquotes/libraries/src/constants/days';
 import {
   Field,
   SubmitButton,
@@ -7,7 +8,6 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import ImageInput from '@autoquotes/common/src/components/ImageInput';
 import TextInput from '@autoquotes/common/src/components/TextInput';
-import { DAYS } from '../../constants/days';
 
 /*
     openingHours,
@@ -149,7 +149,7 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        {DAYS.map(({ label, key }) => (
+        {DAY_OPTIONS.map(({ label, key }) => (
           <Fragment key={key}>
             <Grid item xs={3} data-testid={`openingHours-${key}-openHour`}>
               <Field

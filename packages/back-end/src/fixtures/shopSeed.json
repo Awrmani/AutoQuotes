@@ -5,6 +5,7 @@
     "slogan": "Where all the stars align",
     "email": "shop@sixix.denke.hu",
     "phone": "+1 (001) 2345678",
+    "timezone": "Canada/Eastern",
     "openingHours": {
       "monday": {
         "openHour": 9,
