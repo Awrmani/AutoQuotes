@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
@@ -25,7 +25,7 @@ const ServiceOptions = () => {
       <Typography component="h1" variant="h5">
         Service Options
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'left', m: 2 }}>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
@@ -35,6 +35,9 @@ const ServiceOptions = () => {
             options={services}
           />
         </Box>
+        <Button sx={{ ml: 10 }} variant="contained" size="large">
+          Add Service
+        </Button>
       </Box>
     </Container>
   );
