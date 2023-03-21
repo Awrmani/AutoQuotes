@@ -1,14 +1,5 @@
 const { pull } = require('lodash');
-
-const DAYS = {
-  MONDAY: 'monday',
-  TUESDAY: 'tuesday',
-  WEDNESDAY: 'wednesday',
-  THURSDAY: 'thursday',
-  FRIDAY: 'friday',
-  SATURDAY: 'saturday',
-  SUNDAY: 'sunday',
-};
+const { DAYS } = require('../../constants/days');
 
 const openingHours = oh => {
   if (typeof oh !== 'object') return 'must be an object';
