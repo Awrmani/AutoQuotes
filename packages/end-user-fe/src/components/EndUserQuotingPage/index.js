@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
 import { Box, Container, Divider, Paper } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form } from '@autoquotes/common/src/components/Form';
 import { createQuote, fetchServiceTypeList } from '../../actions';
@@ -26,20 +26,18 @@ const emptyQuotes = {
   ],
 };
 const EndUserQuotingPage = () => {
-  const { setFieldValue, values } = useContext(formContext);
   const dispatch = useDispatch();
-
+  const { setFieldValue } = useContext(formContext);
   // Hook responsible for loading part list from the BE
 
   const onSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
       setFieldValue('quoteId', response?.id);
-      const id = values.quoteId;
 
-      dispatch(fetchServiceTypeList({ quoteId: id }));
+      dispatch(fetchServiceTypeList({ quoteId: response?.id }));
     },
-    [setFieldValue, dispatch, values]
+    [setFieldValue, dispatch]
   );
 
   return (
@@ -57,7 +55,6 @@ const EndUserQuotingPage = () => {
       <Form initialValues={emptyQuotes} action={null} onSuccess={null}>
         <Box sx={{ my: 2 }}>
           <SelectedServices />
-          <Divider sx={{ mt: 2 }} />
         </Box>
       </Form>
 

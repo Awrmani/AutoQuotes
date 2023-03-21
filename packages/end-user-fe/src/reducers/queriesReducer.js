@@ -17,6 +17,7 @@ export default combineReducers({
   }),
   serviceTypeList: queryReducer({
     triggerActionType: actionTypes.SERVICE_TYPE_LIST_FETCH,
+    purgeActionTypes: [actionTypes.QUOTE_CREATE],
   }),
 });
 

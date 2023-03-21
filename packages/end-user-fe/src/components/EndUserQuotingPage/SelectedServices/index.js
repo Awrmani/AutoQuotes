@@ -10,35 +10,34 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import ServiceRow from './ServiceRow';
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(service, selectedPart) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: 'Part 1',
-        customerId: '123',
-        amount: 3,
-      },
-      {
-        date: 'Part 2',
-        customerId: '12',
-        amount: 1,
-      },
-    ],
+    service: {
+      name: service.name,
+      hourlyRate: service.hourlyRate,
+      duration: service.duration,
+      discount: service.discount,
+    },
+    selectedParts: [selectedPart, selectedPart, selectedPart],
   };
 }
+const service = {
+  name: 'Break pads replacement - Rear axle',
+  hourlyRate: 26.0,
+  duration: 90,
+  discount: 0.1,
+};
+const selectedPart = {
+  name: 'Rear break pads',
+  unitPrice: 100,
+  quantity: 2,
+  discount: 0.1,
+};
 
-const rows = [
-  createData('Tire rotation', 159, 6.0, 24, 4.0, 3.99),
-  createData('Break pads replacement - Front axle', 237, 9.0, 37, 4.3, 4.99),
-  createData('Break pads replacement - Rear axle', 262, 16.0, 24, 6.0, 3.79),
-  createData('Suspension Alignment', 305, 3.7, 67, 4.3, 2.5),
-  createData('Software redeploy', 356, 16.0, 49, 3.9, 1.5),
+const lineItems = [
+  createData(service, selectedPart),
+  createData(service, selectedPart),
+  createData(service, selectedPart),
 ];
 
 const SelectedServices = () => {
@@ -48,10 +47,10 @@ const SelectedServices = () => {
         Selected Services
       </Typography>
       <TableContainer>
-        <Table aria-label="collapsible table">
+        <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ width: 50 }} />
+              <TableCell sx={{ width: 50 }}>#</TableCell>
               <TableCell sx={{ fontWeight: 700 }}>Services</TableCell>
               <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
                 Hourly Rate/ Price
@@ -71,8 +70,8 @@ const SelectedServices = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <ServiceRow key={row.name} row={row} />
+            {lineItems.map((row, index) => (
+              <ServiceRow key={row.service.name} row={row} index={index} />
             ))}
           </TableBody>
         </Table>

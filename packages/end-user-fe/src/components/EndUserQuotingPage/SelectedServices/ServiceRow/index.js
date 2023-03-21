@@ -1,104 +1,84 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
+
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 import { Delete } from '@mui/icons-material';
 
+const style = { width: '120px', borderBottom: 'none' };
+
 const ServiceRow = props => {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+  const { row, index } = props;
+  const { service, selectedParts } = row;
 
   return (
     <React.Fragment>
       <TableRow sx={{ px: 0 }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+        <TableCell sx={{ borderBottom: 'none' }}> {index + 1}</TableCell>
+        <TableCell
+          sx={{ width: 300, borderBottom: 'none' }}
+          component="th"
+          scope="row"
+        >
+          {service.name}
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
+        <TableCell sx={style} align="right">
+          ${service.hourlyRate.toFixed(2)}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
-        <TableCell align="right">
+        <TableCell sx={style} align="right">
+          {service.duration / 60}
+        </TableCell>
+        <TableCell sx={style} align="right">
+          {service.discount * 100}%
+        </TableCell>
+        <TableCell sx={style} align="right">
+          $
+          {(
+            (service.duration / 60) *
+            service.hourlyRate *
+            (1 - service.discount)
+          ).toFixed(2)}
+        </TableCell>
+        <TableCell sx={{ width: 8, borderBottom: 'none' }} align="right">
           <Delete sx={{ color: 'red' }} />
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ mr: 0, ml: 14, mb: 2 }}>
-              <Table size="small">
-                {/* <TableHead>
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell sx={{ fontWeight: 550 }}>Part</TableCell>
+        <TableCell style={{ padding: 0 }} colSpan={7}>
+          <Box sx={{ mr: 7, ml: 14, mb: 2 }}>
+            <Table size="small">
+              <TableBody>
+                {selectedParts.map(p => (
+                  <TableRow key={p.date}>
                     <TableCell
-                      sx={{ fontWeight: 550, width: 120 }}
-                      align="right"
+                      sx={{ width: 264, borderBottom: 'none' }}
+                      component="th"
+                      scope="row"
                     >
-                      Price
+                      {p.name}
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 550, width: 120 }}
-                      align="right"
-                    >
-                      Quantity
+                    <TableCell sx={style} align="right">
+                      ${p.unitPrice.toFixed(2)}
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 550, width: 120 }}
-                      align="right"
-                    >
-                      Discount (%)
+                    <TableCell sx={style} align="right">
+                      {p.quantity}
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 550, width: 120 }}
-                      align="right"
-                    >
-                      Price ($)
+                    <TableCell sx={style} align="right">
+                      {p.discount * 100}%
+                    </TableCell>
+                    <TableCell style={style} align="right">
+                      $
+                      {(p.unitPrice * p.quantity * (1 - p.discount)).toFixed(2)}
                     </TableCell>
                   </TableRow>
-                </TableHead> */}
-                <TableBody>
-                  {row.history.map(historyRow => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell sx={{ width: 120 }} align="right">
-                        {historyRow.customerId}
-                      </TableCell>
-                      <TableCell sx={{ width: 120 }} align="right">
-                        {historyRow.amount}
-                      </TableCell>
-                      <TableCell sx={{ width: 120 }} align="right">
-                        {historyRow.amount}
-                      </TableCell>
-                      <TableCell sx={{ width: 120 }} align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -106,21 +86,23 @@ const ServiceRow = props => {
 };
 
 ServiceRow.propTypes = {
+  index: PropTypes.number.isRequired,
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
+    service: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      hourlyRate: PropTypes.number.isRequired,
+      duration: PropTypes.number.isRequired,
+      discount: PropTypes.number.isRequired,
+    }).isRequired,
+    selectedParts: PropTypes.arrayOf(
       PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        unitPrice: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+        discount: PropTypes.number.isRequired,
       })
     ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default ServiceRow;
