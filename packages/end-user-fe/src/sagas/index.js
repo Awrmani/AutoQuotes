@@ -78,5 +78,13 @@ export default function* root() {
       apiFn: endUserApi.fetchServiceTypeList,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
+    takeLatest(actionTypes.QUOTE_DETAILS_FETCH, apiCall, {
+      apiFn: endUserApi.fetchQuoteDetails,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_ADD, apiCall, {
+      apiFn: endUserApi.addService,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
   ]);
 }

@@ -124,7 +124,7 @@ export const createQuote = apiCall(
   })
 );
 
-export const addQuote = apiCall(({ quoteId, serviceTypeId }) => ({
+export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
   url: `/quotes/${quoteId}/services`,
   method: 'PUT',
   data: { serviceTypeId },

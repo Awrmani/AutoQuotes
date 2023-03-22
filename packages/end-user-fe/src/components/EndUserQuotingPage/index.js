@@ -20,26 +20,15 @@ const initialValues = {
   engineVariant: '',
   bodyType: '',
 };
-
-const emptyQuotes = {
-  id: '',
-  lineItems: [
-    {
-      serviceTypeId: '',
-      selectedParts: [],
-    },
-  ],
-};
-
 const emptyService = {
-  service: '',
+  quoteId: '',
+  serviceTypeId: '',
 };
 
 const EndUserQuotingPage = () => {
   const dispatch = useDispatch();
-  const { values } = useContext(formContext);
+  const { setFieldValue, values } = useContext(formContext);
   const { quoteId } = values;
-  const { setFieldValue } = useContext(formContext);
   // Hook responsible for loading part list from the BE
 
   const onSuccess = useCallback(
@@ -68,22 +57,23 @@ const EndUserQuotingPage = () => {
           <Divider sx={{ mt: 2 }} />
         </Box>
       </Form>
-      <Form initialValues={emptyQuotes} action={null} onSuccess={null}>
-        <Box sx={{ my: 2 }}>
-          <SelectedServices />
-        </Box>
-      </Form>
 
-      <Form
-        initialValues={emptyService}
-        action={addService}
-        onSuccess={serviceOptionsOnSuccess}
-      >
-        <Box sx={{ my: 2 }}>
-          <ServiceOptions />
-          <Divider sx={{ mt: 2 }} />
-        </Box>
-      </Form>
+      <Box sx={{ my: 2 }}>
+        <SelectedServices />
+      </Box>
+      {quoteId ? (
+        <Form
+          initialValues={emptyService}
+          action={addService}
+          onSuccess={serviceOptionsOnSuccess}
+        >
+          <Box sx={{ my: 2 }}>
+            <ServiceOptions quoteId={quoteId} />
+            <Divider sx={{ mt: 2 }} />
+          </Box>
+        </Form>
+      ) : null}
+
       <div>End-user front-end</div>
     </Container>
   );

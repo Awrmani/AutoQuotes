@@ -10,7 +10,6 @@ import { getServiceTypeList } from '../../../reducers/queriesReducer';
 
 const ServiceOptions = () => {
   const serviceList = useSelector(getServiceTypeList);
-
   const services = useMemo(() => {
     if (serviceList) {
       return serviceList.map(s => ({
@@ -29,7 +28,7 @@ const ServiceOptions = () => {
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
           <Field
             component={Dropdown}
-            name="service"
+            name="serviceTypeId"
             label="Service"
             fullWidth
             options={services}
