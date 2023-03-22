@@ -1,5 +1,4 @@
 import fetcherFactory from '@autoquotes/libraries/src/utils/fetcherFactory';
-import { method } from 'lodash';
 
 const apiCall = fetcherFactory({
   timeout: 30000,
