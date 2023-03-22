@@ -3,7 +3,12 @@ import { Box, Container, Divider, Paper } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form } from '@autoquotes/common/src/components/Form';
-import { createQuote, fetchServiceTypeList } from '../../actions';
+import {
+  addService,
+  createQuote,
+  fetchQuoteDetails,
+  fetchServiceTypeList,
+} from '../../actions';
 import VehicleInfo from './VehicleInfo';
 import ServiceOptions from './ServiceOptions';
 import SelectedServices from './SelectedServices';
@@ -25,8 +30,15 @@ const emptyQuotes = {
     },
   ],
 };
+
+const emptyService = {
+  service: '',
+};
+
 const EndUserQuotingPage = () => {
   const dispatch = useDispatch();
+  const { values } = useContext(formContext);
+  const { quoteId } = values;
   const { setFieldValue } = useContext(formContext);
   // Hook responsible for loading part list from the BE
 
@@ -39,6 +51,10 @@ const EndUserQuotingPage = () => {
     },
     [setFieldValue, dispatch]
   );
+
+  const serviceOptionsOnSuccess = useCallback(() => {
+    dispatch(fetchQuoteDetails({ quoteId }));
+  }, [quoteId, dispatch]);
 
   return (
     <Container component={Paper}>
@@ -58,11 +74,16 @@ const EndUserQuotingPage = () => {
         </Box>
       </Form>
 
-      <Box sx={{ my: 2 }}>
-        <ServiceOptions />
-        <Divider sx={{ mt: 2 }} />
-      </Box>
-
+      <Form
+        initialValues={emptyService}
+        action={addService}
+        onSuccess={serviceOptionsOnSuccess}
+      >
+        <Box sx={{ my: 2 }}>
+          <ServiceOptions />
+          <Divider sx={{ mt: 2 }} />
+        </Box>
+      </Form>
       <div>End-user front-end</div>
     </Container>
   );

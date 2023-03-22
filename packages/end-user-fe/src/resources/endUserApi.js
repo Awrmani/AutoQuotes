@@ -1,4 +1,5 @@
 import fetcherFactory from '@autoquotes/libraries/src/utils/fetcherFactory';
+import { method } from 'lodash';
 
 const apiCall = fetcherFactory({
   timeout: 30000,
@@ -36,6 +37,10 @@ export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
   method: 'GET',
 }));
 
+export const fetchQuoteDetails = apiCall(quoteId => ({
+  url: `/quotes/${quoteId}`,
+  method: 'GET',
+}));
 // =====Form submits & other actions altering backend state======
 
 // Users
@@ -119,3 +124,9 @@ export const createQuote = apiCall(
     },
   })
 );
+
+export const addQuote = apiCall(({ quoteId, serviceTypeId }) => ({
+  url: `/quotes/${quoteId}/services`,
+  method: 'PUT',
+  data: { serviceTypeId },
+}));

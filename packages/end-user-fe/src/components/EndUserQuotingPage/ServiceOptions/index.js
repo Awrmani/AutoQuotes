@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
-import { Field } from '@autoquotes/common/src/components/Form';
+import { Field, SubmitButton } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
@@ -35,9 +35,9 @@ const ServiceOptions = () => {
             options={services}
           />
         </Box>
-        <Button sx={{ ml: 10 }} variant="contained" size="large">
+        <SubmitButton sx={{ ml: 10 }} variant="contained" size="large">
           Add Service
-        </Button>
+        </SubmitButton>
       </Box>
     </Container>
   );
