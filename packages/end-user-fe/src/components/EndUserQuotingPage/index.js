@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { Box, Container, Divider, Paper } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
@@ -20,22 +20,24 @@ const initialValues = {
   engineVariant: '',
   bodyType: '',
 };
-const emptyService = {
-  quoteId: '',
-  serviceTypeId: '',
-};
 
 const EndUserQuotingPage = () => {
   const dispatch = useDispatch();
+
   const { setFieldValue, values } = useContext(formContext);
   const { quoteId } = values;
+  const initialService = useMemo(() => {
+    return {
+      quoteId,
+      serviceTypeId: '',
+    };
+  }, [quoteId]);
   // Hook responsible for loading part list from the BE
 
   const onSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
       setFieldValue('quoteId', response?.id);
-
       dispatch(fetchServiceTypeList({ quoteId: response?.id }));
     },
     [setFieldValue, dispatch]
@@ -61,18 +63,17 @@ const EndUserQuotingPage = () => {
       <Box sx={{ my: 2 }}>
         <SelectedServices />
       </Box>
-      {quoteId ? (
-        <Form
-          initialValues={emptyService}
-          action={addService}
-          onSuccess={serviceOptionsOnSuccess}
-        >
-          <Box sx={{ my: 2 }}>
-            <ServiceOptions quoteId={quoteId} />
-            <Divider sx={{ mt: 2 }} />
-          </Box>
-        </Form>
-      ) : null}
+      <Form
+        enableReinitialize
+        initialValues={initialService}
+        action={addService}
+        onSuccess={serviceOptionsOnSuccess}
+      >
+        <Box sx={{ my: 2 }}>
+          <ServiceOptions />
+          <Divider sx={{ mt: 2 }} />
+        </Box>
+      </Form>
 
       <div>End-user front-end</div>
     </Container>
