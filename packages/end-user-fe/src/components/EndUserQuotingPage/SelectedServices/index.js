@@ -71,7 +71,7 @@ const SelectedServices = () => {
           </TableHead>
           <TableBody>
             {lineItems.map((row, index) => (
-              <ServiceRow key={row.service.name} row={row} index={index} />
+              <ServiceRow row={row} index={index} />
             ))}
           </TableBody>
         </Table>

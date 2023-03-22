@@ -3,8 +3,8 @@ const listServiceTypesForVehicleTypeId = require('../../utils/listServiceTypesFo
 
 module.exports = async (req, res) => {
   const customerId = req.user?.id; // user may or may not be logged in
-  const { quoteId, serviceTypeId } = req.params;
-
+  const { quoteId } = req.params;
+  const { serviceTypeId } = req.body ?? {};
   const quote = await loadQuote({ customerId, quoteId });
   const compatibleServices = await listServiceTypesForVehicleTypeId(
     quote.attributes.vehicleTypeId
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     )
   )
     throw new Error(
-      'The provided serviceTypeId does not exist or is not compatible with the vehicle'
+      `The provided serviceTypeId does not exist or is not compatible with the vehicle`
     );
 
   // Verify that we do not yet have such a service type added to the quote

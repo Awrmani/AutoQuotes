@@ -19,6 +19,9 @@ export default combineReducers({
     triggerActionType: actionTypes.SERVICE_TYPE_LIST_FETCH,
     purgeActionTypes: [actionTypes.QUOTE_CREATE],
   }),
+  quoteDetails: queryReducer({
+    triggerActionType: actionTypes.QUOTE_DETAILS_FETCH,
+  }),
 });
 
 /**
@@ -41,3 +44,7 @@ export const getVehicleTypeList = state =>
 export const getServiceTypeListQuery = state => state.queries.serviceTypeList;
 export const getServiceTypeList = state =>
   state.queries.serviceTypeList?.result;
+
+// Quote details
+export const getQuoteDetailsQuery = state => state.queries.quoteDetails;
+export const getQuoteDetails = state => state.queries.quoteDetails?.result;

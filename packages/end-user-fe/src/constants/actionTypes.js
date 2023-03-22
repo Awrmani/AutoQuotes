@@ -9,6 +9,7 @@ export const VEHICLE_TYPE_LIST_FETCH = 'VEHICLE_TYPE_LIST_FETCH';
 
 export const SERVICE_TYPE_LIST_FETCH = 'SERVICE_TYPE_LIST_FETCH';
 
+export const QUOTE_DETAILS_FETCH = 'QUOTE_DETAILS_FETCH';
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
 
@@ -19,3 +20,7 @@ export const USER_UPDATE = 'USER_UPDATE';
 // Quotes
 
 export const QUOTE_CREATE = 'QUOTE_CREATE';
+
+// Services
+
+export const SERVICE_ADD = 'SERVICE_ADD';
