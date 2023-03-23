@@ -6,7 +6,7 @@ const { groupBy } = require('lodash');
  * - Two appointments cannot overlap, in fact there must be at least 15 mins
  * between two appointments for the given stall for moving out the previous
  * vehicle, cleaning up the stall coffee etc.
- * - The system also has to obey stallCount and openingHours
+ * - The system also has to obey numberOfStalls and openingHours
  */
 
 const MIN_TIME_BETWEEN_APPOINTMENTS = 15;
@@ -98,7 +98,7 @@ const getAppointmentTimeOptions = ({
   existingAppointments,
   openDate, // Date obj with appropriate date/time
   closeDate, // Date obj with appropriate date/time
-  stallCount,
+  numberOfStalls,
   appointmentLengthMins,
 }) => {
   // Grop existing appointments by stall
@@ -108,7 +108,7 @@ const getAppointmentTimeOptions = ({
   );
 
   // Add missing groups (in case there was no appointment to that stall yet)
-  new Array(stallCount).fill().forEach((_, index) => {
+  new Array(numberOfStalls).fill().forEach((_, index) => {
     grouped[index + 1] ||= [];
   });
 
