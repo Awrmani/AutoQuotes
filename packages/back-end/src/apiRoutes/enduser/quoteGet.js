@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   const { quoteId } = req.params;
 
   const shop = await new Shop().loadBy({});
-  const { hourlyPriceOfLabour } = shop.attributes;
+  const { hourlyPriceOfLabor } = shop.attributes;
   const quote = await loadQuote({ customerId, quoteId });
 
   // Expand the line items with the service type and all available options
@@ -42,10 +42,10 @@ module.exports = async (req, res) => {
         serviceTypeId,
         name: serviceType.attributes.name,
         timeInMinutes: serviceType.attributes.timeInMinutes,
-        labourCost:
+        laborCost:
           Math.round(
             (serviceType.attributes.timeInMinutes / 60) *
-              hourlyPriceOfLabour *
+              hourlyPriceOfLabor *
               100
           ) / 100,
         description: serviceType.attributes.description,
