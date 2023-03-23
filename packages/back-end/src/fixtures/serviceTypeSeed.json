@@ -8,6 +8,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "BreakJobFron",
     "name": "Break pads replacement - Front axle",
     "timeInMinutes": 45,
     "description": "",
