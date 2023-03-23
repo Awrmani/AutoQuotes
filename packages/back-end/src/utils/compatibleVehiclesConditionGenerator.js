@@ -10,6 +10,8 @@ const compatibleVehiclesConditionGenerator = ({ make, model, modelYear }) => {
   const generatedCondition = {
     $or: [
       { compatibleVehicles: { $eq: [] } },
+      { compatibleVehicles: { $eq: null } },
+      { compatibleVehicles: { $exists: false } },
       {
         compatibleVehicles: {
           $elemMatch: {
@@ -18,12 +20,12 @@ const compatibleVehiclesConditionGenerator = ({ make, model, modelYear }) => {
               condition({ attribute: 'model', relation: '$eq', value: model }),
               condition({
                 attribute: 'fromYear',
-                relation: '$gte',
+                relation: '$lte',
                 value: modelYear,
               }),
               condition({
                 attribute: 'toYear',
-                relation: '$lte',
+                relation: '$gte',
                 value: modelYear,
               }),
             ],

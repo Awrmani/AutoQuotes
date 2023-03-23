@@ -38,6 +38,7 @@ const EndUserQuotingPage = () => {
     ({ response }) => {
       // get the quoteId from attributes
       setFieldValue('quoteId', response?.id);
+      dispatch(fetchQuoteDetails({ quoteId: response?.id }));
       dispatch(fetchServiceTypeList({ quoteId: response?.id }));
     },
     [setFieldValue, dispatch]
