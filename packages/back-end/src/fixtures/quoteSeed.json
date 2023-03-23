@@ -9,7 +9,7 @@
         "selectedParts": []
       },
       {
-        "serviceTypeId": "Break pads replacement - Front axle",
+        "serviceTypeId": "BreakJobFron",
         "selectedParts": [
           {
             "id": "FrontBreakPa",

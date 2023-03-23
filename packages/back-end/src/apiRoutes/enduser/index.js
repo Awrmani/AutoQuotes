@@ -57,4 +57,7 @@ router.delete(
   serviceDelete
 );
 
+// Appointments
+router.get('/quotes/:quoteId/appointmentOptions', authenticator);
+
 module.exports = router;

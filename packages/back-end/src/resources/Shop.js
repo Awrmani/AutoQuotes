@@ -152,7 +152,7 @@ class Shop extends ResourceBase {
         second: 0,
         millisecond: 0,
       })
-      .toISO();
+      .toJSDate();
 
     const closeDate = incomingDtShopTz
       .set({
@@ -161,7 +161,7 @@ class Shop extends ResourceBase {
         second: 0,
         millisecond: 0,
       })
-      .toISO();
+      .toJSDate();
 
     // Return ISO format, **with correct tz set**
     return { dayName, openingHoursForDay, isOpen: true, openDate, closeDate };
