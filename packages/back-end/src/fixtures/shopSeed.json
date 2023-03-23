@@ -49,6 +49,7 @@
     "zip": "M5V 0A0",
     "city": "Toronto",
     "state": "ON",
-    "country": "Canada"
+    "country": "Canada",
+    "hourlyPriceOfLabour": 130
   }
 ]

@@ -1,17 +1,18 @@
 const loadQuote = require('../../utils/loadQuote');
 const ServiceType = require('../../resources/ServiceType');
+const Shop = require('../../resources/Shop');
 const listCompatiblePartsForQuoteServiceType = require('../../utils/listCompatiblePartsForQuoteServiceType');
 
 /**
- * ok, so now what you get is the "serviceTypeId"
- * Additionally, you'll need the actual serviceType
- * and for that service type the compatible parts for each row in it
+ * todo calculate cost of work
  */
 
 module.exports = async (req, res) => {
   const customerId = req.user?.id; // user may or may not be logged in
   const { quoteId } = req.params;
 
+  const shop = await new Shop().loadBy({});
+  const { hourlyPriceOfLabour } = shop.attributes;
   const quote = await loadQuote({ customerId, quoteId });
 
   // Expand the line items with the service type and all available options
@@ -41,6 +42,12 @@ module.exports = async (req, res) => {
         serviceTypeId,
         name: serviceType.attributes.name,
         timeInMinutes: serviceType.attributes.timeInMinutes,
+        labourCost:
+          Math.round(
+            (serviceType.attributes.timeInMinutes / 60) *
+              hourlyPriceOfLabour *
+              100
+          ) / 100,
         description: serviceType.attributes.description,
         requiredParts,
       };

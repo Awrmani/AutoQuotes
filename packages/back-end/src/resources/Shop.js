@@ -78,6 +78,7 @@ const shopSchema = new mongoose.Schema(
     city: String,
     state: String,
     country: String,
+    hourlyPriceOfLabour: Number,
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -114,6 +115,7 @@ const validatorConfig = {
   city: [stringValidators.required],
   state: [stringValidators.required],
   country: [stringValidators.required],
+  hourlyPriceOfLabour: [numberValidators.required],
 };
 
 class Shop extends ResourceBase {
