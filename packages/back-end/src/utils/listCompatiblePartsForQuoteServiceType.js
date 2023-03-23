@@ -60,6 +60,7 @@ const listCompatiblePartsForQuoteServiceType = async ({
 
   const nestedOptionPromises = serviceType.attributes.requiredParts.map(
     async ({ name: partName }) => ({
+      name: partName,
       options: await listCompatiblePartsForPartRow({
         make,
         model,

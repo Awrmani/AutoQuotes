@@ -28,9 +28,10 @@ module.exports = async (req, res) => {
       });
 
       // Map over all the required parts combine selection with options
-      const requiredParts = compatibleParts.map(({ options }, index) => {
+      const requiredParts = compatibleParts.map(({ name, options }, index) => {
         const selectedPartId = selectedParts?.[index]?.id;
         return {
+          name,
           selected: selectedPartId ?? null,
           options,
         };
@@ -38,6 +39,7 @@ module.exports = async (req, res) => {
 
       return {
         serviceTypeId,
+        name: serviceType.attributes.name,
         timeInMinutes: serviceType.attributes.timeInMinutes,
         description: serviceType.attributes.description,
         requiredParts,
