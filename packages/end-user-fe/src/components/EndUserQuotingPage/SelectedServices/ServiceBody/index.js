@@ -11,17 +11,13 @@ import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuoteDetails, removeService } from '../../../../actions';
-import {
-  getQuoteDetails,
-  getQuoteDetailsQuery,
-} from '../../../../reducers/queriesReducer';
+import { getQuoteDetailsQuery } from '../../../../reducers/queriesReducer';
 
 const style = { width: '120px', borderBottom: 'none' };
 
 const ServiceBody = () => {
   const dispatch = useDispatch();
   const quoteDetailsQuery = useSelector(getQuoteDetailsQuery);
-  const quoteDetails = useSelector(getQuoteDetails);
   const { isFetching, result } = quoteDetailsQuery ?? {};
   const handleDeleteClick = useCallback(
     ({ quoteId, serviceTypeId }) => {
@@ -39,7 +35,7 @@ const ServiceBody = () => {
 
   // getting lineItems and quoteID from quoteDetails after making sure we have data
   // if statement above
-  const { lineItems, id: quoteId } = quoteDetails;
+  const { lineItems, id: quoteId } = result;
 
   return (
     <TableBody>
@@ -64,15 +60,10 @@ const ServiceBody = () => {
               {0}%
             </TableCell>
             <TableCell sx={style} align="right">
-              $
-              {(
-                (service.timeInMinutes / 60) *
-                service.laborCost *
-                (1 - 0)
-              ).toFixed(2)}
+              ${service.laborCost}
             </TableCell>
             <TableCell sx={{ width: 8, borderBottom: 'none' }} align="right">
-              <Tooltip title="Delete">
+              <Tooltip title="Remove">
                 <IconButton
                   onClick={() =>
                     handleDeleteClick({
