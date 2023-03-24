@@ -8,7 +8,7 @@ import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 import { getServiceTypeList } from '../../../reducers/queriesReducer';
 
-const ServiceOptions = () => {
+const AddServiceForm = () => {
   const serviceList = useSelector(getServiceTypeList);
   const services = useMemo(() => {
     if (serviceList) {
@@ -22,7 +22,7 @@ const ServiceOptions = () => {
   return (
     <Container>
       <Typography component="h1" variant="h5">
-        Service Options
+        Add a service
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'left', m: 2 }}>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
@@ -42,4 +42,4 @@ const ServiceOptions = () => {
   );
 };
 
-export default ServiceOptions;
+export default AddServiceForm;

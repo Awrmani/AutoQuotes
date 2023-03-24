@@ -10,7 +10,7 @@ import { Delete } from '@mui/icons-material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuoteDetails, removeService } from '../../../../actions';
+import { removeService } from '../../../../actions';
 import { getQuoteDetailsQuery } from '../../../../reducers/queriesReducer';
 
 const style = { width: '120px', borderBottom: 'none' };
@@ -18,30 +18,23 @@ const style = { width: '120px', borderBottom: 'none' };
 const ServiceBody = () => {
   const dispatch = useDispatch();
   const quoteDetailsQuery = useSelector(getQuoteDetailsQuery);
-  const { isFetching, result } = quoteDetailsQuery ?? {};
-  const handleDeleteClick = useCallback(
-    ({ quoteId, serviceTypeId }) => {
-      // eslint-disable-next-line no-alert
-      if (window.confirm('Are you sure you want to remove?')) {
-        dispatch(removeService({ quoteId, serviceTypeId }));
-      }
-      dispatch(fetchQuoteDetails({ quoteId }));
-    },
-    [dispatch]
-  );
-  if (isFetching || !result) {
-    return null;
-  }
+  const { result } = quoteDetailsQuery ?? {};
+  const { lineItems, id: quoteId } = result ?? {};
 
-  // getting lineItems and quoteID from quoteDetails after making sure we have data
-  // if statement above
-  const { lineItems, id: quoteId } = result;
+  const handleDeleteClick = useCallback(
+    serviceTypeId => {
+      // eslint-disable-next-line no-alert
+
+      dispatch(removeService({ quoteId, serviceTypeId }));
+    },
+    [dispatch, quoteId]
+  );
 
   return (
     <TableBody>
-      {lineItems.map((service, index) => (
+      {lineItems?.map((service, index) => (
         <>
-          <TableRow sx={{ px: 0 }}>
+          <TableRow key={service.serviceTypeId} sx={{ px: 0 }}>
             <TableCell sx={{ borderBottom: 'none' }}> {index + 1}</TableCell>
             <TableCell
               sx={{ width: 300, borderBottom: 'none' }}
@@ -51,26 +44,16 @@ const ServiceBody = () => {
               {service.name}
             </TableCell>
             <TableCell sx={style} align="right">
-              ${service.laborCost.toFixed(2)}
-            </TableCell>
-            <TableCell sx={style} align="right">
               {(service.timeInMinutes / 60).toFixed(2)}
-            </TableCell>
-            <TableCell sx={style} align="right">
-              {0}%
             </TableCell>
             <TableCell sx={style} align="right">
               ${service.laborCost}
             </TableCell>
+            <TableCell sx={style} align="right"></TableCell>
             <TableCell sx={{ width: 8, borderBottom: 'none' }} align="right">
               <Tooltip title="Remove">
                 <IconButton
-                  onClick={() =>
-                    handleDeleteClick({
-                      quoteId,
-                      serviceTypeId: service.serviceTypeId,
-                    })
-                  }
+                  onClick={() => handleDeleteClick(service.serviceTypeId)}
                 >
                   <Delete />
                 </IconButton>
@@ -107,12 +90,7 @@ const ServiceBody = () => {
                             <TableCell sx={style} align="right">
                               {/* ${partOption.price.toFixed(2)} */}
                             </TableCell>
-                            <TableCell sx={style} align="right">
-                              {1}
-                            </TableCell>
-                            <TableCell sx={style} align="right">
-                              {0}%
-                            </TableCell>
+                            <TableCell sx={style} align="right"></TableCell>
                             <TableCell style={style} align="right">
                               {/* ${(partOption.price * 1 * (1 - 0)).toFixed(2)} */}
                             </TableCell>
