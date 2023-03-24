@@ -27,6 +27,7 @@ const validator = validatorFactory({
   phone: [stringValidators.required],
   numberOfStalls: [stringValidators.asNumber(numberValidators.required)],
   hourlyPriceOfLabor: [stringValidators.asNumber(numberValidators.required)],
+  partMarkupPercent: [stringValidators.asNumber(numberValidators.required)],
   returnPolicyUrl: [stringValidators.required],
   termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],

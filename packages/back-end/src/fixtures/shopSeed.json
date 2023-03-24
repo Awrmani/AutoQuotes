@@ -41,6 +41,8 @@
       "sunday": {}
     },
     "numberOfStalls": 6,
+    "hourlyPriceOfLabor": 130,
+    "partMarkupPercent": 30,
     "returnPolicyUrl": "https://sixix.denke.hu/returnPolicy.pdf",
     "termsAndConditionsUrl": "https://sixix.denke.hu/termsAndConditions.pdf",
     "privacyPolicyUrl": "https://sixix.denke.hu/privacyPolicy.pdf",
@@ -49,7 +51,6 @@
     "zip": "M5V 0A0",
     "city": "Toronto",
     "state": "ON",
-    "country": "Canada",
-    "hourlyPriceOfLabor": 130
+    "country": "Canada"
   }
 ]

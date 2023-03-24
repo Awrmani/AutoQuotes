@@ -59,6 +59,15 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
+        <Grid item xs={12}>
+          <Field
+            required
+            component={TextInput}
+            name="partMarkupPercent"
+            label="Third party supplier part markup %"
+            fullWidth
+          />
+        </Grid>
         <Grid item xs={12} marginTop={4}>
           <Typography variant="h6" gutterBottom>
             Contact & Address

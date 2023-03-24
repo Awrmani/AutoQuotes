@@ -69,6 +69,8 @@ const shopSchema = new mongoose.Schema(
       },
     },
     numberOfStalls: Number,
+    hourlyPriceOfLabor: Number,
+    partMarkupPercent: Number,
     returnPolicyUrl: String,
     termsAndConditionsUrl: String,
     privacyPolicyUrl: String,
@@ -78,7 +80,6 @@ const shopSchema = new mongoose.Schema(
     city: String,
     state: String,
     country: String,
-    hourlyPriceOfLabor: Number,
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
@@ -106,6 +107,8 @@ const validatorConfig = {
   timezone: [stringValidators.required],
   openingHours: [openingHoursValidator.openingHours],
   numberOfStalls: [numberValidators.required],
+  partMarkupPercent: [numberValidators.required],
+  hourlyPriceOfLabor: [numberValidators.required],
   returnPolicyUrl: [stringValidators.required],
   termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],
@@ -115,7 +118,6 @@ const validatorConfig = {
   city: [stringValidators.required],
   state: [stringValidators.required],
   country: [stringValidators.required],
-  hourlyPriceOfLabor: [numberValidators.required],
 };
 
 class Shop extends ResourceBase {
