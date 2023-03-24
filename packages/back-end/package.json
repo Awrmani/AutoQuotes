@@ -13,9 +13,9 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "luxon": "3.3.0",
-    "mongodb-memory-server": "^8.11.4",
+    "mongodb-memory-server": "^8.12.1",
     "mongoose": "^6.9.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "sha1": "^1.1.1",
     "uuid": "^9.0.0"
   },
