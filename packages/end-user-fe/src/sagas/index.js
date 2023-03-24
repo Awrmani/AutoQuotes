@@ -12,6 +12,7 @@ import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
 import refreshCurrentUser from './refreshers/refreshCurrentUser';
 import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
+import refreshQuoteDetails from './refreshers/refreshQuoteDetails';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -69,7 +70,7 @@ export default function* root() {
     // Quotes
     takeLatest(actionTypes.QUOTE_CREATE, apiCall, {
       apiFn: endUserApi.createQuote,
-      onSuccess: [apiCall.DISPATCH_SUCCESS],
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
     takeLatest(actionTypes.QUOTE_DETAILS_FETCH, apiCall, {
       apiFn: endUserApi.fetchQuoteDetails,
@@ -85,11 +86,11 @@ export default function* root() {
 
     takeLatest(actionTypes.SERVICE_ADD, apiCall, {
       apiFn: endUserApi.addService,
-      onSuccess: [apiCall.DISPATCH_SUCCESS],
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
     takeLatest(actionTypes.SERVICE_REMOVE, apiCall, {
       apiFn: endUserApi.removeService,
-      onSuccess: [apiCall.DISPATCH_SUCCESS],
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

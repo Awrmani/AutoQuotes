@@ -3,14 +3,9 @@ import { Box, Container, Divider, Paper } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form } from '@autoquotes/common/src/components/Form';
-import {
-  addService,
-  createQuote,
-  fetchQuoteDetails,
-  fetchServiceTypeList,
-} from '../../actions';
+import { addService, createQuote, fetchServiceTypeList } from '../../actions';
 import VehicleInfo from './VehicleInfo';
-import ServiceOptions from './ServiceOptions';
+import AddServiceForm from './AddServiceForm';
 import SelectedServices from './SelectedServices';
 
 const initialValues = {
@@ -34,26 +29,21 @@ const EndUserQuotingPage = () => {
   }, [quoteId]);
   // Hook responsible for loading part list from the BE
 
-  const onSuccess = useCallback(
+  const onquoteCreateSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
       setFieldValue('quoteId', response?.id);
-      dispatch(fetchQuoteDetails({ quoteId: response?.id }));
       dispatch(fetchServiceTypeList({ quoteId: response?.id }));
     },
     [setFieldValue, dispatch]
   );
-
-  const serviceOptionsOnSuccess = useCallback(() => {
-    dispatch(fetchQuoteDetails({ quoteId }));
-  }, [quoteId, dispatch]);
 
   return (
     <Container component={Paper}>
       <Form
         initialValues={initialValues}
         action={createQuote}
-        onSuccess={onSuccess}
+        onSuccess={onquoteCreateSuccess}
       >
         <Box sx={{ my: 2 }}>
           <VehicleInfo />
@@ -61,22 +51,23 @@ const EndUserQuotingPage = () => {
         </Box>
       </Form>
 
-      <Box sx={{ my: 2 }}>
-        <SelectedServices />
-      </Box>
-      <Form
-        enableReinitialize
-        initialValues={initialService}
-        action={addService}
-        onSuccess={serviceOptionsOnSuccess}
-      >
-        <Box sx={{ my: 2 }}>
-          <ServiceOptions />
-          <Divider sx={{ mt: 2 }} />
-        </Box>
-      </Form>
-
-      <div>End-user front-end</div>
+      {!!quoteId && (
+        <>
+          <Box sx={{ my: 2 }}>
+            <SelectedServices />
+          </Box>
+          <Form
+            enableReinitialize
+            initialValues={initialService}
+            action={addService}
+          >
+            <Box sx={{ my: 2 }}>
+              <AddServiceForm />
+              <Divider sx={{ mt: 2 }} />
+            </Box>
+          </Form>
+        </>
+      )}
     </Container>
   );
 };

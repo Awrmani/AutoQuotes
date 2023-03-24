@@ -1,6 +1,5 @@
 import React from 'react';
-import { Delete } from '@mui/icons-material';
-import { IconButton, TableCell, TableHead, TableRow } from '@mui/material';
+import { TableCell, TableHead, TableRow } from '@mui/material';
 
 const ServiceHead = () => {
   return (
@@ -9,22 +8,18 @@ const ServiceHead = () => {
         <TableCell sx={{ width: 50 }}>#</TableCell>
         <TableCell sx={{ fontWeight: 700 }}>Services</TableCell>
         <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
-          Hourly Rate/ Price
+          Hours of Labor
         </TableCell>
         <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
-          Hours / Units
-        </TableCell>
-        <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
-          Discount (%)
+          Price
         </TableCell>
         <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
           Total Price ($)
         </TableCell>
-        <TableCell sx={{ fontWeight: 700, width: 20 }} align="right">
-          <IconButton data-testid="deleteButton">
-            <Delete />
-          </IconButton>
-        </TableCell>
+        <TableCell
+          sx={{ fontWeight: 700, width: 20 }}
+          align="right"
+        ></TableCell>
       </TableRow>
     </TableHead>
   );
