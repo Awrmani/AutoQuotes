@@ -8,7 +8,7 @@
     "@autoquotes/common-e2e": "^0.0.1",
     "@autoquotes/libraries": "^0.0.1",
     "@autoquotes/third-party-fe": "^0.0.1",
-    "cypress": "^12.3.0"
+    "cypress": "^12.8.1"
   },
   "scripts": {
     "dev": "cypress open",
