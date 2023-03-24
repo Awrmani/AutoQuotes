@@ -129,3 +129,8 @@ export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
   method: 'PUT',
   data: { serviceTypeId },
 }));
+
+export const removeService = apiCall(({ quoteId, serviceTypeId }) => ({
+  url: `/quotes/${quoteId}/services/${serviceTypeId}`,
+  method: 'DELETE',
+}));

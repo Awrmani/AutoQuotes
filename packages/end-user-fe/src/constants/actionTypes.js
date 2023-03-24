@@ -24,3 +24,4 @@ export const QUOTE_CREATE = 'QUOTE_CREATE';
 // Services
 
 export const SERVICE_ADD = 'SERVICE_ADD';
+export const SERVICE_REMOVE = 'SERVICE_REMOVE';
