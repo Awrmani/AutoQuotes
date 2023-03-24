@@ -95,11 +95,7 @@ const useForm = ({
    * The next few functions are here to make sure we are not
    * double submitting
    */
-  const {
-    handleSubmit: FBHandleSubmit,
-    submitForm: FBSubmitForm,
-    isSubmitting,
-  } = formikBag;
+  const { handleSubmit: FBHandleSubmit, isSubmitting } = formikBag;
   const handleSubmit = useCallback(
     e => {
       if (isSubmitting) {
@@ -115,10 +111,10 @@ const useForm = ({
 
   const submitForm = useCallback(() => {
     // If we are already submitting, stop here
-    if (isSubmitting) return;
+    if (formikBagRef.current?.isSubmitting) return;
 
-    FBSubmitForm();
-  }, [FBSubmitForm, isSubmitting]);
+    formikBagRef.current?.submitForm?.();
+  }, []);
 
   const formikBagToExport = useMemo(
     () => ({

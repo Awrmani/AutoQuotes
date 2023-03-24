@@ -241,10 +241,11 @@ export const updateShopSettings = apiCall(
     name,
     logo,
     slogan,
+    numberOfStalls,
+    hourlyPriceOfLabor,
+    partMarkupPercent,
     email,
     phone,
-    openingHours,
-    numberOfStalls,
     returnPolicyUrl,
     termsAndConditionsUrl,
     privacyPolicyUrl,
@@ -254,7 +255,7 @@ export const updateShopSettings = apiCall(
     city,
     state,
     country,
-    ...rest
+    openingHours,
   }) => ({
     url: '/shop',
     method: 'PATCH',
@@ -262,6 +263,8 @@ export const updateShopSettings = apiCall(
       name,
       ...(logo.isNew && { logo: logo.uri }),
       slogan,
+      hourlyPriceOfLabor: Number(hourlyPriceOfLabor),
+      partMarkupPercent: Number(partMarkupPercent),
       email,
       phone,
       openingHours: Object.keys(openingHours).reduce((acc, dayName) => {

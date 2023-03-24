@@ -5,6 +5,7 @@
     "slogan": "Where all the stars align",
     "email": "shop@sixix.denke.hu",
     "phone": "+1 (001) 2345678",
+    "timezone": "Canada/Eastern",
     "openingHours": {
       "monday": {
         "openHour": 9,
@@ -40,6 +41,8 @@
       "sunday": {}
     },
     "numberOfStalls": 6,
+    "hourlyPriceOfLabor": 130,
+    "partMarkupPercent": 30,
     "returnPolicyUrl": "https://sixix.denke.hu/returnPolicy.pdf",
     "termsAndConditionsUrl": "https://sixix.denke.hu/termsAndConditions.pdf",
     "privacyPolicyUrl": "https://sixix.denke.hu/privacyPolicy.pdf",

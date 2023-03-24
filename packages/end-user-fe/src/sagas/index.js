@@ -12,6 +12,7 @@ import * as actionTypes from '../constants/actionTypes';
 import * as endUserApi from '../resources/endUserApi';
 import refreshCurrentUser from './refreshers/refreshCurrentUser';
 import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
+import refreshQuoteDetails from './refreshers/refreshQuoteDetails';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -64,6 +65,32 @@ export default function* root() {
         [successToast('Successfully updated!')],
         apiCall.DISPATCH_SUCCESS,
       ],
+    }),
+
+    // Quotes
+    takeLatest(actionTypes.QUOTE_CREATE, apiCall, {
+      apiFn: endUserApi.createQuote,
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.QUOTE_DETAILS_FETCH, apiCall, {
+      apiFn: endUserApi.fetchQuoteDetails,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Services
+
+    takeLatest(actionTypes.SERVICE_TYPE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchServiceTypeList,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+
+    takeLatest(actionTypes.SERVICE_ADD, apiCall, {
+      apiFn: endUserApi.addService,
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.SERVICE_REMOVE, apiCall, {
+      apiFn: endUserApi.removeService,
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

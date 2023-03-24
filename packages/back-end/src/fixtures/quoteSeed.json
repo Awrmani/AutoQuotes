@@ -6,12 +6,22 @@
     "lineItems": [
       {
         "serviceTypeId": "TireRotation",
-        "parts": ["a", "b", "c"]
+        "selectedParts": []
       },
       {
-        "serviceTypeId": "TireRotation",
-        "parts": ["a", "b", "c"]
+        "serviceTypeId": "BreakJobFron",
+        "selectedParts": [
+          {
+            "id": "FrontBreakPa",
+            "name": "Front break pads",
+            "manufacturer": "Tesla",
+            "type": "OEM",
+            "warrantyMonths": 12,
+            "price": 50
+          }
+        ]
       }
-    ]
+    ],
+    "isFinalized": true
   }
 ]

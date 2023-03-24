@@ -14,16 +14,16 @@ describe('Shop settings', () => {
   it('should allow to edit the shop settings', () => {
     // Let's add availability on Saturday
     cy.getByTestId('openingHours-saturday-openHour').within(() => {
-      cy.findByLabelText('Saturday open hour *').type('11');
+      cy.findByLabelText('Saturday open hour').type('11');
     });
     cy.getByTestId('openingHours-saturday-openMinute').within(() => {
-      cy.findByLabelText('Open minute *').type('30');
+      cy.findByLabelText('Open minute').type('30');
     });
     cy.getByTestId('openingHours-saturday-closeHour').within(() => {
-      cy.findByLabelText('Close hour *').type('15');
+      cy.findByLabelText('Close hour').type('15');
     });
     cy.getByTestId('openingHours-saturday-closeMinute').within(() => {
-      cy.findByLabelText('Close minute *').type('45');
+      cy.findByLabelText('Close minute').type('45');
     });
 
     cy.getByTestId('submitButton').click();

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Container, Grid, Typography } from '@mui/material';
+import { DAY_OPTIONS } from '@autoquotes/libraries/src/constants/days';
 import {
   Field,
   SubmitButton,
@@ -7,7 +8,6 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import ImageInput from '@autoquotes/common/src/components/ImageInput';
 import TextInput from '@autoquotes/common/src/components/TextInput';
-import { DAYS } from '../../constants/days';
 
 /*
     openingHours,
@@ -16,7 +16,7 @@ import { DAYS } from '../../constants/days';
 const ShopSettingsForm = () => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Update Shop Settings
       </Typography>
       <Grid container spacing={2}>
@@ -45,6 +45,38 @@ const ShopSettingsForm = () => {
           <Field
             required
             component={TextInput}
+            name="numberOfStalls"
+            label="Number of stalls"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            required
+            component={TextInput}
+            name="hourlyPriceOfLabor"
+            label="Hourly price of labor"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            required
+            component={TextInput}
+            name="partMarkupPercent"
+            label="Third party supplier part markup %"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12} marginTop={4}>
+          <Typography variant="h6" gutterBottom>
+            Contact & Address
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            required
+            component={TextInput}
             name="email"
             label="Email"
             fullWidth
@@ -59,15 +91,6 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
-          <Field
-            required
-            component={TextInput}
-            name="numberOfStalls"
-            label="Number of stalls"
-            fullWidth
-          />
-        </Grid>
         <Grid item xs={6}>
           <Field
             required
@@ -79,7 +102,6 @@ const ShopSettingsForm = () => {
         </Grid>
         <Grid item xs={6}>
           <Field
-            required
             component={TextInput}
             name="address2"
             label="Address line 2"
@@ -122,6 +144,11 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
+        <Grid item xs={12} marginTop={4}>
+          <Typography variant="h6" gutterBottom>
+            Legal
+          </Typography>
+        </Grid>
         <Grid item xs={12}>
           <Field
             required
@@ -149,11 +176,15 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        {DAYS.map(({ label, key }) => (
+        <Grid item xs={12} marginTop={4}>
+          <Typography variant="h6" gutterBottom>
+            Opening Hours
+          </Typography>
+        </Grid>
+        {DAY_OPTIONS.map(({ label, key }) => (
           <Fragment key={key}>
             <Grid item xs={3} data-testid={`openingHours-${key}-openHour`}>
               <Field
-                required
                 component={TextInput}
                 name={`openingHours.${key}.openHour`}
                 label={`${label} open hour`}
@@ -162,7 +193,6 @@ const ShopSettingsForm = () => {
             </Grid>
             <Grid item xs={3} data-testid={`openingHours-${key}-openMinute`}>
               <Field
-                required
                 component={TextInput}
                 name={`openingHours.${key}.openMinute`}
                 label={`Open minute`}
@@ -171,7 +201,6 @@ const ShopSettingsForm = () => {
             </Grid>
             <Grid item xs={3} data-testid={`openingHours-${key}-closeHour`}>
               <Field
-                required
                 component={TextInput}
                 name={`openingHours.${key}.closeHour`}
                 label={`Close hour`}
@@ -180,7 +209,6 @@ const ShopSettingsForm = () => {
             </Grid>
             <Grid item xs={3} data-testid={`openingHours-${key}-closeMinute`}>
               <Field
-                required
                 component={TextInput}
                 name={`openingHours.${key}.closeMinute`}
                 label={`Close minute`}

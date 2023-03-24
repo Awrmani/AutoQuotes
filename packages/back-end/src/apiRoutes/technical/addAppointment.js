@@ -1,4 +1,4 @@
-const getAppointmentTimeOptions = require('../../utils/appointmentTimeOptions');
+const getAppointmentTimeOptions = require('../../utils/getAppointmentTimeOptions');
 const Appointment = require('../../resources/Appointment');
 const Shop = require('../../resources/Shop');
 const Quote = require('../../resources/Quote');
@@ -47,13 +47,13 @@ module.exports = async (req, res) => {
     ).exec()
   ).map(({ id }) => new Appointment().loadById(id.toString()));
 
-  const objects = await Promise.all(promises);
+  const existingAppointments = await Promise.all(promises);
 
   const shop = await new Shop().loadBy({});
 
   // Get all our options calculated
   const options = getAppointmentTimeOptions({
-    existingAppointments: objects,
+    existingAppointments,
     openDate: eightAm,
     closeDate: fourPm,
     stallCount: shop.attributes.numberOfStalls,

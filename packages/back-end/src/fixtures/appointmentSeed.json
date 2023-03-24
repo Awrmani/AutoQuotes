@@ -1,14 +1,14 @@
 [
   {
     "stall": 1,
-    "startsAt": "2023-03-10T14:00:00Z",
+    "startsAt": "2023-03-23T14:00:00Z",
     "duration": 90,
     "customerId": "endUser00001",
     "quoteId": "quoteforqndu"
   },
   {
     "stall": 2,
-    "startsAt": "2023-03-10T16:00:00Z",
+    "startsAt": "2023-03-23T16:00:00Z",
     "duration": 180,
     "customerId": "endUser00001",
     "quoteId": "quoteforqndu"

@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { DateTime } = require('luxon');
+const { DAYS } = require('@autoquotes/libraries/src/constants/days');
 const stringValidators = require('@autoquotes/libraries/src/utils/validation/string');
 const numberValidators = require('@autoquotes/libraries/src/utils/validation/number');
 const openingHoursValidator = require('@autoquotes/libraries/src/utils/validation/openingHours');
@@ -11,6 +13,9 @@ const shopSchema = new mongoose.Schema(
     slogan: String,
     email: String,
     phone: String,
+    // IANA timezone, like 'Canada/Eastern'
+    // https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    timezone: String,
     openingHours: {
       _id: false,
       monday: {
@@ -64,6 +69,8 @@ const shopSchema = new mongoose.Schema(
       },
     },
     numberOfStalls: Number,
+    hourlyPriceOfLabor: Number,
+    partMarkupPercent: Number,
     returnPolicyUrl: String,
     termsAndConditionsUrl: String,
     privacyPolicyUrl: String,
@@ -97,8 +104,11 @@ const validatorConfig = {
   slogan: [stringValidators.required],
   email: [stringValidators.required, stringValidators.email],
   phone: [stringValidators.required],
+  timezone: [stringValidators.required],
   openingHours: [openingHoursValidator.openingHours],
   numberOfStalls: [numberValidators.required],
+  partMarkupPercent: [numberValidators.required],
+  hourlyPriceOfLabor: [numberValidators.required],
   returnPolicyUrl: [stringValidators.required],
   termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],
@@ -113,6 +123,52 @@ const validatorConfig = {
 class Shop extends ResourceBase {
   constructor(attributes) {
     super({ Model: ShopModel, validatorConfig, attributes });
+  }
+
+  getOpeningHoursForDate(date) {
+    const incomingDt = DateTime.fromISO(date);
+
+    if (!incomingDt.isValid)
+      throw new Error(`Invalid time: ${incomingDt.invalidReason}`);
+
+    const incomingDtShopTz = incomingDt.setZone(this.attributes.timezone);
+
+    if (!incomingDtShopTz.isValid)
+      throw new Error(`Invalid time: ${incomingDtShopTz.invalidReason}`);
+
+    // ES2015 guarantees array order equals object key insertion order when the key is a string
+    const dayName = Object.values(DAYS)[incomingDtShopTz.weekday - 1];
+    const openingHoursForDay = this.attributes.openingHours[dayName];
+
+    if (
+      typeof openingHoursForDay?.openHour !== 'number' ||
+      typeof openingHoursForDay?.openMinute !== 'number' ||
+      typeof openingHoursForDay?.closeHour !== 'number' ||
+      typeof openingHoursForDay?.closeMinute !== 'number'
+    ) {
+      return { dayName, isOpen: false };
+    }
+
+    const openDate = incomingDtShopTz
+      .set({
+        hour: openingHoursForDay.openHour,
+        minute: openingHoursForDay.openMinute,
+        second: 0,
+        millisecond: 0,
+      })
+      .toJSDate();
+
+    const closeDate = incomingDtShopTz
+      .set({
+        hour: openingHoursForDay.closeHour,
+        minute: openingHoursForDay.closeMinute,
+        second: 0,
+        millisecond: 0,
+      })
+      .toJSDate();
+
+    // Return ISO format, **with correct tz set**
+    return { dayName, openingHoursForDay, isOpen: true, openDate, closeDate };
   }
 }
 

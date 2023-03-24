@@ -31,6 +31,15 @@ export const fetchVehicleTypeList = apiCall(() => ({
   url: '/vehicleTypes',
 }));
 
+export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}/services`,
+  method: 'GET',
+}));
+
+export const fetchQuoteDetails = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}`,
+  method: 'GET',
+}));
 // =====Form submits & other actions altering backend state======
 
 // Users
@@ -100,3 +109,28 @@ export const updateUser = apiCall(
     },
   })
 );
+
+export const createQuote = apiCall(
+  ({ make, model, modelYear, engineVariant, bodyType }) => ({
+    url: `/quotes`,
+    method: 'PUT',
+    data: {
+      make,
+      model,
+      modelYear: Number(modelYear),
+      engineVariant,
+      bodyType,
+    },
+  })
+);
+
+export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
+  url: `/quotes/${quoteId}/services`,
+  method: 'PUT',
+  data: { serviceTypeId },
+}));
+
+export const removeService = apiCall(({ quoteId, serviceTypeId }) => ({
+  url: `/quotes/${quoteId}/services/${serviceTypeId}`,
+  method: 'DELETE',
+}));
