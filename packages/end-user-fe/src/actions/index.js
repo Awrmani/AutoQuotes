@@ -23,3 +23,4 @@ export const updateUser = createAction(actionTypes.USER_UPDATE);
 export const createQuote = createAction(actionTypes.QUOTE_CREATE);
 
 export const addService = createAction(actionTypes.SERVICE_ADD);
+export const removeService = createAction(actionTypes.SERVICE_REMOVE);
