@@ -26,6 +26,7 @@ const validator = validatorFactory({
   email: [stringValidators.required],
   phone: [stringValidators.required],
   numberOfStalls: [stringValidators.asNumber(numberValidators.required)],
+  hourlyPriceOfLabor: [stringValidators.asNumber(numberValidators.required)],
   returnPolicyUrl: [stringValidators.required],
   termsAndConditionsUrl: [stringValidators.required],
   privacyPolicyUrl: [stringValidators.required],
