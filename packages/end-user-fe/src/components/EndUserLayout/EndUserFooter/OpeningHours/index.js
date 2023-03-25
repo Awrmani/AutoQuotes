@@ -21,7 +21,6 @@ const OpeningHours = () => {
         <Box
           color="inherit"
           edge="start"
-          disableRipple
           sx={{
             justifyContent: 'left',
             mt: 1,

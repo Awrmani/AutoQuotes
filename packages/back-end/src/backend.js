@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config({ path: '.env.local', debug: true });
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
@@ -8,6 +9,8 @@ const mongoose = require('mongoose');
 const apiRoutes = require('./apiRoutes');
 const getStaticFilePath = require('./utils/getStaticFilePath');
 const dbSeed = require('./fixtures/dbSeed');
+const Shop = require('./resources/Shop');
+const mailer = require('./resources/Mailer');
 
 const runServer = async () => {
   // Connect to DB
@@ -16,6 +19,16 @@ const runServer = async () => {
 
   // Seed db if required
   await dbSeed();
+
+  // Configure SMTP
+  const shop = await new Shop().loadBy({});
+  mailer.configure({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+    sender: `"${shop.attributes.name}" <${shop.attributes.email}>`,
+  });
 
   // Create an express app instance we can use to attach middleware and HTTP routes
   const app = express();
