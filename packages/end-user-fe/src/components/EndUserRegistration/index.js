@@ -145,7 +145,6 @@ const EndUserRegistration = props => {
           </Grid>
           <Grid item xs={6}>
             <Field
-              required
               component={TextInput}
               name="address2"
               label="Address line 2"
