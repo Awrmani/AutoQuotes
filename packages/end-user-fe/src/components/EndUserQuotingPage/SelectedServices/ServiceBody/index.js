@@ -11,7 +11,9 @@ import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeService } from '../../../../actions';
+
 import { getQuoteDetailsQuery } from '../../../../reducers/queriesReducer';
+import AutoFilledField from '../../../AutoFilledField';
 
 const style = { width: '120px', borderBottom: 'none' };
 
@@ -81,20 +83,18 @@ const ServiceBody = () => {
                             >
                               <Field
                                 component={Dropdown}
-                                name="id"
+                                name={requiredPart.name}
                                 label=""
                                 fullWidth
                                 options={options}
                               />
                             </TableCell>
-                            <TableCell sx={style} align="right">
-                              <Field component={null} name="id" />
-                              {/* ${partOption.price.toFixed(2)} */}
-                            </TableCell>
-                            <TableCell sx={style} align="right"></TableCell>
-                            <TableCell style={style} align="right">
-                              {/* ${(partOption.price * 1 * (1 - 0)).toFixed(2)} */}
-                            </TableCell>
+
+                            <Field
+                              component={AutoFilledField}
+                              name={requiredPart.name}
+                              options={requiredPart.options}
+                            />
                           </TableRow>
                         );
                       }

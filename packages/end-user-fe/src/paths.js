@@ -18,6 +18,12 @@ const appointment = () => ({
   pathname: '/appointment',
 });
 
+// const emailConfirmation = () =>(
+//   {
+//     paths: '/confirmEmail/:userId/:key'
+//   }
+// )
+
 const paths = {
   login,
   about,
