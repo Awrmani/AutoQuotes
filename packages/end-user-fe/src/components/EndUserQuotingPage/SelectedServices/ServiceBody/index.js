@@ -88,6 +88,7 @@ const ServiceBody = () => {
                               />
                             </TableCell>
                             <TableCell sx={style} align="right">
+                              <Field component={null} name="id" />
                               {/* ${partOption.price.toFixed(2)} */}
                             </TableCell>
                             <TableCell sx={style} align="right"></TableCell>
