@@ -40,6 +40,7 @@ const EndUserQuotingPage = () => {
 
   return (
     <Container component={Paper}>
+      {/* Vehicle type form */}
       <Form
         initialValues={initialValues}
         action={createQuote}
@@ -56,6 +57,8 @@ const EndUserQuotingPage = () => {
           <Box sx={{ my: 2 }}>
             <SelectedServices />
           </Box>
+
+          {/* Add new line item to quote form */}
           <Form
             enableReinitialize
             initialValues={initialService}

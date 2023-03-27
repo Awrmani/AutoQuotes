@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
         const selectedPartId = selectedParts?.[index]?.id;
         return {
           name,
-          selected: selectedPartId ?? null,
+          selected: selectedPartId ?? '',
           options,
         };
       });

@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TableCell, Typography } from '@mui/material';
 
-const AutoFilledField = ({ options, value }) => {
+const PartDetailsField = ({ options, value }) => {
   const option = options.find(({ id: toCheck }) => toCheck === value);
+
   return (
     <>
       <TableCell align="right">
-        <Typography>{option.price}</Typography>
+        <Typography>{option?.price}</Typography>
       </TableCell>
       <TableCell align="right">
         <Typography>{value}</Typography>
@@ -19,7 +20,7 @@ const AutoFilledField = ({ options, value }) => {
   );
 };
 
-AutoFilledField.propTypes = {
+PartDetailsField.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
@@ -35,11 +36,11 @@ AutoFilledField.propTypes = {
   ).isRequired,
 };
 
-AutoFilledField.defaultProps = {
+PartDetailsField.defaultProps = {
   error: undefined,
   description: undefined,
   value: '',
   isSubmitting: false,
 };
 
-export default AutoFilledField;
+export default PartDetailsField;
