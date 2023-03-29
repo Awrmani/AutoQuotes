@@ -3,7 +3,7 @@ import { Form } from '@autoquotes/common/src/components/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress, Stack } from '@mui/material';
 import EndUserQuotingPage from '../components/EndUserQuotingPage';
-import { fetchVehicleTypeList } from '../actions';
+import { fetchVehicleTypeList, finalizeQuote } from '../actions';
 import {
   getVehicleTypeListQuery,
   getQuoteDetails,
@@ -42,8 +42,7 @@ const EndUserQuotingPageScreen = () => {
     <Form
       enableReinitialize
       initialValues={initialValues}
-      validation={null}
-      action={null}
+      action={finalizeQuote}
       onSuccess={null}
     >
       <EndUserQuotingPage />

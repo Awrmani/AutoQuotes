@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import { Box, Container, Divider, Paper } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
-import { Form } from '@autoquotes/common/src/components/Form';
+import { Form, SubmitButton } from '@autoquotes/common/src/components/Form';
 import { addService, createQuote, fetchServiceTypeList } from '../../actions';
 import VehicleInfo from './VehicleInfo';
 import AddServiceForm from './AddServiceForm';
@@ -71,6 +71,11 @@ const EndUserQuotingPage = () => {
           </Form>
         </>
       )}
+      <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+        <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+          Book Appointment
+        </SubmitButton>
+      </Box>
     </Container>
   );
 };

@@ -11,10 +11,7 @@ const ServiceHead = () => {
           Hours of Labor
         </TableCell>
         <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
-          Price
-        </TableCell>
-        <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
-          Total Price ($)
+          Price ($)
         </TableCell>
         <TableCell
           sx={{ fontWeight: 700, width: 20 }}

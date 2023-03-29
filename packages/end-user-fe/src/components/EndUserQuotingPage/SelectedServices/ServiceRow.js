@@ -15,7 +15,7 @@ import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { removeService } from '../../../actions';
 import SelectedPart from './SelectedPart';
 
-const style = { width: '120px', borderBottom: 'none' };
+const style = { width: '120px', borderBottom: 'none', fontSize: 'large' };
 
 const ServiceRow = ({ lineItemIndex }) => {
   const dispatch = useDispatch();
@@ -32,9 +32,11 @@ const ServiceRow = ({ lineItemIndex }) => {
   return (
     <>
       <TableRow key={serviceTypeId} sx={{ px: 0 }}>
-        <TableCell sx={{ borderBottom: 'none' }}>{lineItemIndex + 1}</TableCell>
+        <TableCell sx={{ borderBottom: 'none', fontSize: 'large' }}>
+          {lineItemIndex + 1}
+        </TableCell>
         <TableCell
-          sx={{ width: 300, borderBottom: 'none' }}
+          sx={{ width: 300, borderBottom: 'none', fontSize: 'large' }}
           component="th"
           scope="row"
         >
@@ -46,7 +48,6 @@ const ServiceRow = ({ lineItemIndex }) => {
         <TableCell sx={style} align="right">
           ${laborCost}
         </TableCell>
-        <TableCell sx={style} align="right"></TableCell>
         <TableCell sx={{ width: 8, borderBottom: 'none' }} align="right">
           <Tooltip title="Remove">
             <IconButton onClick={handleDeleteClick}>

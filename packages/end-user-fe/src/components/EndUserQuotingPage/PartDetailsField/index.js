@@ -7,14 +7,11 @@ const PartDetailsField = ({ options, value }) => {
 
   return (
     <>
-      <TableCell align="right">
-        <Typography>{option?.price}</Typography>
+      <TableCell sx={{ width: '120px', borderBottom: 'none' }} align="right">
+        <Typography>{option?.warrantyMonths}</Typography>
       </TableCell>
-      <TableCell align="right">
-        <Typography>{value}</Typography>
-      </TableCell>
-      <TableCell align="right">
-        <Typography>{value}</Typography>
+      <TableCell sx={{ width: '120px', borderBottom: 'none' }} align="right">
+        <Typography>${option?.price}</Typography>
       </TableCell>
     </>
   );

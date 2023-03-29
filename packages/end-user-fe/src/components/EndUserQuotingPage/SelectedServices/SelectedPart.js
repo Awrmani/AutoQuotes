@@ -25,7 +25,11 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
   return (
     <TableRow key={requiredPart.name}>
       <TableCell
-        sx={{ width: 188, borderBottom: 'none' }}
+        sx={{
+          paddingLeft: 5,
+          width: 188,
+          borderBottom: 'none',
+        }}
         component="th"
         scope="row"
       >
