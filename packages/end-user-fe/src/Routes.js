@@ -8,6 +8,8 @@ import UserLoginScreen from './screens/UserLoginScreen';
 import UserRegistrationScreen from './screens/UserRegistrationScreen';
 import EndUserQuotingPageScreen from './screens/EndUserQuotingPageScreen';
 import EndUserProfileScreen from './screens/EndUserProfileScreen';
+import UserConfirmationScreen from './screens/UserConfirmationScreen';
+import ConfirmingEmailScreen from './screens/ConfirmingEmailScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -51,6 +53,16 @@ const Routes = () => {
           />
         </Route>
       </Route>
+
+      <Route
+        path={paths.emailConfirmation().pathname}
+        element={<UserConfirmationScreen />}
+      />
+
+      <Route
+        path={paths.confirmingEmail().pathname}
+        element={<ConfirmingEmailScreen />}
+      />
 
       {/* If no other route matches, let's fall back to quotingPage */}
       <Route path="*" element={<Navigate to={paths.quotingPage()} replace />} />
