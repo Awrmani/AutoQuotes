@@ -16,7 +16,7 @@ export const LOGIN = 'LOGIN';
 // Users
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_UPDATE = 'USER_UPDATE';
-
+export const USER_CONFIRM = 'USER_CONFIRM';
 // Quotes
 
 export const QUOTE_CREATE = 'QUOTE_CREATE';

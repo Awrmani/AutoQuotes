@@ -76,6 +76,12 @@ export const registerUser = apiCall(
   })
 );
 
+export const confirmUser = apiCall(({ userId, key }) => ({
+  url: `/users/${userId}/confirm`,
+  method: 'POST',
+  data: { verificationCode: key },
+}));
+
 export const updateUser = apiCall(
   ({
     name,

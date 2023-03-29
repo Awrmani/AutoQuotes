@@ -18,6 +18,14 @@ const appointment = () => ({
   pathname: '/appointment',
 });
 
+const emailConfirmation = () => ({
+  pathname: '/confirmEmail/:userId/:key',
+});
+
+const confirmingEmail = () => ({
+  pathname: '/confirmEmail',
+});
+
 const paths = {
   login,
   about,
@@ -25,6 +33,8 @@ const paths = {
   quotingPage,
   appointment,
   profile,
+  emailConfirmation,
+  confirmingEmail,
 };
 
 export default paths;

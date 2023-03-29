@@ -42,7 +42,7 @@ const EndUserRegistrationScreen = () => {
   const navigate = useNavigate();
 
   const handleSuccess = useCallback(() => {
-    navigate(paths.quotingPage());
+    navigate(paths.confirmingEmail());
   }, [navigate]);
 
   return (
