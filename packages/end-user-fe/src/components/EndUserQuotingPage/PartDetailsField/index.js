@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TableCell } from '@mui/material';
-import { toCurrency } from '@autoquotes/libraries/src/utils/calculation/calculation';
+import { toCurrency } from '@autoquotes/libraries/src/utils/currency';
 
 const PartDetailsField = ({ options, value }) => {
   const option = options.find(({ id: toCheck }) => toCheck === value);
@@ -22,13 +22,7 @@ const PartDetailsField = ({ options, value }) => {
 };
 
 PartDetailsField.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
   value: PropTypes.string,
-  error: PropTypes.string,
-  description: PropTypes.string,
-  isSubmitting: PropTypes.bool,
-  label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -38,10 +32,7 @@ PartDetailsField.propTypes = {
 };
 
 PartDetailsField.defaultProps = {
-  error: undefined,
-  description: undefined,
   value: '',
-  isSubmitting: false,
 };
 
 export default PartDetailsField;

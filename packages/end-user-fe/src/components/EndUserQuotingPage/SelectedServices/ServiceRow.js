@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { TableRow, TableCell, IconButton, Tooltip } from '@mui/material';
-import { toCurrency } from '@autoquotes/libraries/src/utils/calculation/calculation';
+import { toCurrency } from '@autoquotes/libraries/src/utils/currency';
 import { Delete } from '@mui/icons-material';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { removeService } from '../../../actions';
