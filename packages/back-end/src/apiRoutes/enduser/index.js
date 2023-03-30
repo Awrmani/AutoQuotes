@@ -44,7 +44,7 @@ router.get('/vehicleTypes', vehicleTypeList);
 router.put('/quotes', optionalAuthenticator, quoteCreate);
 router.get('/quotes', authenticator, quoteList);
 router.get('/quotes/:quoteId', optionalAuthenticator, quoteGet);
-router.post('./quotes/:quoteId/finalize', authenticator, quoteFinalize);
+router.post('/quotes/:quoteId/finalize', authenticator, quoteFinalize);
 
 // services
 

@@ -130,6 +130,12 @@ export const createQuote = apiCall(
   })
 );
 
+export const finalizeQuote = apiCall(({ quoteId, lineItems }) => ({
+  url: `/quotes/${quoteId}/finalize`,
+  method: 'POST',
+  data: { lineItems },
+}));
+
 export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
   url: `/quotes/${quoteId}/services`,
   method: 'PUT',
