@@ -74,7 +74,7 @@ const VehicleInfo = () => {
   }, [make, model, modelYear, engineVariant, bodyType, submitForm]);
 
   return (
-    <Container>
+    <Container sx={{ paddingTop: 2 }}>
       <Typography component="h1" variant="h5">
         Vehicle Specifications
       </Typography>

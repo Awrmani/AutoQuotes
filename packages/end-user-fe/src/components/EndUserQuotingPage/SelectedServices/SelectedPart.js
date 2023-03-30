@@ -13,10 +13,14 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
 
   const options = useMemo(
     () =>
-      requiredPart?.options.map(({ id, name, manufacturer, type }) => ({
-        value: id,
-        label: `${name}${manufacturer ? ` - ${manufacturer}` : ''} (${type})`,
-      })),
+      requiredPart?.options.map(
+        ({ id, name, manufacturer, type, warrantyMonths }) => ({
+          value: id,
+          label: `${name}${manufacturer ? ` - ${manufacturer}` : ''} (${type})${
+            warrantyMonths ? ` - ${warrantyMonths} months` : ''
+          }`,
+        })
+      ),
     [requiredPart]
   );
 
@@ -24,7 +28,9 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
 
   return (
     <TableRow key={requiredPart.name}>
+      <TableCell sx={{ borderBottom: 'none' }}></TableCell>
       <TableCell
+        colSpan={2}
         sx={{
           paddingLeft: 5,
           width: 188,
@@ -34,6 +40,7 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
         scope="row"
       >
         <Field
+          fontSize="small"
           component={Dropdown}
           name={`lineItems.${lineItemIndex}.requiredParts.${requiredPartIndex}.selected`}
           label=""

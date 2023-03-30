@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCell, Typography } from '@mui/material';
+import { TableCell } from '@mui/material';
+import { toCurrency } from '@autoquotes/libraries/src/utils/calculation/calculation';
 
 const PartDetailsField = ({ options, value }) => {
   const option = options.find(({ id: toCheck }) => toCheck === value);
 
   return (
-    <>
-      <TableCell sx={{ width: '120px', borderBottom: 'none' }} align="right">
-        <Typography>{option?.warrantyMonths}</Typography>
-      </TableCell>
-      <TableCell sx={{ width: '120px', borderBottom: 'none' }} align="right">
-        <Typography>${option?.price}</Typography>
-      </TableCell>
-    </>
+    <TableCell
+      sx={{
+        fontSize: 'small',
+        width: '120px',
+        borderBottom: 'none',
+        mb: 0,
+      }}
+      align="right"
+    >
+      {toCurrency(option?.price)}
+    </TableCell>
   );
 };
 

@@ -20,7 +20,7 @@ const EndUserQuotingPage = () => {
   const dispatch = useDispatch();
 
   const { setFieldValue, values } = useContext(formContext);
-  const { quoteId } = values;
+  const { quoteId, lineItems } = values;
   const initialService = useMemo(() => {
     return {
       quoteId,
@@ -29,7 +29,7 @@ const EndUserQuotingPage = () => {
   }, [quoteId]);
   // Hook responsible for loading part list from the BE
 
-  const onquoteCreateSuccess = useCallback(
+  const onQuoteCreateSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
       setFieldValue('quoteId', response?.id);
@@ -44,7 +44,7 @@ const EndUserQuotingPage = () => {
       <Form
         initialValues={initialValues}
         action={createQuote}
-        onSuccess={onquoteCreateSuccess}
+        onSuccess={onQuoteCreateSuccess}
       >
         <Box sx={{ my: 2 }}>
           <VehicleInfo />
@@ -54,9 +54,11 @@ const EndUserQuotingPage = () => {
 
       {!!quoteId && (
         <>
-          <Box sx={{ my: 2 }}>
-            <SelectedServices />
-          </Box>
+          {lineItems && lineItems.length > 0 ? (
+            <Box sx={{ my: 2 }}>
+              <SelectedServices />
+            </Box>
+          ) : null}
 
           {/* Add new line item to quote form */}
           <Form
@@ -71,11 +73,13 @@ const EndUserQuotingPage = () => {
           </Form>
         </>
       )}
-      <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
-          Book Appointment
-        </SubmitButton>
-      </Box>
+      {lineItems && lineItems.length > 0 ? (
+        <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+          <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+            Book Appointment
+          </SubmitButton>
+        </Box>
+      ) : null}
     </Container>
   );
 };
