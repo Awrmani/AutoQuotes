@@ -33,7 +33,6 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
         colSpan={2}
         sx={{
           paddingLeft: 5,
-          width: 188,
           borderBottom: 'none',
         }}
         component="th"
