@@ -24,5 +24,5 @@ module.exports = async (req, res) => {
     }
   });
 
-  return res.jqon(await Promise.all(quotesWithAppointmentsPromises));
+  return res.json(await Promise.all(quotesWithAppointmentsPromises));
 };

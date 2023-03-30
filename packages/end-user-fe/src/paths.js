@@ -26,6 +26,10 @@ const confirmingEmail = () => ({
   pathname: '/confirmEmail',
 });
 
+const userQuotes = () => ({
+  pathname: '/quotes',
+});
+
 const paths = {
   login,
   about,
@@ -35,6 +39,7 @@ const paths = {
   profile,
   emailConfirmation,
   confirmingEmail,
+  userQuotes,
 };
 
 export default paths;

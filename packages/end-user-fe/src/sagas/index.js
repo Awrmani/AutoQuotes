@@ -89,6 +89,10 @@ export default function* root() {
       apiFn: endUserApi.finalizeQuote,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
+    takeLatest(actionTypes.QUOTE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchQuoteList,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
 
     // Services
 

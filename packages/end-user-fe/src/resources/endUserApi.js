@@ -36,6 +36,11 @@ export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
   method: 'GET',
 }));
 
+export const fetchQuoteList = apiCall(() => ({
+  url: `/quotes`,
+  method: 'GET',
+}));
+
 export const fetchQuoteDetails = apiCall(({ quoteId }) => ({
   url: `/quotes/${quoteId}`,
   method: 'GET',
