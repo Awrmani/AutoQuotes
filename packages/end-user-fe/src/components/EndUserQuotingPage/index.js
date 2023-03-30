@@ -3,6 +3,7 @@ import { Box, Container, Divider, Paper } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form, SubmitButton } from '@autoquotes/common/src/components/Form';
+import useQuoteUpdter from '../../hooks/useQuoteUpdater';
 import { addService, createQuote, fetchServiceTypeList } from '../../actions';
 import VehicleInfo from './VehicleInfo';
 import AddServiceForm from './AddServiceForm';
@@ -18,6 +19,7 @@ const initialValues = {
 
 const EndUserQuotingPage = () => {
   const dispatch = useDispatch();
+  useQuoteUpdter();
 
   const { setFieldValue, values } = useContext(formContext);
   const { quoteId, lineItems } = values;

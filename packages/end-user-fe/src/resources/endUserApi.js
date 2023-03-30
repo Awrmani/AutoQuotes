@@ -130,6 +130,12 @@ export const createQuote = apiCall(
   })
 );
 
+export const updateQuote = apiCall(({ quoteId, lineItems }) => ({
+  url: `/quotes/${quoteId}`,
+  method: 'PATCH',
+  data: { lineItems },
+}));
+
 export const finalizeQuote = apiCall(({ quoteId, lineItems }) => ({
   url: `/quotes/${quoteId}/finalize`,
   method: 'POST',

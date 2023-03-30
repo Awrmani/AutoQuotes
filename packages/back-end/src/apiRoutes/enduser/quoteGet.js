@@ -3,10 +3,6 @@ const ServiceType = require('../../resources/ServiceType');
 const Shop = require('../../resources/Shop');
 const listCompatiblePartsForQuoteServiceType = require('../../utils/listCompatiblePartsForQuoteServiceType');
 
-/**
- * todo calculate cost of work
- */
-
 module.exports = async (req, res) => {
   const customerId = req.user?.id; // user may or may not be logged in
   const { quoteId } = req.params;

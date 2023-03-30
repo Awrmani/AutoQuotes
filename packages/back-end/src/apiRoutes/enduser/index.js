@@ -10,6 +10,7 @@ const vehicleTypeList = require('./vehicleTypeList');
 const quoteList = require('./quoteList');
 const quoteCreate = require('./quoteCreate');
 const quoteGet = require('./quoteGet');
+const quoteUpdate = require('./quoteUpdate');
 const quoteFinalize = require('./quoteFinalize');
 const serviceList = require('./serviceList');
 const serviceAdd = require('./serviceAdd');
@@ -44,6 +45,7 @@ router.get('/vehicleTypes', vehicleTypeList);
 router.put('/quotes', optionalAuthenticator, quoteCreate);
 router.get('/quotes', authenticator, quoteList);
 router.get('/quotes/:quoteId', optionalAuthenticator, quoteGet);
+router.patch('/quotes/:quoteId', optionalAuthenticator, quoteUpdate);
 router.post('/quotes/:quoteId/finalize', authenticator, quoteFinalize);
 
 // services

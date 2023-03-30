@@ -24,7 +24,7 @@ const { verifyLineItem } = require('../../utils/verifyQuoteUpdate');
  */
 
 module.exports = async (req, res) => {
-  const customerId = req.user.id;
+  const customerId = req.user?.id;
   const { quoteId } = req.params;
   const { lineItems } = req.body ?? {};
 
@@ -33,14 +33,9 @@ module.exports = async (req, res) => {
   if (quote.attributes.isFinalized)
     throw new Error('Quote is already finalized');
 
-  if (!lineItems?.length)
-    throw new Error(
-      'Cannot finalize a quote that does not have any line items'
-    );
-
   if (lineItems.length !== quote.attributes.lineItems.length)
     throw new Error(
-      'Stored quote and finalization data has different number of line items'
+      'Stored quote and incoming data has different number of line items'
     );
 
   // Verify each line item
@@ -55,15 +50,8 @@ module.exports = async (req, res) => {
     )
   );
 
-  lineItems.forEach(({ selectedParts }) => {
-    if (selectedParts.includes(null))
-      throw new Error(
-        'All parts has to be selected in order to finalize a quote'
-      );
-  });
-
-  // Okay, finalization request is accepted
-  quote.update({ isFinalized: true, lineItems: transformedLineItems });
+  // Okay, update request is accepted
+  quote.update({ lineItems: transformedLineItems });
 
   await quote.save();
 

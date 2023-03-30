@@ -37,7 +37,7 @@ const quoteSchema = new mongoose.Schema(
           {
             _id: false,
             id: {
-              type: [String],
+              type: String,
               ref: 'Part',
             },
             name: String,
@@ -80,7 +80,7 @@ const validatorConfig = {
     validatorFactory.arrayOfValidator(
       validatorFactory.subValidator({
         serviceTypeId: [stringValidators.isStringOrUndefined],
-        selectedParts: validatorFactory.arrayOfValidator(
+        selectedParts: validatorFactory.nullableArrayOfValidator(
           validatorFactory.subValidator({
             id: [stringValidators.required],
             name: [stringValidators.required],

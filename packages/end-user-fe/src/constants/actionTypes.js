@@ -20,6 +20,7 @@ export const USER_CONFIRM = 'USER_CONFIRM';
 // Quotes
 
 export const QUOTE_CREATE = 'QUOTE_CREATE';
+export const QUOTE_UPDATE = 'QUOTE_UPDATE';
 export const QUOTE_FINALIZE = 'QUOTE_FINALIZE';
 // Services
 

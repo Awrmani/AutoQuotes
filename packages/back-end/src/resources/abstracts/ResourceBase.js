@@ -103,6 +103,9 @@ class ResourceBase {
   }
 
   update(toSet) {
+    if (Array.isArray(toSet))
+      throw new Error('Update root level cannot be array');
+
     // merge old attributes with input, and sanitize / verify them
     const sanitized = this._validate({
       ...this._attributes,

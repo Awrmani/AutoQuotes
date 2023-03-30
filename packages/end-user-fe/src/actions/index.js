@@ -21,7 +21,8 @@ export const updateUser = createAction(actionTypes.USER_UPDATE);
 export const confirmUser = createAction(actionTypes.USER_CONFIRM);
 
 export const createQuote = createAction(actionTypes.QUOTE_CREATE);
+export const updateQuote = createAction(actionTypes.QUOTE_UPDATE);
+export const finalizeQuote = createAction(actionTypes.QUOTE_FINALIZE);
 
 export const addService = createAction(actionTypes.SERVICE_ADD);
 export const removeService = createAction(actionTypes.SERVICE_REMOVE);
-export const finalizeQuote = createAction(actionTypes.QUOTE_FINALIZE);
