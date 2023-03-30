@@ -23,7 +23,7 @@ export default combineReducers({
     triggerActionType: actionTypes.QUOTE_DETAILS_FETCH,
   }),
   quoteList: queryReducer({
-    triggerActionType: actionTypes.QUOTE_DETAILS_FETCH,
+    triggerActionType: actionTypes.QUOTE_LIST_FETCH,
   }),
 });
 

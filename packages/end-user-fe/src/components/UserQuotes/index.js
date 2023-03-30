@@ -1,12 +1,21 @@
 import React from 'react';
-import { Container, Paper } from '@mui/material';
+import { Container, Paper, Table, TableBody } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { getQuoteList } from '../../reducers/queriesReducer';
+import ServiceHead from '../EndUserQuotingPage/SelectedServices/ServiceHead';
 
 const UserQuotes = () => {
   const quoteList = useSelector(getQuoteList);
-  console.log(quoteList);
-  return <Container component={Paper}>hello</Container>;
+  const { lineItems } = quoteList;
+  console.log(lineItems);
+  return (
+    <Container component={Paper}>
+      <Table size="small">
+        <ServiceHead />
+        <TableBody>{/* <Summary /> */}</TableBody>
+      </Table>
+    </Container>
+  );
 };
 
 export default UserQuotes;
