@@ -8,7 +8,7 @@ import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { removeService } from '../../../actions';
 import SelectedPart from './SelectedPart';
 
-const ServiceRow = ({ lineItemIndex }) => {
+const ServiceRow = ({ lineItemIndex, isFinalized }) => {
   const dispatch = useDispatch();
   const { values } = useContext(formContext);
   const { quoteId, lineItems } = values ?? {};
@@ -43,7 +43,7 @@ const ServiceRow = ({ lineItemIndex }) => {
           align="right"
         >
           <Tooltip title="Remove">
-            <IconButton onClick={handleDeleteClick}>
+            <IconButton disabled={isFinalized} onClick={handleDeleteClick}>
               <Delete />
             </IconButton>
           </Tooltip>
@@ -65,6 +65,9 @@ const ServiceRow = ({ lineItemIndex }) => {
 
 ServiceRow.propTypes = {
   lineItemIndex: PropTypes.number.isRequired,
+  isFinalized: PropTypes.bool,
 };
-
+ServiceRow.defaultProps = {
+  isFinalized: false,
+};
 export default ServiceRow;

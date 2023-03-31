@@ -9,7 +9,7 @@ import { updateQuote } from '../actions';
  * the Back-end
  */
 
-const useQuoteUpdter = () => {
+const useQuoteUpdater = () => {
   const dispatch = useDispatch();
   const { values } = useContext(formContext);
 
@@ -21,4 +21,4 @@ const useQuoteUpdter = () => {
   }, [dispatch, values]);
 };
 
-export default useQuoteUpdter;
+export default useQuoteUpdater;

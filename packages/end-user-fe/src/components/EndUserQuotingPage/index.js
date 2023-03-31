@@ -1,9 +1,10 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { Box, Container, Divider, Paper } from '@mui/material';
+import { Box, Container, Divider, Paper, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form, SubmitButton } from '@autoquotes/common/src/components/Form';
-import useQuoteUpdter from '../../hooks/useQuoteUpdater';
+import useQuoteUpdater from '../../hooks/useQuoteUpdater';
 import { addService, createQuote, fetchServiceTypeList } from '../../actions';
 import VehicleInfo from './VehicleInfo';
 import AddServiceForm from './AddServiceForm';
@@ -17,10 +18,9 @@ const initialValues = {
   bodyType: '',
 };
 
-const EndUserQuotingPage = () => {
+const EndUserQuotingPage = ({ isFinalized }) => {
   const dispatch = useDispatch();
-  useQuoteUpdter();
-
+  useQuoteUpdater();
   const { setFieldValue, values } = useContext(formContext);
   const { quoteId, lineItems } = values;
   const initialService = useMemo(() => {
@@ -29,8 +29,8 @@ const EndUserQuotingPage = () => {
       serviceTypeId: '',
     };
   }, [quoteId]);
-  // Hook responsible for loading part list from the BE
 
+  // Hook responsible for loading part list from the BE
   const onQuoteCreateSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
@@ -43,36 +43,45 @@ const EndUserQuotingPage = () => {
   return (
     <Container component={Paper}>
       {/* Vehicle type form */}
-      <Form
-        initialValues={initialValues}
-        action={createQuote}
-        onSuccess={onQuoteCreateSuccess}
-      >
-        <Box sx={{ my: 2 }}>
-          <VehicleInfo />
-          <Divider sx={{ mt: 2 }} />
-        </Box>
-      </Form>
+      {!isFinalized ? (
+        <Form
+          initialValues={initialValues}
+          action={createQuote}
+          onSuccess={onQuoteCreateSuccess}
+        >
+          <Box sx={{ my: 2 }}>
+            <VehicleInfo />
+            <Divider sx={{ mt: 2 }} />
+          </Box>
+        </Form>
+      ) : (
+        <Typography sx={{ paddingTop: 2, textAlign: 'center' }} variant={'h4'}>
+          Quote Details
+        </Typography>
+      )}
 
       {!!quoteId && (
         <>
+          {/* Display line items in a quote */}
           {lineItems && lineItems.length > 0 ? (
             <Box sx={{ my: 2 }}>
-              <SelectedServices />
+              <SelectedServices isFinalized={isFinalized} />
             </Box>
           ) : null}
 
           {/* Add new line item to quote form */}
-          <Form
-            enableReinitialize
-            initialValues={initialService}
-            action={addService}
-          >
-            <Box sx={{ my: 2 }}>
-              <AddServiceForm />
-              <Divider sx={{ mt: 2 }} />
-            </Box>
-          </Form>
+          {!isFinalized && (
+            <Form
+              enableReinitialize
+              initialValues={initialService}
+              action={addService}
+            >
+              <Box sx={{ my: 2 }}>
+                <AddServiceForm />
+                <Divider sx={{ mt: 2 }} />
+              </Box>
+            </Form>
+          )}
         </>
       )}
       {lineItems && lineItems.length > 0 ? (
@@ -84,6 +93,12 @@ const EndUserQuotingPage = () => {
       ) : null}
     </Container>
   );
+};
+EndUserQuotingPage.propTypes = {
+  isFinalized: PropTypes.bool,
+};
+EndUserQuotingPage.defaultProps = {
+  isFinalized: false,
 };
 
 export default EndUserQuotingPage;

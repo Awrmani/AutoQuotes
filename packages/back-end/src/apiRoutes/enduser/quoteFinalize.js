@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
   );
 
   lineItems.forEach(({ selectedParts }) => {
-    if (selectedParts.includes(null))
+    if (selectedParts?.includes(null))
       throw new Error(
         'All parts has to be selected in order to finalize a quote'
       );

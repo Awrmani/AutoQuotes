@@ -30,6 +30,10 @@ const userQuotes = () => ({
   pathname: '/quotes',
 });
 
+const userQuoteDetails = ({ id = ':id' } = {}) => ({
+  pathname: `/quotes/${id}`,
+});
+
 const paths = {
   login,
   about,
@@ -40,6 +44,7 @@ const paths = {
   emailConfirmation,
   confirmingEmail,
   userQuotes,
+  userQuoteDetails,
 };
 
 export default paths;
