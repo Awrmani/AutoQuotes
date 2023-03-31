@@ -8,40 +8,44 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getQuoteList } from '../../reducers/queriesReducer';
 import paths from '../../paths';
-import { fetchQuoteDetails, fetchServiceTypeList } from '../../actions';
 
 const UserQuotes = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const quoteList = useSelector(getQuoteList);
 
   const onClick = useCallback(
-    ({ id, isFinalized }) => {
-      dispatch(fetchQuoteDetails({ quoteId: id }));
-      if (!isFinalized) {
-        dispatch(fetchServiceTypeList({ quoteId: id }));
-        navigate(paths.quotingPage());
-      } else {
-        navigate(paths.userQuoteDetails({ id }));
-      }
+    ({ id }) => {
+      navigate(paths.quotingPage({ quoteId: id }));
     },
-    [dispatch, navigate]
+    [navigate]
   );
 
   return (
-    <Container sx={{ mt: 3, padding: 2 }} component={Paper}>
-      <Typography variant={'h5'}> Your quotes</Typography>
+    <Container
+      sx={{
+        width: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mt: 3,
+        padding: 2,
+      }}
+      component={Paper}
+    >
+      <Typography gutterBottom variant={'h5'} sx={{ textAlign: 'center' }}>
+        Your quotes
+      </Typography>
 
       <List sx={{ width: '100%', maxWidth: 380 }}>
         {quoteList?.map(quote => (
           <ListItemButton
+            divider
             key={quote.id}
-            onClick={() =>
-              onClick({ id: quote.id, isFinalized: quote.isFinalized })
-            }
+            onClick={() => onClick({ id: quote.id })}
           >
             <ListItemText
               primary={`Quote Number: ${quote.id}`}

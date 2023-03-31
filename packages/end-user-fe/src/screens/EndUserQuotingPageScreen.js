@@ -1,9 +1,14 @@
 import React, { useEffect, useMemo } from 'react';
 import { Form } from '@autoquotes/common/src/components/Form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { CircularProgress, Stack } from '@mui/material';
 import EndUserQuotingPage from '../components/EndUserQuotingPage';
-import { fetchVehicleTypeList, finalizeQuote } from '../actions';
+import {
+  fetchQuoteDetails,
+  fetchVehicleTypeList,
+  finalizeQuote,
+} from '../actions';
 
 import {
   getVehicleTypeListQuery,
@@ -12,6 +17,11 @@ import {
 
 const EndUserQuotingPageScreen = () => {
   const dispatch = useDispatch();
+  const { quoteId: pathQuoteId } = useParams() ?? {};
+
+  useEffect(() => {
+    dispatch(fetchQuoteDetails({ quoteId: pathQuoteId }));
+  }, [dispatch, pathQuoteId]);
 
   // Hook responsible for loading part list from the BE
   useEffect(() => {

@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import { Box, Container, Divider, Paper, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form, SubmitButton } from '@autoquotes/common/src/components/Form';
 import useQuoteUpdater from '../../hooks/useQuoteUpdater';
@@ -20,6 +21,7 @@ const initialValues = {
 
 const EndUserQuotingPage = ({ isFinalized }) => {
   const dispatch = useDispatch();
+
   useQuoteUpdater();
   const { setFieldValue, values } = useContext(formContext);
   const { quoteId, lineItems } = values;

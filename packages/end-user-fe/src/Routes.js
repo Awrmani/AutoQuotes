@@ -11,7 +11,6 @@ import EndUserProfileScreen from './screens/EndUserProfileScreen';
 import UserConfirmationScreen from './screens/UserConfirmationScreen';
 import ConfirmingEmailScreen from './screens/ConfirmingEmailScreen';
 import UserQuotesScreen from './screens/UserQuotesScreen';
-import UserQuoteDetailsScreen from './screens/UserQuoteDetailsScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -27,7 +26,7 @@ const Routes = () => {
           element={
             <ProtectedRoute
               doRedirect={!!token}
-              redirectPath={paths.quotingPage()}
+              redirectPath={paths.quotingPage({})}
             />
           }
         >
@@ -57,10 +56,6 @@ const Routes = () => {
             path={paths.userQuotes().pathname}
             element={<UserQuotesScreen />}
           />
-          <Route
-            path={paths.userQuoteDetails().pathname}
-            element={<UserQuoteDetailsScreen />}
-          />
         </Route>
       </Route>
 
@@ -75,7 +70,10 @@ const Routes = () => {
       />
 
       {/* If no other route matches, let's fall back to quotingPage */}
-      <Route path="*" element={<Navigate to={paths.quotingPage()} replace />} />
+      <Route
+        path="*"
+        element={<Navigate to={paths.quotingPage({})} replace />}
+      />
     </RrdRoutes>
   );
 };

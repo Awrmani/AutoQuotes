@@ -26,7 +26,10 @@ const ConfirmingEmail = () => {
       <Typography>
         Check your email and click on the confirmation link to continue
       </Typography>
-      <Button variant="contained" onClick={() => navigate(paths.quotingPage())}>
+      <Button
+        variant="contained"
+        onClick={() => navigate(paths.quotingPage({}))}
+      >
         Quoting Page
       </Button>
     </Container>

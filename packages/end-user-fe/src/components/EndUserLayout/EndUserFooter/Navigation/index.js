@@ -14,7 +14,7 @@ const Navigation = () => {
     {
       title: 'Get a quote',
       icon: <RequestQuote sx={{ mr: 1 }} />,
-      onclick: () => navigate(paths.quotingPage()),
+      onclick: () => navigate(paths.quotingPage({})),
     },
     {
       title: 'About us',
