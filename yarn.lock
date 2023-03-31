@@ -2669,6 +2669,26 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@mui/x-date-pickers@^6.0.4":
+  version "6.0.4"
+  resolved "https://registry.npmjs.org/@mui/x-date-pickers/-/x-date-pickers-6.0.4.tgz#f82c0ab3d66603c70dcb3a64f51e633d2f570a07"
+  integrity sha512-blh91rqgnr8mdm+bn5vdde7fQII0gUDmeOMttKrMLv6P6OxkQXdz5aLSroXUpPTAAbX53zciFW/UG5Ynxqxtpw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@date-io/core" "^2.16.0"
+    "@date-io/date-fns" "^2.16.0"
+    "@date-io/date-fns-jalali" "^2.16.0"
+    "@date-io/dayjs" "^2.16.0"
+    "@date-io/hijri" "^2.16.1"
+    "@date-io/jalaali" "^2.16.1"
+    "@date-io/luxon" "^2.16.1"
+    "@date-io/moment" "^2.16.1"
+    "@mui/utils" "^5.11.13"
+    "@types/react-transition-group" "^4.4.5"
+    clsx "^1.2.1"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
