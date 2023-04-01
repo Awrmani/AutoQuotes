@@ -1,5 +1,5 @@
 import { LocationOn, Mail, Phone } from '@mui/icons-material';
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import FooterTitleBox from '../FooterTitleBox';
@@ -38,27 +38,25 @@ const ContactDetails = () => {
   }, [phone, email, address1, address2, zip, city, state, country]);
 
   return (
-    <Box sx={{ mb: 2 }}>
-      <Stack
-        spacing={1}
-        sx={{
-          padding: 1,
-          justifyItems: 'left',
-        }}
-      >
-        <FooterTitleBox title={'Contact details'} />
-        {contactDetailsElements.map(e => {
-          return (
-            <ItemLink
-              key={e.title}
-              title={e.title}
-              href={e.href}
-              icon={e.icon}
-            ></ItemLink>
-          );
-        })}
-      </Stack>
-    </Box>
+    <Stack
+      spacing={1}
+      sx={{
+        padding: 1,
+        justifyItems: 'left',
+      }}
+    >
+      <FooterTitleBox title={'Contact details'} />
+      {contactDetailsElements.map(e => {
+        return (
+          <ItemLink
+            key={e.title}
+            title={e.title}
+            href={e.href}
+            icon={e.icon}
+          ></ItemLink>
+        );
+      })}
+    </Stack>
   );
 };
 

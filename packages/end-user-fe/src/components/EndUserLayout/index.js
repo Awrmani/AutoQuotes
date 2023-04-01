@@ -45,7 +45,7 @@ const EndUserLayout = () => {
           display: 'flex',
           justifyContent: 'center',
           mt: 1,
-          minHeight: '75vh',
+          flex: 1,
         }}
       >
         <Outlet />
@@ -54,7 +54,6 @@ const EndUserLayout = () => {
       <Box
         sx={{
           mt: 3,
-          minHeight: '20vh',
           width: '100%',
           position: 'static',
           bottom: 0,
