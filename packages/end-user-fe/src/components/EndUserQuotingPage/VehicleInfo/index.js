@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useEffect } from 'react';
+import { isEqual } from 'lodash';
 import { Box, Container, Typography } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
@@ -10,8 +11,9 @@ import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
-  const { values, submitForm } = useContext(formContext);
-  const { make, model, modelYear, engineVariant, bodyType } = values;
+  const { values, initialValues, submitForm } = useContext(formContext);
+
+  const { make, model, modelYear, engineVariant, isFinalized } = values;
   const vehicleOptions = useSelector(getVehicleTypeOptions);
 
   // Makes
@@ -67,11 +69,21 @@ const VehicleInfo = () => {
   }, [vehicleOptions, make, model, modelYear, engineVariant]);
 
   useEffect(() => {
-    if (!make || !model || !modelYear || !engineVariant || !bodyType) return;
+    // Everything is filled
+    if (
+      !values.make ||
+      !values.model ||
+      !values.modelYear ||
+      !values.engineVariant ||
+      !values.bodyType
+    )
+      return;
+    // Value did not came in initial form state (happens if quote is reloaded)
+    if (isEqual(values, initialValues)) return;
 
     submitForm();
     // All of the below has to be a dependency, if any changes and all are set, we will wnat to re-post
-  }, [make, model, modelYear, engineVariant, bodyType, submitForm]);
+  }, [values, initialValues, submitForm]);
 
   return (
     <Container sx={{ paddingTop: 2 }}>
@@ -86,6 +98,7 @@ const VehicleInfo = () => {
             label="Make"
             fullWidth
             options={makeOptions}
+            disabled={isFinalized}
           />
         </Box>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
@@ -95,6 +108,7 @@ const VehicleInfo = () => {
             label="Model"
             fullWidth
             options={modelOptions}
+            disabled={isFinalized}
           />
         </Box>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
@@ -104,6 +118,7 @@ const VehicleInfo = () => {
             label="Year"
             fullWidth
             options={yearOptions}
+            disabled={isFinalized}
           />
         </Box>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
@@ -113,6 +128,7 @@ const VehicleInfo = () => {
             label="Engine"
             fullWidth
             options={engineOptions}
+            disabled={isFinalized}
           />
         </Box>
         <Box sx={{ minWidth: SELECTOR_WIDTH }}>
@@ -122,6 +138,7 @@ const VehicleInfo = () => {
             label="Body"
             fullWidth
             options={bodyOptions}
+            disabled={isFinalized}
           />
         </Box>
       </Box>

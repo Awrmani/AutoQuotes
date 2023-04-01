@@ -1,5 +1,5 @@
 import { AssignmentReturn, Gavel, Shield } from '@mui/icons-material';
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -34,27 +34,25 @@ const TermsServices = () => {
   }, [returnPolicyUrl, termsAndConditionsUrl, privacyPolicyUrl]);
 
   return (
-    <Box sx={{ mb: 2 }}>
-      <Stack
-        spacing={1}
-        sx={{
-          padding: 1,
-          justifyItems: 'left',
-        }}
-      >
-        <FooterTitleBox title={'Terms and Services'}></FooterTitleBox>
-        {termsServicesElements.map(e => {
-          return (
-            <ItemLink
-              key={e.title}
-              title={e.title}
-              icon={e.icon}
-              href={e.href}
-            ></ItemLink>
-          );
-        })}
-      </Stack>
-    </Box>
+    <Stack
+      spacing={1}
+      sx={{
+        padding: 1,
+        justifyItems: 'left',
+      }}
+    >
+      <FooterTitleBox title={'Terms and Services'}></FooterTitleBox>
+      {termsServicesElements.map(e => {
+        return (
+          <ItemLink
+            key={e.title}
+            title={e.title}
+            icon={e.icon}
+            href={e.href}
+          ></ItemLink>
+        );
+      })}
+    </Stack>
   );
 };
 

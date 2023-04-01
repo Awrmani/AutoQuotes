@@ -1,14 +1,14 @@
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { TableRow, TableCell, IconButton, Tooltip } from '@mui/material';
+import { TableRow, TableCell, IconButton } from '@mui/material';
 import { toCurrency } from '@autoquotes/libraries/src/utils/currency';
 import { Delete } from '@mui/icons-material';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { removeService } from '../../../actions';
 import SelectedPart from './SelectedPart';
 
-const ServiceRow = ({ lineItemIndex }) => {
+const ServiceRow = ({ lineItemIndex, isFinalized }) => {
   const dispatch = useDispatch();
   const { values } = useContext(formContext);
   const { quoteId, lineItems } = values ?? {};
@@ -42,16 +42,15 @@ const ServiceRow = ({ lineItemIndex }) => {
           sx={{ borderBottom: 'none', padding: 0, maxWith: 20 }}
           align="right"
         >
-          <Tooltip title="Remove">
-            <IconButton onClick={handleDeleteClick}>
-              <Delete />
-            </IconButton>
-          </Tooltip>
+          <IconButton disabled={isFinalized} onClick={handleDeleteClick}>
+            <Delete />
+          </IconButton>
         </TableCell>
       </TableRow>
 
       {requiredParts.map((_, requiredPartIndex) => (
         <SelectedPart
+          key={requiredPartIndex}
           lineItemIndex={lineItemIndex}
           requiredPartIndex={requiredPartIndex}
         />
@@ -65,6 +64,9 @@ const ServiceRow = ({ lineItemIndex }) => {
 
 ServiceRow.propTypes = {
   lineItemIndex: PropTypes.number.isRequired,
+  isFinalized: PropTypes.bool,
 };
-
+ServiceRow.defaultProps = {
+  isFinalized: false,
+};
 export default ServiceRow;

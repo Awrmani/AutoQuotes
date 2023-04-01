@@ -11,7 +11,7 @@ const EndUserFooter = () => {
   const GridItemSx = { borderLeft: 2, borderLeftColor: grey[200] };
 
   return (
-    <Grid container columnSpacing={1}>
+    <Grid container columnSpacing={1} sx={{ marginBottom: 0 }}>
       <Grid item xs={3}>
         <ContactDetails />
       </Grid>

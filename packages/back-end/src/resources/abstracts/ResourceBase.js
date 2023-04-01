@@ -41,7 +41,8 @@ class ResourceBase {
   async _populateWithMongooseObj(mongooseObj) {
     // remove __v
     const { __v: v, ...rest } = mongooseObj.toJSON();
-    this._attributes = rest;
+    // Clone the object, so mongoose objectids are casted to string
+    this._attributes = JSON.parse(JSON.stringify(rest));
     this._isSaved = true;
 
     return this;

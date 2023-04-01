@@ -24,7 +24,7 @@ const Confirmation = () => {
 
   const token = useSelector(getToken);
   useEffect(() => {
-    if (token) navigate(paths.quotingPage());
+    if (token) navigate(paths.quotingPage({}));
   }, [token, navigate]);
   return (
     <Container

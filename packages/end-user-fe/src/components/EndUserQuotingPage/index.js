@@ -1,50 +1,59 @@
 import React, { useCallback, useContext, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Container, Divider, Paper } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import { Form, SubmitButton } from '@autoquotes/common/src/components/Form';
-import useQuoteUpdter from '../../hooks/useQuoteUpdater';
-import { addService, createQuote, fetchServiceTypeList } from '../../actions';
+import useQuoteUpdater from '../../hooks/useQuoteUpdater';
+import { addService, createQuote } from '../../actions';
 import VehicleInfo from './VehicleInfo';
 import AddServiceForm from './AddServiceForm';
 import SelectedServices from './SelectedServices';
-
-const initialValues = {
-  make: '',
-  model: '',
-  modelYear: '',
-  engineVariant: '',
-  bodyType: '',
-};
+import paths from '../../paths';
 
 const EndUserQuotingPage = () => {
-  const dispatch = useDispatch();
-  useQuoteUpdter();
+  const navigate = useNavigate();
+  const { values } = useContext(formContext);
+  const { quoteId, lineItems, isFinalized } = values;
 
-  const { setFieldValue, values } = useContext(formContext);
-  const { quoteId, lineItems } = values;
+  // If we are reloading the quote, load the vehicle type as well
+  // This way the outputs will be filled
+  // Dropdown uses a string representation of numbers
+  const vehicleTypeFormInitialValues = useMemo(
+    () => ({
+      isFinalized,
+      make: values?.vehicleType?.make ?? '',
+      model: values?.vehicleType?.model ?? '',
+      modelYear: String(values?.vehicleType?.modelYear ?? ''),
+      engineVariant: values?.vehicleType?.engineVariant ?? '',
+      bodyType: values?.vehicleType?.bodyType ?? '',
+    }),
+    [values.vehicleType, isFinalized]
+  );
+
+  useQuoteUpdater();
   const initialService = useMemo(() => {
     return {
       quoteId,
       serviceTypeId: '',
     };
   }, [quoteId]);
-  // Hook responsible for loading part list from the BE
 
+  // Hook responsible for loading part list from the BE
   const onQuoteCreateSuccess = useCallback(
     ({ response }) => {
       // get the quoteId from attributes
-      setFieldValue('quoteId', response?.id);
-      dispatch(fetchServiceTypeList({ quoteId: response?.id }));
+      navigate(paths.quotingPage({ quoteId: response?.id }));
     },
-    [setFieldValue, dispatch]
+    [navigate]
   );
 
   return (
     <Container component={Paper}>
       {/* Vehicle type form */}
+
       <Form
-        initialValues={initialValues}
+        enableReinitialize
+        initialValues={vehicleTypeFormInitialValues}
         action={createQuote}
         onSuccess={onQuoteCreateSuccess}
       >
@@ -56,6 +65,7 @@ const EndUserQuotingPage = () => {
 
       {!!quoteId && (
         <>
+          {/* Display line items in a quote */}
           {lineItems && lineItems.length > 0 ? (
             <Box sx={{ my: 2 }}>
               <SelectedServices />
@@ -63,16 +73,18 @@ const EndUserQuotingPage = () => {
           ) : null}
 
           {/* Add new line item to quote form */}
-          <Form
-            enableReinitialize
-            initialValues={initialService}
-            action={addService}
-          >
-            <Box sx={{ my: 2 }}>
-              <AddServiceForm />
-              <Divider sx={{ mt: 2 }} />
-            </Box>
-          </Form>
+          {!isFinalized && (
+            <Form
+              enableReinitialize
+              initialValues={initialService}
+              action={addService}
+            >
+              <Box sx={{ my: 2 }}>
+                <AddServiceForm />
+                <Divider sx={{ mt: 2 }} />
+              </Box>
+            </Form>
+          )}
         </>
       )}
       {lineItems && lineItems.length > 0 ? (

@@ -45,12 +45,17 @@ const EndUserAppBar = () => {
     handleCloseUserMenu();
   }, [navigate]);
 
+  const quoteListNavigate = useCallback(() => {
+    navigate(paths.userQuotes());
+    handleCloseUserMenu();
+  }, [navigate]);
+
   const pages = useMemo(() => {
     return [
       {
-        title: 'Get Quote',
+        title: 'Get New Quote',
         onclick: () => {
-          navigate(paths.quotingPage());
+          navigate(paths.quotingPage({}));
         },
       },
       {
@@ -75,11 +80,15 @@ const EndUserAppBar = () => {
         onclick: profileNavigate,
       },
       {
+        title: 'Your quotes',
+        onclick: quoteListNavigate,
+      },
+      {
         title: 'Logout',
         onclick: onLogout,
       },
     ],
-    [onLogout, profileNavigate]
+    [onLogout, profileNavigate, quoteListNavigate]
   );
 
   const handleOpenNavMenu = event => {

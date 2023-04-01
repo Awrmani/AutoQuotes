@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Container, Table, Typography, TableBody } from '@mui/material';
-
 import formContext from '@autoquotes/common/src/components/Form/formContext';
 import ServiceRow from './ServiceRow';
 import ServiceHead from './ServiceHead';
@@ -18,7 +17,11 @@ const SelectedServices = () => {
         <ServiceHead />
         <TableBody>
           {values.lineItems?.map((service, lineItemIndex) => (
-            <ServiceRow key={service.id} lineItemIndex={lineItemIndex} />
+            <ServiceRow
+              isFinalized={values.isFinalized}
+              key={service.serviceTypeId}
+              lineItemIndex={lineItemIndex}
+            />
           ))}
           <Summary />
         </TableBody>

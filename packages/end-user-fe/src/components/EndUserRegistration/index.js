@@ -194,7 +194,7 @@ const EndUserRegistration = props => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, mr: 1 }}
-              onClick={() => navigate(paths.quotingPage())}
+              onClick={() => navigate(paths.quotingPage({}))}
             >
               Cancel
             </Button>

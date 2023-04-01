@@ -12,11 +12,11 @@ const appointmentSchema = new mongoose.Schema(
     },
     duration: Number,
     customerId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'EndUser',
     },
     quoteId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Quote',
     },
   },

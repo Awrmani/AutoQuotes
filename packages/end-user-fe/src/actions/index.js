@@ -11,6 +11,8 @@ export const fetchServiceTypeList = createAction(
   actionTypes.SERVICE_TYPE_LIST_FETCH
 );
 
+export const fetchQuoteList = createAction(actionTypes.QUOTE_LIST_FETCH);
+
 export const fetchQuoteDetails = createAction(actionTypes.QUOTE_DETAILS_FETCH);
 
 // Form submits & other actions altering backend state

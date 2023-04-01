@@ -28,9 +28,9 @@ const partSchema = new mongoose.Schema(
         toYear: Number,
       },
     ],
-    supplierId: String, // only if this is an offer
+    supplierId: mongoose.Schema.Types.ObjectId, // only if this is an offer
     offerExpiration: Date, // only if this is an offer
-    exclusiveQuoteId: String, // A supplier offer is for a specific quote
+    exclusiveQuoteId: mongoose.Schema.Types.ObjectId, // A supplier offer is for a specific quote
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format
