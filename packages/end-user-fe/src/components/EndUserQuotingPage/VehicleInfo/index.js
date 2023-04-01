@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useEffect } from 'react';
 import { isEqual } from 'lodash';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Divider } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { useSelector } from 'react-redux';
@@ -86,63 +86,66 @@ const VehicleInfo = () => {
   }, [values, initialValues, submitForm]);
 
   return (
-    <Container sx={{ paddingTop: 2 }}>
-      <Typography component="h1" variant="h5">
-        Vehicle Specifications
-      </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="make"
-            label="Make"
-            fullWidth
-            options={makeOptions}
-            disabled={isFinalized}
-          />
+    <Box sx={{ my: 2 }}>
+      <Container sx={{ paddingTop: 2 }}>
+        <Typography component="h1" variant="h5">
+          Vehicle Specifications
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="make"
+              label="Make"
+              fullWidth
+              options={makeOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="model"
+              label="Model"
+              fullWidth
+              options={modelOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="modelYear"
+              label="Year"
+              fullWidth
+              options={yearOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="engineVariant"
+              label="Engine"
+              fullWidth
+              options={engineOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="bodyType"
+              label="Body"
+              fullWidth
+              options={bodyOptions}
+              disabled={isFinalized}
+            />
+          </Box>
         </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="model"
-            label="Model"
-            fullWidth
-            options={modelOptions}
-            disabled={isFinalized}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="modelYear"
-            label="Year"
-            fullWidth
-            options={yearOptions}
-            disabled={isFinalized}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="engineVariant"
-            label="Engine"
-            fullWidth
-            options={engineOptions}
-            disabled={isFinalized}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="bodyType"
-            label="Body"
-            fullWidth
-            options={bodyOptions}
-            disabled={isFinalized}
-          />
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+      <Divider sx={{ mt: 2 }} />
+    </Box>
   );
 };
 

@@ -60,6 +60,7 @@ export const registerUser = apiCall(
     city,
     state,
     country,
+    quoteId,
   }) => ({
     url: '/users',
     method: 'PUT',
@@ -77,6 +78,7 @@ export const registerUser = apiCall(
         state,
         country,
       },
+      quoteId,
     },
   })
 );

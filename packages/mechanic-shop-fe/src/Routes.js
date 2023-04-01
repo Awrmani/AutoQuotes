@@ -31,7 +31,10 @@ const Routes = () => {
       <Route
         // We only want to show these when the user is logged in
         element={
-          <ProtectedRoute doRedirect={!token} redirectPath={paths.login()} />
+          <ProtectedRoute
+            doRedirectIf={!token}
+            defaultRedirectPath={paths.login()}
+          />
         }
       >
         <Route
@@ -107,8 +110,8 @@ const Routes = () => {
         // We only want to show these when the user is *NOT* logged in
         element={
           <ProtectedRoute
-            doRedirect={!!token}
-            redirectPath={paths.dashboard()}
+            doRedirectIf={!!token}
+            defaultRedirectPath={paths.dashboard()}
           />
         }
       >

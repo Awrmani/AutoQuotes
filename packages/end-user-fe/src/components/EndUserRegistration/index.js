@@ -5,7 +5,7 @@ import {
   SubmitButton,
   FormError,
 } from '@autoquotes/common/src/components/Form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import {
   Box,
@@ -23,6 +23,7 @@ import paths from '../../paths';
 
 const EndUserRegistration = props => {
   const navigate = useNavigate();
+  const { quoteId } = useLocation()?.state ?? {};
   const shopDetails = useSelector(getShopSettings);
   const { name: shopName, slogan } = shopDetails;
   return (
@@ -194,7 +195,7 @@ const EndUserRegistration = props => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, mr: 1 }}
-              onClick={() => navigate(paths.quotingPage({}))}
+              onClick={() => navigate(paths.quotingPage({ quoteId }))}
             >
               Cancel
             </Button>
@@ -214,7 +215,12 @@ const EndUserRegistration = props => {
             <Grid item xs={12}>
               <Link
                 onClick={() => {
-                  navigate(paths.login());
+                  navigate(paths.login(), {
+                    state: {
+                      quoteId,
+                      redirectPath: paths.quotingPage({ quoteId }),
+                    },
+                  });
                 }}
                 sx={{
                   cursor: 'pointer',

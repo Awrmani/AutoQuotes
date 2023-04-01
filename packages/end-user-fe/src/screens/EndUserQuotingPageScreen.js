@@ -1,22 +1,25 @@
-import React, { useEffect, useMemo } from 'react';
-import { Form } from '@autoquotes/common/src/components/Form';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { CircularProgress, Stack } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { CircularProgress, Stack, Container, Paper } from '@mui/material';
+import { Form } from '@autoquotes/common/src/components/Form';
+import VehicleInfo from '../components/EndUserQuotingPage/VehicleInfo';
 import EndUserQuotingPage from '../components/EndUserQuotingPage';
 import {
   fetchQuoteDetails,
   fetchVehicleTypeList,
   fetchServiceTypeList,
   finalizeQuote,
+  createQuote,
 } from '../actions';
-
 import {
   getVehicleTypeListQuery,
   getQuoteDetails,
 } from '../reducers/queriesReducer';
+import paths from '../paths';
 
 const EndUserQuotingPageScreen = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { quoteId } = useParams() ?? {};
 
@@ -30,6 +33,7 @@ const EndUserQuotingPageScreen = () => {
   useEffect(() => {
     dispatch(fetchVehicleTypeList());
   }, [dispatch]);
+
   useEffect(() => {
     if (quoteId === 'new') return;
 
@@ -46,7 +50,6 @@ const EndUserQuotingPageScreen = () => {
     if (quoteId === quoteDetails?.id)
       return {
         isFinalized: quoteDetails?.isFinalized ?? false,
-        vehicleType: quoteDetails?.vehicleType,
         quoteId: quoteDetails?.id ?? '',
         lineItems: quoteDetails?.lineItems,
       };
@@ -57,6 +60,27 @@ const EndUserQuotingPageScreen = () => {
     };
   }, [quoteDetails, quoteId]);
 
+  const vehicleTypeFormInitialValues = useMemo(
+    () => ({
+      isFinalized: quoteDetails?.isFinalized ?? false,
+      make: quoteDetails?.vehicleType?.make ?? '',
+      model: quoteDetails?.vehicleType?.model ?? '',
+      modelYear: String(quoteDetails?.vehicleType?.modelYear ?? ''),
+      engineVariant: quoteDetails?.vehicleType?.engineVariant ?? '',
+      bodyType: quoteDetails?.vehicleType?.bodyType ?? '',
+    }),
+    [quoteDetails]
+  );
+
+  // Hook responsible for loading part list from the BE
+  const onQuoteCreateSuccess = useCallback(
+    ({ response }) => {
+      // get the quoteId from attributes
+      navigate(paths.quotingPage({ quoteId: response?.id }));
+    },
+    [navigate]
+  );
+
   // DO not render while data is fetching from the BE
   if (isFetching || !result)
     return (
@@ -64,14 +88,28 @@ const EndUserQuotingPageScreen = () => {
         <CircularProgress sx={{ mt: 8 }} size={64} />
       </Stack>
     );
+
   return (
-    <Form
-      enableReinitialize
-      initialValues={initialValues}
-      action={finalizeQuote}
-    >
-      <EndUserQuotingPage />
-    </Form>
+    <Container component={Paper}>
+      {/* Vehicle type form */}
+
+      <Form
+        enableReinitialize
+        initialValues={vehicleTypeFormInitialValues}
+        action={createQuote}
+        onSuccess={onQuoteCreateSuccess}
+      >
+        <VehicleInfo />
+      </Form>
+
+      <Form
+        enableReinitialize
+        initialValues={initialValues}
+        action={finalizeQuote}
+      >
+        <EndUserQuotingPage />
+      </Form>
+    </Container>
   );
 };
 
