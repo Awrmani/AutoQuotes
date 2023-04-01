@@ -16,11 +16,11 @@ const ResourceBase = require('./abstracts/ResourceBase');
 const quoteSchema = new mongoose.Schema(
   {
     customerId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'EndUser',
     },
     vehicleTypeId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'VehicleType',
     },
     lineItems: [
@@ -28,7 +28,7 @@ const quoteSchema = new mongoose.Schema(
         _id: false,
         // AKA. package
         serviceTypeId: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
           ref: 'ServiceType',
         },
         // To leave a paper trail (persist these in case of part changes) we copy the original
@@ -37,7 +37,7 @@ const quoteSchema = new mongoose.Schema(
           {
             _id: false,
             id: {
-              type: String,
+              type: mongoose.Schema.Types.ObjectId,
               ref: 'Part',
             },
             name: String,
@@ -49,7 +49,7 @@ const quoteSchema = new mongoose.Schema(
             },
             warrantyMonths: Number,
             price: Number, // If it cames from a supplier offer, it already contains markup
-            supplierId: String, // only if this is an offer
+            supplierId: mongoose.Schema.Types.ObjectId, // only if this is an offer
           },
         ],
       },

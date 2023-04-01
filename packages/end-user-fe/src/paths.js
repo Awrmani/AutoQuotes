@@ -6,7 +6,7 @@ const profile = () => ({
   pathname: `/profile`,
 });
 
-const quotingPage = ({ quoteId = '' } = { quoteId: ':quoteId' }) => ({
+const quotingPage = ({ quoteId = 'new' } = { quoteId: ':quoteId' }) => ({
   pathname: `/quotingPage/${quoteId}`,
 });
 

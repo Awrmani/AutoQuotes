@@ -11,14 +11,17 @@ import { updateQuote } from '../actions';
 
 const useQuoteUpdater = () => {
   const dispatch = useDispatch();
-  const { values } = useContext(formContext);
+  const { values, initialValues } = useContext(formContext);
 
   useEffect(() => {
     const { quoteId } = values ?? {};
     if (!quoteId) return;
 
+    // If we are reloading info, do not send update to BE
+    if (values === initialValues) return;
+
     dispatch(updateQuote(values));
-  }, [dispatch, values]);
+  }, [dispatch, values, initialValues]);
 };
 
 export default useQuoteUpdater;

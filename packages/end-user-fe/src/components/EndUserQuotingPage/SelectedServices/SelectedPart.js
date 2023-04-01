@@ -45,6 +45,7 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
           label=""
           fullWidth
           options={options}
+          disabled={values.isFinalized}
         />
       </TableCell>
 

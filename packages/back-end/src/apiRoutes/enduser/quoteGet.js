@@ -1,5 +1,6 @@
 const loadQuote = require('../../utils/loadQuote');
 const ServiceType = require('../../resources/ServiceType');
+const VehicleType = require('../../resources/VehicleType');
 const Shop = require('../../resources/Shop');
 const listCompatiblePartsForQuoteServiceType = require('../../utils/listCompatiblePartsForQuoteServiceType');
 
@@ -10,6 +11,10 @@ module.exports = async (req, res) => {
   const shop = await new Shop().loadBy({});
   const { hourlyPriceOfLabor } = shop.attributes;
   const quote = await loadQuote({ customerId, quoteId });
+
+  const vehicleType = await new VehicleType().loadById(
+    quote.attributes.vehicleTypeId
+  );
 
   // Expand the line items with the service type and all available options
   const expandedLineItemPromises = quote.attributes.lineItems.map(
@@ -52,5 +57,9 @@ module.exports = async (req, res) => {
 
   const expandedLineItems = await Promise.all(expandedLineItemPromises);
 
-  return res.json({ ...quote.attributes, lineItems: expandedLineItems });
+  return res.json({
+    ...quote.attributes,
+    vehicleType: vehicleType.attributes,
+    lineItems: expandedLineItems,
+  });
 };
