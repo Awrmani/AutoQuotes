@@ -18,8 +18,8 @@ const UserQuotes = () => {
   const quoteList = useSelector(getQuoteList);
 
   const onClick = useCallback(
-    ({ id }) => {
-      navigate(paths.quotingPage({ quoteId: id }));
+    quoteId => {
+      navigate(paths.quotingPage({ quoteId }));
     },
     [navigate]
   );
@@ -41,15 +41,17 @@ const UserQuotes = () => {
       </Typography>
 
       <List sx={{ width: '100%', maxWidth: 380 }}>
-        {quoteList?.map(quote => (
-          <ListItemButton
-            divider
-            key={quote.id}
-            onClick={() => onClick({ id: quote.id })}
-          >
+        {quoteList?.map(({ id, vehicleType, appointment }) => (
+          <ListItemButton divider key={id} onClick={() => onClick(id)}>
             <ListItemText
-              primary={`Quote Number: ${quote.id}`}
-              secondary={`Date: ${new Date(quote.createdAt).toLocaleString()}`}
+              primary={`For a ${vehicleType.modelYear} ${vehicleType.make} ${vehicleType.model} ${vehicleType.engineVariant} ${vehicleType.bodyType}`}
+              secondary={
+                appointment?.startsAt
+                  ? `Appointment at: ${new Date(
+                      appointment.startsAt
+                    ).toLocaleString()}`
+                  : 'No appointment scheduled'
+              }
             />
           </ListItemButton>
         ))}

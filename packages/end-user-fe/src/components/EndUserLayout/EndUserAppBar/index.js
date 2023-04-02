@@ -53,21 +53,15 @@ const EndUserAppBar = () => {
   const pages = useMemo(() => {
     return [
       {
-        title: 'Get New Quote',
+        title: 'Get a Quote',
         onclick: () => {
           navigate(paths.quotingPage({}));
         },
       },
       {
-        title: 'Book Appointment',
+        title: 'View your Quotes',
         onclick: () => {
-          navigate(paths.appointment());
-        },
-      },
-      {
-        title: 'About us',
-        onclick: () => {
-          navigate(paths.about());
+          navigate(paths.userQuotes());
         },
       },
     ];
@@ -154,9 +148,6 @@ const EndUserAppBar = () => {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
             >
               {pages.map(p => (
                 <MenuItem key={p.title} onClick={p.onclick}>
@@ -188,12 +179,28 @@ const EndUserAppBar = () => {
           >
             {shopName}
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: 'none',
+                md: 'flex',
+                gap: 6,
+              },
+            }}
+          >
             {pages.map(p => (
               <Button
                 key={p.title}
                 onClick={p.onclick}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  textTransform: 'none',
+                  fontSize: 16,
+                }}
+                variant="outlined"
               >
                 {p.title}
               </Button>

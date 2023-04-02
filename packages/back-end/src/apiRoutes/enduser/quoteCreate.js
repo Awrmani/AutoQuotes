@@ -24,6 +24,22 @@ module.exports = async (req, res) => {
     throw new Error('Vehicle type not found');
   }
 
+  // Delete previous empty quotes for the user
+  if (customerId) {
+    await Quote.QuoteModel.deleteMany({
+      $and: [
+        { customerId },
+        {
+          $or: [
+            { lineItems: { $eq: [] } },
+            { lineItems: { $eq: null } },
+            { lineItems: { $exists: false } },
+          ],
+        },
+      ],
+    });
+  }
+
   const quote = new Quote({
     customerId,
     vehicleTypeId: vehicleType.attributes.id,
