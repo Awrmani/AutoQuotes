@@ -1,3 +1,4 @@
+import React from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import {
   Box,
@@ -7,25 +8,8 @@ import {
   Typography,
 } from '@mui/material';
 import { green, grey } from '@mui/material/colors';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getToken } from '@autoquotes/libraries/src/reducers/tokenReducer';
-import { confirmUser } from '../../actions';
-import paths from '../../paths';
 
 const Confirmation = () => {
-  const { userId, key } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(confirmUser({ userId, key }));
-  }, [userId, key, dispatch]);
-
-  const token = useSelector(getToken);
-  useEffect(() => {
-    if (token) navigate(paths.quotingPage({}));
-  }, [token, navigate]);
   return (
     <Container
       sx={{

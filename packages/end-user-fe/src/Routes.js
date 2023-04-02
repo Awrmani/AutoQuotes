@@ -25,8 +25,8 @@ const Routes = () => {
           // We only want to show these when the user is *NOT* logged in
           element={
             <ProtectedRoute
-              doRedirect={!!token}
-              redirectPath={paths.quotingPage({})}
+              doRedirectIf={!!token}
+              defaultRedirectPath={paths.quotingPage({})}
             />
           }
         >
@@ -36,6 +36,10 @@ const Routes = () => {
             path={paths.registration().pathname}
             element={<UserRegistrationScreen />}
           />
+          <Route
+            path={paths.confirmingEmail().pathname}
+            element={<ConfirmingEmailScreen />}
+          />
         </Route>
         <Route
           path={paths.quotingPage().pathname}
@@ -44,7 +48,10 @@ const Routes = () => {
         <Route
           // We only want to show these when the user is logged in
           element={
-            <ProtectedRoute doRedirect={!token} redirectPath={paths.login()} />
+            <ProtectedRoute
+              doRedirectIf={!token}
+              defaultRedirectPath={paths.login()}
+            />
           }
         >
           {/* Add all authenticated routes here */}
@@ -59,14 +66,10 @@ const Routes = () => {
         </Route>
       </Route>
 
+      {/* Routes that are available independent of login state */}
       <Route
         path={paths.emailConfirmation().pathname}
         element={<UserConfirmationScreen />}
-      />
-
-      <Route
-        path={paths.confirmingEmail().pathname}
-        element={<ConfirmingEmailScreen />}
       />
 
       {/* If no other route matches, let's fall back to quotingPage */}

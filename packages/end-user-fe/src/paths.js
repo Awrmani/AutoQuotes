@@ -19,11 +19,11 @@ const appointment = () => ({
 });
 
 const emailConfirmation = () => ({
-  pathname: '/confirmEmail/:userId/:key',
+  pathname: '/confirmEmail/:userId/:key/:quoteId?',
 });
 
 const confirmingEmail = () => ({
-  pathname: '/confirmEmail',
+  pathname: '/confirmEmailSent',
 });
 
 const userQuotes = () => ({
