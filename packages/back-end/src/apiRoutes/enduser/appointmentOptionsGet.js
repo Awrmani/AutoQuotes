@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
   const { date } = req.query;
 
   const quote = await loadQuote({ customerId, quoteId });
-  if (!quote.attributes.isFinalized) throw new Error('Quote is not finalized');
 
+  if (!quote.attributes.isFinalized) throw new Error('Quote is not finalized');
   try {
     await new Appointment().loadBy({ quoteId });
 
@@ -22,12 +22,13 @@ module.exports = async (req, res) => {
 
   const deduplicatedOptions = options.reduce((acc, option) => {
     // If we already have that option, no point in adding it again (for a different stall)
-    if (
-      acc.find(
-        toCheck => toCheck.start === option.start && toCheck.end === option.end
-      )
-    )
-      return acc;
+    const found = acc.some(
+      toCheck =>
+        toCheck.start.toISOString() === option.start.toISOString() &&
+        toCheck.end.toISOString() === option.end.toISOString()
+    );
+
+    if (found) return acc;
 
     return [...acc, { start: option.start, end: option.end }];
   }, []);
