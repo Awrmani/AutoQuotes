@@ -24,7 +24,7 @@ const runServer = async () => {
   const shop = await new Shop().loadBy({});
   mailer.configure({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+    port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined,
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
     sender: `"${shop.attributes.name}" <${shop.attributes.email}>`,
