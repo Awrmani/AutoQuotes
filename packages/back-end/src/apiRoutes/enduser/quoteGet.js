@@ -32,6 +32,7 @@ module.exports = async (req, res) => {
       // Map over all the required parts combine selection with options
       const requiredParts = compatibleParts.map(({ name, options }, index) => {
         const selectedPartId = selectedParts?.[index]?.id;
+
         return {
           name,
           selected: selectedPartId ?? '',
@@ -39,16 +40,18 @@ module.exports = async (req, res) => {
         };
       });
 
+      const laborCost =
+        Math.round(
+          (serviceType.attributes.timeInMinutes / 60) * hourlyPriceOfLabor * 100
+        ) / 100;
+
       return {
         serviceTypeId,
         name: serviceType.attributes.name,
         timeInMinutes: serviceType.attributes.timeInMinutes,
-        laborCost:
-          Math.round(
-            (serviceType.attributes.timeInMinutes / 60) *
-              hourlyPriceOfLabor *
-              100
-          ) / 100,
+        laborCost,
+        laborTax: laborCost * (shop.attributes.taxPercent / 100),
+        taxPercent: shop.attributes.taxPercent,
         description: serviceType.attributes.description,
         requiredParts,
       };

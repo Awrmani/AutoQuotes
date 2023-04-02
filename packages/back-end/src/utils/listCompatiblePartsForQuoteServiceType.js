@@ -1,5 +1,5 @@
-const { pick } = require('lodash');
 const VehicleType = require('../resources/VehicleType');
+const Shop = require('../resources/Shop');
 const Part = require('../resources/Part');
 const ServiceType = require('../resources/ServiceType');
 const compatibleVehiclesConditionGenerator = require('./compatibleVehiclesConditionGenerator');
@@ -10,6 +10,7 @@ const listCompatiblePartsForPartRow = async ({
   modelYear,
   partName,
   quoteId,
+  taxPercent,
 }) => {
   const partIds = await Part.PartModel.find(
     {
@@ -39,11 +40,15 @@ const listCompatiblePartsForPartRow = async ({
   );
 
   const partPromises = partIds.map(({ id }) =>
-    new Part()
-      .loadById(id.toString())
-      .then(({ attributes }) =>
-        pick(attributes, ['name', 'type', 'warrantyMonths', 'price', 'id'])
-      )
+    new Part().loadById(id.toString()).then(({ attributes }) => ({
+      name: attributes.name,
+      type: attributes.type,
+      warrantyMonths: attributes.warrantyMonths,
+      price: attributes.price,
+      partTax: attributes.price * (taxPercent / 100),
+      taxPercent,
+      id: attributes.id,
+    }))
   );
 
   return Promise.all(partPromises);
@@ -54,6 +59,7 @@ const listCompatiblePartsForQuoteServiceType = async ({
   serviceTypeId,
   vehicleTypeId,
 }) => {
+  const shop = await new Shop().loadBy({});
   const vehicleType = await new VehicleType().loadById(vehicleTypeId);
   const serviceType = await new ServiceType().loadById(serviceTypeId);
   const { make, model, modelYear } = vehicleType.attributes;
@@ -67,6 +73,7 @@ const listCompatiblePartsForQuoteServiceType = async ({
         modelYear,
         partName,
         quoteId,
+        taxPercent: shop.attributes.taxPercent,
       }),
     })
   );

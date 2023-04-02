@@ -13,8 +13,15 @@ const ServiceRow = ({ lineItemIndex, isFinalized }) => {
   const { values } = useContext(formContext);
   const { quoteId, lineItems } = values ?? {};
   const lineItem = lineItems[lineItemIndex];
-  const { serviceTypeId, name, timeInMinutes, laborCost, requiredParts } =
-    lineItem;
+  const {
+    serviceTypeId,
+    name,
+    timeInMinutes,
+    laborCost,
+    laborTax,
+    requiredParts,
+  } = lineItem;
+
   const style = { width: '120px', fontSize: 'small', borderBottom: 'none' };
 
   const handleDeleteClick = useCallback(() => {
@@ -38,6 +45,12 @@ const ServiceRow = ({ lineItemIndex, isFinalized }) => {
         <TableCell sx={style} align="right">
           {toCurrency(laborCost)}
         </TableCell>
+        <TableCell sx={style} align="right">
+          {toCurrency(laborTax)}
+        </TableCell>
+        <TableCell sx={style} align="right">
+          {toCurrency(laborCost + laborTax)}
+        </TableCell>
         <TableCell
           sx={{ borderBottom: 'none', padding: 0, maxWith: 20 }}
           align="right"
@@ -56,7 +69,7 @@ const ServiceRow = ({ lineItemIndex, isFinalized }) => {
         />
       ))}
       <TableRow>
-        <TableCell colSpan={5}></TableCell>
+        <TableCell colSpan={7}></TableCell>
       </TableRow>
     </>
   );

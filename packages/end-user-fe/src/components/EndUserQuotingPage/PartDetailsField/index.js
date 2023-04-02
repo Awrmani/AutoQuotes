@@ -7,17 +7,41 @@ const PartDetailsField = ({ options, value }) => {
   const option = options.find(({ id: toCheck }) => toCheck === value);
 
   return (
-    <TableCell
-      sx={{
-        fontSize: 'small',
-        width: '120px',
-        borderBottom: 'none',
-        mb: 0,
-      }}
-      align="right"
-    >
-      {toCurrency(option?.price)}
-    </TableCell>
+    <>
+      <TableCell
+        sx={{
+          fontSize: 'small',
+          width: '120px',
+          borderBottom: 'none',
+          mb: 0,
+        }}
+        align="right"
+      >
+        {toCurrency(option?.price)}
+      </TableCell>
+      <TableCell
+        sx={{
+          fontSize: 'small',
+          width: '120px',
+          borderBottom: 'none',
+          mb: 0,
+        }}
+        align="right"
+      >
+        {toCurrency(option?.partTax)}
+      </TableCell>
+      <TableCell
+        sx={{
+          fontSize: 'small',
+          width: '120px',
+          borderBottom: 'none',
+          mb: 0,
+        }}
+        align="right"
+      >
+        {toCurrency((option?.price ?? 0) + (option?.partTax ?? 0))}
+      </TableCell>
+    </>
   );
 };
 

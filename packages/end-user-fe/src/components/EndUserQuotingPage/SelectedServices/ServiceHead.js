@@ -13,10 +13,13 @@ const ServiceHead = () => {
         <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
           Cost
         </TableCell>
-        <TableCell
-          sx={{ fontWeight: 700, width: 20 }}
-          align="right"
-        ></TableCell>
+        <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
+          Tax
+        </TableCell>
+        <TableCell sx={{ fontWeight: 700, width: 120 }} align="right">
+          Sum
+        </TableCell>
+        <TableCell sx={{ fontWeight: 700, width: 20 }} align="right" />
       </TableRow>
     </TableHead>
   );
