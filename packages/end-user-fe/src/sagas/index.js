@@ -54,15 +54,20 @@ export default function* root() {
     }),
     takeLatest(actionTypes.USER_REGISTER, apiCall, {
       apiFn: endUserApi.registerUser,
-      onSuccess: [
-        [successToast('Successfully created!')],
-        apiCall.DISPATCH_SUCCESS,
-      ],
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: endUserApi.updateUser,
       onSuccess: [
         [successToast('Successfully updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.USER_CONFIRM, apiCall, {
+      apiFn: endUserApi.confirmUser,
+      onSuccess: [
+        [earlySetToken],
+        [refreshCurrentUser],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
@@ -76,9 +81,20 @@ export default function* root() {
       apiFn: endUserApi.fetchQuoteDetails,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
+    takeLatest(actionTypes.QUOTE_UPDATE, apiCall, {
+      apiFn: endUserApi.updateQuote,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.QUOTE_FINALIZE, apiCall, {
+      apiFn: endUserApi.finalizeQuote,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.QUOTE_LIST_FETCH, apiCall, {
+      apiFn: endUserApi.fetchQuoteList,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
 
     // Services
-
     takeLatest(actionTypes.SERVICE_TYPE_LIST_FETCH, apiCall, {
       apiFn: endUserApi.fetchServiceTypeList,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
@@ -90,6 +106,12 @@ export default function* root() {
     }),
     takeLatest(actionTypes.SERVICE_REMOVE, apiCall, {
       apiFn: endUserApi.removeService,
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Offers
+    takeLatest(actionTypes.OFFERS_REQUEST, apiCall, {
+      apiFn: endUserApi.requestOffers,
       onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
   ]);

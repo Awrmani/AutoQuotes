@@ -41,7 +41,7 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={3}>
           <Field
             required
             component={TextInput}
@@ -50,7 +50,7 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={3}>
           <Field
             required
             component={TextInput}
@@ -59,12 +59,21 @@ const ShopSettingsForm = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={3}>
           <Field
             required
             component={TextInput}
             name="partMarkupPercent"
-            label="Third party supplier part markup %"
+            label="Third party part markup %"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <Field
+            required
+            component={TextInput}
+            name="taxPercent"
+            label="Tax %"
             fullWidth
           />
         </Grid>

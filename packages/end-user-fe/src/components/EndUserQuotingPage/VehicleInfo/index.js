@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useEffect } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { isEqual } from 'lodash';
+import { Box, Container, Typography, Divider } from '@mui/material';
 import { Field } from '@autoquotes/common/src/components/Form';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
 import { useSelector } from 'react-redux';
@@ -10,8 +11,9 @@ import { SELECTOR_WIDTH } from '../../../constants/comDimension';
 
 const optionDefault = { value: '', label: '' };
 const VehicleInfo = () => {
-  const { values, submitForm } = useContext(formContext);
-  const { make, model, modelYear, engineVariant, bodyType } = values;
+  const { values, initialValues, submitForm } = useContext(formContext);
+
+  const { make, model, modelYear, engineVariant, isFinalized } = values;
   const vehicleOptions = useSelector(getVehicleTypeOptions);
 
   // Makes
@@ -67,65 +69,83 @@ const VehicleInfo = () => {
   }, [vehicleOptions, make, model, modelYear, engineVariant]);
 
   useEffect(() => {
-    if (!make || !model || !modelYear || !engineVariant || !bodyType) return;
+    // Everything is filled
+    if (
+      !values.make ||
+      !values.model ||
+      !values.modelYear ||
+      !values.engineVariant ||
+      !values.bodyType
+    )
+      return;
+    // Value did not came in initial form state (happens if quote is reloaded)
+    if (isEqual(values, initialValues)) return;
 
     submitForm();
     // All of the below has to be a dependency, if any changes and all are set, we will wnat to re-post
-  }, [make, model, modelYear, engineVariant, bodyType, submitForm]);
+  }, [values, initialValues, submitForm]);
 
   return (
-    <Container>
-      <Typography component="h1" variant="h5">
-        Vehicle Specifications
-      </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="make"
-            label="Make"
-            fullWidth
-            options={makeOptions}
-          />
+    <Box sx={{ my: 2 }}>
+      <Container sx={{ paddingTop: 2 }}>
+        <Typography component="h1" variant="h5">
+          Vehicle Specifications
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="make"
+              label="Make"
+              fullWidth
+              options={makeOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="model"
+              label="Model"
+              fullWidth
+              options={modelOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="modelYear"
+              label="Year"
+              fullWidth
+              options={yearOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="engineVariant"
+              label="Engine"
+              fullWidth
+              options={engineOptions}
+              disabled={isFinalized}
+            />
+          </Box>
+          <Box sx={{ minWidth: SELECTOR_WIDTH }}>
+            <Field
+              component={Dropdown}
+              name="bodyType"
+              label="Body"
+              fullWidth
+              options={bodyOptions}
+              disabled={isFinalized}
+            />
+          </Box>
         </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="model"
-            label="Model"
-            fullWidth
-            options={modelOptions}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="modelYear"
-            label="Year"
-            fullWidth
-            options={yearOptions}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="engineVariant"
-            label="Engine"
-            fullWidth
-            options={engineOptions}
-          />
-        </Box>
-        <Box sx={{ minWidth: SELECTOR_WIDTH }}>
-          <Field
-            component={Dropdown}
-            name="bodyType"
-            label="Body"
-            fullWidth
-            options={bodyOptions}
-          />
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+      <Divider sx={{ mt: 2 }} />
+    </Box>
   );
 };
 

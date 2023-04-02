@@ -22,6 +22,9 @@ export default combineReducers({
   quoteDetails: queryReducer({
     triggerActionType: actionTypes.QUOTE_DETAILS_FETCH,
   }),
+  quoteList: queryReducer({
+    triggerActionType: actionTypes.QUOTE_LIST_FETCH,
+  }),
 });
 
 /**
@@ -48,3 +51,7 @@ export const getServiceTypeList = state =>
 // Quote details
 export const getQuoteDetailsQuery = state => state.queries.quoteDetails;
 export const getQuoteDetails = state => state.queries.quoteDetails?.result;
+
+// Quote list
+export const getQuoteListQuery = state => state.queries.quoteList;
+export const getQuoteList = state => state.queries.quoteList?.result;

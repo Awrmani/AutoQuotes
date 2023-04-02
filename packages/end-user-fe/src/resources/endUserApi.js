@@ -36,6 +36,11 @@ export const fetchServiceTypeList = apiCall(({ quoteId }) => ({
   method: 'GET',
 }));
 
+export const fetchQuoteList = apiCall(() => ({
+  url: `/quotes`,
+  method: 'GET',
+}));
+
 export const fetchQuoteDetails = apiCall(({ quoteId }) => ({
   url: `/quotes/${quoteId}`,
   method: 'GET',
@@ -55,6 +60,7 @@ export const registerUser = apiCall(
     city,
     state,
     country,
+    quoteId,
   }) => ({
     url: '/users',
     method: 'PUT',
@@ -72,9 +78,16 @@ export const registerUser = apiCall(
         state,
         country,
       },
+      quoteId,
     },
   })
 );
+
+export const confirmUser = apiCall(({ userId, key }) => ({
+  url: `/users/${userId}/confirm`,
+  method: 'POST',
+  data: { verificationCode: key },
+}));
 
 export const updateUser = apiCall(
   ({
@@ -124,6 +137,18 @@ export const createQuote = apiCall(
   })
 );
 
+export const updateQuote = apiCall(({ quoteId, lineItems }) => ({
+  url: `/quotes/${quoteId}`,
+  method: 'PATCH',
+  data: { lineItems },
+}));
+
+export const finalizeQuote = apiCall(({ quoteId, lineItems }) => ({
+  url: `/quotes/${quoteId}/finalize`,
+  method: 'POST',
+  data: { lineItems },
+}));
+
 export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
   url: `/quotes/${quoteId}/services`,
   method: 'PUT',
@@ -133,4 +158,10 @@ export const addService = apiCall(({ quoteId, serviceTypeId }) => ({
 export const removeService = apiCall(({ quoteId, serviceTypeId }) => ({
   url: `/quotes/${quoteId}/services/${serviceTypeId}`,
   method: 'DELETE',
+}));
+
+export const requestOffers = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}/requestOffers`,
+  method: 'POST',
+  data: {},
 }));

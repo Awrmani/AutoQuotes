@@ -43,6 +43,7 @@
     "numberOfStalls": 6,
     "hourlyPriceOfLabor": 130,
     "partMarkupPercent": 30,
+    "taxPercent": 13,
     "returnPolicyUrl": "https://sixix.denke.hu/returnPolicy.pdf",
     "termsAndConditionsUrl": "https://sixix.denke.hu/termsAndConditions.pdf",
     "privacyPolicyUrl": "https://sixix.denke.hu/privacyPolicy.pdf",

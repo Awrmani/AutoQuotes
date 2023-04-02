@@ -6,7 +6,7 @@ import {
 } from '@autoquotes/common/src/components/Form';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container, Link, Box, Typography, Paper } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { getShopSettings } from '../../reducers/queriesReducer';
@@ -14,6 +14,7 @@ import paths from '../../paths';
 
 const EndUserLogin = () => {
   const navigate = useNavigate();
+  const { quoteId } = useLocation()?.state ?? {};
   const shopDetails = useSelector(getShopSettings);
   const { name: shopName, slogan } = shopDetails;
 
@@ -72,18 +73,12 @@ const EndUserLogin = () => {
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Link
               onClick={() => {
-                navigate(paths.registration());
-              }}
-              sx={{
-                cursor: 'pointer',
-              }}
-              variant="body2"
-            >
-              {'Forgot password?'}
-            </Link>
-            <Link
-              onClick={() => {
-                navigate(paths.registration());
+                navigate(paths.registration(), {
+                  state: {
+                    quoteId,
+                    redirectPath: paths.quotingPage({ quoteId }),
+                  },
+                });
               }}
               sx={{
                 cursor: 'pointer',

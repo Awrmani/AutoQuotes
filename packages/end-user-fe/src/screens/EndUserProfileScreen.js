@@ -45,7 +45,7 @@ const EndUserProfileScreen = () => {
   }, [result]);
 
   const handleSuccess = useCallback(() => {
-    navigate(paths.quotingPage());
+    navigate(paths.quotingPage({}));
   }, [navigate]);
 
   // DO not render while data is fetching from the BE

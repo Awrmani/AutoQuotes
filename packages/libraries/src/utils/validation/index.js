@@ -43,7 +43,7 @@ const subValidator = config => {
     const failed = Object.keys(validator(values));
     if (!failed.length) return undefined;
 
-    return `The follwing attributes are incorrect: ${failed.join(', ')}`;
+    return `The following attributes are incorrect: ${failed.join(', ')}`;
   };
 };
 
@@ -75,8 +75,37 @@ const arrayOf = validatorArr => {
   };
 };
 
+const nullableArrayOf = validatorArr => {
+  return valuesArray => {
+    if (!Array.isArray(valuesArray)) return 'Not an array';
+
+    // Take the first error from the list
+    const [error] = valuesArray
+      // run validator(s) on each element
+      .map((value, index) => {
+        // null and undefined is allowed
+        if ([null, undefined].includes(value)) return undefined;
+
+        const fieldValidationResult = validateField({
+          validatorArr,
+          value,
+        });
+
+        if (fieldValidationResult)
+          return `${fieldValidationResult} in array index [${index}]`;
+
+        return undefined;
+      })
+      // only keep failures
+      .filter(v => !!v);
+
+    return error; // Either a validation error or undefined if there were none
+  };
+};
+
 validatorFactory.subValidator = subValidator;
 validatorFactory.arrayOfValidator = arrayOf;
+validatorFactory.nullableArrayOfValidator = nullableArrayOf;
 
 // Using CJS export as this is used in both CJS and MJS
 module.exports = validatorFactory;

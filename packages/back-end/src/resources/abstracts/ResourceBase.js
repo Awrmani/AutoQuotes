@@ -41,7 +41,8 @@ class ResourceBase {
   async _populateWithMongooseObj(mongooseObj) {
     // remove __v
     const { __v: v, ...rest } = mongooseObj.toJSON();
-    this._attributes = rest;
+    // Clone the object, so mongoose objectids are casted to string
+    this._attributes = JSON.parse(JSON.stringify(rest));
     this._isSaved = true;
 
     return this;
@@ -103,6 +104,9 @@ class ResourceBase {
   }
 
   update(toSet) {
+    if (Array.isArray(toSet))
+      throw new Error('Update root level cannot be array');
+
     // merge old attributes with input, and sanitize / verify them
     const sanitized = this._validate({
       ...this._attributes,

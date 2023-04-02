@@ -8,6 +8,9 @@ import UserLoginScreen from './screens/UserLoginScreen';
 import UserRegistrationScreen from './screens/UserRegistrationScreen';
 import EndUserQuotingPageScreen from './screens/EndUserQuotingPageScreen';
 import EndUserProfileScreen from './screens/EndUserProfileScreen';
+import UserConfirmationScreen from './screens/UserConfirmationScreen';
+import ConfirmingEmailScreen from './screens/ConfirmingEmailScreen';
+import UserQuotesScreen from './screens/UserQuotesScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -22,8 +25,8 @@ const Routes = () => {
           // We only want to show these when the user is *NOT* logged in
           element={
             <ProtectedRoute
-              doRedirect={!!token}
-              redirectPath={paths.quotingPage()}
+              doRedirectIf={!!token}
+              defaultRedirectPath={paths.quotingPage({})}
             />
           }
         >
@@ -33,6 +36,10 @@ const Routes = () => {
             path={paths.registration().pathname}
             element={<UserRegistrationScreen />}
           />
+          <Route
+            path={paths.confirmingEmail().pathname}
+            element={<ConfirmingEmailScreen />}
+          />
         </Route>
         <Route
           path={paths.quotingPage().pathname}
@@ -41,7 +48,10 @@ const Routes = () => {
         <Route
           // We only want to show these when the user is logged in
           element={
-            <ProtectedRoute doRedirect={!token} redirectPath={paths.login()} />
+            <ProtectedRoute
+              doRedirectIf={!token}
+              defaultRedirectPath={paths.login()}
+            />
           }
         >
           {/* Add all authenticated routes here */}
@@ -49,11 +59,24 @@ const Routes = () => {
             path={paths.profile().pathname}
             element={<EndUserProfileScreen />}
           />
+          <Route
+            path={paths.userQuotes().pathname}
+            element={<UserQuotesScreen />}
+          />
         </Route>
       </Route>
 
+      {/* Routes that are available independent of login state */}
+      <Route
+        path={paths.emailConfirmation().pathname}
+        element={<UserConfirmationScreen />}
+      />
+
       {/* If no other route matches, let's fall back to quotingPage */}
-      <Route path="*" element={<Navigate to={paths.quotingPage()} replace />} />
+      <Route
+        path="*"
+        element={<Navigate to={paths.quotingPage({})} replace />}
+      />
     </RrdRoutes>
   );
 };

@@ -244,6 +244,7 @@ export const updateShopSettings = apiCall(
     numberOfStalls,
     hourlyPriceOfLabor,
     partMarkupPercent,
+    taxPercent,
     email,
     phone,
     returnPolicyUrl,
@@ -265,6 +266,7 @@ export const updateShopSettings = apiCall(
       slogan,
       hourlyPriceOfLabor: Number(hourlyPriceOfLabor),
       partMarkupPercent: Number(partMarkupPercent),
+      taxPercent: Number(taxPercent),
       email,
       phone,
       openingHours: Object.keys(openingHours).reduce((acc, dayName) => {

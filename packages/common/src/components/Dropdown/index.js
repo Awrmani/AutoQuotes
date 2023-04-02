@@ -1,7 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from '@mui/material';
 
 const Dropdown = ({
   onChange,
@@ -39,7 +45,6 @@ const Dropdown = ({
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         labelId={labelId}
-        helperText={error ?? description}
         error={!!error}
         disabled={isSubmitting}
         onChange={handleChange}
@@ -57,6 +62,7 @@ const Dropdown = ({
           </MenuItem>
         ))}
       </Select>
+      <FormHelperText>{error ?? description}</FormHelperText>
     </FormControl>
   );
 };

@@ -6,8 +6,8 @@ const profile = () => ({
   pathname: `/profile`,
 });
 
-const quotingPage = () => ({
-  pathname: '/quotingPage',
+const quotingPage = ({ quoteId = 'new' } = { quoteId: ':quoteId' }) => ({
+  pathname: `/quotingPage/${quoteId}`,
 });
 
 const about = () => ({
@@ -18,6 +18,18 @@ const appointment = () => ({
   pathname: '/appointment',
 });
 
+const emailConfirmation = () => ({
+  pathname: '/confirmEmail/:userId/:key/:quoteId?',
+});
+
+const confirmingEmail = () => ({
+  pathname: '/confirmEmailSent',
+});
+
+const userQuotes = () => ({
+  pathname: '/quotes',
+});
+
 const paths = {
   login,
   about,
@@ -25,6 +37,9 @@ const paths = {
   quotingPage,
   appointment,
   profile,
+  emailConfirmation,
+  confirmingEmail,
+  userQuotes,
 };
 
 export default paths;

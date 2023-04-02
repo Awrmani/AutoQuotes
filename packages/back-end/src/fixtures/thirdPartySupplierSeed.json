@@ -1,0 +1,22 @@
+[
+  {
+    "name": "First Supplier",
+    "address": "Bay Street 1",
+    "zip": "A0A 0A0",
+    "city": "Toronto",
+    "state": "ON",
+    "country": "Canada",
+    "email": "denke@denke.hu",
+    "phone": "+12345678910"
+  },
+  {
+    "name": "Second Supplier",
+    "address": "Front Street 2",
+    "zip": "B1B 1B1",
+    "city": "Toronto",
+    "state": "ON",
+    "country": "Canada",
+    "email": "denke@denke.hu",
+    "phone": "+12345678911"
+  }
+]

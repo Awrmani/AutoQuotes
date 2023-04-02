@@ -1,11 +1,8 @@
 const loadQuote = require('../../utils/loadQuote');
 const ServiceType = require('../../resources/ServiceType');
+const VehicleType = require('../../resources/VehicleType');
 const Shop = require('../../resources/Shop');
 const listCompatiblePartsForQuoteServiceType = require('../../utils/listCompatiblePartsForQuoteServiceType');
-
-/**
- * todo calculate cost of work
- */
 
 module.exports = async (req, res) => {
   const customerId = req.user?.id; // user may or may not be logged in
@@ -14,6 +11,10 @@ module.exports = async (req, res) => {
   const shop = await new Shop().loadBy({});
   const { hourlyPriceOfLabor } = shop.attributes;
   const quote = await loadQuote({ customerId, quoteId });
+
+  const vehicleType = await new VehicleType().loadById(
+    quote.attributes.vehicleTypeId
+  );
 
   // Expand the line items with the service type and all available options
   const expandedLineItemPromises = quote.attributes.lineItems.map(
@@ -29,32 +30,63 @@ module.exports = async (req, res) => {
       });
 
       // Map over all the required parts combine selection with options
-      const requiredParts = compatibleParts.map(({ name, options }, index) => {
-        const selectedPartId = selectedParts?.[index]?.id;
-        return {
-          name,
-          selected: selectedPartId ?? null,
-          options,
-        };
-      });
+      let arePartsMissing = false;
+      let arePartsMissingWithoutQuotesRequested = false;
+      const requiredParts = compatibleParts.map(
+        ({ name, options, thirdPartyOffersRequested }, index) => {
+          const selectedPartId = selectedParts?.[index]?.id;
+
+          if (!options?.length) {
+            // Okay, so we have a case where we don't have options for a required part
+            arePartsMissing = true;
+
+            // Check if it was requested already or not
+            if (!thirdPartyOffersRequested) {
+              arePartsMissingWithoutQuotesRequested = true;
+            }
+          }
+
+          return {
+            name,
+            selected: selectedPartId ?? '',
+            options,
+            thirdPartyOffersRequested,
+          };
+        }
+      );
+
+      const laborCost =
+        Math.round(
+          (serviceType.attributes.timeInMinutes / 60) * hourlyPriceOfLabor * 100
+        ) / 100;
 
       return {
         serviceTypeId,
         name: serviceType.attributes.name,
         timeInMinutes: serviceType.attributes.timeInMinutes,
-        laborCost:
-          Math.round(
-            (serviceType.attributes.timeInMinutes / 60) *
-              hourlyPriceOfLabor *
-              100
-          ) / 100,
+        laborCost,
+        laborTax: laborCost * (shop.attributes.taxPercent / 100),
+        taxPercent: shop.attributes.taxPercent,
         description: serviceType.attributes.description,
         requiredParts,
+        arePartsMissing,
+        arePartsMissingWithoutQuotesRequested,
       };
     }
   );
 
   const expandedLineItems = await Promise.all(expandedLineItemPromises);
 
-  return res.json({ ...quote.attributes, lineItems: expandedLineItems });
+  return res.json({
+    ...quote.attributes,
+    vehicleType: vehicleType.attributes,
+    lineItems: expandedLineItems,
+    arePartsMissing: expandedLineItems.some(
+      ({ arePartsMissing }) => arePartsMissing
+    ),
+    arePartsMissingWithoutQuotesRequested: expandedLineItems.some(
+      ({ arePartsMissingWithoutQuotesRequested }) =>
+        arePartsMissingWithoutQuotesRequested
+    ),
+  });
 };

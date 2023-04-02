@@ -10,17 +10,19 @@
     "cors": "2.8.5",
     "dotenv": "^16.0.3",
     "express": "5.0.0-beta.1",
+    "forever": "^4.0.3",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "luxon": "3.3.0",
-    "mongodb-memory-server": "^8.11.4",
+    "mongodb-memory-server": "^8.12.1",
     "mongoose": "^6.9.0",
-    "nodemon": "^2.0.20",
+    "nodemailer": "6.9.1",
+    "nodemon": "^2.0.22",
     "sha1": "^1.1.1",
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "node src/production.js",
+    "start": "forever --minUptime 1000 --spinSleepTime 5000 src/production.js",
     "dev": "nodemon node src/development.js"
   }
 }
