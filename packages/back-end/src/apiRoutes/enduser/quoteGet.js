@@ -30,15 +30,30 @@ module.exports = async (req, res) => {
       });
 
       // Map over all the required parts combine selection with options
-      const requiredParts = compatibleParts.map(({ name, options }, index) => {
-        const selectedPartId = selectedParts?.[index]?.id;
+      let arePartsMissing = false;
+      let arePartsMissingWithoutQuotesRequested = false;
+      const requiredParts = compatibleParts.map(
+        ({ name, options, thirdPartyOffersRequested }, index) => {
+          const selectedPartId = selectedParts?.[index]?.id;
 
-        return {
-          name,
-          selected: selectedPartId ?? '',
-          options,
-        };
-      });
+          if (!options?.length) {
+            // Okay, so we have a case where we don't have options for a required part
+            arePartsMissing = true;
+
+            // Check if it was requested already or not
+            if (!thirdPartyOffersRequested) {
+              arePartsMissingWithoutQuotesRequested = true;
+            }
+          }
+
+          return {
+            name,
+            selected: selectedPartId ?? '',
+            options,
+            thirdPartyOffersRequested,
+          };
+        }
+      );
 
       const laborCost =
         Math.round(
@@ -54,6 +69,8 @@ module.exports = async (req, res) => {
         taxPercent: shop.attributes.taxPercent,
         description: serviceType.attributes.description,
         requiredParts,
+        arePartsMissing,
+        arePartsMissingWithoutQuotesRequested,
       };
     }
   );
@@ -64,5 +81,12 @@ module.exports = async (req, res) => {
     ...quote.attributes,
     vehicleType: vehicleType.attributes,
     lineItems: expandedLineItems,
+    arePartsMissing: expandedLineItems.some(
+      ({ arePartsMissing }) => arePartsMissing
+    ),
+    arePartsMissingWithoutQuotesRequested: expandedLineItems.some(
+      ({ arePartsMissingWithoutQuotesRequested }) =>
+        arePartsMissingWithoutQuotesRequested
+    ),
   });
 };

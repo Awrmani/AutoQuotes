@@ -24,8 +24,6 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
     [requiredPart]
   );
 
-  if (!options?.length) return null;
-
   return (
     <TableRow key={requiredPart.name}>
       <TableCell sx={{ borderBottom: 'none' }}></TableCell>
@@ -42,10 +40,12 @@ const SelectedPart = ({ lineItemIndex, requiredPartIndex }) => {
           fontSize="small"
           component={Dropdown}
           name={`lineItems.${lineItemIndex}.requiredParts.${requiredPartIndex}.selected`}
-          label=""
+          label={`${requiredPart.name}${
+            !options.length ? ' (not in stock)' : ''
+          }`}
           fullWidth
           options={options}
-          disabled={values.isFinalized}
+          disabled={values.isFinalized || !options.length}
         />
       </TableCell>
 

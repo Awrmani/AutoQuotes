@@ -159,3 +159,9 @@ export const removeService = apiCall(({ quoteId, serviceTypeId }) => ({
   url: `/quotes/${quoteId}/services/${serviceTypeId}`,
   method: 'DELETE',
 }));
+
+export const requestOffers = apiCall(({ quoteId }) => ({
+  url: `/quotes/${quoteId}/requestOffers`,
+  method: 'POST',
+  data: {},
+}));

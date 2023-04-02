@@ -11,6 +11,7 @@ import {
   fetchServiceTypeList,
   finalizeQuote,
   createQuote,
+  reqestOffers,
 } from '../actions';
 import {
   getVehicleTypeListQuery,
@@ -47,16 +48,19 @@ const EndUserQuotingPageScreen = () => {
   const { isFetching, result } = VehicleTypeListQuery ?? {};
 
   const initialValues = useMemo(() => {
-    if (quoteId === quoteDetails?.id)
+    if (!quoteDetails?.id || quoteId !== quoteDetails?.id)
       return {
-        isFinalized: quoteDetails?.isFinalized ?? false,
-        quoteId: quoteDetails?.id ?? '',
-        lineItems: quoteDetails?.lineItems,
+        isFinalized: false,
+        quoteId: '',
       };
 
     return {
-      isFinalized: false,
-      quoteId: '',
+      isFinalized: quoteDetails.isFinalized ?? false,
+      quoteId: quoteDetails.id ?? '',
+      lineItems: quoteDetails.lineItems,
+      arePartsMissing: quoteDetails.arePartsMissing,
+      arePartsMissingWithoutQuotesRequested:
+        quoteDetails.arePartsMissingWithoutQuotesRequested,
     };
   }, [quoteDetails, quoteId]);
 
@@ -105,7 +109,11 @@ const EndUserQuotingPageScreen = () => {
       <Form
         enableReinitialize
         initialValues={initialValues}
-        action={finalizeQuote}
+        action={
+          quoteDetails?.arePartsMissingWithoutQuotesRequested
+            ? reqestOffers
+            : finalizeQuote
+        }
       >
         <EndUserQuotingPage />
       </Form>

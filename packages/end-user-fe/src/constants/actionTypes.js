@@ -19,13 +19,15 @@ export const LOGIN = 'LOGIN';
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_UPDATE = 'USER_UPDATE';
 export const USER_CONFIRM = 'USER_CONFIRM';
-// Quotes
 
+// Quotes
 export const QUOTE_CREATE = 'QUOTE_CREATE';
 export const QUOTE_UPDATE = 'QUOTE_UPDATE';
 export const QUOTE_FINALIZE = 'QUOTE_FINALIZE';
 
 // Services
-
 export const SERVICE_ADD = 'SERVICE_ADD';
 export const SERVICE_REMOVE = 'SERVICE_REMOVE';
+
+// Offers
+export const OFFERS_REQUEST = 'OFFERS_REQUEST';

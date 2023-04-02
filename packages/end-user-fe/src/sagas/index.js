@@ -95,7 +95,6 @@ export default function* root() {
     }),
 
     // Services
-
     takeLatest(actionTypes.SERVICE_TYPE_LIST_FETCH, apiCall, {
       apiFn: endUserApi.fetchServiceTypeList,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
@@ -107,6 +106,12 @@ export default function* root() {
     }),
     takeLatest(actionTypes.SERVICE_REMOVE, apiCall, {
       apiFn: endUserApi.removeService,
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Offers
+    takeLatest(actionTypes.OFFERS_REQUEST, apiCall, {
+      apiFn: endUserApi.requestOffers,
       onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
   ]);

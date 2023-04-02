@@ -2,6 +2,7 @@ const VehicleType = require('../resources/VehicleType');
 const Shop = require('../resources/Shop');
 const Part = require('../resources/Part');
 const ServiceType = require('../resources/ServiceType');
+const ThirdPartyOfferRequest = require('../resources/ThirdPartyOfferRequest');
 const compatibleVehiclesConditionGenerator = require('./compatibleVehiclesConditionGenerator');
 
 const listCompatiblePartsForPartRow = async ({
@@ -65,20 +66,38 @@ const listCompatiblePartsForQuoteServiceType = async ({
   const { make, model, modelYear } = vehicleType.attributes;
 
   const nestedOptionPromises = serviceType.attributes.requiredParts.map(
-    async ({ name: partName }) => ({
-      name: partName,
-      options: await listCompatiblePartsForPartRow({
+    async ({ name: partName }) => {
+      const options = await listCompatiblePartsForPartRow({
         make,
         model,
         modelYear,
         partName,
         quoteId,
         taxPercent: shop.attributes.taxPercent,
-      }),
-    })
+      });
+
+      // Let's check if we have requested 3rd party offers for this part or not
+      let thirdPartyOffersRequested = false;
+      try {
+        await new ThirdPartyOfferRequest().loadBy({
+          quoteId,
+          serviceTypeId,
+          partName,
+        });
+        thirdPartyOffersRequested = true;
+      } catch (e) {
+        // noop, not found
+      }
+
+      return {
+        name: partName,
+        options,
+        thirdPartyOffersRequested,
+      };
+    }
   );
 
-  const nestedOptions = Promise.all(nestedOptionPromises);
+  const nestedOptions = await Promise.all(nestedOptionPromises);
 
   return nestedOptions;
 };

@@ -4,38 +4,14 @@ const ResourceBase = require('./abstracts/ResourceBase');
 
 const thirdPartySupplierSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    zip: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    country: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
+    name: String,
+    address: String,
+    zip: String,
+    city: String,
+    state: String,
+    country: String,
+    email: String,
+    phone: String,
   },
   {
     // Auto handle createdAt, updatedAt in ISO8601 format

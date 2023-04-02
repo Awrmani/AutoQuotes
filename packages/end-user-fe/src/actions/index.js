@@ -28,3 +28,5 @@ export const finalizeQuote = createAction(actionTypes.QUOTE_FINALIZE);
 
 export const addService = createAction(actionTypes.SERVICE_ADD);
 export const removeService = createAction(actionTypes.SERVICE_REMOVE);
+
+export const reqestOffers = createAction(actionTypes.OFFERS_REQUEST);

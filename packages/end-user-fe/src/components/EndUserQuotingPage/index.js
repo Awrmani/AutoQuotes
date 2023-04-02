@@ -71,11 +71,7 @@ const EndUserQuotingPage = () => {
             padding: 2,
           }}
         >
-          {token ? (
-            <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
-              Book Appointment
-            </SubmitButton>
-          ) : (
+          {!token && (
             <>
               <Typography>In order to continue, you need to</Typography>
               <Button onClick={handleLoginClick}>Log in</Button>
@@ -88,6 +84,26 @@ const EndUserQuotingPage = () => {
                 Sign Up
               </Button>
             </>
+          )}
+          {!!token && !!values.arePartsMissingWithoutQuotesRequested && (
+            <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+              Request offers for missing parts
+            </SubmitButton>
+          )}
+
+          {!!token &&
+            !values.arePartsMissingWithoutQuotesRequested &&
+            !!values.arePartsMissing && (
+              <Typography>
+                Please wait for our suppliers to provide some offers, or remove
+                the services with missing parts from your quote
+              </Typography>
+            )}
+
+          {!!token && !values.arePartsMissing && (
+            <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+              Book Appointment
+            </SubmitButton>
           )}
         </Box>
       ) : null}

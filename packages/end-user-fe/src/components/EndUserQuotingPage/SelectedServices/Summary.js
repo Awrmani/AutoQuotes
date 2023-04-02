@@ -48,6 +48,8 @@ const Summary = () => {
       <TableRow sx={{ height: '150px' }} />
       <TableRow>
         <TableCell rowSpan={3} colSpan={1} sx={{ borderBottom: 'none' }} />
+
+        {/* Labor */}
         <TableCell sx={{ borderBottom: 'none', fontWeight: 700 }} align="right">
           Labor
         </TableCell>
@@ -64,6 +66,8 @@ const Summary = () => {
           {toCurrency(laborTaxSum + laborCostSum)}
         </TableCell>
       </TableRow>
+
+      {/* Parts */}
       <TableRow>
         <TableCell sx={{ borderBottom: 'none', fontWeight: 700 }} align="right">
           Parts
@@ -79,6 +83,8 @@ const Summary = () => {
           {toCurrency(partsCost + partsTax)}
         </TableCell>
       </TableRow>
+
+      {/* Totoal */}
       <TableRow>
         <TableCell sx={{ borderBottom: 'none', fontWeight: 700 }} align="right">
           Total
