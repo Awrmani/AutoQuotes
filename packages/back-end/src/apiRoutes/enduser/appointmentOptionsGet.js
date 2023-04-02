@@ -11,13 +11,26 @@ module.exports = async (req, res) => {
   if (!quote.attributes.isFinalized) throw new Error('Quote is not finalized');
 
   try {
-    new Appointment().loadBy({ quoteId });
+    await new Appointment().loadBy({ quoteId });
+
     return res.status(409).json({ error: 'Quote already has an appointment' });
   } catch (e) {
     // This is the happy path, expected to not find any appointment for the quote
   }
 
-  const options = getAppointmentTimeOptionsForQuote({ date, quoteId });
+  const options = await getAppointmentTimeOptionsForQuote({ date, quoteId });
 
-  return res.json(options);
+  const deduplicatedOptions = options.reduce((acc, option) => {
+    // If we already have that option, no point in adding it again (for a different stall)
+    if (
+      acc.find(
+        toCheck => toCheck.start === option.start && toCheck.end === option.end
+      )
+    )
+      return acc;
+
+    return [...acc, { start: option.start, end: option.end }];
+  }, []);
+
+  return res.json(deduplicatedOptions);
 };
