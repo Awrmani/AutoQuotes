@@ -100,7 +100,7 @@ const EndUserQuotingPage = () => {
               </Typography>
             )}
 
-          {!!token && !values.arePartsMissing && (
+          {!!token && !values.arePartsMissing && !values.appointment && (
             <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
               Book Appointment
             </SubmitButton>

@@ -61,6 +61,7 @@ const EndUserQuotingPageScreen = () => {
       arePartsMissing: quoteDetails.arePartsMissing,
       arePartsMissingWithoutQuotesRequested:
         quoteDetails.arePartsMissingWithoutQuotesRequested,
+      appointment: quoteDetails.appointment,
     };
   }, [quoteDetails, quoteId]);
 
