@@ -17,6 +17,7 @@ const serviceAdd = require('./serviceAdd');
 const serviceDelete = require('./serviceDelete');
 const offersRequest = require('./offersRequest');
 const appointmentOptionsGet = require('./appointmentOptionsGet');
+const appointmentCreate = require('./appointmentCreate');
 
 const authenticator = authenticatorFactory({
   audience: 'enduser',
@@ -70,5 +71,6 @@ router.get(
   authenticator,
   appointmentOptionsGet
 );
+router.put('/quotes/:quoteId/appointment', authenticator, appointmentCreate);
 
 module.exports = router;
