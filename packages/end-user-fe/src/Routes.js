@@ -11,6 +11,7 @@ import EndUserProfileScreen from './screens/EndUserProfileScreen';
 import UserConfirmationScreen from './screens/UserConfirmationScreen';
 import ConfirmingEmailScreen from './screens/ConfirmingEmailScreen';
 import UserQuotesScreen from './screens/UserQuotesScreen';
+import AppointmentScreen from './screens/AppointmentScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -62,6 +63,10 @@ const Routes = () => {
           <Route
             path={paths.userQuotes().pathname}
             element={<UserQuotesScreen />}
+          />
+          <Route
+            path={paths.appointment().pathname}
+            element={<AppointmentScreen />}
           />
         </Route>
       </Route>

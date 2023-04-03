@@ -114,5 +114,10 @@ export default function* root() {
       apiFn: endUserApi.requestOffers,
       onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
+    // appointment
+    takeLatest(actionTypes.APPOINTMENT_OPTIONS_FETCH, apiCall, {
+      apiFn: endUserApi.fetchAppointmentOptions,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
   ]);
 }

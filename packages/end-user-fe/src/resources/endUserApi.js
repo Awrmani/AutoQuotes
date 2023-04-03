@@ -165,3 +165,8 @@ export const requestOffers = apiCall(({ quoteId }) => ({
   method: 'POST',
   data: {},
 }));
+
+export const fetchAppointmentOptions = apiCall(({ quoteId, date }) => ({
+  url: `/quotes/${quoteId}/appointmentOptions`,
+  params: { date },
+}));

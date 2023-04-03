@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CircularProgress, Stack, Container, Paper } from '@mui/material';
@@ -85,6 +85,10 @@ const EndUserQuotingPageScreen = () => {
     [navigate]
   );
 
+  const onSuccess = useCallback(() => {
+    navigate(paths.appointment({ quoteId: quoteDetails?.id }));
+  }, [navigate, quoteDetails]);
+
   // DO not render while data is fetching from the BE
   if (isFetching || !result)
     return (
@@ -114,6 +118,7 @@ const EndUserQuotingPageScreen = () => {
             ? reqestOffers
             : finalizeQuote
         }
+        onSuccess={onSuccess}
       >
         <EndUserQuotingPage />
       </Form>

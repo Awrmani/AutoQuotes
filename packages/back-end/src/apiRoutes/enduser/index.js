@@ -16,6 +16,8 @@ const serviceList = require('./serviceList');
 const serviceAdd = require('./serviceAdd');
 const serviceDelete = require('./serviceDelete');
 const offersRequest = require('./offersRequest');
+const appointmentOptionsGet = require('./appointmentOptionsGet');
+const appointmentCreate = require('./appointmentCreate');
 
 const authenticator = authenticatorFactory({
   audience: 'enduser',
@@ -64,6 +66,11 @@ router.delete(
 router.post('/quotes/:quoteId/requestOffers', authenticator, offersRequest);
 
 // Appointments
-router.get('/quotes/:quoteId/appointmentOptions', authenticator);
+router.get(
+  '/quotes/:quoteId/appointmentOptions',
+  authenticator,
+  appointmentOptionsGet
+);
+router.put('/quotes/:quoteId/appointment', authenticator, appointmentCreate);
 
 module.exports = router;
