@@ -96,6 +96,6 @@ module.exports = async (req, res) => {
       ({ arePartsMissingWithoutQuotesRequested }) =>
         arePartsMissingWithoutQuotesRequested
     ),
-    appointment: appointment.attributes,
+    appointment: appointment?.attributes,
   });
 };
