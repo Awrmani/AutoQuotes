@@ -64,17 +64,26 @@ const EndUserQuotingPageScreen = () => {
     };
   }, [quoteDetails, quoteId]);
 
-  const vehicleTypeFormInitialValues = useMemo(
-    () => ({
-      isFinalized: quoteDetails?.isFinalized ?? false,
-      make: quoteDetails?.vehicleType?.make ?? '',
-      model: quoteDetails?.vehicleType?.model ?? '',
-      modelYear: String(quoteDetails?.vehicleType?.modelYear ?? ''),
-      engineVariant: quoteDetails?.vehicleType?.engineVariant ?? '',
-      bodyType: quoteDetails?.vehicleType?.bodyType ?? '',
-    }),
-    [quoteDetails]
-  );
+  const vehicleTypeFormInitialValues = useMemo(() => {
+    if (!quoteDetails?.id || quoteId !== quoteDetails?.id)
+      return {
+        isFinalized: false,
+        make: '',
+        model: '',
+        modelYear: '',
+        engineVariant: '',
+        bodyType: '',
+      };
+
+    return {
+      isFinalized: quoteDetails.isFinalized ?? false,
+      make: quoteDetails.vehicleType?.make ?? '',
+      model: quoteDetails.vehicleType?.model ?? '',
+      modelYear: String(quoteDetails.vehicleType?.modelYear ?? ''),
+      engineVariant: quoteDetails.vehicleType?.engineVariant ?? '',
+      bodyType: quoteDetails.vehicleType?.bodyType ?? '',
+    };
+  }, [quoteDetails, quoteId]);
 
   // Hook responsible for loading part list from the BE
   const onQuoteCreateSuccess = useCallback(
