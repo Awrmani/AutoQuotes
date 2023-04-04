@@ -17,12 +17,14 @@ Capstone project - Seneca SIA CPA PRJ666 course
 - [Shop](packages/back-end/src/fixtures/shopUserSeed.json)
 - [End-user](packages/back-end/src/fixtures/endUserSeed.json)
 
-Third-party suppliers do not have users, they are authenticated by the `magic link` they get in the email
-To test that functionality:
+### Notes:
 
-- You can set the supplier's email address in the `Shop UI` with an admin user
-- Get a custom quote with an end-user
-- Follow the link in the email
+- Passwords are hashed in the system you can only see them in cleartext form in the seed file
+- Third-party suppliers do not have users, they are authenticated by the `magic link` they get in the email
+- To test that functionality:
+  - You can set the supplier's email address in the `Shop UI` with an admin user
+  - Get a custom quote with an end-user
+  - Follow the link in the email
 
 ## Usage
 
