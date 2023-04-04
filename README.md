@@ -10,6 +10,20 @@ Capstone project - Seneca SIA CPA PRJ666 course
 | Mechanic shop  | http://shop.sixix.denke.hu   |
 | Third-party UI | http://thirdp.sixix.denke.hu |
 
+## Seed file containing credentials for demo users
+
+!! Users are only re-seeded on a deploy with a new seed version, so if you get locked out please reach out to us so we can re-seed the DB
+
+- [Shop](packages/back-end/src/fixtures/shopUserSeed.json)
+- [End-user](packages/back-end/src/fixtures/endUserSeed.json)
+
+Third-party suppliers do not have users, they are authenticated by the `magic link` they get in the email
+To test that functionality:
+
+- You can set the supplier's email address in the `Shop UI` with an admin user
+- Get a custom quote with an end-user
+- Follow the link in the email
+
 ## Usage
 
 All of the following will have to be prefixed with `yarn run`
