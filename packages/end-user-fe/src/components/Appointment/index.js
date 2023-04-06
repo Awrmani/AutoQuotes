@@ -1,47 +1,56 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Dropdown from '@autoquotes/common/src/components/Dropdown';
+import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Button, Container, Paper } from '@mui/material';
-import { fetchAppointmentOptions } from '../../actions';
-// import { getAppointmentOptions } from '../../reducers/queriesReducer';
+import { Box, Container, Paper } from '@mui/material';
+import { Field, SubmitButton } from '@autoquotes/common/src/components/Form';
+import { useSelector } from 'react-redux';
+import { getAppointments } from '../../reducers/compositeReducers';
 
-const Appointment = () => {
-  const { quoteId } = useParams();
-  const dispatch = useDispatch();
-  // const appointmentOptions = useSelector(getAppointmentOptions);
+const Appointment = ({ date, setDate }) => {
+  const appointments = useSelector(getAppointments);
 
   const onDatePicked = useCallback(
     value => {
-      dispatch(
-        fetchAppointmentOptions({
-          quoteId,
-          date: new Date(value._d).toISOString(),
-        })
-      );
+      setDate(value);
     },
-    [dispatch, quoteId]
+    [setDate]
   );
-
-  const onBookAppointment = () => {};
 
   return (
-    <Container component={Paper} sx={{ p: 2 }}>
+    <Container component={Paper} sx={{ display: 'flex', p: 2 }}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <DatePicker disablePast onChange={onDatePicked} />
+        <DatePicker
+          value={date}
+          showDaysOutsideCurrentMonth
+          disablePast
+          onChange={onDatePicked}
+        />
       </LocalizationProvider>
-      <Button
-        sx={{ ml: 2 }}
-        onClick={onBookAppointment}
-        variant="contained"
-        size="large"
-      >
+      <Box sx={{ mx: 2, minWidth: 300 }}>
+        <Field
+          variant="outlined"
+          labelml={2}
+          component={Dropdown}
+          name="start"
+          label={`${'Available appointments'}`}
+          options={appointments}
+          fullWidth
+        ></Field>
+      </Box>
+
+      <SubmitButton sx={{ ml: 2 }} variant="contained" size="large">
         Book Appointment
-      </Button>
+      </SubmitButton>
     </Container>
   );
+};
+Appointment.propTypes = {
+  date: PropTypes.instanceOf(moment),
+  setDate: PropTypes.func,
 };
 
 export default Appointment;

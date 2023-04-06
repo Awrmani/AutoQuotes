@@ -33,3 +33,6 @@ export const SERVICE_REMOVE = 'SERVICE_REMOVE';
 
 // Offers
 export const OFFERS_REQUEST = 'OFFERS_REQUEST';
+
+// Appointments
+export const APPOINTMENT_CREATE = 'APPOINTMENT_CREATE';

@@ -24,7 +24,7 @@ const Dropdown = ({
     () => options.map(({ value: v }) => v),
     [options]
   );
-
+  const { labelml } = rest;
   // set value to empty string to prevent changing from
   // controlled component to uncontrolled component
   useEffect(() => {
@@ -42,7 +42,9 @@ const Dropdown = ({
 
   return (
     <FormControl fullWidth variant="standard">
-      <InputLabel id={labelId}>{label}</InputLabel>
+      <InputLabel sx={{ ml: labelml }} id={labelId}>
+        {label}
+      </InputLabel>
       <Select
         labelId={labelId}
         error={!!error}

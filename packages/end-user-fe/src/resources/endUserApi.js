@@ -170,3 +170,9 @@ export const fetchAppointmentOptions = apiCall(({ quoteId, date }) => ({
   url: `/quotes/${quoteId}/appointmentOptions`,
   params: { date },
 }));
+
+export const createAppointment = apiCall(({ quoteId, start }) => ({
+  url: `/quotes/${quoteId}/appointment`,
+  method: 'PUT',
+  data: { start: start.toISOString() },
+}));
