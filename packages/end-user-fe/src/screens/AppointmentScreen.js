@@ -40,9 +40,9 @@ const AppointmentScreen = () => {
     );
   return (
     <Form
+      enableReinitialize
       initialValues={initialValues}
       action={createAppointment}
-      onSuccess={null}
     >
       <Appointment date={date} setDate={setDate} />
     </Form>

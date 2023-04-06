@@ -120,8 +120,8 @@ export default function* root() {
       onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
     takeLatest(actionTypes.APPOINTMENT_CREATE, apiCall, {
-      apiFn: endUserApi.createAppointment,
-      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
+      apiFn: endUserApi.addAppointment,
+      onSuccess: [apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }

@@ -36,12 +36,11 @@ const Appointment = ({ date, setDate }) => {
           labelml={2}
           component={Dropdown}
           name="start"
-          label={`${'Available appointments'}`}
+          label="Available appointments"
           options={appointments}
           fullWidth
-        ></Field>
+        />
       </Box>
-
       <SubmitButton sx={{ ml: 2 }} variant="contained" size="large">
         Book Appointment
       </SubmitButton>
