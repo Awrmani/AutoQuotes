@@ -24,6 +24,15 @@ const Appointment = ({ date, setDate }) => {
 
   return (
     <Container component={Paper}>
+      <Box sx={{ p: 2 }}>
+        <Typography gutterBottom component="h1" variant="h4">
+          Book an appointment
+        </Typography>
+        <Typography t variant="body2" sx={{ pl: 2 }}>
+          Book an appointment before going to our shop.
+        </Typography>
+      </Box>
+
       <Box sx={{ display: 'flex', p: 2 }}>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DatePicker
@@ -54,13 +63,16 @@ const Appointment = ({ date, setDate }) => {
         </SubmitButton>
       </Box>
       {!isFinalized && (
-        <>
-          <Typography sx={{ p: 2, color: 'red' }}>
-            Please wait for our suppliers to provide some offers, or remove the
-            services with missing parts from your quote to be able to book an
-            appointment
-          </Typography>
-        </>
+        <Typography sx={{ p: 2, color: 'red' }}>
+          Please wait for our suppliers to provide some offers, or remove the
+          services with missing parts from your quote to be able to book an
+          appointment
+        </Typography>
+      )}
+      {appointments.length < 1 && (
+        <Typography sx={{ p: 2, color: 'red' }}>
+          No appointments are available on the selected date
+        </Typography>
       )}
     </Container>
   );

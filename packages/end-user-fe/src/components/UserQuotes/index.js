@@ -36,8 +36,12 @@ const UserQuotes = () => {
       }}
       component={Paper}
     >
-      <Typography gutterBottom variant={'h5'} sx={{ textAlign: 'center' }}>
-        Your quotes
+      <Typography
+        gutterBottom
+        variant="h4"
+        sx={{ fontWeight: 600, textAlign: 'center' }}
+      >
+        Your Quotes
       </Typography>
 
       <List sx={{ width: '100%', maxWidth: 380 }}>
@@ -56,6 +60,9 @@ const UserQuotes = () => {
           </ListItemButton>
         ))}
       </List>
+      <Typography sx={{ color: 'primary.main' }} paddingTop={2} gutterBottom>
+        Contact to us in order to make changes on your appointments
+      </Typography>
     </Container>
   );
 };
