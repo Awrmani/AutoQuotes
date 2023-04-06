@@ -35,10 +35,13 @@ module.exports = async (req, res) => {
 
   // Select a random one from available slots, to be fair with mechanics
   const selectedSlot = slots[Math.floor(Math.random() * slots.length)];
+  const duration =
+    (selectedSlot.end.getTime() - selectedSlot.start.getTime()) / (60 * 1000);
+
   const appointment = new Appointment({
     stall: selectedSlot.stall,
     startsAt: selectedSlot.start.toISOString(),
-    duration: ((selectedSlot.end - selectedSlot.start) / 60) * 1000,
+    duration,
     customerId,
     quoteId: quote.attributes.id,
   });
