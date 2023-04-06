@@ -23,13 +23,21 @@ const AppointmentDetails = () => {
           </Grid>
           <Grid item xs={3}>
             <Typography>
+              Duration:&nbsp;
+              <Typography component="span" color="primary.main">
+                {`${(appointment.duration / 60).toFixed(2)} hours`}
+              </Typography>
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography>
               From: &nbsp;
               <Typography component="span" color="primary.main">
                 {moment(appointment.startsAt).format('h:mm a')}
               </Typography>
             </Typography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Typography>
               To: &nbsp;
               <Typography component="span" color="primary.main">
@@ -37,11 +45,12 @@ const AppointmentDetails = () => {
               </Typography>
             </Typography>
           </Grid>
-          <Grid item xs={3}>
+
+          <Grid item xs={2}>
             <Typography>
               Stall number:&nbsp;
               <Typography component="span" color="primary.main">
-                {appointment.stall}
+                {`0${appointment.stall}`}
               </Typography>
             </Typography>
           </Grid>
