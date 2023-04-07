@@ -17,6 +17,7 @@ import refreshServiceList from './refreshers/refreshServiceList';
 import refreshShopSettings from './refreshers/refreshShopSettings';
 import refreshAppointmentList from './refreshers/refreshAppointment';
 import refreshVehicleTypeList from './refreshers/refreshVehicleTypeList';
+import refreshSupplierList from './refreshers/refreshSupplierList';
 
 const apiCall = apiCallSagaFactory({
   // These are interceptors that are added globally -- All apiCall sagas execute it
@@ -204,6 +205,38 @@ export default function* root() {
     takeLatest(actionTypes.APPOINTMENT_DELETE, apiCall, {
       apiFn: mechanicShopApi.deleteAppointment,
       onSuccess: [[refreshAppointmentList], apiCall.DISPATCH_SUCCESS],
+    }),
+
+    // Supplier
+    takeLatest(actionTypes.SUPPLIER_LIST_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchSuppliers,
+    }),
+    takeLatest(actionTypes.SUPPLIER_DETAILS_FETCH, apiCall, {
+      apiFn: mechanicShopApi.fetchSupplierDetails,
+    }),
+    takeLatest(actionTypes.SUPPLIER_ADD, apiCall, {
+      apiFn: mechanicShopApi.addSupplier,
+      onSuccess: [
+        [refreshSupplierList],
+        [successToast('Supplier added!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.SUPPLIER_UPDATE, apiCall, {
+      apiFn: mechanicShopApi.updateSupplier,
+      onSuccess: [
+        [refreshSupplierList],
+        [successToast('Supplier updated!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
+    }),
+    takeLatest(actionTypes.SUPPLIER_DELETE, apiCall, {
+      apiFn: mechanicShopApi.deleteSupplier,
+      onSuccess: [
+        [refreshSupplierList],
+        [successToast('Supplier deleted!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }

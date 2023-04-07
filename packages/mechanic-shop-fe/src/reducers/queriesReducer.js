@@ -58,6 +58,16 @@ export default combineReducers({
     triggerActionType: actionTypes.VEHICLE_TYPE_DETAILS_FETCH,
     purgeActionTypes: [actionTypes.TOKEN_REMOVE],
   }),
+
+  // Supplier
+  supplierList: queryReducer({
+    triggerActionType: actionTypes.SUPPLIER_LIST_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
+  supplierDetails: queryReducer({
+    triggerActionType: actionTypes.SUPPLIER_DETAILS_FETCH,
+    purgeActionTypes: [actionTypes.TOKEN_REMOVE],
+  }),
 });
 
 /**
@@ -109,3 +119,11 @@ export const getVehicleTypeDetailsQuery = state =>
   state.queries.vehicleTypeDetails;
 export const getVehicleTypeDetails = state =>
   state.queries.vehicleTypeDetails?.result;
+
+// Suppliers
+export const getSupplierListQuery = state => state.queries.supplierList;
+export const getSupplierList = state => state.queries.supplierList?.result;
+
+export const getSupplierDetailsQuery = state => state.queries.supplierDetails;
+export const getSupplierDetails = state =>
+  state.queries.supplierDetails?.result;

@@ -26,6 +26,7 @@ import {
   Settings,
   ManageAccounts,
   DirectionsCar,
+  LocalShipping,
 } from '@mui/icons-material';
 import { removeToken } from '@autoquotes/libraries/src/actions';
 import {
@@ -69,6 +70,12 @@ const SideBarInner = () => {
           label: 'Appointments',
           icon: <CalendarMonth />,
           path: paths.appointmentList(),
+        },
+        {
+          label: 'Suppliers',
+          icon: <LocalShipping />,
+          path: paths.supplierList(),
+          adminOnly: true,
         },
         {
           label: 'Settings',

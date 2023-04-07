@@ -9,10 +9,6 @@ import {
 import ImageInput from '@autoquotes/common/src/components/ImageInput';
 import TextInput from '@autoquotes/common/src/components/TextInput';
 
-/*
-    openingHours,
-  */
-
 const ShopSettingsForm = () => {
   return (
     <Container sx={{ mt: 2, width: '80%' }}>
