@@ -37,6 +37,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "WiperBlade01",
     "name": "Wiper blade replacement",
     "timeInMinutes": 5,
     "description": "",
@@ -79,6 +80,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "MCU3upgrade1",
     "name": "Upgrade to MCU3",
     "timeInMinutes": 150,
     "description": "Media control unit (Amd Ryzen)",
