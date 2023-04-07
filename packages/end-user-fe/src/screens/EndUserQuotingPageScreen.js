@@ -5,6 +5,8 @@ import { CircularProgress, Stack, Container, Paper } from '@mui/material';
 import { Form } from '@autoquotes/common/src/components/Form';
 import VehicleInfo from '../components/EndUserQuotingPage/VehicleInfo';
 import EndUserQuotingPage from '../components/EndUserQuotingPage';
+import AppointmentDetails from '../components/EndUserQuotingPage/AppointmentDetails';
+
 import {
   fetchQuoteDetails,
   fetchVehicleTypeList,
@@ -109,6 +111,10 @@ const EndUserQuotingPageScreen = () => {
 
   return (
     <Container component={Paper}>
+      {initialValues.appointment && (
+        <AppointmentDetails appointment={initialValues.appointment} />
+      )}
+
       {/* Vehicle type form */}
 
       <Form

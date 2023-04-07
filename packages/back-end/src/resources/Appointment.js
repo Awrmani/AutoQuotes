@@ -8,7 +8,6 @@ const appointmentSchema = new mongoose.Schema(
     stall: Number,
     startsAt: {
       type: Date,
-      default: Date.now,
     },
     duration: Number,
     customerId: {

@@ -16,7 +16,6 @@ const EndUserQuotingPage = () => {
   const token = useSelector(getToken);
   const { values } = useContext(formContext);
   const { quoteId, lineItems, isFinalized } = values;
-
   useQuoteUpdater();
 
   const initialService = useMemo(() => {
@@ -39,6 +38,11 @@ const EndUserQuotingPage = () => {
     navigate(paths.registration(), { state: { quoteId } });
   }, [navigate, quoteId]);
 
+  const onFinalized = () => {
+    if (isFinalized) {
+      navigate(paths.appointment({ quoteId }));
+    }
+  };
   return (
     <>
       {!!quoteId && (
@@ -100,10 +104,23 @@ const EndUserQuotingPage = () => {
               </Typography>
             )}
 
-          {!!token && !values.arePartsMissing && !values.appointment && (
-            <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+          {!!token &&
+            !values.arePartsMissing &&
+            !values.appointment &&
+            !isFinalized && (
+              <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+                Confirm & Book Appointment
+              </SubmitButton>
+            )}
+          {isFinalized && !values.appointment && (
+            <Button
+              sx={{ m: 2 }}
+              variant="contained"
+              size="large"
+              onClick={onFinalized}
+            >
               Book Appointment
-            </SubmitButton>
+            </Button>
           )}
         </Box>
       ) : null}

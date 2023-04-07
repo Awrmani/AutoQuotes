@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect';
 import { set } from 'lodash';
-import { getShopSettings, getVehicleTypeList } from './queriesReducer';
+import moment from 'moment';
+import {
+  getAppointmentOptions,
+  getShopSettings,
+  getVehicleTypeList,
+} from './queriesReducer';
 
 const DAY_NAMES = {
   monday: 'Mon',
@@ -126,6 +131,28 @@ export const getVehicleTypeOptions = createSelector(
       }
     );
 
+    return options;
+  }
+);
+
+const twoDigitFormat = number => {
+  return number.toString().length < 2
+    ? `0${number.toString()}`
+    : number.toString();
+};
+
+export const getAppointments = createSelector(
+  getAppointmentOptions,
+  appointmentOptions => {
+    const options = [];
+    (appointmentOptions ?? []).forEach(({ start, end }) => {
+      const label = `${twoDigitFormat(moment(start).hours())}:${twoDigitFormat(
+        moment(start).minutes()
+      )} - ${twoDigitFormat(moment(end).hours())}:${twoDigitFormat(
+        moment(end).minutes()
+      )}`;
+      options.push({ label, value: start });
+    });
     return options;
   }
 );

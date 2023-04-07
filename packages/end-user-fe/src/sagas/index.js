@@ -87,7 +87,7 @@ export default function* root() {
     }),
     takeLatest(actionTypes.QUOTE_FINALIZE, apiCall, {
       apiFn: endUserApi.finalizeQuote,
-      onSuccess: [apiCall.DISPATCH_SUCCESS],
+      onSuccess: [[refreshQuoteDetails], apiCall.DISPATCH_SUCCESS],
     }),
     takeLatest(actionTypes.QUOTE_LIST_FETCH, apiCall, {
       apiFn: endUserApi.fetchQuoteList,
@@ -118,6 +118,13 @@ export default function* root() {
     takeLatest(actionTypes.APPOINTMENT_OPTIONS_FETCH, apiCall, {
       apiFn: endUserApi.fetchAppointmentOptions,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.APPOINTMENT_CREATE, apiCall, {
+      apiFn: endUserApi.addAppointment,
+      onSuccess: [
+        [successToast('Appointment created!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }
