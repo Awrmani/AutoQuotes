@@ -16,7 +16,6 @@ const EndUserQuotingPage = () => {
   const token = useSelector(getToken);
   const { values } = useContext(formContext);
   const { quoteId, lineItems, isFinalized } = values;
-
   useQuoteUpdater();
 
   const initialService = useMemo(() => {
@@ -25,6 +24,20 @@ const EndUserQuotingPage = () => {
       serviceTypeId: '',
     };
   }, [quoteId]);
+
+  const areAllPartsSelected = useMemo(() => {
+    let allSelected = true;
+
+    lineItems?.forEach(({ requiredParts }) => {
+      requiredParts?.forEach(({ selected }) => {
+        if (!selected) {
+          allSelected = false;
+        }
+      });
+    });
+
+    return allSelected;
+  }, [lineItems]);
 
   const handleLoginClick = useCallback(() => {
     navigate(paths.login(), {
@@ -38,6 +51,12 @@ const EndUserQuotingPage = () => {
   const handleSignupClick = useCallback(() => {
     navigate(paths.registration(), { state: { quoteId } });
   }, [navigate, quoteId]);
+
+  const onFinalized = useCallback(() => {
+    if (isFinalized) {
+      navigate(paths.appointment({ quoteId }));
+    }
+  }, [isFinalized, quoteId, navigate]);
 
   return (
     <>
@@ -100,10 +119,29 @@ const EndUserQuotingPage = () => {
               </Typography>
             )}
 
-          {!!token && !values.arePartsMissing && (
-            <SubmitButton sx={{ m: 2 }} variant="contained" size="large">
+          {!!token &&
+            !values.arePartsMissing &&
+            !values.appointment &&
+            !isFinalized && (
+              <SubmitButton
+                sx={{ m: 2 }}
+                variant="contained"
+                size="large"
+                disabled={!areAllPartsSelected}
+              >
+                Confirm & Book Appointment
+              </SubmitButton>
+            )}
+          {isFinalized && !values.appointment && (
+            <Button
+              sx={{ m: 2 }}
+              variant="contained"
+              size="large"
+              onClick={onFinalized}
+              disabled={!areAllPartsSelected}
+            >
               Book Appointment
-            </SubmitButton>
+            </Button>
           )}
         </Box>
       ) : null}

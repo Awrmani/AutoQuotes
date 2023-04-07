@@ -14,8 +14,8 @@ const about = () => ({
   pathname: '/about',
 });
 
-const appointment = () => ({
-  pathname: '/appointment',
+const appointment = ({ quoteId = ':quoteId' } = {}) => ({
+  pathname: `/appointment/${quoteId}`,
 });
 
 const emailConfirmation = () => ({

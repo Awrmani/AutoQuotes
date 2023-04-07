@@ -25,6 +25,9 @@ export default combineReducers({
   quoteList: queryReducer({
     triggerActionType: actionTypes.QUOTE_LIST_FETCH,
   }),
+  appointmentOptions: queryReducer({
+    triggerActionType: actionTypes.APPOINTMENT_OPTIONS_FETCH,
+  }),
 });
 
 /**
@@ -55,3 +58,9 @@ export const getQuoteDetails = state => state.queries.quoteDetails?.result;
 // Quote list
 export const getQuoteListQuery = state => state.queries.quoteList;
 export const getQuoteList = state => state.queries.quoteList?.result;
+
+// Appointment options
+export const getAppointmentOptionsQuery = state =>
+  state.queries.appointmentOptions;
+export const getAppointmentOptions = state =>
+  state.queries.appointmentOptions?.result;

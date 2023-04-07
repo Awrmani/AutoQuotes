@@ -54,7 +54,7 @@ const Summary = () => {
           Labor
         </TableCell>
         <TableCell sx={{ borderBottom: 'none' }} align="right">
-          {timeInMinutesSum / 60}
+          {(timeInMinutesSum / 60).toFixed(2)}
         </TableCell>
         <TableCell sx={{ borderBottom: 'none' }} align="right">
           {toCurrency(laborCostSum)}

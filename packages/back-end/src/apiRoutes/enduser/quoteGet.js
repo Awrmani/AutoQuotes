@@ -1,6 +1,7 @@
 const loadQuote = require('../../utils/loadQuote');
 const ServiceType = require('../../resources/ServiceType');
 const VehicleType = require('../../resources/VehicleType');
+const Appointment = require('../../resources/Appointment');
 const Shop = require('../../resources/Shop');
 const listCompatiblePartsForQuoteServiceType = require('../../utils/listCompatiblePartsForQuoteServiceType');
 
@@ -77,6 +78,13 @@ module.exports = async (req, res) => {
 
   const expandedLineItems = await Promise.all(expandedLineItemPromises);
 
+  let appointment;
+  try {
+    appointment = await new Appointment().loadBy({ quoteId });
+  } catch (e) {
+    // This is normal, no appointment has been made
+  }
+
   return res.json({
     ...quote.attributes,
     vehicleType: vehicleType.attributes,
@@ -88,5 +96,6 @@ module.exports = async (req, res) => {
       ({ arePartsMissingWithoutQuotesRequested }) =>
         arePartsMissingWithoutQuotesRequested
     ),
+    appointment: appointment?.attributes,
   });
 };

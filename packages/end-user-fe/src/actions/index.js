@@ -10,6 +10,9 @@ export const fetchVehicleTypeList = createAction(
 export const fetchServiceTypeList = createAction(
   actionTypes.SERVICE_TYPE_LIST_FETCH
 );
+export const fetchAppointmentOptions = createAction(
+  actionTypes.APPOINTMENT_OPTIONS_FETCH
+);
 
 export const fetchQuoteList = createAction(actionTypes.QUOTE_LIST_FETCH);
 
@@ -30,3 +33,5 @@ export const addService = createAction(actionTypes.SERVICE_ADD);
 export const removeService = createAction(actionTypes.SERVICE_REMOVE);
 
 export const reqestOffers = createAction(actionTypes.OFFERS_REQUEST);
+
+export const createAppointment = createAction(actionTypes.APPOINTMENT_CREATE);

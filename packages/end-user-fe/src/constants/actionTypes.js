@@ -12,6 +12,8 @@ export const SERVICE_TYPE_LIST_FETCH = 'SERVICE_TYPE_LIST_FETCH';
 export const QUOTE_DETAILS_FETCH = 'QUOTE_DETAILS_FETCH';
 export const QUOTE_LIST_FETCH = 'QUOTE_LIST_FETCH';
 
+// Appointment
+export const APPOINTMENT_OPTIONS_FETCH = 'APPOINTMENT_OPTIONS_FETCH';
 // Form submits & other actions altering backend state
 export const LOGIN = 'LOGIN';
 
@@ -31,3 +33,6 @@ export const SERVICE_REMOVE = 'SERVICE_REMOVE';
 
 // Offers
 export const OFFERS_REQUEST = 'OFFERS_REQUEST';
+
+// Appointments
+export const APPOINTMENT_CREATE = 'APPOINTMENT_CREATE';

@@ -66,6 +66,15 @@ export const fetchAppointmentDetails = apiCall(({ id }) => ({
   url: `/appointments/${id}`,
 }));
 
+// Suppliers
+export const fetchSuppliers = apiCall(() => ({
+  url: '/suppliers',
+}));
+
+export const fetchSupplierDetails = apiCall(({ id }) => ({
+  url: `/suppliers/${id}`,
+}));
+
 // =====Form submits & other actions altering backend state======
 export const login = apiCall(({ email, password }) => ({
   url: '/login',
@@ -304,5 +313,28 @@ export const updateShopSettings = apiCall(
 
 export const deleteAppointment = apiCall(({ id }) => ({
   url: `/appointments/${id}`,
+  method: 'DELETE',
+}));
+
+// Suppliers
+
+export const addSupplier = apiCall(
+  ({ name, address, zip, city, state, country, email, phone }) => ({
+    url: '/suppliers',
+    method: 'PUT',
+    data: { name, address, zip, city, state, country, email, phone },
+  })
+);
+
+export const updateSupplier = apiCall(
+  ({ id, name, address, zip, city, state, country, email, phone }) => ({
+    url: `/suppliers/${id}`,
+    method: 'PATCH',
+    data: { name, address, zip, city, state, country, email, phone },
+  })
+);
+
+export const deleteSupplier = apiCall(({ id }) => ({
+  url: `/suppliers/${id}`,
   method: 'DELETE',
 }));

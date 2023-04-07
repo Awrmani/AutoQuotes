@@ -5,7 +5,7 @@
     "email": "end@user.com",
     "phone": "+1 (234) 565-5543",
     "password": "secret",
-    "isVerified": false,
+    "isVerified": true,
     "verificationCode": "88888888-4444-4444-121212121212",
     "billingInformation": {
       "name": "End User1",

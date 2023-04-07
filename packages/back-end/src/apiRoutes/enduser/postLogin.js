@@ -18,7 +18,15 @@ module.exports = async (req, res) => {
   if (!enduser.validatePassword(password))
     return res.status(401).json({ error: 'Incorrect password' });
 
+  if (!enduser.attributes.isVerified)
+    return res
+      .status(401)
+      .json({ error: 'Please verify your email address first' });
+
   return res.status(200).json({
-    token: createToken({ userId: enduser.attributes.id, audience: 'enduser' }),
+    token: createToken({
+      userId: enduser.attributes.id,
+      audience: 'enduser',
+    }),
   });
 };

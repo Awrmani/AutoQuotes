@@ -88,7 +88,7 @@ const VehicleInfo = () => {
   return (
     <Box sx={{ my: 2 }}>
       <Container sx={{ paddingTop: 2 }}>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
           Vehicle Specifications
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

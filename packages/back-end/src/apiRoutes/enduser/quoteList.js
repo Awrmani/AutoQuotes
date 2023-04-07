@@ -1,5 +1,6 @@
 const Quote = require('../../resources/Quote');
 const Appointment = require('../../resources/Appointment');
+const VehicleType = require('../../resources/VehicleType');
 
 /**
  * List all quotes associated with the user
@@ -13,15 +14,21 @@ module.exports = async (req, res) => {
   const quotes = (await Promise.all(promises)).map(obj => obj.attributes);
 
   const quotesWithAppointmentsPromises = quotes.map(async quote => {
+    const vehicleType = await new VehicleType().loadById(quote.vehicleTypeId);
+
+    let appointment;
     try {
       // Try to load and merge in appointment for quote
-      const appointment = await new Appointment().loadBy({ quoteId: quote.id });
-
-      return { ...quote, appointment: appointment.attributes };
+      appointment = await new Appointment().loadBy({ quoteId: quote.id });
     } catch (e) {
       // No appointment found for quote
-      return quote;
     }
+
+    return {
+      ...quote,
+      appointment: appointment?.attributes,
+      vehicleType: vehicleType?.attributes,
+    };
   });
 
   return res.json(await Promise.all(quotesWithAppointmentsPromises));
