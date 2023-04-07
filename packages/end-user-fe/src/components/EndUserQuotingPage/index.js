@@ -10,7 +10,6 @@ import { addService } from '../../actions';
 import AddServiceForm from './AddServiceForm';
 import SelectedServices from './SelectedServices';
 import paths from '../../paths';
-import AppointmentDetails from './AppointmentDetails';
 
 const EndUserQuotingPage = () => {
   const navigate = useNavigate();
@@ -46,7 +45,6 @@ const EndUserQuotingPage = () => {
   };
   return (
     <>
-      {values.appointment && <AppointmentDetails />}
       {!!quoteId && (
         <>
           {/* Display line items in a quote */}

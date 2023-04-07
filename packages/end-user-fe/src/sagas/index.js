@@ -121,7 +121,10 @@ export default function* root() {
     }),
     takeLatest(actionTypes.APPOINTMENT_CREATE, apiCall, {
       apiFn: endUserApi.addAppointment,
-      onSuccess: [apiCall.DISPATCH_SUCCESS],
+      onSuccess: [
+        [successToast('Appointment created!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }

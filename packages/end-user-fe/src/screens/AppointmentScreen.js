@@ -32,8 +32,8 @@ const AppointmentScreen = () => {
     );
   }, [date, dispatch, quoteId]);
   const handleSuccess = useCallback(() => {
-    navigate(paths.userQuotes());
-  }, [navigate]);
+    navigate(paths.quotingPage({ quoteId }));
+  }, [navigate, quoteId]);
   // Extract the list query from the redux store
   const appointmentOptionsQuery = useSelector(getAppointmentOptionsQuery);
   const quoteDetailsQuery = useSelector(getQuoteDetailsQuery);

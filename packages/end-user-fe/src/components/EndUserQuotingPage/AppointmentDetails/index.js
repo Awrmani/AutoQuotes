@@ -1,11 +1,8 @@
-import formContext from '@autoquotes/common/src/components/Form/formContext';
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useContext } from 'react';
+import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 
-const AppointmentDetails = () => {
-  const { values } = useContext(formContext);
-  const { appointment } = values;
+const AppointmentDetails = ({ appointment }) => {
   return (
     <Box sx={{ my: 2 }}>
       <Container>
@@ -50,7 +47,7 @@ const AppointmentDetails = () => {
             <Typography>
               Stall number:&nbsp;
               <Typography component="span" color="primary.main">
-                {`0${appointment.stall}`}
+                {String(appointment.stall).padStart(2, 0)}
               </Typography>
             </Typography>
           </Grid>
@@ -59,6 +56,15 @@ const AppointmentDetails = () => {
       <Divider sx={{ mt: 2 }} />
     </Box>
   );
+};
+
+AppointmentDetails.propTypes = {
+  appointment: PropTypes.shape({
+    startsAt: PropTypes.string.isRequired,
+    endsAt: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    stall: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default AppointmentDetails;

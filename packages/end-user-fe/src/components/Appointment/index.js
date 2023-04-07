@@ -1,20 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Dropdown from '@autoquotes/common/src/components/Dropdown';
+import formContext from '@autoquotes/common/src/components/Form/formContext';
 import moment from 'moment';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { Field, SubmitButton } from '@autoquotes/common/src/components/Form';
 import { useSelector } from 'react-redux';
 import { getAppointments } from '../../reducers/compositeReducers';
-import { getQuoteDetails } from '../../reducers/queriesReducer';
 
 const Appointment = ({ date, setDate }) => {
   const appointments = useSelector(getAppointments);
-  const quoteDetails = useSelector(getQuoteDetails);
-  const { isFinalized } = quoteDetails ?? {};
+  const { values } = useContext(formContext);
+
   const onDatePicked = useCallback(
     value => {
       setDate(value);
@@ -28,21 +28,23 @@ const Appointment = ({ date, setDate }) => {
         <Typography gutterBottom component="h1" variant="h4">
           Book an appointment
         </Typography>
-        <Typography t variant="body2" sx={{ pl: 2 }}>
-          Book an appointment before going to our shop.
-        </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', p: 2 }}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DatePicker
-            value={date}
-            showDaysOutsideCurrentMonth
-            disablePast
-            onChange={onDatePicked}
-          />
-        </LocalizationProvider>
-        <Box sx={{ mx: 2, minWidth: 300 }}>
+        <Box sx={{ mt: -2 }}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <StaticDatePicker
+              value={date}
+              showDaysOutsideCurrentMonth
+              disablePast
+              onChange={onDatePicked}
+              slots={{ actionBar: () => null, toolbar: () => null }}
+              views={['day']}
+              slotProps={{ layout: {} }}
+            />
+          </LocalizationProvider>
+        </Box>
+        <Box sx={{ mx: 2, minWidth: 300, flex: 1 }}>
           <Field
             variant="outlined"
             labelml={2}
@@ -51,29 +53,23 @@ const Appointment = ({ date, setDate }) => {
             label="Available appointments"
             options={appointments}
             fullWidth
+            disabled={!appointments.length}
+            error={
+              !appointments.length
+                ? 'No appointments are available on the selected date'
+                : ''
+            }
           />
         </Box>
         <SubmitButton
-          disabled={!isFinalized}
-          sx={{ ml: 2 }}
+          disabled={!values.start}
+          sx={{ ml: 2, alignSelf: 'end' }}
           variant="contained"
           size="large"
         >
           Book Appointment
         </SubmitButton>
       </Box>
-      {!isFinalized && (
-        <Typography sx={{ p: 2, color: 'red' }}>
-          Please wait for our suppliers to provide some offers, or remove the
-          services with missing parts from your quote to be able to book an
-          appointment
-        </Typography>
-      )}
-      {appointments.length < 1 && (
-        <Typography sx={{ p: 2, color: 'red' }}>
-          No appointments are available on the selected date
-        </Typography>
-      )}
     </Container>
   );
 };

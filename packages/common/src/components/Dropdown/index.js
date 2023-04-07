@@ -17,6 +17,7 @@ const Dropdown = ({
   options,
   value,
   label,
+  labelml,
   ...rest
 }) => {
   const [labelId] = useState(() => uuid());
@@ -24,7 +25,6 @@ const Dropdown = ({
     () => options.map(({ value: v }) => v),
     [options]
   );
-  const { labelml } = rest;
   // set value to empty string to prevent changing from
   // controlled component to uncontrolled component
   useEffect(() => {
@@ -64,7 +64,7 @@ const Dropdown = ({
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText>{error ?? description}</FormHelperText>
+      <FormHelperText error={!!error}>{error ?? description}</FormHelperText>
     </FormControl>
   );
 };
@@ -83,6 +83,7 @@ Dropdown.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  labelml: PropTypes.shape({}),
 };
 
 Dropdown.defaultProps = {
@@ -90,6 +91,7 @@ Dropdown.defaultProps = {
   description: undefined,
   value: '',
   isSubmitting: false,
+  labelml: undefined,
 };
 
 export default Dropdown;
