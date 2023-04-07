@@ -98,6 +98,8 @@ const EndUserQuotingPageScreen = () => {
   );
 
   const onSuccess = useCallback(() => {
+    if (!quoteDetails?.isFinalized) return;
+
     navigate(paths.appointment({ quoteId: quoteDetails?.id }));
   }, [navigate, quoteDetails]);
 
