@@ -10,5 +10,5 @@ module.exports = async (req, res) => {
 
   const supplier = await new ThirdPartySupplier().loadById(id);
 
-  return res.json({ id: supplier.attributes });
+  return res.json(supplier.attributes);
 };

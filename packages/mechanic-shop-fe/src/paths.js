@@ -72,6 +72,19 @@ const editVehicleType = ({ id = ':id' } = {}) => ({
   pathname: `/editVehicleType/${id}`,
 });
 
+// Suppliers
+const supplierList = () => ({
+  pathname: `/supplierList`,
+});
+
+const addSupplier = () => ({
+  pathname: `/addSupplier`,
+});
+
+const editSupplier = ({ id = ':id' } = {}) => ({
+  pathname: `/editSupplier/${id}`,
+});
+
 const paths = {
   login,
   dashboard,
@@ -90,6 +103,9 @@ const paths = {
   vehicleTypeList,
   addVehicleType,
   editVehicleType,
+  supplierList,
+  addSupplier,
+  editSupplier,
 };
 
 export default paths;

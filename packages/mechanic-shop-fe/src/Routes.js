@@ -21,6 +21,9 @@ import AppointmentDetailsScreen from './screens/AppointmentDetailsScreen';
 import VehicleTypeListScreen from './screens/VehicleTypeListScreen';
 import AddVehicleTypeScreen from './screens/AddVehicleTypeScreen';
 import EditVehicleTypeScreen from './screens/EditVehicleTypeScreen';
+import SupplierListScreen from './screens/SupplierListScreen';
+import AddSupplierScreen from './screens/AddSupplierScreen';
+import EditSupplierScreen from './screens/EditSupplierScreen';
 
 const Routes = () => {
   // If the user is logged in, they will have a token
@@ -102,6 +105,18 @@ const Routes = () => {
           <Route
             path={paths.editVehicleType().pathname}
             element={<EditVehicleTypeScreen />}
+          />
+          <Route
+            path={paths.supplierList().pathname}
+            element={<SupplierListScreen />}
+          />
+          <Route
+            path={paths.addSupplier().pathname}
+            element={<AddSupplierScreen />}
+          />
+          <Route
+            path={paths.editSupplier().pathname}
+            element={<EditSupplierScreen />}
           />
         </Route>
       </Route>
