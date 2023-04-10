@@ -50,5 +50,5 @@ module.exports = async (req, res) => {
 
   await mailer.send({ to: email, subject, html });
 
-  return res.json({ id });
+  return res.json({ id, quoteId });
 };

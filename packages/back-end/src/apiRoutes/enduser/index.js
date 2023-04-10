@@ -4,6 +4,7 @@ const { authenticatorFactory } = require('../../utils/authentication');
 const postLogin = require('./postLogin');
 const shopGet = require('./shopGet');
 const currentUserGet = require('./currentUserGet');
+const endUserUpdate = require('./endUserUpdate');
 const endUserCreate = require('./endUserCreate');
 const confirmUser = require('./confirmUser');
 const vehicleTypeList = require('./vehicleTypeList');
@@ -37,6 +38,7 @@ router.post('/login', postLogin);
 router.get('/users/current', authenticator, currentUserGet);
 router.put('/users', endUserCreate);
 router.post('/users/:id/confirm', confirmUser);
+router.patch('/users/current', authenticator, endUserUpdate);
 
 // Shop
 router.get('/shop', shopGet);

@@ -1,4 +1,4 @@
-import { all, takeLatest, call } from 'redux-saga/effects';
+import { all, takeLatest, takeLeading, call } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
 import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
 import {
@@ -59,11 +59,12 @@ export default function* root() {
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: endUserApi.updateUser,
       onSuccess: [
+        [refreshCurrentUser],
         [successToast('Successfully updated!')],
         apiCall.DISPATCH_SUCCESS,
       ],
     }),
-    takeLatest(actionTypes.USER_CONFIRM, apiCall, {
+    takeLeading(actionTypes.USER_CONFIRM, apiCall, {
       apiFn: endUserApi.confirmUser,
       onSuccess: [
         [earlySetToken],
