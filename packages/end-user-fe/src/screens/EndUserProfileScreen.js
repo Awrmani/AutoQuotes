@@ -39,6 +39,7 @@ const EndUserProfileScreen = () => {
     const { billingInformation, ...rest } = result;
     return {
       password: '', // Have to add this, BE will never send back the PWD in any form
+      passwordConfirm: '',
       ...billingInformation,
       ...rest,
     };

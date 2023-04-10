@@ -59,6 +59,7 @@ export default function* root() {
     takeLatest(actionTypes.USER_UPDATE, apiCall, {
       apiFn: endUserApi.updateUser,
       onSuccess: [
+        [refreshCurrentUser],
         [successToast('Successfully updated!')],
         apiCall.DISPATCH_SUCCESS,
       ],

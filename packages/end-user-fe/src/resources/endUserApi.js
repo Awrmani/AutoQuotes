@@ -102,7 +102,7 @@ export const updateUser = apiCall(
     state,
     country,
   }) => ({
-    url: `/users`,
+    url: `/users/current`,
     method: 'PATCH',
     data: {
       name,
