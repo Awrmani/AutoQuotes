@@ -1,5 +1,6 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { BOOTSTRAPPED } from '@autoquotes/libraries/src/constants/actionTypes';
+import successToast from '@autoquotes/libraries/src/saga/successToast';
 import { apiCallSagaFactory } from '@autoquotes/libraries/src/saga/apiCallSagaFactory';
 import { errorTranslationInterceptor } from '@autoquotes/libraries/src/saga/interceptors/errorTranslation';
 import * as actionTypes from '../constants/actionTypes';
@@ -27,6 +28,13 @@ export default function* root() {
     takeLatest(actionTypes.REQUESTED_PARTS_FETCH, apiCall, {
       apiFn: thirdPartyApi.fetchRequestedParts,
       onSuccess: [apiCall.DISPATCH_SUCCESS],
+    }),
+    takeLatest(actionTypes.PARTS_OFFER, apiCall, {
+      apiFn: thirdPartyApi.offerParts,
+      onSuccess: [
+        [successToast('Successfully sent an offer!')],
+        apiCall.DISPATCH_SUCCESS,
+      ],
     }),
   ]);
 }

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import fetcherFactory from '@autoquotes/libraries/src/utils/fetcherFactory';
 
 const apiCall = fetcherFactory({
@@ -16,8 +17,27 @@ export const fetchRequestedParts = apiCall(({ supplierId, quoteId }) => ({
 // =====Form submits & other actions altering backend state======
 
 // offers
-export const offerParts = apiCall(({ supplierId, quoteId, partRequestId }) => ({
-  url: `/suppliers/${supplierId}/quotes/${quoteId}/parts/${partRequestId}`,
-  method: 'PUT',
-  data: {},
-}));
+export const offerParts = apiCall(
+  ({
+    supplierId,
+    quoteId,
+    partRequestId,
+    description,
+    manufacturer,
+    type,
+    warrantyMonths,
+    price,
+    offerExpiration,
+  }) => ({
+    url: `/suppliers/${supplierId}/quotes/${quoteId}/parts/${partRequestId}`,
+    method: 'PUT',
+    data: {
+      description,
+      manufacturer,
+      type,
+      warrantyMonths: Number(warrantyMonths),
+      price,
+      offerExpiration: moment(offerExpiration).toISOString(),
+    },
+  })
+);
