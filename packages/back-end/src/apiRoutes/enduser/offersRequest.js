@@ -122,8 +122,9 @@ module.exports = async (req, res) => {
       partsOffersNeeded,
       href: [
         process.env.THIRD_PARTY_URL,
-        'confirmEmail',
+        'suppliers',
         supplier.id,
+        'quotes',
         quote.attributes.id,
       ].join('/'),
     });
