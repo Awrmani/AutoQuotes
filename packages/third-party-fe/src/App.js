@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Provider as StoreProvider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { set } from 'lodash';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +8,7 @@ import buildStore from '@autoquotes/libraries/src/utils/buildStore';
 import MuiThemeProvider from '@autoquotes/common/src/components/MuiThemeProvider';
 import rootReducer from './reducers';
 import sagas from './sagas';
+import Routes from './Routes';
 
 const storePromise = buildStore({ rootReducer, sagas });
 
@@ -35,7 +37,9 @@ const App = () => {
       <ToastContainer />
       <StoreProvider store={store}>
         <MuiThemeProvider>
-          <div>Third party FE</div>
+          <BrowserRouter>
+            <Routes />
+          </BrowserRouter>
         </MuiThemeProvider>
       </StoreProvider>
     </>
