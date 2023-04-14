@@ -20,6 +20,8 @@ const Appointment = require('../resources/Appointment');
 const appointmentSeed = require('./appointmentSeed.json');
 const ThirdPartySupplier = require('../resources/ThirdPartySupplier');
 const thirdPartySupplierSeed = require('./thirdPartySupplierSeed.json');
+const ThirdPartyOfferRequest = require('../resources/ThirdPartyOfferRequest');
+const thirdPartyOfferRequestSeed = require('./thirdPartyOfferRequestSeed.json');
 
 const SEED_MAP = {
   config: {
@@ -71,6 +73,11 @@ const SEED_MAP = {
     Model: ThirdPartySupplier.ThirdPartySupplierModel,
     Resource: ThirdPartySupplier,
     seed: thirdPartySupplierSeed,
+  },
+  thirdPartyOfferRequest: {
+    Model: ThirdPartyOfferRequest.ThirdPartyOfferRequestModel,
+    Resource: ThirdPartyOfferRequest,
+    seed: thirdPartyOfferRequestSeed,
   },
 };
 

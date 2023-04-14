@@ -88,6 +88,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "APv3Upgrade1",
     "name": "Upgrade to AP computer v3",
     "timeInMinutes": 150,
     "description": "Upgrade to FSD computer",
@@ -95,6 +96,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "scrollComp01",
     "name": "Heat pump replacement",
     "timeInMinutes": 60,
     "description": "Replace heat pump scroll compressor",

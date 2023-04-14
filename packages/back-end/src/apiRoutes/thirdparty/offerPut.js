@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     type,
     warrantyMonths,
     price: price * (shop.attributes.partMarkupPercent / 100),
-    amountInStock: 0,
+    amountInStock: 1,
     compatibleVehicles: [
       {
         make: vehicleType.attributes.make,
@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
       },
     ],
     supplierId,
-    offerExpiration: new Date(offerExpiration),
+    offerExpiration,
     exclusiveQuoteId: quote.attributes.id,
   }).save();
 
