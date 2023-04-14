@@ -5,7 +5,7 @@ const apiCall = fetcherFactory({
   timeout: 30000,
   // On production, the same domain and port serves cdn and api, so no need to specify them
   baseUrl: `${
-    process.env.NODE_ENV !== 'production' ? 'http://localhost:8080' : ''
+    process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8080' : ''
   }/api/thirdparty/v1`,
 });
 
