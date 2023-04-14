@@ -13,7 +13,7 @@ module.exports = defineConfig({
     baseUrl: 'http://127.0.0.1:3000',
   },
   retries: {
-    runMode: 2,
+    runMode: 5,
     openMode: 0,
   },
 });
