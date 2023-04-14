@@ -1,4 +1,4 @@
-describe('FLOW Quote => login', () => {
+describe('FLOW CustomQuote', () => {
   beforeEach(() => {
     // Reset BE to initial state before each test
     cy.reSeedDb()
