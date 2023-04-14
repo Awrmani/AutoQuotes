@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -44,11 +44,12 @@ const QuoteRequestScreen = () => {
   }, [supplierId, quoteId, dispatch]);
   const requestedPartsQuery = useSelector(getRequestedPartsQuery) ?? {};
   const { isFetching, result } = requestedPartsQuery ?? {};
+
   const { make, model, modelYear, engineVariant, bodyType } =
-    result?.[0].vehicleType._attributes ?? {};
-  const title = useMemo(() => {
-    return `${make} ${modelYear} ${model} ${engineVariant} ${bodyType}`;
-  }, [make, model, modelYear, engineVariant, bodyType]);
+    result?.[0].vehicleType ?? {};
+
+  const { name, description } = result?.[tab].serviceType ?? {};
+
   const initialValues = useMemo(() => {
     return {
       quoteId,
@@ -60,13 +61,16 @@ const QuoteRequestScreen = () => {
       type: '',
       warrantyMonths: '',
       price: '',
-      offerExpiration: moment(),
+      offerExpiration: moment().add(30, 'days'),
     };
   }, [quoteId, supplierId, result, tab]);
 
   const handleTabChange = (event, tabIndex) => {
     setTab(tabIndex);
   };
+  const handleSuccess = useCallback(({ formikBag }) => {
+    formikBag.resetForm();
+  }, []);
 
   if (isFetching || !result)
     return (
@@ -79,6 +83,7 @@ const QuoteRequestScreen = () => {
     <Container
       component={Paper}
       sx={{
+        mt: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -101,7 +106,7 @@ const QuoteRequestScreen = () => {
           variant="subtitle1"
           sx={{ my: 2 }}
         >
-          {title}
+          {make} {modelYear} {model} {engineVariant} {bodyType}
         </Typography>
       </Box>
       <Box
@@ -117,12 +122,23 @@ const QuoteRequestScreen = () => {
           ))}
         </Tabs>
       </Box>
+      <Box>
+        <Typography
+          fontStyle="italic"
+          textAlign="left"
+          variant="subtitle2"
+          sx={{ mt: 2 }}
+        >
+          {name} - {description}
+        </Typography>
+      </Box>
       <Form
         key={tab}
         enableReinitialize
         initialValues={initialValues}
         action={offerParts}
         validation={validator}
+        onSuccess={handleSuccess}
       >
         <PartForm />
       </Form>
