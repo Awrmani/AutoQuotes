@@ -1,5 +1,6 @@
 [
   {
+    "id": "firstSupplie",
     "name": "First Supplier",
     "address": "Bay Street 1",
     "zip": "A0A 0A0",
@@ -10,6 +11,7 @@
     "phone": "+12345678910"
   },
   {
+    "id": "secondSuppli",
     "name": "Second Supplier",
     "address": "Front Street 2",
     "zip": "B1B 1B1",

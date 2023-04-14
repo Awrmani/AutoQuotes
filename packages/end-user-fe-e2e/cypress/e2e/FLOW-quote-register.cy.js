@@ -1,4 +1,4 @@
-describe('FLOW Quote => login', () => {
+describe('FLOW Quote => register', () => {
   beforeEach(() => {
     // Reset BE to initial state before each test
     cy.reSeedDb().then(() => cy.visit('/'));

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   const { supplierId, quoteId } = req.params;
 
   const promises = (
-    await ThirdPartyOfferRequest.ThirdPartySupplierModel.find(
+    await ThirdPartyOfferRequest.ThirdPartyOfferRequestModel.find(
       { quoteId, supplierIds: supplierId },
       ['_id']
     ).exec()
@@ -27,8 +27,8 @@ module.exports = async (req, res) => {
 
     return {
       ...omit(obj.attributes, ['supplierIds']),
-      vehicleType,
-      serviceType,
+      vehicleType: vehicleType.attributes,
+      serviceType: serviceType.attributes,
     };
   });
 

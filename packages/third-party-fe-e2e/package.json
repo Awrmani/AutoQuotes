@@ -12,6 +12,6 @@
   },
   "scripts": {
     "dev": "cypress open",
-    "e2e": "cypress run --headless"
+    "e2e": "cypress run --headless --browser chrome"
   }
 }

@@ -23,5 +23,25 @@
       }
     ],
     "isFinalized": true
+  },
+  {
+    "id": "customQuote1",
+    "customerId": "endUser00001",
+    "vehicleTypeId": "TeslaModelS9",
+    "lineItems": [
+      {
+        "serviceTypeId": "MCU3upgrade1",
+        "selectedParts": []
+      },
+      {
+        "serviceTypeId": "APv3Upgrade1",
+        "selectedParts": []
+      },
+      {
+        "serviceTypeId": "scrollComp01",
+        "selectedParts": []
+      }
+    ],
+    "isFinalized": false
   }
 ]
