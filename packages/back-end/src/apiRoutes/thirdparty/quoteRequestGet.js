@@ -27,8 +27,8 @@ module.exports = async (req, res) => {
 
     return {
       ...omit(obj.attributes, ['supplierIds']),
-      vehicleType,
-      serviceType,
+      vehicleType: vehicleType.attributes,
+      serviceType: serviceType.attributes,
     };
   });
 
