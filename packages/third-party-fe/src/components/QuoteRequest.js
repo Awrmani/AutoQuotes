@@ -32,7 +32,7 @@ const QuoteRequest = () => {
   return (
     <Container component={Paper}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={tab} onChange={handleChange}>
+        <Tabs variant="scrollable" value={tab} onChange={handleChange}>
           {requestedParts.map(({ partName }) => (
             <Tab label={partName} key={partName} />
           ))}
