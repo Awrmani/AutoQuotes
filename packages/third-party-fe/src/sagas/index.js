@@ -31,10 +31,7 @@ export default function* root() {
     }),
     takeLatest(actionTypes.PARTS_OFFER, apiCall, {
       apiFn: thirdPartyApi.offerParts,
-      onSuccess: [
-        [successToast('Successfully sent an offer!')],
-        apiCall.DISPATCH_SUCCESS,
-      ],
+      onSuccess: [[successToast('Offer sent!')], apiCall.DISPATCH_SUCCESS],
     }),
   ]);
 }
