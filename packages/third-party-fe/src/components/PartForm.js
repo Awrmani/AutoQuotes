@@ -32,35 +32,11 @@ const PartForm = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Field
-            component={TextInput}
-            name="description"
-            label="Description"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Field
-            component={TextInput}
-            name="manufacturer"
-            label="Manufacturer"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Field
             component={Dropdown}
             name="type"
             label="Type"
             fullWidth
             options={typeOptions}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Field
-            component={TextInput}
-            name="warrantyMonths"
-            label="Warranty in months"
-            fullWidth
           />
         </Grid>
         <Grid item xs={12}>
@@ -74,6 +50,14 @@ const PartForm = () => {
         </Grid>
         <Grid item xs={12}>
           <Field
+            component={TextInput}
+            name="warrantyMonths"
+            label="Warranty in months"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
             required
             component={DateTimePicker}
             name="offerExpiration"
@@ -81,6 +65,23 @@ const PartForm = () => {
             fullWidth
           />
         </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={TextInput}
+            name="manufacturer"
+            label="Manufacturer"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            component={TextInput}
+            name="description"
+            label="Description"
+            fullWidth
+          />
+        </Grid>
+
         <Grid item xs={12}>
           <FormError />
         </Grid>

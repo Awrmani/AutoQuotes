@@ -23,6 +23,7 @@ const DateTimePicker = ({
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <DatePicker
+        sx={{ width: '100%' }}
         disabled={isSubmitting}
         value={value}
         onChange={handleChange}
@@ -31,7 +32,7 @@ const DateTimePicker = ({
         disablePast
         slots={{ actionBar: () => null, toolbar: () => null }}
         views={['day']}
-        slotProps={{ layout: {} }}
+        slotProps={{ textField: { variant: 'standard' } }}
       />
     </LocalizationProvider>
   );

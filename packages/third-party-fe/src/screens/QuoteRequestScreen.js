@@ -9,6 +9,7 @@ import {
   Paper,
   Tab,
   Tabs,
+  Typography,
 } from '@mui/material';
 import { Form } from '@autoquotes/common/src/components/Form';
 import moment from 'moment';
@@ -43,7 +44,11 @@ const QuoteRequestScreen = () => {
   }, [supplierId, quoteId, dispatch]);
   const requestedPartsQuery = useSelector(getRequestedPartsQuery) ?? {};
   const { isFetching, result } = requestedPartsQuery ?? {};
-
+  const { make, model, modelYear, engineVariant, bodyType } =
+    result?.[0].vehicleType._attributes ?? {};
+  const title = useMemo(() => {
+    return `${make} ${modelYear} ${model} ${engineVariant} ${bodyType}`;
+  }, [make, model, modelYear, engineVariant, bodyType]);
   const initialValues = useMemo(() => {
     return {
       quoteId,
@@ -71,11 +76,44 @@ const QuoteRequestScreen = () => {
     );
 
   return (
-    <Container component={Paper}>
+    <Container
+      component={Paper}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Typography
+          fontWeight={900}
+          textAlign="center"
+          component="h1"
+          variant="h3"
+          sx={{ my: 2 }}
+        >
+          Part Request Form
+        </Typography>
+
+        <Typography
+          fontStyle="italic"
+          textAlign="center"
+          variant="subtitle1"
+          sx={{ my: 2 }}
+        >
+          {title}
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          maxWidth: '90%',
+          borderBottom: 1,
+          borderColor: 'divider',
+        }}
+      >
         <Tabs variant="scrollable" value={tab} onChange={handleTabChange}>
           {result.map(({ partName }) => (
-            <Tab label={partName} key={partName} />
+            <Tab sx={{ fontWeight: 700 }} label={partName} key={partName} />
           ))}
         </Tabs>
       </Box>
