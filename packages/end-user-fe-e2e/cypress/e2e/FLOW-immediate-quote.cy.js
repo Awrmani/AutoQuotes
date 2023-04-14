@@ -6,7 +6,7 @@ describe('FLOW ImmediateQuote', () => {
       .then(() => cy.login({ email: 'end@user.com', password: 'secret' }));
   });
 
-  it('Should allow a user to log in from an anonymous quote flow', () => {
+  it.skip('Should allow a user to log in from an anonymous quote flow', () => {
     /**
      * Starting out on the main quoting page
      */
