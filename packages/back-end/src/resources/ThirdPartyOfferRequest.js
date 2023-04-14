@@ -48,4 +48,4 @@ class ThirdPartyOfferRequest extends ResourceBase {
 module.exports = ThirdPartyOfferRequest;
 
 // Exporting the model too so DB seed is able to truncate the collection
-module.exports.ThirdPartySupplierModel = ThirdPartyOfferRequestModel;
+module.exports.ThirdPartyOfferRequestModel = ThirdPartyOfferRequestModel;

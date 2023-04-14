@@ -1,0 +1,20 @@
+[
+  {
+    "quoteId": "customQuote1",
+    "serviceTypeId": "MCU3upgrade1",
+    "partName": "MCU 3 computer",
+    "supplierIds": ["firstSupplie", "secondSuppli"]
+  },
+  {
+    "quoteId": "customQuote1",
+    "serviceTypeId": "APv3Upgrade1",
+    "partName": "AP computer v3",
+    "supplierIds": ["firstSupplie", "secondSuppli"]
+  },
+  {
+    "quoteId": "customQuote1",
+    "serviceTypeId": "scrollComp01",
+    "partName": "Scroll compressor",
+    "supplierIds": ["firstSupplie", "secondSuppli"]
+  }
+]

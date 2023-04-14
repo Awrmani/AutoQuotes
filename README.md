@@ -4,11 +4,11 @@ Capstone project - Seneca SIA CPA PRJ666 course
 
 ## Demo Deployment URLs
 
-| Interface      | Url                          |
-| -------------- | ---------------------------- |
-| End-user       | http://sixix.denke.hu        |
-| Mechanic shop  | http://shop.sixix.denke.hu   |
-| Third-party UI | http://thirdp.sixix.denke.hu |
+| Interface      | Url                                                                     |
+| -------------- | ----------------------------------------------------------------------- |
+| End-user       | http://sixix.denke.hu                                                   |
+| Mechanic shop  | http://shop.sixix.denke.hu                                              |
+| Third-party UI | http://thirdp.sixix.denke.hu/suppliers/firstSupplie/quotes/customQuote1 |
 
 ## Seed file containing credentials for demo users
 

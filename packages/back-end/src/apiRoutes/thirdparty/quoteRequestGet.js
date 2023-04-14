@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   const { supplierId, quoteId } = req.params;
 
   const promises = (
-    await ThirdPartyOfferRequest.ThirdPartySupplierModel.find(
+    await ThirdPartyOfferRequest.ThirdPartyOfferRequestModel.find(
       { quoteId, supplierIds: supplierId },
       ['_id']
     ).exec()
