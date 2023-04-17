@@ -35,6 +35,8 @@ module.exports = async (req, res) => {
   );
 
   const endUser = await new EndUser().loadById(quote.attributes.customerId);
+  const markedUpPrice =
+    price * ((100 + shop.attributes.partMarkupPercent) / 100);
 
   // Add offer to Parts collection
   const partId = await new Part({
@@ -43,7 +45,7 @@ module.exports = async (req, res) => {
     manufacturer,
     type,
     warrantyMonths,
-    price: price * (shop.attributes.partMarkupPercent / 100),
+    price: markedUpPrice,
     amountInStock: 1,
     compatibleVehicles: [
       {
