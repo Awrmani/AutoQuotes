@@ -1,4 +1,4 @@
-// const { v4: uuid } = require('uuid');
+const { v4: uuid } = require('uuid');
 const EndUser = require('../../resources/EndUser');
 const mailer = require('../../resources/Mailer');
 const Shop = require('../../resources/Shop');
@@ -17,8 +17,8 @@ module.exports = async (req, res) => {
   const endUser = new EndUser({
     ...rest,
     email,
-    isVerified: true,
-    verificationCode: '', // uuid(),
+    isVerified: false,
+    verificationCode: uuid(),
   });
 
   const id = await endUser.save();
