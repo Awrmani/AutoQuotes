@@ -60,3 +60,7 @@ All of the following will have to be prefixed with `yarn run`
 | clean                 |                         | Dev util                         | Removes node_modules in all packages         |
 | format                |                         | Dev util                         | Goes through all code and formats it         |
 | lint                  |                         | CI, Dev util                     | Does static code analysis on all code        |
+
+# Project END
+
+Project finished at April 21, 2023
