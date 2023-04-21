@@ -4,7 +4,7 @@ describe('FLOW Quote => register', () => {
     cy.reSeedDb().then(() => cy.visit('/'));
   });
 
-  it.skip('Should allow a user to log in from an anonymous quote flow', () => {
+  it('Should allow a user to log in from an anonymous quote flow', () => {
     /**
      * Starting out on the main quoting page
      */
