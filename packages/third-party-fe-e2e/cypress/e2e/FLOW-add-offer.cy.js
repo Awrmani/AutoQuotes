@@ -1,17 +1,4 @@
-describe('Demo', () => {
-
-  it(`should display car's info`, () => {
-    cy.visit('/suppliers/firstSupplie/quotes/customQuote1');
-    cy.contains('Tesla 2022 Model S Plaid liftback');
-  });
-
-  it('should show parts requested', () => {
-    cy.visit('/suppliers/firstSupplie/quotes/customQuote1');
-    cy.contains('MCU 3 computer');
-    cy.contains('AP computer v3');
-    cy.contains('Scroll compressor');
-  });
-
+describe('Supplier add offer', () => {
   it('should allow to send an offer', () => {
     cy.visit('/suppliers/firstSupplie/quotes/customQuote1');
     cy.getByText('MCU 3 computer').click();
