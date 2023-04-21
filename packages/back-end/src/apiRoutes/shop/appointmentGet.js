@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
 
   // Expand customer and quote also
   const { quoteId, customerId } = appointment.attributes;
-  const customer = await new EndUser().loadBy(customerId);
-  const quote = await new Quote().loadBy(quoteId);
+  const customer = await new EndUser().loadById(customerId);
+  const quote = await new Quote().loadById(quoteId);
 
   let vehicleType;
   try {
