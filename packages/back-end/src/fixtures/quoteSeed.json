@@ -20,6 +20,19 @@
             "price": 50
           }
         ]
+      },
+      {
+        "serviceTypeId": "BreakJobRear",
+        "selectedParts": [
+          {
+            "id": "RearBreakPad",
+            "name": "Rear break pads",
+            "manufacturer": "Tesla",
+            "type": "OEM",
+            "warrantyMonths": 12,
+            "price": 50
+          }
+        ]
       }
     ],
     "isFinalized": true

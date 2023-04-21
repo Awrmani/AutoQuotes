@@ -34,7 +34,7 @@ const AppointmentList = ({ setSelectedDay, selectedDay }) => {
         const startDate = moment(a.startsAt);
         return {
           id: a.id,
-          title: a.customerId,
+          title: a.customer.name,
           start: startDate.toDate(),
           end: startDate.add(a.duration, 'minutes').toDate(),
           resourceId: a.stall,
