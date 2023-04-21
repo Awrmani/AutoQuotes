@@ -23,7 +23,7 @@ import paths from '../../paths';
 const AppointmentDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { appointment, customer, quote, vehicleType } = useSelector(
+  const { appointment, customer, vehicleType, lineItems } = useSelector(
     getAppointmentDetails
   );
   const { address1, address2, city, country, state, zip } =
@@ -147,7 +147,7 @@ const AppointmentDetails = () => {
             <TableRow>
               <TableCell
                 sx={{ color: 'white', fontSize: 'medium' }}
-                width={160}
+                width={320}
                 align="left"
               >
                 Services
@@ -166,7 +166,7 @@ const AppointmentDetails = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {quote.lineItems.map(lineItem => (
+          {lineItems.map(lineItem => (
             <TableBody>
               <TableRow>
                 <TableCell
@@ -175,7 +175,7 @@ const AppointmentDetails = () => {
                   rowSpan={lineItem.selectedParts.length + 1}
                   colSpan={lineItem.selectedParts.length ? 1 : 5}
                 >
-                  {lineItem.serviceTypeId}
+                  {lineItem.serviceType?.name}
                 </TableCell>
               </TableRow>
 

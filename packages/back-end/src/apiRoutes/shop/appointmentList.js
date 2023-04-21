@@ -1,4 +1,5 @@
 const Appointment = require('../../resources/Appointment');
+const EndUser = require('../../resources/EndUser');
 
 module.exports = async (req, res) => {
   const { from, to } = req.query ?? {};
@@ -10,7 +11,16 @@ module.exports = async (req, res) => {
     ).exec()
   ).map(({ id }) => new Appointment().loadById(id.toString()));
 
-  const objects = (await Promise.all(promises)).map(obj => obj.attributes);
+  const appointments = (await Promise.all(promises)).map(obj => obj.attributes);
 
-  return res.json(objects);
+  const appwithCustomerPromises = appointments.map(
+    async ({ customerId, ...rest }) => ({
+      ...rest,
+      customer: (await new EndUser().loadById(customerId)).attributes,
+    })
+  );
+
+  const appwithCustomer = await Promise.all(appwithCustomerPromises);
+
+  return res.json(appwithCustomer);
 };

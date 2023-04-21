@@ -2,6 +2,7 @@ const Appointment = require('../../resources/Appointment');
 const EndUser = require('../../resources/EndUser');
 const Quote = require('../../resources/Quote');
 const VehicleType = require('../../resources/VehicleType');
+const ServiceType = require('../../resources/ServiceType');
 
 module.exports = async (req, res) => {
   const { id } = req.params;
@@ -22,10 +23,20 @@ module.exports = async (req, res) => {
     // noop
   }
 
+  const lineItemPromises = quote.attributes.lineItems.map(
+    async ({ serviceTypeId, ...rest }) => ({
+      serviceTypeId,
+      ...rest,
+      serviceType: (await new ServiceType().loadById(serviceTypeId)).attributes,
+    })
+  );
+  const lineItems = await Promise.all(lineItemPromises);
+
   res.json({
     appointment: appointment.attributes,
     customer: customer.attributes,
     quote: quote.attributes,
     vehicleType: vehicleType?.attributes,
+    lineItems,
   });
 };

@@ -16,6 +16,7 @@
     "compatibleVehicles": []
   },
   {
+    "id": "BreakJobRear",
     "name": "Break pads replacement - Rear axle",
     "timeInMinutes": 45,
     "description": "",
