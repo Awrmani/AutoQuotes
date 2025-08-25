@@ -1,7 +1,5 @@
 # AutoQuotes monorepo
 
-Capstone project - Seneca SIA CPA PRJ666 course
-
 ## Demo Deployment URLs
 
 | Interface      | Url                                                                     |
